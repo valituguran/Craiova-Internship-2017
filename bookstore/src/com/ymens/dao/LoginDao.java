@@ -10,7 +10,7 @@ public class LoginDao {
 		ResultSet rs = null;
 
 		String url = "jdbc:mysql://localhost:3306/";
-		String dbName = "login";
+		String dbName = "bookstore";
 		String driver = "com.mysql.jdbc.Driver";
 		String userName = "root";
 		String password = "root";
@@ -19,8 +19,7 @@ public class LoginDao {
 			conn = DriverManager
 					.getConnection(url + dbName, userName, password);
 
-			pst = conn
-					.prepareStatement("select * from users where name=? and password=?");
+			pst = conn.prepareStatement("select * from users where username=? and password=?");
 			pst.setString(1, name);
 			pst.setString(2, pass);
 

@@ -28,6 +28,10 @@
                 <td><input type="text" name="email" required="required" /></td>
             </tr>
             <tr>
+                <td>Real name</td>
+                <td><input type="text" name="realname" required="required" /></td>
+            </tr>
+            <tr>
                 <td><input type="submit" name="register" value="Register" /></td>
             </tr>
         </table>
