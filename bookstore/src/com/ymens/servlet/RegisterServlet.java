@@ -31,7 +31,7 @@ public class RegisterServlet extends HttpServlet{
         if(session!=null)
             session.setAttribute("name", n);
 
-        if(RegisterDao.validate(n, p, e) == true ){
+        if(RegisterDao.validate(n, p, e) > 0 ){
             RequestDispatcher rd=request.getRequestDispatcher("index.jsp");
             rd.forward(request,response);
         }

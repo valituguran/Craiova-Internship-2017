@@ -5,11 +5,11 @@ import java.sql.*;
  * Created by madalina.luca on 7/27/2017.
  */
 public class RegisterDao {
-    public static boolean validate(String name, String pass, String email) {
-        boolean status = false;
+    public static int validate(String name, String pass, String email) {
+        int status = 0;
         Connection conn = null;
-        PreparedStatement pst = null;
-        ResultSet rs = null;
+
+
 
         String url = "jdbc:mysql://localhost:3306/";
         String dbName = "login";
@@ -29,10 +29,9 @@ public class RegisterDao {
             ps.setString(1, name);
             ps.setString(2, email);
             ps.setString(3, pass);
-            rs = ps.executeQuery();
+            status = ps.executeUpdate();
 
 
-            status = rs.next();
         } catch (Exception e) {
             System.out.println(e);
         } finally {
@@ -50,14 +49,10 @@ public class RegisterDao {
                     e.printStackTrace();
                 }
             }
-            if (rs != null) {
-                try {
-                    rs.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+
             }
-        }
         return status;
     }
-}
+
+    }
+
