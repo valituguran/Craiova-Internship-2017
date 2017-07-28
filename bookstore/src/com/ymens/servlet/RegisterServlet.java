@@ -5,6 +5,7 @@ import com.ymens.dao.RegisterDao;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -14,7 +15,7 @@ import java.io.PrintWriter;
 /**
  * Created by madalina.luca on 7/27/2017.
  */
-public class RegisterServlet {
+public class RegisterServlet extends HttpServlet{
     private static final long serialVersionUID = 1L;
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -31,7 +32,7 @@ public class RegisterServlet {
             session.setAttribute("name", n);
 
         if(RegisterDao.validate(n, p, e) == true ){
-            RequestDispatcher rd=request.getRequestDispatcher("register.jsp");
+            RequestDispatcher rd=request.getRequestDispatcher("index.jsp");
             rd.forward(request,response);
         }
         else{

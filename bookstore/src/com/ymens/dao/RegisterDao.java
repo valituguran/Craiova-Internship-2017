@@ -29,15 +29,10 @@ public class RegisterDao {
             ps.setString(1, name);
             ps.setString(2, email);
             ps.setString(3, pass);
-            if(name.isEmpty()||pass.isEmpty()||email.isEmpty())
-            {
-                status = true;
-            }
-            else
-            {
-                status = false;
-            }
+            rs = ps.executeQuery();
 
+
+            status = rs.next();
         } catch (Exception e) {
             System.out.println(e);
         } finally {
