@@ -27,48 +27,26 @@ public class RegisterDao {
         } catch (Exception e) {
             System.out.println(e);
         } finally {
-           return conn;
+            return conn;
         }
             }
-
-
-public static void closeConnection( Connection conn) throws SQLException {
-    try {
-        conn.close();
-    } catch (SQLException e) {
-        e.printStackTrace();
-    }
-}
-
-
-
-
-
-    public static int validate(String name, String pass, String realname, String email) {
+    public static int validate(String name, String pass, String realname, String email) throws SQLException {
 
         PreparedStatement ps = null;
-      int status = 0;
+        int status = 0;
         Connection conn = connect();
         try {
-
-
-            ps = conn.prepareStatement
-                    ("insert into users values(?,?,?,?,?)");
-
+            ps = conn.prepareStatement("insert into users (username, password, real_name, email,type) values(?,?,?,?,?)");
             ps.setString(1, name);
             ps.setString(2, pass);
             ps.setString(3, realname);
             ps.setString(4, email);
+
             ps.setInt(5, RegisterServlet.type);
-
-
             status = ps.executeUpdate();
-
-
         } catch (Exception e) {
             System.out.println(e);
         } finally {
-
             if (ps != null) {
                 try {
                     ps.close();
@@ -76,11 +54,10 @@ public static void closeConnection( Connection conn) throws SQLException {
                     e.printStackTrace();
                 }
             }
-
-            }
+            conn.close();
+        }
         return status;
     }
-
-    }
+}
 
 

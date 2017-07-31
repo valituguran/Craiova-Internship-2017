@@ -12,6 +12,8 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -19,23 +21,25 @@ import java.sql.SQLException;
  */
 public class RegisterServlet extends HttpServlet{
      private static final long serialVersionUID = 1L;
-
-     public static int type = 0;
-
+     private ResultSet user_type;
+     public static int type;
      public void init() throws ServletException {
          super.init();
-
+         PreparedStatement ps = null;
          Connection conn = RegisterDao.connect();
 
          try {
-             type = Integer.parseInt(String.valueOf(conn.prepareStatement("select id from user_type where name=user ")));
-
+             ps = conn.prepareStatement("select* from user_type where name=? ");
+             ps.setString(1,"user");
+             user_type = ps.executeQuery();
+             user_type.next();
+             type = user_type.getInt("id");
          } catch (SQLException e) {
              e.printStackTrace();
          }
          finally {
              try {
-                 RegisterDao.closeConnection(conn);
+                 conn.close();
              } catch (SQLException e) {
                  e.printStackTrace();
              }
@@ -57,14 +61,18 @@ public class RegisterServlet extends HttpServlet{
         if(session!=null)
             session.setAttribute("name", n);
 
-        if(RegisterDao.validate(n, p, rn , e) >0 ){
-            RequestDispatcher rd=request.getRequestDispatcher("index.jsp");
-            rd.forward(request,response);
-        }
-        else{
-            RequestDispatcher rd = request.getRequestDispatcher("register.jsp");
-            out.println("<font color=red>Please fill all the fields</font>");
-            rd.include(request, response);
+        try {
+            if(RegisterDao.validate(n, p, rn , e) >0 ){
+                RequestDispatcher rd=request.getRequestDispatcher("welcome_admin.jsp");
+                rd.forward(request,response);
+            }
+            else{
+                RequestDispatcher rd = request.getRequestDispatcher("register.jsp");
+                out.println("<font color=red>Please fill all the fields</font>");
+                rd.include(request, response);
+            }
+        } catch (SQLException e1) {
+            e1.printStackTrace();
         }
 
         out.close();
