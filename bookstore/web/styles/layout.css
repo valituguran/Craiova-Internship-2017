@@ -1,12 +1,11 @@
+html{overflow-y:scroll;}
 
-
-
-
-body{width:100%; margin:0; padding:0; font-size:13px; font-family:Georgia, "Times New Roman", Times, serif; color:#979797; background-color:#FFFFFF;}
+body{margin:0; padding:0; font-size:13px; font-family:Georgia, "Times New Roman", Times, serif; color:#979797; background-color:#FFFFFF;}
 
 .clear:after{content:"."; display:block; height:0; clear:both; visibility:hidden; line-height:0;}
 .clear{display:block; clear:both;}
-
+html[xmlns] .clear{display:block;}
+* html .clear{height:1%;}
 
 a{outline:none; text-decoration:none;}
 
@@ -21,20 +20,24 @@ img{margin:0; padding:0; border:none; line-height:normal; vertical-align:middle;
 .imgr{float:right; margin:0 0 15px 15px; clear:right;}
 
 
+address, article, aside, figcaption, figure, footer, header, nav, section{display:block; margin:0; padding:0;}
 
-/* ----------------------------------------------Wrapper-------------------------------------*/
+q{display:block; padding:0 10px 8px 10px; color:#979797; background-color:#ECECEC; font-style:italic; line-height:normal;}
+q:before{content:'� '; font-size:26px;}
+q:after{content:' �'; font-size:26px; line-height:0;}
 
-div.wrapper{display:block; width:1500px; margin:0 auto; padding:0; text-align:left;}
 
-.row1{color:#979797; background-color:#FFFFFF;}
+div.wrapper{display:block; width:960px; margin:0 auto; padding:0; text-align:left;}
+
+.row1, .row1 a{color:#979797; background-color:#FFFFFF;}
 .row2{color:#979797; background-color:#FFFFFF;}
 .row2 a{color:#FF9900; background-color:#FFFFFF;}
 .row3{border-top:1px solid #DEDEDE;}
 .row3, .row3 a{color:#979797; background-color:#FFFFFF;}
 
-/*----------------------------------------------Generalise-------------------------------------*/
 
-#header, #container, #footer{display:block; width:100%;}
+
+#header, #container, #footer{display:block; width:960px;}
 
 nav ul{margin:0; padding:0; list-style:none;}
 
@@ -46,12 +49,17 @@ blockquote, q{display:block; padding:8px 10px; color:#979797; background-color:#
 blockquote:before, q:before{content:'� '; font-size:26px;}
 blockquote:after, q:after{content:' �'; font-size:26px; line-height:0;}
 
+.one_third, .two_third, .three_third{display:block; float:left; margin:0 30px 0 0;}
+.one_third{width:300px;}
+.two_third{width:630px;}
+.three_third{width:960px; float:none; margin-right:0; clear:both;}
+.lastbox{margin-right:0;}
 
-/*----------------------------------------------Header-------------------------------------*/
+
 
 #header{}
 
-#header #hgroup{width:100%;padding:20px 0 0 0;}
+#header #hgroup{padding:20px 0 0 0; float:left;}
 #header #hgroup h1, #header #hgroup h2{font-weight:normal; text-transform:none;}
 #header #hgroup h1{font-size:36px;}
 #header #hgroup h2{font-size:13px;}
@@ -63,7 +71,6 @@ blockquote:after, q:after{content:' �'; font-size:26px; line-height:0;}
 #header nav li a{}
 #header nav li a:hover{color:#FF9900; }
 
-/*----------------------------------------------Content Area-------------------------------------*/
 
 #container{padding:30px 0;}
 #container section{display:block; width:100%; margin:0 0 30px 0; padding:0;}
@@ -72,18 +79,83 @@ blockquote:after, q:after{content:' �'; font-size:26px; line-height:0;}
 
 
 
-/*----------------------------------------------Footer-------------------------------------*/
+
+
+#container #homepage{line-height:1.6em;}
+#container #homepage article{}
+#container #homepage article h2{font-size:14px; margin-bottom:15px; padding-bottom:8px; border-bottom:1px solid #DEDEDE;}
+#container #homepage article p{margin:0; padding:0;}
+#container #homepage article img{float:left; width:80px; height:80px; margin:0 10px 10px 0; padding:4px; border:1px solid #DEDEDE;}
+#container #homepage article footer{margin:10px 0 0 0;}
+
 
 .container{
     width: 100%;
     margin: 0 auto;
 }
-.header{
-    float:left;
-    width:20%;
+
+
+ul.tabs{
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
 }
-#q{
-    width:60%;
+ul.tabs li{
+    background: #ededed;
+    color: #222;
+    display: inline-block;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+.slider img{height:300px;}
+ul.tabs li.current{
+    background: #ededed;
+    color: #222;
+    border: 1px solid #FF9900;
+    border-bottom: 1px solid #ededed;
+    margin-bottom: -1px;
+}
+
+.tab-content{
+    display: none;
+    background: #ededed;
+    padding: 15px;
+    overflow: hidden;
+}
+
+.tab-content.current{
+    display: inherit;
+    background: #ededed;
+    padding: 15px;
+    border: 1px solid #FF9900;
+}
+.target.active{
+    color: #FF9900;
+    background-color: #ccc;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.product{
+    height:150px;
+    width:175px;
+    border:1px solid;
+    margin-right:10px;
+    float:left;
+    margin-top:10px;
+    text-align:center;
+}
+
+.product.last{
+    margin-right:0px;
+}
+.product img {
+    margin-top: 10px;
+    border: 1px solid;
+    width: 100px;
+    margin-bottom: 10px;
+    border-radius: 50%;
+    padding: 2px;
 }
 
 /* ------Form-----*/
@@ -100,10 +172,9 @@ body {
 
 form {
     max-width: 300px;
-    height: 700px;
     margin: 10px auto;
     padding: 10px 20px;
-    background: darkslategrey;
+    background: #979797;
     border-radius: 8px;
 }
 
@@ -179,12 +250,24 @@ label {
     margin-bottom: 8px;
 }
 
-.light {
+label.light {
     font-weight: 300;
     display: inline;
 }
 
-
+.number {
+    background-color: #5fcf80;
+    color: #fff;
+    height: 30px;
+    width: 30px;
+    display: inline-block;
+    font-size: 0.8em;
+    margin-right: 4px;
+    line-height: 30px;
+    text-align: center;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.2);
+    border-radius: 100%;
+}
 
 @media screen and (min-width: 480px) {
 
@@ -194,6 +277,8 @@ label {
 
 }
 
+#footer{padding:20px 0;}
+#footer p{margin:0; padding:0;}
 
 @media screen and (max-width: 768px) {
     .one_third{
@@ -202,7 +287,43 @@ label {
         width: 100%;
     }
 }
+
+/* ---------------- product -------------------- */
+
+#page article h2{
+    font-size:14px;
+    margin-bottom:15px;
+    padding-bottom:8px;
+    border-bottom:1px solid #DEDEDE;
+}
+
+#page article p{
+    width:100%;
+    padding:0;
+}
+
+#page article img{
+    float: right;
+    width:80px;
+    height:80px;
+    margin:0 0 10px 10px;
+    padding:4px;
+    border:1px solid #DEDEDE;
+}
+
+#page article footer{
+    margin:10px 0 0 0;
+}
+
 .button {
     position: relative;
     left: 64%;
 }
+
+
+
+
+
+
+
+

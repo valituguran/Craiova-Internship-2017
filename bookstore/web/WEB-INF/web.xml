@@ -12,6 +12,37 @@
 		<servlet-name>login</servlet-name>
 		<url-pattern>/loginServlet</url-pattern>
 	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>logout</servlet-name>
+		<servlet-class>com.ymens.servlet.LogoutServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>logout</servlet-name>
+		<url-pattern>/logoutServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>profile</servlet-name>
+		<servlet-class>com.ymens.servlet.ProfileServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>profile</servlet-name>
+		<url-pattern>/profilServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>selectbooks</servlet-name>
+		<servlet-class>com.ymens.servlet.SelectBooksServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>selectbooks</servlet-name>
+		<url-pattern>/selectbooksServlet</url-pattern>
+	</servlet-mapping>
+
 	<servlet>
 		<servlet-name>register</servlet-name>
 		<servlet-class>com.ymens.servlet.RegisterServlet</servlet-class>
@@ -22,8 +53,9 @@
 		<url-pattern>/registerServlet</url-pattern>
 	</servlet-mapping>
 
+
 	<welcome-file-list>
-		<welcome-file>start.jsp</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
 
 </web-app>

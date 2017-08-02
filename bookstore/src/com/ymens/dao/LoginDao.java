@@ -25,20 +25,25 @@ public class LoginDao {
 		}
 	}
 
-	public static boolean validate(String name, String pass) {
+	public static int validate(String name, String pass) {
 		boolean status = false;
 		Connection conn = connect();
 		PreparedStatement pst = null;
 		ResultSet rs = null;
-		int type;
-		int tip = 0;
+		int type = 0;
+
 
 		try {
 			pst = conn.prepareStatement("select * from users where username=? and password=?");
 			pst.setString(1, name);
 			pst.setString(2, pass);
 			rs = pst.executeQuery();
-			status = rs.next();
+
+			if(rs.next()) {
+
+
+				type = rs.getInt("type");
+			}
 
 		} catch (Exception e) {
 			System.out.println(e);
@@ -65,34 +70,8 @@ public class LoginDao {
 				}
 			}
 		}
-		return status;
+		return type;
 	}
 
-	public static int getUserType(String name, String pass) {
-		PreparedStatement ps ;
-		Connection conn = RegisterDao.connect();
-        ResultSet user_type ;
-        int type  = 2 ;
-		try {
-			ps = conn.prepareStatement(" select * from users where username=? and password=? ");
-			ps.setString(1,"name");
-			ps.setString(2,"pass");
-			user_type = ps.executeQuery();
-			if(user_type.next()) {
 
-
-				type = user_type.getInt("type");
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		finally {
-			try {
-				conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-         return type;
-	}
 }

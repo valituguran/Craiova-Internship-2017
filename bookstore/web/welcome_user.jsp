@@ -13,7 +13,8 @@
 	<table>
 
 	<tr>
-		<td><a href="register.jsp">Register</a></td>
+		<td><a href="register.jsp">Register</a></td
+		<td><a href="index.jsp" methods="logoutServlet">Logout</a></td>
 	</tr>
 	</table>
 
