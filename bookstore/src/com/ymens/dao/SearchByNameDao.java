@@ -1,5 +1,6 @@
 package com.ymens.dao;
 
+import com.ymens.Author;
 import com.ymens.Book;
 
 import java.sql.*;
@@ -8,7 +9,7 @@ import java.util.LinkedList;
 /**
  * Created by madalina.luca on 8/1/2017.
  */
-public class SelectBooks  {
+public class SearchByNameDao {
     public static Connection connect() {
         Connection conn = null;
 
@@ -30,7 +31,7 @@ public class SelectBooks  {
         }
     }
 
-    public static LinkedList select() {
+    public static LinkedList select(String value) {
         boolean status = false;
         Connection conn = connect();
         PreparedStatement pst = null;
@@ -38,15 +39,17 @@ public class SelectBooks  {
 
         LinkedList<Book> list = new LinkedList();
         try {
-            pst = conn.prepareStatement("select * from books");
+            pst = conn.prepareStatement("select * from books where name like ?");
+            pst.setString(1,value+'%');
             rs = pst.executeQuery();
             while (rs.next()) {
                 String name = rs.getString("name");
                 int id_author = rs.getInt("author_id");
+                Author author = Author.getDetail(id_author);
                 int isbn = rs.getInt("isbn");
                 double price = rs.getDouble("price");
                 String description = rs.getString("description");
-                Book book = new Book(name, isbn, id_author, price, description);
+                Book book = new Book(name, isbn,author, price, description);
                 list.add(book);
 
             }

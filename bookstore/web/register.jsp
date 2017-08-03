@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link rel="stylesheet" href="styles/layout.css" type="text/css">
+    <link rel="stylesheet" href="../styles/layout.css" type="text/css">
     <title>Title</title>
 </head>
 <body>
@@ -49,6 +49,8 @@
             </form>
         </div><!-- container -->
     </div>
+</div>
+
     <div class="wrapper row3">
         <footer id="footer" class="clear">
             <p class="fl_left">Copyright &copy; - All Rights Reserved - <a href="www.ymens.com">Ymens Homepage</a></p>

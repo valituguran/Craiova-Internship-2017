@@ -1,11 +1,7 @@
 package com.ymens.dao;
 
-import com.ymens.servlet.RegisterServlet;
+import java.sql.*;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 /**
  * Created by madalina.luca on 7/27/2017.
  */
@@ -29,7 +25,30 @@ public class RegisterDao {
         } finally {
             return conn;
         }
+    }
+    public static int getType(){
+        PreparedStatement ps = null;
+        Connection conn = RegisterDao.connect();
+         ResultSet user_type;
+        int type = 0;
+        try {
+            ps = conn.prepareStatement("select* from user_type where name=? ");
+            ps.setString(1,"user");
+            user_type = ps.executeQuery();
+            user_type.next();
+            type = user_type.getInt("id");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
+        }
+        return type;
+    }
     public static int validate(String name, String pass, String realname, String email) throws SQLException {
 
         PreparedStatement ps = null;
@@ -42,11 +61,12 @@ public class RegisterDao {
             ps.setString(3, realname);
             ps.setString(4, email);
 
-            ps.setInt(5, RegisterServlet.type);
+            ps.setInt(5, getType());
             status = ps.executeUpdate();
         } catch (Exception e) {
             System.out.println(e);
-        } finally {
+        }
+        finally {
             if (ps != null) {
                 try {
                     ps.close();

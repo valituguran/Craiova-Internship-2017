@@ -11,9 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -21,29 +18,10 @@ import java.sql.SQLException;
  */
 public class RegisterServlet extends HttpServlet{
      private static final long serialVersionUID = 1L;
-     private ResultSet user_type;
-     public static int type;
+
      public void init() throws ServletException {
          super.init();
-         PreparedStatement ps = null;
-         Connection conn = RegisterDao.connect();
 
-         try {
-             ps = conn.prepareStatement("select* from user_type where name=? ");
-             ps.setString(1,"user");
-             user_type = ps.executeQuery();
-             user_type.next();
-             type = user_type.getInt("id");
-         } catch (SQLException e) {
-             e.printStackTrace();
-         }
-         finally {
-             try {
-                 conn.close();
-             } catch (SQLException e) {
-                 e.printStackTrace();
-             }
-         }
 
      }
     public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -56,6 +34,7 @@ public class RegisterServlet extends HttpServlet{
         String p=request.getParameter("userpass");
         String e=request.getParameter("email");
         String rn=request.getParameter("realname");
+
 
         HttpSession session = request.getSession(false);
         if(session!=null)
@@ -74,6 +53,7 @@ public class RegisterServlet extends HttpServlet{
         } catch (SQLException e1) {
             e1.printStackTrace();
         }
+
 
         out.close();
     }

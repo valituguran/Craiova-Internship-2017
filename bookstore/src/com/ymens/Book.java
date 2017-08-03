@@ -6,12 +6,12 @@ package com.ymens;
 public class Book {
     String name;
     int isbn;
-    int id_author;
+    Author author;
     double price;
     String description;
-    public Book(String name, int isbn, int id_author, double price, String description){
+    public Book(String name, int isbn,Author author, double price, String description){
         this.name = name;
-        this.id_author = id_author;
+        this.author = author;
         this.isbn = isbn;
         this.price = price;
         this.description = description;
@@ -28,7 +28,7 @@ public class Book {
     public double getPrice(){
             return this.price;
     }
-    public double getIdAuthor(){
-        return this.id_author;
+    public Author getAuthor(){
+        return this.author;
     }
 }

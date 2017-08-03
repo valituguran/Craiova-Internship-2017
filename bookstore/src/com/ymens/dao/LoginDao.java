@@ -25,7 +25,7 @@ public class LoginDao {
 		}
 	}
 
-	public static int validate(String name, String pass) {
+	public static boolean validate(String name, String pass) {
 		boolean status = false;
 		Connection conn = connect();
 		PreparedStatement pst = null;
@@ -38,12 +38,8 @@ public class LoginDao {
 			pst.setString(1, name);
 			pst.setString(2, pass);
 			rs = pst.executeQuery();
+			status = rs.next();
 
-			if(rs.next()) {
-
-
-				type = rs.getInt("type");
-			}
 
 		} catch (Exception e) {
 			System.out.println(e);
@@ -70,7 +66,7 @@ public class LoginDao {
 				}
 			}
 		}
-		return type;
+		return status;
 	}
 
 

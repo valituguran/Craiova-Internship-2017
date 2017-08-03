@@ -1,5 +1,6 @@
 package com.ymens.servlet;
 
+import com.ymens.UserType;
 import com.ymens.dao.LoginDao;
 
 import javax.servlet.RequestDispatcher;
@@ -17,37 +18,29 @@ public class LoginServlet extends HttpServlet {
 
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-
 		String n = request.getParameter("name");
 		String p = request.getParameter("password");
 		HttpSession session = request.getSession(false);
-		if (session != null)
+
+		if (session != null) {
 			session.setAttribute("name", n);
+			session.setAttribute("password", p);
 
+		}
+		if (LoginDao.validate(n, p )) {
+			String type = UserType.getType(n,p);
+			if (type.equalsIgnoreCase("admin")) {
+				getServletContext().getRequestDispatcher("/selectbooksadminServlet").forward(request, response);
 
-		Cookie ck;
-		if (LoginDao.validate(n, p) == 1) {
-
-			RequestDispatcher rd = request.getRequestDispatcher("welcome_admin.jsp");
-			rd.include(request, response);
-			ck=new Cookie("name",n);
-			response.addCookie(ck);
-
-		} else if (LoginDao.validate(n, p) == 2) {
-
-			//RequestDispatcher rd = request.getRequestDispatcher("selectbooksServlet");
-			getServletContext().getRequestDispatcher("/selectbooksServlet").forward(request, response);
-
-
-			//rd.include(request, response);
-			//ck=new Cookie("name",n);
-			//response.addCookie(ck);
-		} else {
+			} else if (type.equalsIgnoreCase("user")) {
+				//RequestDispatcher rd = request.getRequestDispatcher("selectbooksServlet");
+				getServletContext().getRequestDispatcher("/selectbooksuserServlet").forward(request, response);
+			}
+		}else {
 			out.print("<p style=\"color:red\">Sorry username or password error</p>");
 			RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
 			rd.include(request, response);
 		}
-
 		//out.close();
 	}
 }
