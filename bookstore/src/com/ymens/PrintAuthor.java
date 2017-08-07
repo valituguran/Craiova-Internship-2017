@@ -26,6 +26,7 @@ public class PrintAuthor {
                 author.description = resultSet.getString("description");
                 author.age = resultSet.getInt("age");
                 author.nationality = resultSet.getString("nationality");
+                author.cnp = resultSet.getInt("CNP");
             }
         }catch (SQLException e) {
             e.printStackTrace();

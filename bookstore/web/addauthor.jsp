@@ -17,14 +17,16 @@
     <div id="container" class="clear">
         <div class="container">
             <form name="addbook_form" action="addauthorServlet" method="post">
-                <h1>Add a book</h1>
+                <h1>Add author details</h1>
                 <fieldset>
-                    <label for="nationality"> Author details:</label>
+                    <label for="name"> Name :</label>
+                    <input type="text" id="name" name="name" required="required">
+
                     <label for="nationality"> Nationality :</label>
                     <input type="text" id="nationality" name="nationality" required="required">
 
-                    <label for="description"> Description :</label>
-                    <input type="text" id="description" name="description" required="required">
+                    <label for="description_author"> Description :</label>
+                    <input type="text" id="description_author" name="description_author" required="required">
 
                     <label for="age"> Age:</label>
                     <input type="text" id="age" name="age" required="required">

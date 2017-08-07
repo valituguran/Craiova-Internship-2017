@@ -10,17 +10,18 @@ public class Author {
     int age;
     String nationality;
     String description;
+    long cnp;
 
     public Author(){}
 
-    public Author( String name, int age, String nationality, String description){
+    public Author( String name, int age, String nationality, String description, long cnp){
 
         this.name = name;
         this.age = age;
         this.nationality = nationality;
         this.description = description;
+        this.cnp = cnp;
     }
-
     public String getName(){
         return this.name;
     }
@@ -36,6 +37,7 @@ public class Author {
     public int getAge(){
         return this.age;
     }
+    public long getCNP() { return this.cnp;}
 
 
 }

@@ -15,31 +15,29 @@ public class AddAuthorDao {
         String driver = "com.mysql.jdbc.Driver";
         String userName = "root";
         String password = "root";
-
         try {
             Class.forName(driver).newInstance();
             conn = DriverManager.getConnection(url + dbName, userName, password);
-
         } catch (Exception e) {
             System.out.println(e);
         } finally {
             return conn;
         }
     }
-    public static int getIdAuthor(String name) {
+    public static int getIdAuthor(long cnp) {
         boolean status = false;
         Connection conn = connect();
         PreparedStatement pst = null;
         ResultSet rs = null;
         int id = 0;
         try {
-            pst = conn.prepareStatement("select * from authors where name=?");
-            pst.setString(1,name);
+            pst = conn.prepareStatement("select * from authors where CNP=?");
+            pst.setLong(1,cnp);
             rs = pst.executeQuery();
             if (rs.next()) {
                 id = rs.getInt("id");
             }
-        } catch (SQLException e) {
+        }catch (SQLException e) {
             e.printStackTrace();
         }
         return id;
@@ -50,11 +48,12 @@ public class AddAuthorDao {
         Connection conn = RegisterDao.connect();
         int status = 0;
         try {
-            ps = conn.prepareStatement("insert into authors (name, age, nationality, description) values(?,?,?,?)");
+            ps = conn.prepareStatement("insert into authors (name, age, nationality, description, cnp) values(?,?,?,?,?)");
             ps.setString(1, a.getName());
             ps.setInt(2, a.getAge());
             ps.setString(3, a.getNationality());
             ps.setString(4, a.getDescription());
+            ps.setLong(5, a.getCNP());
             status = ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

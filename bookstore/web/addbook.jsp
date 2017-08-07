@@ -22,8 +22,8 @@
                     <label for="name"> Name:</label>
                     <input type="text" id="name" name="name" required="required">
 
-                    <label for="nameauthor">Name Author:</label>
-                    <input type="text" id="nameauthor" name="nameauthor" required="required">
+                    <label for="cnp">CNP Author:</label>
+                    <input type="text" id="cnp" name="cnp" required="required">
 
                     <label for="isbn"> ISBN:</label>
                     <input type="text" id="isbn" name="isbn" required="required">

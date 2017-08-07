@@ -23,30 +23,42 @@ public class AddBookServlet extends HttpServlet{
     private static final long serialVersionUID = 1L;
     public static String text;
     public static String n;
-    public static String na;
-    public static String isbn;
-    public static String price;
+    public static String cnp;
+    public static String isbnString;
+    public static String priceString;
     public static String description;
+    public static long CNP = 0;
+    public static int isbn = 0;
+    public static double price = 0.0;
+    public static int id_author;
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
-        int id_author = 0;
+        id_author = 0;
         Author author = new Author();
         n = request.getParameter("name");
-        na = request.getParameter("nameauthor");
-        isbn = request.getParameter("isbn");
-        price = request.getParameter("price");
+        cnp = request.getParameter("cnp");
+        isbnString = request.getParameter("isbn");
+        priceString = request.getParameter("price");
         description = request.getParameter("description");
         HttpSession session = request.getSession(false);
-        if (AddAuthorDao.getIdAuthor(na) != 0) {
-            id_author = AddAuthorDao.getIdAuthor(na);
+
+        try{
+            CNP = Long.parseLong(cnp);
+            isbn = Integer.parseInt(isbnString);
+            price = Double.parseDouble(priceString);
+        }catch(NumberFormatException e){
+            e.printStackTrace();
+        }
+        if (AddAuthorDao.getIdAuthor(CNP) != 0){
+            id_author = AddAuthorDao.getIdAuthor(CNP);
             author = PrintAuthor.getDetails(id_author);
-            Book b = new Book(n, Integer.parseInt(isbn), author, Double.parseDouble(price), description);
+            Book b = new Book(n, isbn, author, price, description);
             try {
-                if (AddBookDao.addBook(b)) {
+                if (AddBookDao.addBook(b, CNP) == 1) {
                     RequestDispatcher rd = request.getRequestDispatcher("/selectbooksadminServlet");
                     rd.forward(request, response);
                 } else {
@@ -57,8 +69,7 @@ public class AddBookServlet extends HttpServlet{
             } catch (SQLException e1) {
                 e1.printStackTrace();
             }
-            out.close();
-        } else {
+        }else{
             RequestDispatcher rd = request.getRequestDispatcher("/addauthor.jsp");
             rd.forward(request, response);
         }

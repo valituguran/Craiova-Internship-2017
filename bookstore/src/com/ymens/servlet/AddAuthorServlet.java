@@ -21,24 +21,25 @@ public class AddAuthorServlet extends HttpServlet {
         PrintWriter out=response.getWriter();
         int id_author=0;
         Author a=new Author();
+        String name = request.getParameter("name");
         String nationality=request.getParameter("nationality");
         String description_author=request.getParameter("description_author");
         String age=request.getParameter("age");
         int ag = 0;
         int isbn = 0;
         double price = 0.0;
-        try {
+        try{
            ag = Integer.parseInt(age);
-           isbn = Integer.parseInt(AddBookServlet.isbn);
-           price = Double.parseDouble(AddBookServlet.price);
+           isbn = Integer.parseInt(AddBookServlet.isbnString);
+           price = Double.parseDouble(AddBookServlet.priceString);
         }catch (NumberFormatException e){
             e.printStackTrace();
         }
-        a = new Author(AddBookServlet.na, ag, nationality, description_author);
+        a = new Author(name, ag, nationality, description_author, AddBookServlet.CNP);
         AddAuthorDao.addAuthor(a);
         Book b=new Book(AddBookServlet.n, isbn, a, price, AddBookServlet.description);
         try{
-            if(AddBookDao.addBook(b)==true){
+            if(AddBookDao.addBook(b, AddBookServlet.CNP) == 1){
                 RequestDispatcher rd=request.getRequestDispatcher("/selectbooksadminServlet");
                 rd.forward(request,response);
             } else{

@@ -38,8 +38,7 @@
         </div>
         <nav class="custom-menu">
             <ul>
-                <%String realname;
-                    realname=(String)session.getAttribute("realname");%>
+                <%String realname;realname=(String)session.getAttribute("realname");%>
                 <li><a class="target" href="/mycontServlet"><%=realname%></a></li>
                 <li><a class="target" href="index.jsp">Logout</a></li>
                 <li><a class="target" href="register.jsp">Add users</a></li>
