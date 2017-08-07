@@ -21,13 +21,12 @@ public class UserType {
         String driver = "com.mysql.jdbc.Driver";
         String userName = "root";
         String password = "root";
-
-        try {
+        try{
             Class.forName(driver).newInstance();
             conn = DriverManager.getConnection(url + dbName, userName, password);
-        } catch (Exception e) {
+        }catch (Exception e) {
             System.out.println(e);
-        } finally {
+        }finally {
             return conn;
         }
     }
@@ -37,7 +36,6 @@ public class UserType {
         ResultSet resultSet;
         int type = 0;
         String typ = "";
-
         try {
             ps = conn.prepareStatement("select* from users where username=? and password=? ");
             ps.setString(1,n);

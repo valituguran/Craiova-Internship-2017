@@ -35,8 +35,7 @@
                     <label for="userpass"> Password:</label>
                     <input type="password" id="userpass" name="userpass" required="required">
 
-                    <label for="userpass"> Repeat password:</label>
-                    <input type="password" id="userpass" name="userpass" required="required">
+
 
                     <label for="email"> Email:</label>
                     <input type="text" id="email" name="email" required="required">

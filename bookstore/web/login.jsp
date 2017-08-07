@@ -22,9 +22,7 @@
 		<div class="container">
 
 			<form action="loginServlet" method="post">
-
 				<h1>Login</h1>
-
 				<fieldset>
 					<label for="name"> Username:</label>
 					<input type="text" id="name" name="name" required="required">
@@ -43,5 +41,6 @@
 			<p class="fl_right"> Bookstore</p>
 		</footer>
 	</div>
+</div>
 </body>
 </html>

@@ -37,24 +37,12 @@
 <!-- content -->
 <div class="wrapper row2">
 
-    <div id="container" class="clear">
-        <!-- content body -->
-        <div class="slider">
-
-            <li><img src="../images/logo.jpg"/></li>
-
-            </ul>
-        </div>
-    </div
-
     <%
         User user =(User) session.getAttribute("currentuser");%>
     <div class="container">
 
         <div id="tab-1" class="tab-content current">
-            <div class="product">
-                <img src=" ">
-            </div>
+
 
 
             <tr>Username
@@ -83,7 +71,7 @@
 <!-- footer -->
 <div class="wrapper row3">
     <footer id="footer" class="clear">
-        <p class="fl_left">Copyright &copy; - All Rights Reserved - <a href="www.roweb.ro"> Homepage</a></p>
+        <p class="fl_left">Copyright &copy; - All Rights Reserved - <a href="www.ymens.ro"> Homepage</a></p>
         <p class="fl_right"> Ymens Teamnet SRL</p>
     </footer>
 </div>

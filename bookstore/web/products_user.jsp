@@ -5,23 +5,33 @@
 <html lang="en" dir="ltr">
 
 <%@page import="com.ymens.Book"%>
-<%@ page import="sun.awt.image.ImageWatched" %>
+<%@ page import="com.ymens.dao.LoginDao" %>
 <%@ page import="java.util.LinkedList" %>
-<%@ page import="com.ymens.servlet.SelectBooksServlet"%>
-<%@ page import="com.ymens.dao.SelectBooksDao" %>
 <head>
     <title>Products</title>
     <meta charset="iso-8859-1">
     <link rel="stylesheet" href="../styles/layout.css" type="text/css">
 
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <!--[if lt IE 9]><script src="scripts/html5shiv.js"></script><![endif]-->
+    <!--[if lt IE 9]>
+    <script src="scripts/html5shiv.js"></script><![endif]-->
 </head>
 <body>
-<form method="get" action="/searchbyauthoruserServlet">
-    <!--<input type="text" id="searchbyname" name="searchbyname" required="required">-->
-    <input type="text" id="searchbyname" name="searchbyauthor" required="required">
 
+<form method="get" action="/searchbyauthoruserServlet">
+    <fieldset>
+        <label for="searchbyauthor">Search by author</label>
+        <input type="search" id="searchbyauthor" name="searchbyauthor" required="required">
+    </fieldset>
+    <button type="submit">Search</button>
+</form>
+
+<form method="get" action="/searchbynameuserServlet">
+    <fieldset>
+        <label for="searchbyname">Search by name</label>
+        <input type="text" id="searchbyname" name="searchbyname" required="required">
+    </fieldset>
+    <button type="submit">Search</button>
 </form>
 
 <div class="wrapper row1">
@@ -31,9 +41,11 @@
         </div>
         <nav class="custom-menu">
             <ul>
-                <li><a class="target" href="/mycontServlet">Contul meu</a></li>
+                <%String realname;
+                realname=(String)session.getAttribute("realname");%>
+                <li><a class="target" href="/mycontServlet"><%=realname%></a></li>
                 <li><a class="target" href="index.jsp">Logout</a></li>
-                <li class="last"><a class="target" href="buy.jsp">Cos de cumparaturi</a></li>
+                <li class="last"><a class="target" href="buy.jsp">(Cart)</a></li>
             </ul>
         </nav>
 
@@ -50,6 +62,7 @@
 
             </ul>
         </div>
+
     </div
 
     <%
@@ -97,7 +110,7 @@
 <!-- footer -->
 <div class="wrapper row3">
     <footer id="footer" class="clear">
-        <p class="fl_left">Copyright &copy; - All Rights Reserved - <a href="www.roweb.ro"> Homepage</a></p>
+        <p class="fl_left">Copyright &copy; - All Rights Reserved - <a href="www.ymens.ro"> Homepage</a></p>
         <p class="fl_right"> Ymens Teamnet SRL</p>
     </footer>
 </div>

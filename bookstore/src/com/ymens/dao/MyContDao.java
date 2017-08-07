@@ -10,8 +10,6 @@ import java.sql.*;
 public class MyContDao {
     public static Connection connect() {
         Connection conn = null;
-
-
         String url = "jdbc:mysql://localhost:3306/";
         String dbName = "bookstore";
         String driver = "com.mysql.jdbc.Driver";
@@ -35,7 +33,7 @@ public class MyContDao {
         PreparedStatement pst ;
         ResultSet rs ;
         User user = new User();
-        //LinkedList<User> list = new LinkedList();
+
         try {
             pst = conn.prepareStatement("select * from users where username=? and password=?");
             pst.setString(1,n);
@@ -49,15 +47,13 @@ public class MyContDao {
                 String email = rs.getString("email");
                 int type = rs.getInt("type");
                 user = new User(id, name, password, realname, email, type);
-                //list.add(user);
-
             }
-
-        } catch (SQLException e) {
+        }catch (SQLException e) {
             e.printStackTrace();
         }
         return user;
     }
+
 }
 
 

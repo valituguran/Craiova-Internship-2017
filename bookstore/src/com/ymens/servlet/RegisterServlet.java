@@ -1,6 +1,7 @@
 package com.ymens.servlet;
 
 
+import com.ymens.UserType;
 import com.ymens.dao.RegisterDao;
 
 import javax.servlet.RequestDispatcher;
@@ -21,6 +22,7 @@ public class RegisterServlet extends HttpServlet{
 
      public void init() throws ServletException {
          super.init();
+         UserType userType = new UserType();
 
 
      }
@@ -34,15 +36,12 @@ public class RegisterServlet extends HttpServlet{
         String p=request.getParameter("userpass");
         String e=request.getParameter("email");
         String rn=request.getParameter("realname");
-
-
         HttpSession session = request.getSession(false);
         if(session!=null)
             session.setAttribute("name", n);
-
         try {
             if(RegisterDao.validate(n, p, rn , e) >0 ){
-                RequestDispatcher rd=request.getRequestDispatcher("welcome_admin.jsp");
+                RequestDispatcher rd=request.getRequestDispatcher("products_admin.jsp");
                 rd.forward(request,response);
             }
             else{

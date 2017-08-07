@@ -2,6 +2,7 @@ package com.ymens.dao;
 
 import com.ymens.Author;
 import com.ymens.Book;
+import com.ymens.PrintAuthor;
 
 import java.sql.*;
 import java.util.LinkedList;
@@ -12,18 +13,14 @@ import java.util.LinkedList;
 public class SelectBooksDao {
     public static Connection connect() {
         Connection conn = null;
-
-
         String url = "jdbc:mysql://localhost:3306/";
         String dbName = "bookstore";
         String driver = "com.mysql.jdbc.Driver";
         String userName = "root";
         String password = "root";
-
-        try {
+        try{
             Class.forName(driver).newInstance();
             conn = DriverManager.getConnection(url + dbName, userName, password);
-
         } catch (Exception e) {
             System.out.println(e);
         } finally {
@@ -44,16 +41,14 @@ public class SelectBooksDao {
             while (rs.next()) {
                 String name = rs.getString("name");
                 int id_author = rs.getInt("author_id");
-                Author author = Author.getDetail(id_author);
+                Author author = PrintAuthor.getDetails(id_author);
                 int isbn = rs.getInt("isbn");
                 double price = rs.getDouble("price");
                 String description = rs.getString("description");
                 Book book = new Book(name, isbn,author, price, description);
                 list.add(book);
-
             }
-
-        } catch (SQLException e) {
+        }catch (SQLException e) {
             e.printStackTrace();
         }
         return list;

@@ -50,7 +50,7 @@
 
 <div class="wrapper row3">
     <footer id="footer" class="clear">
-        <p class="fl_left">Copyright &copy; - All Rights Reserved - <a href="www.roweb.ro"> Homepage</a></p>
+        <p class="fl_left">Copyright &copy; - All Rights Reserved - <a href="www.ymens.ro"> Homepage</a></p>
         <p class="fl_right"> Ymens Teamnet SRL</p>
     </footer>
 </div>

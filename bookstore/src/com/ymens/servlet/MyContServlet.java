@@ -22,7 +22,6 @@ public class MyContServlet extends HttpServlet{
     public void init() throws ServletException {
 
     }
-
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession(false);

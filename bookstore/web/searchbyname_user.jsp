@@ -27,9 +27,11 @@
         </div>
         <nav class="custom-menu">
             <ul>
-                <li><a class="target" href="/mycontServlet">Contul meu</a></li>
+                <%String realname;
+                    realname=(String)session.getAttribute("realname");%>
+                <li><a class="target" href="/mycontServlet"><%=realname%></a></li>
                 <li><a class="target" href="index.jsp">Logout</a></li>
-                <li class="last"><a class="target" href="buy.jsp">Cos de cumparaturi</a></li>
+                <li class="last"><a class="target" href="buy.jsp">(Cart)</a></li>
             </ul>
         </nav>
 
@@ -93,7 +95,7 @@
 <!-- footer -->
 <div class="wrapper row3">
     <footer id="footer" class="clear">
-        <p class="fl_left">Copyright &copy; - All Rights Reserved - <a href="www.roweb.ro"> Homepage</a></p>
+        <p class="fl_left">Copyright &copy; - All Rights Reserved - <a href="www.ymens.ro"> Homepage</a></p>
         <p class="fl_right"> Ymens Teamnet SRL</p>
     </footer>
 </div>

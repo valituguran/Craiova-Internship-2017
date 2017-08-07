@@ -21,18 +21,17 @@ public class LoginServlet extends HttpServlet {
 		String n = request.getParameter("name");
 		String p = request.getParameter("password");
 		HttpSession session = request.getSession(false);
-
+        String realname = LoginDao.getRealName(n, p);
 		if (session != null) {
 			session.setAttribute("name", n);
 			session.setAttribute("password", p);
-
+			session.setAttribute("realname", realname);
 		}
 		if (LoginDao.validate(n, p )) {
 			String type = UserType.getType(n,p);
 			if (type.equalsIgnoreCase("admin")) {
 				getServletContext().getRequestDispatcher("/selectbooksadminServlet").forward(request, response);
-
-			} else if (type.equalsIgnoreCase("user")) {
+			}else if (type.equalsIgnoreCase("user")) {
 				//RequestDispatcher rd = request.getRequestDispatcher("selectbooksServlet");
 				getServletContext().getRequestDispatcher("/selectbooksuserServlet").forward(request, response);
 			}

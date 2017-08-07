@@ -31,6 +31,8 @@
                     realname=(String)session.getAttribute("realname");%>
                 <li><a class="target" href="/mycontServlet"><%=realname%></a></li>
                 <li><a class="target" href="index.jsp">Logout</a></li>
+                <li><a class="target" href="register.jsp">Add users</a></li>
+                <li><a class="target" href="addbooks.jsp">Add books</a></li>
                 <li class="last"><a class="target" href="buy.jsp">(Cart)</a></li>
             </ul>
         </nav>
@@ -51,7 +53,7 @@
     </div
 
     <%
-        LinkedList list = (LinkedList)session.getAttribute("searchbyauthor");%>
+        LinkedList list = (LinkedList)session.getAttribute("searchbyname");%>
     <div class="container">
         <%
 

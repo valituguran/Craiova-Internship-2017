@@ -33,32 +33,25 @@ public class SearchByNameServlet extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         String n = request.getParameter("searchbyname");
-        list = SearchByNameDao.select(n);
+        list = SearchByNameDao.searchByName(n);
         session = request.getSession(false);
         if (session != null) {
             session.setAttribute("searchbyname", list);
         }
-
         user.username = (String) session.getAttribute("name");
         user.password = (String) session.getAttribute("password");
         doPost(request, response);
-
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-
-
         UserType userType = new UserType();
         String usertype = userType.getType(user.username, user.password);
         if (usertype.equalsIgnoreCase("user")) {
             getServletContext().getRequestDispatcher("/searchbyname_user.jsp").forward(request, response);
-
-        } else {
-            getServletContext().getRequestDispatcher("/products_admin.jsp").forward(request, response);
-
+        }else {
+            getServletContext().getRequestDispatcher("/searchbyname_admin.jsp").forward(request, response);
         }
-
     }
 }

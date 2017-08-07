@@ -8,28 +8,24 @@ import java.sql.*;
 public class RegisterDao {
     public static Connection connect() {
         Connection conn = null;
-
-
         String url = "jdbc:mysql://localhost:3306/";
         String dbName = "bookstore";
         String driver = "com.mysql.jdbc.Driver";
         String userName = "root";
         String password = "root";
-
-        try {
+        try{
             Class.forName(driver).newInstance();
             conn = DriverManager.getConnection(url + dbName, userName, password);
-
-        } catch (Exception e) {
+        }catch (Exception e) {
             System.out.println(e);
-        } finally {
+        }finally {
             return conn;
         }
     }
     public static int getType(){
         PreparedStatement ps = null;
         Connection conn = RegisterDao.connect();
-         ResultSet user_type;
+        ResultSet user_type;
         int type = 0;
         try {
             ps = conn.prepareStatement("select* from user_type where name=? ");
@@ -60,7 +56,6 @@ public class RegisterDao {
             ps.setString(2, pass);
             ps.setString(3, realname);
             ps.setString(4, email);
-
             ps.setInt(5, getType());
             status = ps.executeUpdate();
         } catch (Exception e) {

@@ -93,6 +93,25 @@
 		<url-pattern>/registerServlet</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>addbook</servlet-name>
+		<servlet-class>com.ymens.servlet.AddBookServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>addbook</servlet-name>
+		<url-pattern>/addbookServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>addauthor</servlet-name>
+		<servlet-class>com.ymens.servlet.AddAuthorServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>addauthor</servlet-name>
+		<url-pattern>/addauthorServlet</url-pattern>
+	</servlet-mapping>
+
+
 
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>

@@ -32,24 +32,19 @@ public class SearchByAuthorServlet extends HttpServlet {
 
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
-        String n = request.getParameter("searchbyauthor");
-        int nr = Integer.parseInt(n);
-        list = SearchByAuthorDao.select(nr);
+        String name = request.getParameter("searchbyauthor");
+        list = SearchByAuthorDao.searchByAuthor(name);
         session = request.getSession(false);
         if (session != null) {
             session.setAttribute("searchbyauthor", list);
         }
-
         user.username = (String) session.getAttribute("name");
         user.password = (String) session.getAttribute("password");
         doPost(request, response);
-
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-
 
         UserType userType = new UserType();
         String usertype = userType.getType(user.username, user.password);
@@ -57,9 +52,7 @@ public class SearchByAuthorServlet extends HttpServlet {
             getServletContext().getRequestDispatcher("/searchbyauthor_user.jsp").forward(request, response);
 
         } else {
-            getServletContext().getRequestDispatcher("/products_admin.jsp").forward(request, response);
-
+            getServletContext().getRequestDispatcher("/searchbyauthor_admin.jsp").forward(request, response);
         }
-
     }
 }

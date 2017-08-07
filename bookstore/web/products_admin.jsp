@@ -19,6 +19,17 @@
 </head>
 <body>
 
+<form method="get" action="/searchbyauthoradminServlet">
+    <p>Search by author:</p>
+    <input type="search" id="searchbyauthor" name="searchbyauthor" required="required">
+    <button type="submit">Search</button>
+</form>
+
+<form method="get" action="/searchbynameadminServlet">
+     Search by name:
+    <input type="text" id="searchbyname" name="searchbyname" required="required">
+    <button type="submit">Search</button>
+</form>
 
 <div class="wrapper row1">
     <header id="header" class="clear">
@@ -27,11 +38,13 @@
         </div>
         <nav class="custom-menu">
             <ul>
-                <li><a class="target" href="/mycontServlet">Contul meu</a></li>
+                <%String realname;
+                    realname=(String)session.getAttribute("realname");%>
+                <li><a class="target" href="/mycontServlet"><%=realname%></a></li>
                 <li><a class="target" href="index.jsp">Logout</a></li>
-                <li><a class="target" href="register.jsp">Adauga utilizatori</a></li>
-                <li><a class="target" href="addbooks.jsp">Adauga carti</a></li>
-                <li class="last"><a class="target" href="buy.jsp">Cos de cumparaturi</a></li>
+                <li><a class="target" href="register.jsp">Add users</a></li>
+                <li><a class="target" href="addbook.jsp">Add books</a></li>
+                <li class="last"><a class="target" href="buy.jsp">(Cart)</a></li>
             </ul>
         </nav>
 
@@ -95,7 +108,7 @@
 <!-- footer -->
 <div class="wrapper row3">
     <footer id="footer" class="clear">
-        <p class="fl_left">Copyright &copy; - All Rights Reserved - <a href="www.roweb.ro"> Homepage</a></p>
+        <p class="fl_left">Copyright &copy; - All Rights Reserved - <a href="www.ymens.ro"> Homepage</a></p>
         <p class="fl_right"> Ymens Teamnet SRL</p>
     </footer>
 </div>
