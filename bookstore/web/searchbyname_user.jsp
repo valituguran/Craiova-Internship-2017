@@ -1,103 +1,84 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1"%>
 
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-
 <%@page import="com.ymens.Book"%>
 <%@ page import="sun.awt.image.ImageWatched" %>
 <%@ page import="java.util.LinkedList" %>
 <%@ page import="com.ymens.servlet.SelectBooksServlet"%>
 <%@ page import="com.ymens.dao.SelectBooksDao" %>
+<!DOCTYPE html>
+<html>
 <head>
-    <title>Products</title>
-    <meta charset="iso-8859-1">
-    <link rel="stylesheet" href="../styles/layout.css" type="text/css">
-
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <!--[if lt IE 9]><script src="scripts/html5shiv.js"></script><![endif]-->
+    <title>Bookstore</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../styles/style.css">
+    <link src="../scripts/file.js">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
 </head>
+
 <body>
-
-
-<div class="wrapper row1">
-    <header id="header" class="clear">
-        <div id="hgroup">
-            <h1><a href="#">Bookstore</a></h1>
-        </div>
-        <nav class="custom-menu">
-            <ul>
-                <%String realname;
-                    realname=(String)session.getAttribute("realname");%>
-                <li><a class="target" href="/mycontServlet"><%=realname%></a></li>
-                <li><a class="target" href="index.jsp">Logout</a></li>
-                <li class="last"><a class="target" href="buy.jsp">(Cart)</a></li>
-            </ul>
-        </nav>
-
-    </header>
+<%String realname;
+    realname=(String)session.getAttribute("realname");%>
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="/mycontServlet"><%=realname%></a>
+    <a href="index.jsp">Logout</a>
 </div>
-<!-- content -->
-<div class="wrapper row2">
 
-    <div id="container" class="clear">
-        <!-- content body -->
-        <div class="slider">
-
-            <li><img src="../images/logo.jpg" /></li>
-
-            </ul>
-        </div>
-    </div
-
-    <%
-        LinkedList list = (LinkedList)session.getAttribute("searchbyname");%>
-    <div class="container">
-        <%
-
-            for( int i=0; i<list.size(); i++){
-                Book book = (Book) list.get(i);
-
-        %>
-        <div id="tab-1" class="tab-content current">
-            <div class="product">
-                <img src=" ">
-            </div>
-
-
-            <tr>Title
-                <td width="50px">
-                    <%=book.getNume()%><br>
-                </td>ISBN
-                <td width="50px">
-                    <%=book.getIsbn()%><br>
-                </td>Author
-                <td width="50px">
-                    <%=book.getAuthor().getDescription()%>
-                    <%=book.getAuthor().getAge()%>
-                    <%=book.getAuthor().getNationality()%>
-                    <br>
-                </td>Description
-                <td width="50px">
-                    <%=book.getDescription()%><br>
-                </td>
-
-
-            </tr>
-
-        </div>
-        <% } %>
-        </table>
+<div class="topnav">
+    <span style="align:left;cursor:pointer;color:white;text-align:center;font-size: 20px;" onclick="openNav()">&#9776;<%=realname%></span>
+    <a href="addbook.jsp">Add books</a>
+    <a href="buy.jsp">Cart</a>
+</div>
+<div class="content">
+    <div class="form">
+        <h4>Filter</h4>
+        <form method="get" action="/searchbyauthoradminServlet" id="search">
+            <h3>Search by author</h3><br>
+            <input name="searchbyauthor" type="text" size="40" placeholder="Search..." required="required">
+        </form>
+        <form method="get" action="/searchbynameadminServlet" id="searchbyname">
+            <h3>Search by name</h3><br>
+            <input name="searchbyname" type="text" size="40" placeholder="Search..." required="required">
+        </form>
     </div>
 
+    <img class="logo" src="../images/logo.jpg">
+    <div class="products">
+        <%
+            LinkedList list = (LinkedList)session.getAttribute("searchbyname");%>
+        <div class="container">
+            <%
+
+                for( int i=0; i<list.size(); i++){
+                    Book book = (Book) list.get(i);
+
+            %>
+            <div class="tab-content">
+                <p><%=book.getNume()%></p><br>
+                <div class="product">
+
+                    <img src="<%=book.getURLImage()%>">
+                    <span><a href="#">Buy</a></span>
+                </div>
+
+            </div>
+            <% } %>
+
+        </div>
+
+    </div>
 </div>
-</div>
-<!-- footer -->
-<div class="wrapper row3">
-    <footer id="footer" class="clear">
-        <p class="fl_left">Copyright &copy; - All Rights Reserved - <a href="www.ymens.ro"> Homepage</a></p>
-        <p class="fl_right"> Ymens Teamnet SRL</p>
-    </footer>
-</div>
+
+<script>
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+    }
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+    }
+</script>
 </body>
+
 </html>

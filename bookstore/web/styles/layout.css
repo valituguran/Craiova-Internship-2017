@@ -1,81 +1,24 @@
 html{overflow-y:scroll;}
 
 body{margin:0; padding:0; font-size:13px; font-family:Georgia, "Times New Roman", Times, serif; color: #592f97; background-color:#FFFFFF;}
-
-.clear:after{content:"."; display:block; height:0; clear:both; visibility:hidden; line-height:0;}
-.clear{display:block; clear:both;}
-html[xmlns] .clear{display:block;}
-* html .clear{height:1%;}
-
 a{outline:none; text-decoration:none;}
-
-code{font-weight:normal; font-style:normal; font-family:Georgia, "Times New Roman", Times, serif;}
-
 .fl_left{float:left;}
 .fl_right{float:right;}
-
 img{margin:0; padding:0; border:none; line-height:normal; vertical-align:middle;}
 .imgholder, .imgl, .imgr{padding:4px; border:1px solid #D6D6D6; text-align:center;}
 .imgl{float:left; margin:0 15px 15px 0; clear:left;}
 .imgr{float:right; margin:0 0 15px 15px; clear:right;}
 
 
-address, article, aside, figcaption, figure, footer, header, nav, section{display:block; margin:0; padding:0;}
 
-q{display:block; padding:0 10px 8px 10px; color:#979797; background-color:#ECECEC; font-style:italic; line-height:normal;}
-q:before{content:'ï¿½ '; font-size:26px;}
-q:after{content:' ï¿½'; font-size:26px; line-height:0;}
-
-
-div.wrapper{display:block;width:1200px; margin:0 auto; padding:0; text-align:left;}
-
-.row1, .row1 a{color:#979797; width:100%;}
+div.wrapper {display:block;width:1200px; margin:0 auto; padding:0; text-align:left;}
 .row2{color:#979797; width:100%;}
 .row2 a{color:#FF9900; }
-.row3{border-top:1px solid #DEDEDE;width:100%;}
-.row3, .row3 a{color:#979797; width:100%;}
 
 
-
-#header, #container, #footer{display:block; width:100%;}
-
-nav ul{margin:0; padding:0; list-style:none;}
 
 h1, h2, h3, h4, h5, h6{margin:0; padding:0; font-size:16px; font-weight:bold; font-style:normal; line-height:normal; text-transform:uppercase;}
 
-address{font-style:normal;}
-
-blockquote, q{display:block; padding:8px 10px; color:#979797; background-color:#ECECEC; font-style:italic; line-height:normal;}
-blockquote:before, q:before{content:'ï¿½ '; font-size:26px;}
-blockquote:after, q:after{content:' ï¿½'; font-size:26px; line-height:0;}
-
-
-
-#header{}
-
-#header #hgroup{padding:20px 0 0 0; float:left;}
-#header #hgroup h1, #header #hgroup h2{font-weight:normal; text-transform:none;}
-#header #hgroup h1{font-size:36px;}
-#header #hgroup h2{font-size:13px;}
-
-#header nav{display:block; float:right; margin:25px 0 0 0; padding:10px 10px; border-top:1px solid #DEDEDE; border-bottom:1px solid #DEDEDE;}
-#header nav ul{}
-#header nav li{display:inline; margin-right:25px; text-transform:uppercase;}
-#header nav li.last{margin-right:0;}
-#header nav li a{}
-#header nav li a:hover{color:#FF9900; }
-
-#container{padding:30px 0;}
-#container section{display:block; width:100%; margin:0 0 30px 0; padding:0;}
-#container .last{margin:0;}
-#container .more{text-align:right; text-transform:uppercase; font-size:smaller; font-weight:bold;}
-
-#container #homepage{line-height:1.6em;}
-#container #homepage article{}
-#container #homepage article h2{font-size:14px; margin-bottom:15px; padding-bottom:8px; border-bottom:1px solid #DEDEDE;}
-#container #homepage article p{margin:0; padding:0;}
-#container #homepage article img{float:left; width:80px; height:80px; margin:0 10px 10px 0; padding:4px; border:1px solid #DEDEDE;}
-#container #homepage article footer{margin:10px 0 0 0;}
 
 
 .container{
@@ -96,7 +39,6 @@ ul.tabs li{
     padding: 10px 15px;
     cursor: pointer;
 }
-.slider img{height:300px;}
 ul.tabs li.current{
     background: #ededed;
     color: #222;
@@ -118,24 +60,26 @@ ul.tabs li.current{
     padding: 15px;
     border: 1px solid #FF9900;
 }
-.target.active{
-    color: #FF9900;
-    background-color: #ccc;
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
 
 .product{
     height:150px;
-    width:175px;
+    width:30%;
     border:1px solid;
-    margin-right:10px;
+    margin:15px;
     float:left;
     margin-top:10px;
     text-align:center;
 }
+.product img{
+    width:50%;
+    height:50%;
 
-
+}
+.product span{
+   font-size: 17px;
+    color:#111111;
+    font-family: "Lato", sans-serif;
+}
 
 /* ------Form-----*/
 *, *:before, *:after {
@@ -254,19 +198,7 @@ label.light {
 }
 
 #footer{padding:20px 0;}
-#footer p{margin:0; padding:0;}
-
-@media screen and (max-width: 768px) {
-    .one_third{
-        display:block;
-        float:none;
-        width: 100%;
-    }
-}
-
-
-
-.button {
+#footer p{margin:0; padding:0;}  .button {
     position: relative;
     left: 64%;
 }
@@ -278,7 +210,89 @@ label.light {
 
 
 
+html, body {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
 
+body {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+}
+
+form {
+    background: white;
+    width: 60%;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7);
+    font-family: lato;
+    position: relative;
+    color: #333;
+    border-radius: 10px;
+}
+form header {
+    background: ;
+    padding: 30px 20px;
+    color: white;
+    font-size: 1.2em;
+    font-weight: 600;
+    border-radius: 10px 10px 0 0;
+}
+form label {
+    margin-left: 20px;
+    display: inline-block;
+    margin-top: 30px;
+    margin-bottom: 5px;
+    position: relative;
+}
+form label span {
+    color: #FF3838;
+    font-size: 2em;
+    position: absolute;
+    left: 2.3em;
+    top: -10px;
+}
+form input {
+    display: block;
+    width: 78%;
+    margin-left: 20px;
+    padding: 5px 20px;
+    font-size: 1em;
+    border-radius: 3px;
+    outline: none;
+    border: 1px solid #ccc;
+}
+form .help {
+    margin-left: 20px;
+    font-size: 0.8em;
+    color: #777;
+}
+form button {
+    position: relative;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    font-family: inherit;
+    color: white;
+    background: #FF3838;
+    outline: none;
+    border: none;
+    padding: 5px 15px;
+    font-size: 1.3em;
+    font-weight: 400;
+    border-radius: 3px;
+    box-shadow: 0px 0px 10px rgba(51, 51, 51, 0.4);
+    cursor: pointer;
+    transition: all 0.15s ease-in-out;
+}
+form button:hover {
+    background: #ff5252;
+}
 
 
 

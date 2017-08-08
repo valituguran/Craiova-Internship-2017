@@ -9,12 +9,14 @@ public class Book {
     Author author;
     double price;
     String description;
-    public Book(String name, int isbn,Author author, double price, String description){
+    String image;
+    public Book(String name, int isbn,Author author, double price, String description, String image){
         this.name = name;
         this.author = author;
         this.isbn = isbn;
         this.price = price;
         this.description = description;
+        this.image = image;
     }
     public String getNume(){
         return this.name;
@@ -28,6 +30,7 @@ public class Book {
     public double getPrice(){
             return this.price;
     }
+    public String getURLImage() {return this.image;}
     public Author getAuthor(){
         return this.author;
     }

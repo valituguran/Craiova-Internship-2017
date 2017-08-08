@@ -27,6 +27,7 @@ public class AddBookServlet extends HttpServlet{
     public static String isbnString;
     public static String priceString;
     public static String description;
+    public  static String image;
     public static long CNP = 0;
     public static int isbn = 0;
     public static double price = 0.0;
@@ -44,6 +45,7 @@ public class AddBookServlet extends HttpServlet{
         isbnString = request.getParameter("isbn");
         priceString = request.getParameter("price");
         description = request.getParameter("description");
+        image = request.getParameter("image");
         HttpSession session = request.getSession(false);
 
         try{
@@ -56,7 +58,7 @@ public class AddBookServlet extends HttpServlet{
         if (AddAuthorDao.getIdAuthor(CNP) != 0){
             id_author = AddAuthorDao.getIdAuthor(CNP);
             author = PrintAuthor.getDetails(id_author);
-            Book b = new Book(n, isbn, author, price, description);
+            Book b = new Book(n, isbn, author, price, description, image);
             try {
                 if (AddBookDao.addBook(b, CNP) == 1) {
                     RequestDispatcher rd = request.getRequestDispatcher("/selectbooksadminServlet");

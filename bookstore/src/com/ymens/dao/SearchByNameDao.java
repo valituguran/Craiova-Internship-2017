@@ -48,7 +48,8 @@ public class SearchByNameDao {
                 int isbn = rs.getInt("isbn");
                 double price = rs.getDouble("price");
                 String description = rs.getString("description");
-                Book book = new Book(name, isbn,author, price, description);
+                String image = rs.getString("image");
+                Book book = new Book(name, isbn,author, price, description, image);
                 list.add(book);
 
             }

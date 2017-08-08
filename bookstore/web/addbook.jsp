@@ -34,6 +34,10 @@
                     <label for="description"> Description:</label>
                     <input type="text" id="description" name="description" required="required">
 
+                    <p style="color:black;">Please specify a image:</p><br>
+                    <input type="file" name="image" size="40" accept="image/*" style="color:black;">
+
+
                 </fieldset>
                 <button type="submit">Add</button>
             </form>

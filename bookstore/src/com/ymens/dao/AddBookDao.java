@@ -39,12 +39,13 @@ public class AddBookDao {
         Connection conn = connect();
         try {
 
-            ps = conn.prepareStatement("insert into books (name, author_id, isbn, price, description) values(?,?,?,?,?)");
+            ps = conn.prepareStatement("insert into books (name, author_id, isbn, price, description, image) values(?,?,?,?,?, ?)");
             ps.setString(1, b.getNume());
             ps.setInt(2, AddAuthorDao.getIdAuthor(cnp));
             ps.setInt(3, b.getIsbn());
             ps.setDouble(4, b.getPrice());
             ps.setString(5, b.getDescription());
+            ps.setString(6, b.getURLImage());
             i = ps.executeUpdate();
         } catch (Exception e) {
             status = false;

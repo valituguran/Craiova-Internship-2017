@@ -37,7 +37,7 @@ public class AddAuthorServlet extends HttpServlet {
         }
         a = new Author(name, ag, nationality, description_author, AddBookServlet.CNP);
         AddAuthorDao.addAuthor(a);
-        Book b=new Book(AddBookServlet.n, isbn, a, price, AddBookServlet.description);
+        Book b=new Book(AddBookServlet.n, isbn, a, price, AddBookServlet.description, AddBookServlet.image);
         try{
             if(AddBookDao.addBook(b, AddBookServlet.CNP) == 1){
                 RequestDispatcher rd=request.getRequestDispatcher("/selectbooksadminServlet");

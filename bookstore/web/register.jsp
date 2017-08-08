@@ -10,6 +10,9 @@
 <head>
     <link rel="stylesheet" href="../styles/layout.css" type="text/css">
     <title>Title</title>
+    <script>
+
+    </script>
 </head>
 <body>
 <div class="wrapper row1">

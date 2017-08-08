@@ -9,44 +9,32 @@
 <head>
     <title>Products</title>
     <meta charset="iso-8859-1">
-   <link rel="stylesheet" href="../styles/layout.css" type="text/css">
+
+    <link rel="stylesheet" href="../styles/index.css">
 
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <!--[if lt IE 9]><script src="scripts/html5shiv.js"></script><![endif]-->
+
 </head>
 <body>
 
-<div class="wrapper row1">
-    <header id="header" class="clear">
-        <div id="hgroup">
-            <h1><a href="#">Bookstore</a></h1>
-        </div>
-        <nav class="custom-menu">
-            <ul>
-                <li><a class="target" href="login.jsp">Login</a></li>
+<header class="bgimg-1 w3-display-container w3-grayscale-min" id="home">
 
-            </ul>
-        </nav>
+    <div class="w3-display-left w3-text-white" style="padding:48px">
+        <span class="w3-jumbo w3-hide-small">Buy a book from Bookstore</span><br>
 
-    </header>
-</div>
-
-<div class="wrapper row2">
-
-    <div id="container" class="clear">
-
-        <div class="slider">
-
-            <li><img src="../images/logo.jpg" /></li>
-
-            </ul>
-        </div>
+        <span class="w3-large">You need to login in order to buy books</span>
+        <p><a href="login.jsp" class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">Login</a></p>
     </div>
-
-    <div class="container">
-
+    <div class="w3-display-bottomleft w3-text-grey w3-large" style="padding:24px 48px">
+        <i class="fa fa-facebook-official w3-hover-opacity"></i>
+        <i class="fa fa-instagram w3-hover-opacity"></i>
+        <i class="fa fa-snapchat w3-hover-opacity"></i>
+        <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+        <i class="fa fa-twitter w3-hover-opacity"></i>
+        <i class="fa fa-linkedin w3-hover-opacity"></i>
     </div>
-</div>
+</header>
 
 <div class="wrapper row3">
     <footer id="footer" class="clear">
