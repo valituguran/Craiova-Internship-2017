@@ -27,22 +27,27 @@ realname=(String)session.getAttribute("realname");%>
 </div>
 
 <div class="topnav">
-    <span style="align:left;cursor:pointer;color:white;font-size: 20px;margin-left:30px;" onclick="openNav()">&#9776;<%=realname%></span>
+    <div style="align:left;cursor:pointer;color:white;font-size: 20px;margin:30px;float:left" onclick="openNav()">&#9776;<%=realname%></div>
+
+    <a href="buy.jsp">Cart</a>
     <a href="addbook.jsp">Add books</a>
     <a href="register.jsp">Add users</a>
-    <a href="buy.jsp">Cart</a>
+    <a id="form"><form method="get" action="/searchbynameadminServlet" id="search" >
+        <input name="search" type="text" size="40" placeholder="Search..." required="required">
+    </form></a>
+
 </div>
 <div class="content">
     <div class="form">
     <h4>Filter</h4>
-<form method="get" action="/searchbyauthoradminServlet" id="search">
+    <form method="get" action="/searchbyauthoradminServlet" id="searchbyauthor">
     <h3>Search by author</h3><br>
     <input name="searchbyauthor" type="text" size="40" placeholder="Search..." required="required">
-</form>
-<form method="get" action="/searchbynameadminServlet" id="searchbyname">
+    </form>
+    <form method="get" action="/searchbynameadminServlet" id="searchbyname">
     <h3>Search by name</h3><br>
     <input name="searchbyname" type="text" size="40" placeholder="Search..." required="required">
-</form>
+    </form>
     </div>
 
     <img class="logo" src="../images/logo.jpg">
