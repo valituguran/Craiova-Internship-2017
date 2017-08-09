@@ -111,6 +111,24 @@
 		<url-pattern>/addauthorServlet</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>CartServlet</servlet-name>
+		<servlet-class>com.ymens.servlet.CartServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CartServlet</servlet-name>
+		<url-pattern>/cartServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>OrderServlet</servlet-name>
+		<servlet-class>com.ymens.servlet.OrderServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>OrderServlet</servlet-name>
+		<url-pattern>/orderServlet</url-pattern>
+	</servlet-mapping>
+
 
 
 	<welcome-file-list>

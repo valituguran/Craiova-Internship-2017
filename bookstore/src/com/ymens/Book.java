@@ -10,6 +10,7 @@ public class Book {
     double price;
     String description;
     String image;
+    public Book() {}
     public Book(String name, int isbn,Author author, double price, String description, String image){
         this.name = name;
         this.author = author;

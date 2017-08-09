@@ -6,6 +6,8 @@
 <%@ page import="java.util.LinkedList" %>
 <%@ page import="com.ymens.servlet.SelectBooksServlet"%>
 <%@ page import="com.ymens.dao.SelectBooksDao" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.ymens.dao.CartDao" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,7 +31,7 @@ realname=(String)session.getAttribute("realname");%>
 <div class="topnav">
     <div style="align:left;cursor:pointer;color:white;font-size: 20px;margin:30px;float:left" onclick="openNav()">&#9776;<%=realname%></div>
 
-    <a href="buy.jsp">Cart</a>
+    <a href="/../shoppingcart.jsp">Cart</a>
     <a href="addbook.jsp">Add books</a>
     <a href="register.jsp">Add users</a>
     <a id="form"><form method="get" action="/searchbynameadminServlet" id="search" >
@@ -65,7 +67,14 @@ realname=(String)session.getAttribute("realname");%>
                <h3><%=book.getNume()%></h3>
                 <div class="product">
                     <img src="<%=book.getURLImage()%>">
-                    <span><a href="#">Buy</a></span>
+                    <form name="model" method="POST" action="/cartServlet"><p>Title:
+                            <%=book.getNume()%></font><input type="hidden" name="book" value="<%=book.getNume()%>"></p>
+                        <p>Description:
+                            ...<input type="hidden" name="description" value="<%=book.getDescription()%>"></p>
+                        <p><strong>Quantity</strong>: <input type="text" size="2" value="1" name="quantity"></p>
+                        <p><strong>Price</strong>:<%=book.getPrice()%></font><input type="hidden" name="price" value="<%=book.getPrice()%>"></p>
+                        <input type="hidden" name="action" value="add"><input type="submit" name="addToCart" value="Add To Cart">
+                    </form>
                 </div>
 
             </div>
