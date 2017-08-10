@@ -32,6 +32,10 @@
     <a href="buy.jsp">Cart</a>
 </div>
 <div class="content">
+    <ul class="breadcrumb">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Books</a></li>
+    </ul>
     <div class="form">
         <h4>Filter</h4>
         <form method="get" action="/searchbyauthoradminServlet" id="searchbyauthor">
@@ -51,27 +55,27 @@
         <div class="container">
             <%for( int i=0; i<list.size(); i++){
                 CartItem cartitem = (CartItem) list.get(i);%>
-
-
             <form name="item" method="POST" action="/cartServlet">
                 <p><strong><%=cartitem.getBook().getNume()%></strong></p>
                 <input type='hidden' name='name' value="<%=cartitem.getBook().getNume()%>">
                 <p>Disponibilitate: in stoc</p>
                 <input type='text' name="quantity" value="<%=cartitem.getQuantity()%>">
                 <input type="submit" name="action" value="Update">
-                <br/>         <input type="submit" name="action" value="Delete">
+                <br/><input type="submit" name="action" value="Delete">
                 <input type='hidden' name='price' value="<%=cartitem.getUnitCost()%>">
                 <p>Pret unitar:<%=cartitem.getUnitCost()%></p>
                 <p>Cost:<%=cartitem.getTotalCost()%></p>
             </form>
-                    <% } %>
+            <% } %>
                 <br><pre></pre>
                 <input type='hidden' name='orderTotal' value="<%=CartDao.dblOrderTotal%>">
                 <h3>Suma totala:</h3><%=CartDao.dblOrderTotal%><br
-
+               <form name="order" method="POST" action="/orderServlet">
+                   <input type="submit" name="action" value="Plaseaza comanda">
+               </form>
+            <a href="/orderServlet">Comanda</a>
         </div>
     </div>
-
     <script>
         function openNav() {
             document.getElementById("mySidenav").style.width = "250px";

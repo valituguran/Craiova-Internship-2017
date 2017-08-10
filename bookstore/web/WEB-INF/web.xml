@@ -31,12 +31,30 @@
 	</servlet-mapping>
 
 	<servlet>
+		<servlet-name>/products</servlet-name>
+		<servlet-class>com.ymens.servlet.ProductsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>/products</servlet-name>
+		<url-pattern>/productsServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
 	<servlet-name>selectbooksuser</servlet-name>
 	<servlet-class>com.ymens.servlet.SelectBooksServlet</servlet-class>
     </servlet>
 	<servlet-mapping>
 		<servlet-name>selectbooksuser</servlet-name>
 		<url-pattern>/selectbooksuserServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>selectbooks</servlet-name>
+		<servlet-class>com.ymens.servlet.SelectBooksServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>selectbooks</servlet-name>
+		<url-pattern>/selectbooksServlet</url-pattern>
 	</servlet-mapping>
 
 	<servlet>
@@ -132,6 +150,6 @@
 
 
 	<welcome-file-list>
-		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>productsServlet</welcome-file>
 	</welcome-file-list>
 </web-app>

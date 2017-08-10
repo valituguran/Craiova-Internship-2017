@@ -68,12 +68,12 @@ realname=(String)session.getAttribute("realname");%>
                 <div class="product">
                     <img src="<%=book.getURLImage()%>">
                     <form name="model" method="POST" action="/cartServlet"><p>Title:
-                            <%=book.getNume()%></font><input type="hidden" name="book" value="<%=book.getNume()%>"></p>
+                            <%=book.getNume()%><input type="hidden" name="book" value="<%=book.getNume()%>"></p>
                         <p>Description:
                             ...<input type="hidden" name="description" value="<%=book.getDescription()%>"></p>
                         <p><strong>Quantity</strong>: <input type="text" size="2" value="1" name="quantity"></p>
-                        <p><strong>Price</strong>:<%=book.getPrice()%></font><input type="hidden" name="price" value="<%=book.getPrice()%>"></p>
-                        <input type="hidden" name="action" value="add"><input type="submit" name="addToCart" value="Add To Cart">
+                        <p><strong>Price</strong><%=book.getPrice()%></font><input type="hidden" name="price" value="<%=book.getPrice()%>"></p>
+                        <button onclick="cart()"><input type="hidden" name="action" value="add">Buy</button>
                     </form>
 
                 </div>
@@ -92,6 +92,11 @@ realname=(String)session.getAttribute("realname");%>
     }
     function closeNav() {
         document.getElementById("mySidenav").style.width = "0";
+    }
+    function cart() {
+        var txt;
+        var r = alert("Produs adaugat cu succes in cos.");
+        document.getElementById("demo").innerHTML = txt;
     }
 </script>
 </body>
