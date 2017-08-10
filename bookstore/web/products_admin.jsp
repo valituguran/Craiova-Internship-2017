@@ -75,6 +75,7 @@ realname=(String)session.getAttribute("realname");%>
                         <p><strong>Price</strong>:<%=book.getPrice()%></font><input type="hidden" name="price" value="<%=book.getPrice()%>"></p>
                         <input type="hidden" name="action" value="add"><input type="submit" name="addToCart" value="Add To Cart">
                     </form>
+
                 </div>
 
             </div>

@@ -1,7 +1,6 @@
 package com.ymens.servlet;
 
 import com.ymens.Book;
-import com.ymens.CartItem;
 import com.ymens.dao.CartDao;
 
 import javax.servlet.RequestDispatcher;
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * Created by madalina.luca on 8/9/2017.
@@ -23,14 +21,12 @@ public class CartServlet extends HttpServlet {
             throws ServletException, IOException {
 
         String strAction = request.getParameter("action");
-
-
         if(strAction!=null && !strAction.equals("")) {
             if(strAction.equals("add")) {
                 addToCart(request);
-            }  if (strAction.equals("Update")) {
+            } else if (strAction.equals("Update")) {
                 updateCart(request);
-            } if (strAction.equals("Delete")) {
+            } else if (strAction.equals("Delete")) {
                 deleteCart(request);
             }
         }
@@ -38,6 +34,7 @@ public class CartServlet extends HttpServlet {
         RequestDispatcher dispatcher = getServletContext()
                 .getRequestDispatcher(url);
         dispatcher.forward(request, response);
+
     }
     public void doPost (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -49,60 +46,53 @@ public class CartServlet extends HttpServlet {
     }
 
     protected void deleteCart(HttpServletRequest request) {
+        response.setContentType("text/html;charset=UTF-8");
+        String name = request.getParameter("name");
         HttpSession session = request.getSession();
-        String title = request.getParameter("name");
-        CartDao cartDao = new CartDao();
-        int id = CartDao.getIdBook(title);
-        ArrayList<CartItem> list =(ArrayList) session.getAttribute("cart");
-        for(int i=0; i<list.size(); i++){
-            if(CartDao.getIdBook(list.get(i).getBook().getNume()) == id){
-                cartDao.deleteCartItem(id);
-                session.setAttribute("cart", CartDao.getCartItems());
-            }
-        }
+        CartItem shoppingCart;
+        shoppingCart = (CartItem) session.getAttribute("cart");
+        shoppingCart.deleteCartItem(name);
+        session.setAttribute("cart", shoppingCart);
+        //shoppingCart = (CartItem) session.getAttribute("cart");
     }
 
     protected void updateCart(HttpServletRequest request) {
         HttpSession session = request.getSession();
         String strQuantity = request.getParameter("quantity");
-        String title = request.getParameter("name");
-        int id = CartDao.getIdBook(title);
-        CartDao cartDao = new CartDao();
-        ArrayList<CartItem> list =(ArrayList) session.getAttribute("cart");
-        for(int i=0; i<list.size(); i++){
-            if(CartDao.getIdBook(list.get(i).getBook().getNume()) == id){
-                cartDao.updateCartItem(id, strQuantity);
-                session.setAttribute("cart", CartDao.getCartItems());
-            }
+        String strItemIndex = request.getParameter("name");
+        int id = CartDao.getIdBook(strItemIndex);
+
+        CartDao cartDao = null;
+
+        Object objCartDao = session.getAttribute("cart");
+        if(objCartDao!=null) {
+            cartDao = (CartDao) objCartDao ;
+        } else {
+            cartDao = new CartDao();
         }
-
-
+        cartDao.updateCartItem(id, strQuantity);
     }
 
     protected void addToCart(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        int cant = 0;
-        double price = 0.0;
-
         String strTitle = request.getParameter("book");
         Book book = CartDao.getBook(strTitle);
         String strDescription = request.getParameter("description");
         String strPrice = request.getParameter("price");
         String strQuantity = request.getParameter("quantity");
-        try{
-            cant = Integer.parseInt(strQuantity);
-            price = Double.parseDouble(strPrice);
-        }catch (NumberFormatException e){
-            e.printStackTrace();
+
+        CartDao cartDao = null;
+
+        Object objCartDao = session.getAttribute("cart");
+
+        if(objCartDao!=null) {
+            cartDao = (CartDao) objCartDao ;
+        } else {
+            cartDao = new CartDao();
+            session.setAttribute("cart", cartDao);
         }
-        CartItem cartItem = new CartItem();
-        cartItem.setBook(book);
-        cartItem.setQuantity(cant);
-        cartItem.setUnitCost(price);
-        cartItem.setTotalCost(cant*price);
-        CartDao.alCartItems.add(cartItem);
-        session.setAttribute("cart", CartDao.getCartItems());
+
+        cartDao.addCartItem(book, strDescription, strPrice, strQuantity);
     }
 
 }
-

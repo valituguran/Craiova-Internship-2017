@@ -47,39 +47,40 @@
     <img class="logo" src="../images/logo.jpg">
     <div class="products">
         <%
-
-        ArrayList list = CartDao.getCartItems();%>
+            ArrayList list = CartDao.getCartItems();%>
         <div class="container">
             <%for( int i=0; i<list.size(); i++){
-                    CartItem cartitem = (CartItem) list.get(i);
-            %>
+                CartItem cartitem = (CartItem) list.get(i);%>
+
+
             <form name="item" method="POST" action="/cartServlet">
                 <p><strong><%=cartitem.getBook().getNume()%></strong></p>
-            <input type='hidden' name='itemIndex' value="<%=cartitem.getBook().getNume()%>">
-
-            <p>Disponibilitate: in stoc</p>
-            <input type='text' name="quantity" value="<%=cartitem.getQuantity()%>">
-            <input type="submit" name="action" value="Update">
-            <br/>         <input type="submit" name="action" value="Delete">
+                <input type='hidden' name='name' value="<%=cartitem.getBook().getNume()%>">
+                <p>Disponibilitate: in stoc</p>
+                <input type='text' name="quantity" value="<%=cartitem.getQuantity()%>">
+                <input type="submit" name="action" value="Update">
+                <br/>         <input type="submit" name="action" value="Delete">
                 <input type='hidden' name='price' value="<%=cartitem.getUnitCost()%>">
-            <p>Pret unitar:<%=cartitem.getUnitCost()%></p>
-            <p>Cost:<%=cartitem.getTotalCost()%></p>
+                <p>Pret unitar:<%=cartitem.getUnitCost()%></p>
+                <p>Cost:<%=cartitem.getTotalCost()%></p>
+            </form>
                     <% } %>
-            <br><pre></pre>
+                <br><pre></pre>
                 <input type='hidden' name='orderTotal' value="<%=CartDao.dblOrderTotal%>">
-            <h3>Suma totala:</h3><%=CartDao.dblOrderTotal%><br
+                <h3>Suma totala:</h3><%=CartDao.dblOrderTotal%><br
 
+        </div>
     </div>
-</div>
 
-<script>
-    function openNav() {
-        document.getElementById("mySidenav").style.width = "250px";
-    }
-    function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-    }
-</script>
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+    </script>
 </body>
 
+</html>
 </html>

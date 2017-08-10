@@ -8,6 +8,8 @@ public class CartItem {
     private double dblUnitCost;
     private int iQuantity;
     private double dblTotalCost;
+    public CartItem(){
+    }
 
        public Book getBook(){
            return this.book;

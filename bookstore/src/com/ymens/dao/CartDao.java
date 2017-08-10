@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 
 public class CartDao {
-    private static ArrayList alCartItems = new ArrayList();
+    public static ArrayList alCartItems = new ArrayList();
     public static double dblOrderTotal;
     public static Connection connect() {
         Connection conn = null;
