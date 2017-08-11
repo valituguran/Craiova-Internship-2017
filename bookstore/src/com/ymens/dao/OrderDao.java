@@ -28,7 +28,7 @@ public class OrderDao {
         int status = 0;
         Connection conn = connect();
         try {
-            ps = conn.prepareStatement("insert into order (total_price) values(?)");
+            ps = conn.prepareStatement("insert into `order`(total_price) values(?)");
             ps.setDouble(1, orderTotal);
             status = ps.executeUpdate();
         } catch (Exception e) {
@@ -57,7 +57,7 @@ public class OrderDao {
         ResultSet rs = null;
         int id = 0;
         try {
-            pst = conn.prepareStatement("select * from order where total_price=?");
+            pst = conn.prepareStatement("select * from `order` where `total_price`=?");
             pst.setDouble(1, orderTotal);
             rs = pst.executeQuery();
             if (rs.next()) {

@@ -1,6 +1,7 @@
 package com.ymens.servlet;
 
 import com.ymens.User;
+import com.ymens.UserType;
 import com.ymens.dao.MyContDao;
 
 import javax.servlet.ServletException;
@@ -32,14 +33,20 @@ public class MyContServlet extends HttpServlet{
         if (session != null) {
             session.setAttribute("currentuser", user);
         }
-        //request.getRequestDispatcher("mycont.jsp").include(request, response);
-        getServletContext().getRequestDispatcher("/mycont.jsp").forward(request, response);
+        user.username = (String)session.getAttribute("name");
+        user.password = (String)session.getAttribute("password");
+        UserType userType = new UserType();
+        if( userType.getType(user.username, user.password).equalsIgnoreCase("user")) {
+            getServletContext().getRequestDispatcher("/mycont_user.jsp").forward(request, response);
+        } else {
+            getServletContext().getRequestDispatcher("/mycont_admin.jsp").forward(request, response);
+        }
+
     }
-
-
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         doGet(request,response);
+
 
     }
 

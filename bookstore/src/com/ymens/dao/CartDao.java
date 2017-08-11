@@ -142,7 +142,7 @@ public class CartDao {
     public void setCartItems(ArrayList alCartItems) {
         this.alCartItems = alCartItems;
     }
-    public double getOrderTotal() {
+    public static double getOrderTotal() {
         return dblOrderTotal;
     }
     public void setOrderTotal(double dblOrderTotal) {

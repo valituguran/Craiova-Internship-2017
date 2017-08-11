@@ -16,9 +16,9 @@ import java.util.LinkedList;
 public class ProductsServlet extends HttpServlet{
     private static final long serialVersionUID = 1L;
     public static LinkedList list = new LinkedList();
+
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         response.setContentType("text/html");
         list = SelectBooksDao.select();
         String url = "/index.jsp";
@@ -26,9 +26,9 @@ public class ProductsServlet extends HttpServlet{
                 .getRequestDispatcher(url);
        dispatcher.forward(request, response);
     }
+
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         doGet(request, response);
         getServletContext().getRequestDispatcher("/productsServlet").forward(request, response);
     }

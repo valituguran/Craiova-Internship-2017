@@ -32,7 +32,6 @@ public class LoginServlet extends HttpServlet {
 			if (type.equalsIgnoreCase("admin")) {
 				getServletContext().getRequestDispatcher("/selectbooksadminServlet").forward(request, response);
 			}else if (type.equalsIgnoreCase("user")) {
-				//RequestDispatcher rd = request.getRequestDispatcher("selectbooksServlet");
 				getServletContext().getRequestDispatcher("/selectbooksuserServlet").forward(request, response);
 			}
 		}else {

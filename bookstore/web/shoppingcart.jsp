@@ -47,7 +47,7 @@
             <input name="searchbyname" type="text" size="40" placeholder="Search..." required="required">
         </form>
     </div>
-
+</div>
     <img class="logo" src="../images/logo.jpg">
     <div class="products">
         <%
@@ -56,7 +56,7 @@
             <%for( int i=0; i<list.size(); i++){
                 CartItem cartitem = (CartItem) list.get(i);%>
             <form name="item" method="POST" action="/cartServlet">
-                <p><strong><%=cartitem.getBook().getNume()%></strong></p>
+                <p><%=cartitem.getBook().getNume()%></p>
                 <input type='hidden' name='name' value="<%=cartitem.getBook().getNume()%>">
                 <p>Disponibilitate: in stoc</p>
                 <input type='text' name="quantity" value="<%=cartitem.getQuantity()%>">
@@ -68,12 +68,11 @@
             </form>
             <% } %>
                 <br><pre></pre>
-                <input type='hidden' name='orderTotal' value="<%=CartDao.dblOrderTotal%>">
-                <h3>Suma totala:</h3><%=CartDao.dblOrderTotal%><br
-               <form name="order" method="POST" action="/orderServlet">
-                   <input type="submit" name="action" value="Plaseaza comanda">
+                <input type='hidden' name ="orderTotal" value="<%=CartDao.dblOrderTotal%>">
+                <h3>Suma totala:</h3><%=CartDao.dblOrderTotal%><br>
+               <form name="order" method="post" action="orderServlet">
+                   <button class="button" type="submit">Plaseaza comanda</button>
                </form>
-            <a href="/orderServlet">Comanda</a>
         </div>
     </div>
     <script>
@@ -86,5 +85,4 @@
     </script>
 </body>
 
-</html>
 </html>

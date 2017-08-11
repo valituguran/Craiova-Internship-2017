@@ -18,41 +18,42 @@ import java.util.ArrayList;
  * Created by madalina.luca on 8/9/2017.
  */
 public class OrderServlet extends HttpServlet {
-
+public static double orderTotal = 0.0;
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
-        String strOrderTotal = request.getParameter("orderTotal");
         CartItem cartitem = new CartItem();
-        double orderTotal = 0.0;
         HttpSession session = request.getSession();
-        ArrayList list = CartDao.getCartItems();
-        int i = 0;
-        int order_id;
-        try {
-            orderTotal = Double.parseDouble(strOrderTotal);
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
+        ArrayList<CartItem> list = CartDao.getCartItems();
+        orderTotal = 0.0;
+        int i;
+        for( i=0; i<list.size();i++){
+            orderTotal +=list.get(i).getTotalCost();
         }
+        int order_id;
         if (orderTotal != 0) {
-            OrderDao.setOrder(orderTotal);
-            order_id = OrderDao.getOrderId(orderTotal);
-            for (i = 0; i < list.size(); i++) {
-                cartitem = (CartItem) list.get(i);
-                OrderDao.setOrderItem(order_id, cartitem.getBook().getNume(), cartitem.getTotalCost());
-                RequestDispatcher rd = request.getRequestDispatcher("products_admin.jsp");
-                rd.forward(request, response);
+            if(OrderDao.setOrder(orderTotal) != 0) {
+                order_id = OrderDao.getOrderId(orderTotal);
+                for (i = 0; i < list.size(); i++) {
+                    cartitem = (CartItem) list.get(i);
+                    OrderDao.setOrderItem(order_id, cartitem.getBook().getNume(), cartitem.getUnitCost());
+                    RequestDispatcher rd = request.getRequestDispatcher("order.jsp");
+                    rd.forward(request, response);
+                }
             }
         } else {
             RequestDispatcher rd = request.getRequestDispatcher("shoppingcart.jsp");
             rd.forward(request, response);
         }
-            getServletContext().getRequestDispatcher("/shoppingcart.jsp").forward(request, response);
-        }
+        getServletContext().getRequestDispatcher("/orderServlet").forward(request, response);
+    }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         doPost(request, response);
+        doPost(request, response);
+        response.setContentType("text/html");
+        String url = "/order.jsp";
+        //RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url).forward(request, response);
     }
 }

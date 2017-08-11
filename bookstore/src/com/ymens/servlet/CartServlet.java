@@ -34,14 +34,17 @@ public class CartServlet extends HttpServlet {
                 deleteCart(request);
             }
         }
+
         String url = "/shoppingcart.jsp";
         RequestDispatcher dispatcher = getServletContext()
                 .getRequestDispatcher(url);
         dispatcher.forward(request, response);
+        getServletContext().getRequestDispatcher("/order.jsp").forward(request, response);
     }
     public void doPost (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
          processRequest(request, response);
+
     }
     public void doGet (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -83,7 +86,6 @@ public class CartServlet extends HttpServlet {
         HttpSession session = request.getSession();
         int cant = 0;
         double price = 0.0;
-
         String strTitle = request.getParameter("book");
         Book book = CartDao.getBook(strTitle);
         String strDescription = request.getParameter("description");

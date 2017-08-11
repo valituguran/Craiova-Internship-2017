@@ -1,12 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1"%>
 
-<%@page import="com.ymens.Book"%>
-<%@ page import="sun.awt.image.ImageWatched" %>
+<%@page import="com.ymens.Author"%>
+<%@ page import="com.ymens.Book" %>
+<%@ page import="com.ymens.servlet.ProductsServlet"%>
 <%@ page import="java.util.LinkedList" %>
-<%@ page import="com.ymens.servlet.SelectBooksServlet"%>
-<%@ page import="com.ymens.dao.SelectBooksDao" %>
-<%@ page import="com.ymens.servlet.ProductsServlet" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../styles/style.css">
     <link src="../scripts/file.js">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+
 </head>
 
 <body>
@@ -27,60 +25,49 @@
 
 <div class="topnav">
     <span style="align:left;cursor:pointer;color:white;text-align:center;font-size: 20px;" onclick="openNav()">&#9776;Bookstore</span>
-    <form method="get" action="/search" id="search">
-        <input name="search" type="text" size="40" placeholder="Search..." required="required">
-    </form>
-
 </div>
-<div class="content">
-<div class="menu-vertical">
-    <ul class="breadcrumb">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Books</a></li>
-    </ul>
 
-    <div class="form">
-        <h4>Filter</h4>
-        <form method="get" action="/searchbyauthoradminServlet" id="searchbyauthor">
-            <h3>Search by author</h3><br>
-            <input name="searchbyauthor" type="text" size="40" placeholder="Search..." required="required">
-        </form>
-        <form method="get" action="/searchbynameadminServlet" id="searchbyname">
-            <h3>Search by name</h3><br>
-            <input name="searchbyname" type="text" size="40" placeholder="Search..." required="required">
-        </form>
+<div class="content">
+    <div class="menu-vertical">
+        <ul class="breadcrumb">
+            <li><a href="#">Home</a></li>
+            <li><a href="#products">Books</a></li>
+        </ul>
+        <div class="form">
+            <h4>Filter</h4>
+            <form method="get" action="/searchbyauthoradminServlet" id="searchbyauthor">
+                <h3>Search by author</h3><br>
+                <input name="searchbyauthor" type="text" size="40" placeholder="Search..." required="required">
+            </form>
+            <form method="get" action="/searchbynameadminServlet" id="searchbyname">
+                <h3>Search by name</h3><br>
+                <input name="searchbyname" type="text" size="40" placeholder="Search..." required="required">
+            </form>
+        </div>
     </div>
 </div>
-
-    <div class="products">
+<div class="products" id="products">
         <<img class="logo" src="../images/logo.jpg">
-        <%
-            LinkedList list = ProductsServlet.list;%>
+        <%LinkedList list = ProductsServlet.list;%>
         <div class="container">
-            <%
-
-                for( int i=0; i<list.size(); i++){
-                    Book book = (Book) list.get(i);
-
-            %>
+            <%for( int i=0; i<list.size(); i++){
+                    Book book = (Book) list.get(i);%>
             <div class="tab-content">
-                <p><%=book.getNume()%></p><br>
+                <h3><%=book.getNume()%></h3>
                 <div class="product">
-
                     <img src="<%=book.getURLImage()%>">
-                    <div class="divclass">
-                        <button onclick="redirectLogin()">Buy</button></span>
-                    </div>
-
+                    Title:<%=book.getNume()%><input type="hidden" name="book" value="<%=book.getNume()%>"></p>
+                        <p>Description:
+                            ...<input type="hidden" name="description" value="<%=book.getDescription()%>"></p>
+                        <p>Quantity: <input type="text" size="2" value="1" name="quantity"></p>
+                        <p>Price<%=book.getPrice()%><input type="hidden" name="price" value="<%=book.getPrice()%>"></p>
+                        <button onclick="redirectLogin()"><input type="hidden" name="action" value="add">Buy</button>
                 </div>
-
             </div>
             <% } %>
-
         </div>
-
-    </div>
 </div>
+
 
 <script>
     function openNav() {
@@ -91,7 +78,7 @@
     }
     function redirectLogin() {
         var txt;
-        var r = confirm("Please login to continue!!");
+        var r = confirm("Va rugam sa va logati!");
         if (r == true) {
             window.location="login.jsp";
         } else {
