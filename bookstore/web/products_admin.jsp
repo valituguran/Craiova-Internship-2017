@@ -4,6 +4,9 @@
 <%@page import="com.ymens.Author"%>
 <%@ page import="com.ymens.Book" %>
 <%@ page import="java.util.LinkedList"%>
+<%@ page import="com.ymens.servlet.SelectBooksServlet" %>
+
+<%@ page import="com.ymens.dao.SearchAuthorDao" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +17,6 @@
     <link src="../scripts/file.js">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
 </head>
-
 <body>
 <%String realname;
 realname=(String)session.getAttribute("realname");%>
@@ -33,7 +35,7 @@ realname=(String)session.getAttribute("realname");%>
 <div class="content">
     <div class="menu-vertical">
         <ul class="breadcrumb">
-            <li><a href="#">Home</a></li>
+            <li><a href="products_admin.jsp">Home</a></li>
             <li><a href="#products">Books</a></li>
         </ul>
 
@@ -47,7 +49,72 @@ realname=(String)session.getAttribute("realname");%>
                 <h3>Search by name</h3><br>
                 <input name="searchbyname" type="text" size="40" placeholder="Search..." required="required">
             </form>
+        </div>
+        <h4>Select a author</h4>
+        <div class="scroll">
+            <%
+                LinkedList list1 = SearchAuthorDao.select();%>
 
+                <%for( int i=0; i<list1.size(); i++){
+                    Book book = (Book) list1.get(i);%>
+            <form method="get" action="/searchauthorServlet" id="searchauthor">
+                <input name="<%=book.getNume()%>" type="checkbox"  required="required"> <%=book.getNume()%>
+            </form>
+            <% } %>
+            <form method="get" action="/searchbyauthoradminServlet" id="searchauthor">
+                <input name="searchauthor" type="checkbox"  required="required"> Name1
+            </form>
+            <form method="get" action="/searchbyauthoradminServlet" id="searchauthor">
+                <input name="searchauthor" type="checkbox"  required="required"> Name1
+            </form>
+            <form method="get" action="/searchbyauthoradminServlet" id="searchauthor">
+                <input name="searchauthor" type="checkbox"  required="required"> Name1
+            </form>
+            <form method="get" action="/searchbyauthoradminServlet" id="searchauthor">
+                <input name="searchauthor" type="checkbox"  required="required"> Name1
+            </form>
+            <form method="get" action="/searchbyauthoradminServlet" id="searchauthor">
+                <input name="b" type="checkbox"  required="required"> Name1
+            </form>
+            <form method="get" action="/searchbyauthoradminServlet" id="searchauthor">
+                <input name="searchauthor" type="checkbox"  required="required"> Name1
+            </form>
+            <form method="get" action="/searchbyauthoradminServlet" id="searchauthor">
+                <input name="searchauthor" type="checkbox"  required="required"> Name1
+            </form>
+            <form method="get" action="/searchbyauthoradminServlet" id="searchauthor">
+                <input name="searchauthor" type="checkbox"  required="required"> Name1
+            </form>
+            <form method="get" action="/searchbyauthoradminServlet" id="searchauthor">
+                <input name="searchauthor" type="checkbox"  required="required"> Name1
+            </form>
+            <form method="get" action="/searchbyauthoradminServlet" id="searchauthor">
+                <input name="searchauthor" type="checkbox"  required="required"> Name1
+            </form>
+            <form method="get" action="/searchbyauthoradminServlet" id="searchauthor">
+                <input name="searchauthor" type="checkbox"  required="required"> Name1
+            </form>
+            <form method="get" action="/searchbyauthoradminServlet" id="searchauthor">
+                <input name="searchauthor" type="checkbox"  required="required"> Name1
+            </form>
+            <form method="get" action="/searchbyauthoradminServlet" id="searchauthor">
+                <input name="searchauthor" type="checkbox"  required="required"> Name1
+            </form>
+            <form method="get" action="/searchbyauthoradminServlet" id="searchauthor">
+                <input name="searchauthor" type="checkbox"  required="required"> Name1
+            </form>
+            <form method="get" action="/searchbyauthoradminServlet" id="searchauthor">
+                <input name="searchauthor" type="checkbox"  required="required"> Name1
+            </form>
+            <form method="get" action="/searchbyauthoradminServlet" id="searchauthor">
+                <input name="searchauthor" type="checkbox"  required="required"> Name1
+            </form>
+            <form method="get" action="/searchbyauthoradminServlet" id="searchauthor">
+                <input name="searchauthor" type="checkbox"  required="required"> Name1
+            </form>
+            <form method="get" action="/searchbyauthoradminServlet" id="searchauthor">
+               <input name="searchauthor" type="checkbox"  required="required"> Name1
+            </form>
         </div>
     </div>
 </div>
@@ -57,14 +124,12 @@ realname=(String)session.getAttribute("realname");%>
             LinkedList list = (LinkedList)session.getAttribute("list");%>
         <div class="container">
             <%for( int i=0; i<list.size(); i++){
-                    Book book = (Book) list.get(i);
-
-            %>
+                    Book book = (Book) list.get(i);%>
             <div class="tab-content">
                <h3><%=book.getNume()%></h3>
                 <div class="product">
                     <img src="<%=book.getURLImage()%>">
-                    <form name="model" method="POST" action="/cartServlet"><p>Title:
+                    <form name="model" method="POST" action="/cartadminServlet"><p>Title:
                             <%=book.getNume()%><input type="hidden" name="book" value="<%=book.getNume()%>"></p>
                         <p>Description:
                             ...<input type="hidden" name="description" value="<%=book.getDescription()%>"></p>
@@ -72,14 +137,10 @@ realname=(String)session.getAttribute("realname");%>
                         <p>Price<%=book.getPrice()%><input type="hidden" name="price" value="<%=book.getPrice()%>"></p>
                         <button onclick="cart()"><input type="hidden" name="action" value="add">Buy</button>
                     </form>
-
                 </div>
-
             </div>
             <% } %>
-
         </div>
-
     </div>
 </div>
 
@@ -94,6 +155,11 @@ realname=(String)session.getAttribute("realname");%>
         var txt;
         var r = alert("Produs adaugat cu succes in cos.");
         document.getElementById("demo").innerHTML = txt;
+    }
+    document.getElementById("myDIV").onscroll = function() {myFunction()};
+
+    function myFunction() {
+        document.getElementById("demo").innerHTML = "Select a author";
     }
 </script>
 </body>

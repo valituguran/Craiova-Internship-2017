@@ -21,10 +21,9 @@
     realname=(String)session.getAttribute("realname");%>
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a href="/mycontServlet"><%=realname%></a>
+    <a href="/mycontadminServlet"><%=realname%></a>
     <a href="index.jsp">Logout</a>
 </div>
-
 <div class="topnav">
     <span style="align:left;cursor:pointer;color:white;text-align:center;font-size: 20px;" onclick="openNav()">&#9776;<%=realname%></span>
     <a href="addbook.jsp">Add books</a>
@@ -33,8 +32,8 @@
 </div>
 <div class="content">
     <ul class="breadcrumb">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Books</a></li>
+        <li><a href="products_admin.jsp">Home</a></li>
+        <li><a href="products_admin.jsp">Books</a></li>
     </ul>
     <div class="form">
         <h4>Filter</h4>
@@ -55,7 +54,7 @@
         <div class="container">
             <%for( int i=0; i<list.size(); i++){
                 CartItem cartitem = (CartItem) list.get(i);%>
-            <form name="item" method="POST" action="/cartServlet">
+            <form name="item" method="POST" action="/cartadminServlet">
                 <p><%=cartitem.getBook().getNume()%></p>
                 <input type='hidden' name='name' value="<%=cartitem.getBook().getNume()%>">
                 <p>Disponibilitate: in stoc</p>

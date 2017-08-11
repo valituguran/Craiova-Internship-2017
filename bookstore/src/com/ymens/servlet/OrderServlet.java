@@ -43,7 +43,7 @@ public static double orderTotal = 0.0;
                 }
             }
         } else {
-            RequestDispatcher rd = request.getRequestDispatcher("shoppingcart.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("shoppingcart_user.jsp");
             rd.forward(request, response);
         }
         getServletContext().getRequestDispatcher("/orderServlet").forward(request, response);

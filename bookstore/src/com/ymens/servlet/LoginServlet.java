@@ -31,9 +31,12 @@ public class LoginServlet extends HttpServlet {
 			String type = UserType.getType(n,p);
 			if (type.equalsIgnoreCase("admin")) {
 				getServletContext().getRequestDispatcher("/selectbooksadminServlet").forward(request, response);
+				getServletContext().getRequestDispatcher("/searchauthorServlet").forward(request, response);
+
 			}else if (type.equalsIgnoreCase("user")) {
 				getServletContext().getRequestDispatcher("/selectbooksuserServlet").forward(request, response);
 			}
+			getServletContext().getRequestDispatcher("/searchauthorServlet").forward(request, response);
 		}else {
 			out.print("<p style=\"color:red\">Sorry username or password error</p>");
 			RequestDispatcher rd = request.getRequestDispatcher("login.jsp");

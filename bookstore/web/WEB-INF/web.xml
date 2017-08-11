@@ -139,12 +139,29 @@
 	</servlet-mapping>
 
 	<servlet>
-		<servlet-name>CartServlet</servlet-name>
+		<servlet-name>searchauthor</servlet-name>
+		<servlet-class>com.ymens.SearchAuthor</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>searchauthor</servlet-name>
+		<url-pattern>/searchauthorServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>CartUserServlet</servlet-name>
 		<servlet-class>com.ymens.servlet.CartServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>CartServlet</servlet-name>
-		<url-pattern>/cartServlet</url-pattern>
+		<servlet-name>CartUserServlet</servlet-name>
+		<url-pattern>/cartuserServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>CartAdminServlet</servlet-name>
+		<servlet-class>com.ymens.servlet.CartServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CartAdminServlet</servlet-name>
+		<url-pattern>/cartadminServlet</url-pattern>
 	</servlet-mapping>
 
 	<servlet>

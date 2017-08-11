@@ -44,6 +44,7 @@
                 <h3>Search by name</h3><br>
                 <input name="searchbyname" type="text" size="40" placeholder="Search..." required="required">
             </form>
+
         </div>
     </div>
 </div>

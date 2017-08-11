@@ -2,10 +2,9 @@
          pageEncoding="ISO-8859-1"%>
 
 <%@page import="com.ymens.Book"%>
-<%@ page import="sun.awt.image.ImageWatched" %>
-<%@ page import="java.util.LinkedList" %>
-<%@ page import="com.ymens.servlet.SelectBooksServlet"%>
-<%@ page import="com.ymens.dao.SelectBooksDao" %>
+<%@ page import="com.ymens.dao.CartDao" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.ymens.CartItem" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,12 +31,10 @@
     <a href="buy.jsp">Cart</a>
 </div>
 <div class="content">
-    < <div class="menu-vertical">
     <ul class="breadcrumb">
         <li><a href="products_user.jsp">Home</a></li>
-        <li><a href="#products">Books</a></li>
+        <li><a href="products_user.jsp">Books</a></li>
     </ul>
-
     <div class="form">
         <h4>Filter</h4>
         <form method="get" action="/searchbyauthoradminServlet" id="searchbyauthor">
@@ -50,58 +47,39 @@
         </form>
     </div>
 </div>
-</div>
-
-    <img class="logo" src="../images/logo.jpg">
-    <div class="products" id="products">
-        <%
-            LinkedList list = (LinkedList)session.getAttribute("searchbyauthor");%>
-        <div class="container">
-            <%
-
-                for( int i=0; i<list.size(); i++){
-                    Book book = (Book) list.get(i);
-
-            %>
-            <div class="tab-content">
-                <h3><%=book.getNume()%></h3>
-                <div class="product">
-                    <img src="<%=book.getURLImage()%>">
-                    <form name="model" method="POST" action="/cartuserServlet"><p>Title:
-                        <%=book.getNume()%><input type="hidden" name="book" value="<%=book.getNume()%>"></p>
-                        <p>Description:
-                            ...<input type="hidden" name="description" value="<%=book.getDescription()%>"></p>
-                        <p>Quantity: <input type="text" size="2" value="1" name="quantity"></p>
-                        <p>Price<%=book.getPrice()%><input type="hidden" name="price" value="<%=book.getPrice()%>"></p>
-                        <button onclick="cart()"><input type="hidden" name="action" value="add">Buy</button>
-                    </form>
-
-                </div>
-
-            </div>
-            <% } %>
-
-        </div>
-
+<img class="logo" src="../images/logo.jpg">
+<div class="products">
+    <%
+        ArrayList list = CartDao.getCartItems();%>
+    <div class="container">
+        <%for( int i=0; i<list.size(); i++){
+            CartItem cartitem = (CartItem) list.get(i);%>
+        <form name="item" method="POST" action="/cartuserServlet">
+            <p><%=cartitem.getBook().getNume()%></p>
+            <input type='hidden' name='name' value="<%=cartitem.getBook().getNume()%>">
+            <p>Disponibilitate: in stoc</p>
+            <input type='text' name="quantity" value="<%=cartitem.getQuantity()%>">
+            <input type="submit" name="action" value="Update">
+            <br/><input type="submit" name="action" value="Delete">
+            <input type='hidden' name='price' value="<%=cartitem.getUnitCost()%>">
+            <p>Pret unitar:<%=cartitem.getUnitCost()%></p>
+            <p>Cost:<%=cartitem.getTotalCost()%></p>
+        </form>
+        <% } %>
+        <br><pre></pre>
+        <input type='hidden' name ="orderTotal" value="<%=CartDao.dblOrderTotal%>">
+        <h3>Suma totala:</h3><%=CartDao.dblOrderTotal%><br>
+        <form name="order" method="post" action="orderServlet">
+            <button class="button" type="submit">Plaseaza comanda</button>
+        </form>
     </div>
-
-
+</div>
 <script>
     function openNav() {
         document.getElementById("mySidenav").style.width = "250px";
     }
     function closeNav() {
         document.getElementById("mySidenav").style.width = "0";
-    }
-    function redirectLogin() {
-        var txt;
-        var r = confirm("Please login to continue!!");
-        if (r == true) {
-            window.location="login.jsp";
-        } else {
-            txt = "You pressed Cancel!";
-        }
-        document.getElementById("demo").innerHTML = txt;
     }
 </script>
 </body>

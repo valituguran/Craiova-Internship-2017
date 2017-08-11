@@ -46,6 +46,8 @@ public class SelectBooksServlet extends HttpServlet{
             getServletContext().getRequestDispatcher("/products_user.jsp").forward(request, response);
             getServletContext().getRequestDispatcher("/mycont_user.jsp").forward(request, response);
             getServletContext().getRequestDispatcher("/searchbyauthor_user.jsp").forward(request, response);
+            getServletContext().getRequestDispatcher("/searchauthorServlet").forward(request, response);
+
         }
         else
         {

@@ -2,9 +2,11 @@ package com.ymens.servlet;
 
 import com.ymens.Book;
 import com.ymens.CartItem;
+import com.ymens.User;
+import com.ymens.UserType;
 import com.ymens.dao.CartDao;
+import com.ymens.dao.MyContDao;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,13 +20,11 @@ import java.util.ArrayList;
  */
 public class CartServlet extends HttpServlet {
     //public static final String addToCart
-
+    public User user;
     public void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         String strAction = request.getParameter("action");
-
-
         if(strAction!=null && !strAction.equals("")) {
             if(strAction.equals("add")) {
                 addToCart(request);
@@ -34,21 +34,30 @@ public class CartServlet extends HttpServlet {
                 deleteCart(request);
             }
         }
-
-        String url = "/shoppingcart.jsp";
-        RequestDispatcher dispatcher = getServletContext()
-                .getRequestDispatcher(url);
-        dispatcher.forward(request, response);
-        getServletContext().getRequestDispatcher("/order.jsp").forward(request, response);
     }
     public void doPost (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         processRequest(request, response);
-
+        doGet(request, response);
     }
     public void doGet (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        HttpSession session = request.getSession(false);
+        response.setContentType("text/html");
+        String n =(String) session.getAttribute("name");
+        String p = (String)session.getAttribute("password");
+        user = MyContDao.select(n, p);
+        if (session != null) {
+            session.setAttribute("currentuser", user);
+        }
+        user.username = (String)session.getAttribute("name");
+        user.password = (String)session.getAttribute("password");
+        UserType userType = new UserType();
+        if( userType.getType(user.username, user.password).equalsIgnoreCase("user")) {
+            getServletContext().getRequestDispatcher("/shoppingcart_user.jsp").forward(request, response);
+        } else {
+            getServletContext().getRequestDispatcher("/shoppingcart_admin.jsp").forward(request, response);
+        }
     }
 
     protected void deleteCart(HttpServletRequest request) {

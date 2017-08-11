@@ -38,8 +38,8 @@
 <div class="content">
 	<div class="menu-vertical">
 		<ul class="breadcrumb">
-			<li><a href="#">Home</a></li>
-			<li><a href="#products">Books</a></li>
+			<li><a href="products_admin.jsp">Home</a></li>
+			<li><a href="#tab-content">Books</a></li>
 		</ul>
 
 		<div class="form">
@@ -60,17 +60,13 @@
 		<%
 			LinkedList list = (LinkedList)session.getAttribute("searchbyauthor");%>
 		<div class="container">
-			<%
-
-				for( int i=0; i<list.size(); i++){
-					Book book = (Book) list.get(i);
-
-			%>
-			<div class="tab-content">
+			<%for( int i=0; i<list.size(); i++){
+					Book book = (Book) list.get(i);%>
+			<div class="tab-content" id="tab-content">
 				<h3><%=book.getNume()%></h3>
 				<div class="product">
 					<img src="<%=book.getURLImage()%>">
-					<form name="model" method="POST" action="/cartServlet"><p>Title:
+					<form name="model" method="POST" action="/cartadminServlet"><p>Title:
 						<%=book.getNume()%><input type="hidden" name="book" value="<%=book.getNume()%>"></p>
 						<p>Description:
 							...<input type="hidden" name="description" value="<%=book.getDescription()%>"></p>

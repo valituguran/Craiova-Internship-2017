@@ -31,5 +31,6 @@ public class ProductsServlet extends HttpServlet{
             throws ServletException, IOException {
         doGet(request, response);
         getServletContext().getRequestDispatcher("/productsServlet").forward(request, response);
+        getServletContext().getRequestDispatcher("/searchauthorServlet").forward(request, response);
     }
 }

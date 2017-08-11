@@ -230,4 +230,13 @@ button {
     height: 30px;
     font-size: 20px;
 }
-
+.scroll{
+    border: 1px solid black;
+    width: 200px;
+    height: 300px;
+    overflow: scroll;
+    margin-top:50px;
+}
+#searchbyname{
+    margin-bottom:100px;
+}
