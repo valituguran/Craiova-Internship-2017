@@ -50,8 +50,11 @@ public class SearchByNameServlet extends HttpServlet {
         String usertype = userType.getType(user.username, user.password);
         if (usertype.equalsIgnoreCase("user")) {
             getServletContext().getRequestDispatcher("/searchbyname_user.jsp").forward(request, response);
-        }else {
+        }else  if (usertype.equalsIgnoreCase("admin")){
             getServletContext().getRequestDispatcher("/searchbyname_admin.jsp").forward(request, response);
+        }
+        else {
+            getServletContext().getRequestDispatcher("/searchbyname.jsp").forward(request, response);
         }
     }
 }

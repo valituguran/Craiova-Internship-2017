@@ -36,10 +36,8 @@ public class SelectBooksServlet extends HttpServlet{
         user.username = (String)session.getAttribute("name");
         user.password = (String)session.getAttribute("password");
     }
-
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         doGet(request, response);
         UserType userType = new UserType();
         if( userType.getType(user.username, user.password).equalsIgnoreCase("user")) {
@@ -47,7 +45,6 @@ public class SelectBooksServlet extends HttpServlet{
             getServletContext().getRequestDispatcher("/mycont_user.jsp").forward(request, response);
             getServletContext().getRequestDispatcher("/searchbyauthor_user.jsp").forward(request, response);
             getServletContext().getRequestDispatcher("/searchauthorServlet").forward(request, response);
-
         }
         else
         {

@@ -5,6 +5,7 @@ import com.ymens.Book;
 import com.ymens.PrintAuthor;
 
 import java.sql.*;
+import java.util.Base64;
 import java.util.LinkedList;
 
 /**
@@ -56,7 +57,8 @@ public class SearchByAuthorDao {
         Connection conn = connect();
         PreparedStatement pst = null;
         ResultSet rs = null;
-
+        Blob image = null;
+        byte[] fileData = null;
         LinkedList<Book> list = new LinkedList();
         LinkedList<Integer> listId = selectId(value);
         for (int i=0; i<listId.size(); i++) {
@@ -68,15 +70,15 @@ public class SearchByAuthorDao {
                     String name = rs.getString("name");
                     int id_author = rs.getInt("author_id");
                     Author author = PrintAuthor.getDetails(id_author);
-                    int isbn = rs.getInt("isbn");
+                    long isbn = rs.getLong("isbn");
                     double price = rs.getDouble("price");
                     String description = rs.getString("description");
-                    String image = rs.getString("image");
-                    Book book = new Book(name, isbn, author, price, description, image);
+                    fileData = rs.getBytes("image");
+                    String encode = Base64.getEncoder().encodeToString(fileData);
+                    Book book = new Book(name, isbn, author, price, description, encode);
                     list.add(book);
                 }
-
-            } catch (SQLException e) {
+            }catch (SQLException e) {
                 e.printStackTrace();
             }
         }

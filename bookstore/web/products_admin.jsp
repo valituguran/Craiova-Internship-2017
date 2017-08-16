@@ -50,72 +50,7 @@ realname=(String)session.getAttribute("realname");%>
                 <input name="searchbyname" type="text" size="40" placeholder="Search..." required="required">
             </form>
         </div>
-        <h4>Select a author</h4>
-        <div class="scroll">
-            <%
-                LinkedList list1 = SearchAuthorDao.select();%>
 
-                <%for( int i=0; i<list1.size(); i++){
-                    Book book = (Book) list1.get(i);%>
-            <form method="get" action="/searchauthorServlet" id="searchauthor">
-                <input name="<%=book.getNume()%>" type="checkbox"  required="required"> <%=book.getNume()%>
-            </form>
-            <% } %>
-            <form method="get" action="/searchbyauthoradminServlet" id="searchauthor">
-                <input name="searchauthor" type="checkbox"  required="required"> Name1
-            </form>
-            <form method="get" action="/searchbyauthoradminServlet" id="searchauthor">
-                <input name="searchauthor" type="checkbox"  required="required"> Name1
-            </form>
-            <form method="get" action="/searchbyauthoradminServlet" id="searchauthor">
-                <input name="searchauthor" type="checkbox"  required="required"> Name1
-            </form>
-            <form method="get" action="/searchbyauthoradminServlet" id="searchauthor">
-                <input name="searchauthor" type="checkbox"  required="required"> Name1
-            </form>
-            <form method="get" action="/searchbyauthoradminServlet" id="searchauthor">
-                <input name="b" type="checkbox"  required="required"> Name1
-            </form>
-            <form method="get" action="/searchbyauthoradminServlet" id="searchauthor">
-                <input name="searchauthor" type="checkbox"  required="required"> Name1
-            </form>
-            <form method="get" action="/searchbyauthoradminServlet" id="searchauthor">
-                <input name="searchauthor" type="checkbox"  required="required"> Name1
-            </form>
-            <form method="get" action="/searchbyauthoradminServlet" id="searchauthor">
-                <input name="searchauthor" type="checkbox"  required="required"> Name1
-            </form>
-            <form method="get" action="/searchbyauthoradminServlet" id="searchauthor">
-                <input name="searchauthor" type="checkbox"  required="required"> Name1
-            </form>
-            <form method="get" action="/searchbyauthoradminServlet" id="searchauthor">
-                <input name="searchauthor" type="checkbox"  required="required"> Name1
-            </form>
-            <form method="get" action="/searchbyauthoradminServlet" id="searchauthor">
-                <input name="searchauthor" type="checkbox"  required="required"> Name1
-            </form>
-            <form method="get" action="/searchbyauthoradminServlet" id="searchauthor">
-                <input name="searchauthor" type="checkbox"  required="required"> Name1
-            </form>
-            <form method="get" action="/searchbyauthoradminServlet" id="searchauthor">
-                <input name="searchauthor" type="checkbox"  required="required"> Name1
-            </form>
-            <form method="get" action="/searchbyauthoradminServlet" id="searchauthor">
-                <input name="searchauthor" type="checkbox"  required="required"> Name1
-            </form>
-            <form method="get" action="/searchbyauthoradminServlet" id="searchauthor">
-                <input name="searchauthor" type="checkbox"  required="required"> Name1
-            </form>
-            <form method="get" action="/searchbyauthoradminServlet" id="searchauthor">
-                <input name="searchauthor" type="checkbox"  required="required"> Name1
-            </form>
-            <form method="get" action="/searchbyauthoradminServlet" id="searchauthor">
-                <input name="searchauthor" type="checkbox"  required="required"> Name1
-            </form>
-            <form method="get" action="/searchbyauthoradminServlet" id="searchauthor">
-               <input name="searchauthor" type="checkbox"  required="required"> Name1
-            </form>
-        </div>
     </div>
 </div>
     <img class="logo" src="../images/logo.jpg">
@@ -128,7 +63,7 @@ realname=(String)session.getAttribute("realname");%>
             <div class="tab-content">
                <h3><%=book.getNume()%></h3>
                 <div class="product">
-                    <img src="<%=book.getURLImage()%>">
+                    <img src="<%=book.getImage()%>">
                     <form name="model" method="POST" action="/cartadminServlet"><p>Title:
                             <%=book.getNume()%><input type="hidden" name="book" value="<%=book.getNume()%>"></p>
                         <p>Description:

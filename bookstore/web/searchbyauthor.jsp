@@ -18,23 +18,21 @@
 </head>
 
 <body>
-<%String realname;
-    realname=(String)session.getAttribute("realname");%>
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a href="/mycontuserServlet"><%=realname%></a>
-    <a href="index.jsp">Logout</a>
+    <a href="login.jsp"></a>
+    <a href="#"></a>
 </div>
 
 <div class="topnav">
-    <span style="align:left;cursor:pointer;color:white;text-align:center;font-size: 20px;" onclick="openNav()">&#9776;<%=realname%></span>
-    <a href="addbook.jsp">Add books</a>
-    <a href="buy.jsp">Cart</a>
+    <span style="align:left;cursor:pointer;color:white;text-align:center;font-size: 20px;" onclick="openNav()">&#9776;</span>
+    <a href="login.jsp">Add books</a>
+    <a href="login.jsp">Cart</a>
 </div>
 <div class="content">
     < <div class="menu-vertical">
     <ul class="breadcrumb">
-        <li><a href="products_user.jsp">Home</a></li>
+        <li><a href="index.jsp">Home</a></li>
         <li><a href="#products">Books</a></li>
     </ul>
 
@@ -52,36 +50,34 @@
 </div>
 </div>
 
-    <img class="logo" src="../images/logo.jpg">
-    <div class="products" id="products">
+<img class="logo" src="../images/logo.jpg">
+<div class="products" id="products">
+    <%
+        LinkedList list = (LinkedList)session.getAttribute("searchbyauthor");%>
+    <div class="container">
         <%
-            LinkedList list = (LinkedList)session.getAttribute("searchbyname");%>
-        <div class="container">
-            <%for( int i=0; i<list.size(); i++){
-                    Book book = (Book) list.get(i);%>
-            <div class="tab-content">
-                <h3><%=book.getNume()%></h3>
-                <div class="product">
-                    <img src="<%=book.getImage()%>">
-                    <form name="model" method="POST" action="/cartuserServlet"><p>Title:
-                        <%=book.getNume()%><input type="hidden" name="book" value="<%=book.getNume()%>"></p>
-                        <p>Description:
-                            ...<input type="hidden" name="description" value="<%=book.getDescription()%>"></p>
-                        <p>Quantity</strong>: <input type="text" size="2" value="1" name="quantity"></p>
-                        <p>Price<%=book.getPrice()%><input type="hidden" name="price" value="<%=book.getPrice()%>"></p>
-                        <button onclick="cart()"><input type="hidden" name="action" value="add">Buy</button>
-                    </form>
 
-                </div>
+            for( int i=0; i<list.size(); i++){
+                Book book = (Book) list.get(i);
 
+        %>
+        <div class="tab-content">
+            <h3><%=book.getNume()%></h3>
+            <div class="product">
+                <img src="<%=book.getImage()%>">
+                <form name="model" method="POST" action="/cartuserServlet"><p>Title:
+                    <%=book.getNume()%><input type="hidden" name="book" value="<%=book.getNume()%>"></p>
+                    <p>Description:
+                        ...<input type="hidden" name="description" value="<%=book.getDescription()%>"></p>
+                    <p>Quantity: <input type="text" size="2" value="1" name="quantity"></p>
+                    <p>Price<%=book.getPrice()%><input type="hidden" name="price" value="<%=book.getPrice()%>"></p>
+                    <button onclick="cart()"><input type="hidden" name="action" value="add">Buy</button>
+                </form>
             </div>
-            <% } %>
-
         </div>
-
+        <% } %>
     </div>
-
-
+</div>
 <script>
     function openNav() {
         document.getElementById("mySidenav").style.width = "250px";

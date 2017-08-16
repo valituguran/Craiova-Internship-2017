@@ -11,6 +11,7 @@ import com.ymens.PrintAuthor;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Base64;
 
 
 public class CartDao {
@@ -40,6 +41,8 @@ public class CartDao {
         PreparedStatement pst = null;
         ResultSet rs = null;
         Book book = new Book();
+        Blob image;
+        byte[] fileData = null;
         try {
                 pst = conn.prepareStatement("select * from books where name=?");
                 pst.setString(1, name);
@@ -51,8 +54,9 @@ public class CartDao {
                     int isbn = rs.getInt("isbn");
                     double price = rs.getDouble("price");
                     String description = rs.getString("description");
-                    String image = rs.getString("image");
-                    book = new Book(namebook, isbn, author, price, description, image);
+                    fileData = rs.getBytes("image");
+                    String encode = Base64.getEncoder().encodeToString(fileData);
+                    book = new Book(namebook, isbn, author, price, description, encode);
                 }
         } catch (SQLException e) {
                 e.printStackTrace();

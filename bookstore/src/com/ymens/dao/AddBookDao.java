@@ -28,7 +28,6 @@ public class AddBookDao {
             return conn;
         }
     }
-
     public static int addBook(Book b, long cnp) throws SQLException {
         PreparedStatement ps = null;
         PreparedStatement pst = null;
@@ -38,14 +37,16 @@ public class AddBookDao {
         int i = 0;
         Connection conn = connect();
         try {
-
             ps = conn.prepareStatement("insert into books (name, author_id, isbn, price, description, image) values(?,?,?,?,?, ?)");
             ps.setString(1, b.getNume());
             ps.setInt(2, AddAuthorDao.getIdAuthor(cnp));
-            ps.setInt(3, b.getIsbn());
+            ps.setLong(3, b.getIsbn());
             ps.setDouble(4, b.getPrice());
             ps.setString(5, b.getDescription());
-            ps.setString(6, b.getURLImage());
+            byte[] byteData = b.getImage().getBytes("UTF-8");
+            Blob blobData = conn.createBlob();
+            blobData.setBytes(1, byteData);
+            ps.setBlob(6, blobData);
             i = ps.executeUpdate();
         } catch (Exception e) {
             status = false;

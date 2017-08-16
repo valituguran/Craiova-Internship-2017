@@ -5,9 +5,7 @@
 	<title> Login Form</title>
 	<link rel="stylesheet" href="../styles/layout_login.css">
 	<style>
-		body{
-			background-image:url("../images/index.jpg");
-		}
+
 	</style>
 </head>
 <body>

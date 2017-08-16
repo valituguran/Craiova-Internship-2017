@@ -5,13 +5,13 @@ package com.ymens;
  */
 public class Book {
     String name;
-    int isbn;
+    long isbn;
     Author author;
     double price;
     String description;
     String image;
     public Book() {}
-    public Book(String name, int isbn,Author author, double price, String description, String image){
+    public Book(String name, long isbn,Author author, double price, String description, String image){
         this.name = name;
         this.author = author;
         this.isbn = isbn;
@@ -25,14 +25,13 @@ public class Book {
     public String getDescription(){
         return this.description;
     }
-    public int getIsbn (){
+    public long getIsbn (){
         return this.isbn;
     }
     public double getPrice(){
             return this.price;
     }
-    public String getURLImage() {return this.image;}
-    public Author getAuthor(){
-        return this.author;
-    }
+    public String getImage(){return this.image;}
+    public Author getAuthor(){return this.author;}
+
 }

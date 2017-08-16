@@ -51,38 +51,31 @@
     </div>
 </div>
 </div>
-    <img class="logo" src="../images/logo.jpg">
-    <div class="products" id="products">
-        <%
-            LinkedList list = (LinkedList)session.getAttribute("list");%>
-        <div class="container">
-            <%
-
-                for( int i=0; i<list.size(); i++){
-                    Book book = (Book) list.get(i);
-
-            %>
-            <div class="tab-content">
-                <h3><%=book.getNume()%></h3>
-                <div class="product">
-                    <img src="<%=book.getURLImage()%>">
-                    <form name="model" method="POST" action="/cartuserServlet"><p>Title:
-                        <%=book.getNume()%><input type="hidden" name="book" value="<%=book.getNume()%>"></p>
-                        <p>Description:
-                            ...<input type="hidden" name="description" value="<%=book.getDescription()%>"></p>
-                        <p><Quantity</strong>: <input type="text" size="2" value="1" name="quantity"></p>
-                        <p><Price<%=book.getPrice()%><input type="hidden" name="price" value="<%=book.getPrice()%>"></p>
-                        <button onclick="cart()"><input type="hidden" name="action" value="add">Buy</button>
-                    </form>
-
-                </div>
-
+<img class="logo" src="../images/logo.jpg">
+<div class="products" id="products">
+    <%
+        LinkedList list = (LinkedList)session.getAttribute("list");%>
+    <div class="container">
+        <%for( int i=0; i<list.size(); i++){
+            Book book = (Book) list.get(i);%>
+        <div class="tab-content">
+            <h3><%=book.getNume()%></h3>
+            <div class="product">
+                <img src="<%=book.getImage()%>">
+                <form name="model" method="POST" action="/cartadminServlet"><p>Title:
+                    <%=book.getNume()%><input type="hidden" name="book" value="<%=book.getNume()%>"></p>
+                    <p>Description:
+                        ...<input type="hidden" name="description" value="<%=book.getDescription()%>"></p>
+                    <p><strong>Quantity</strong>: <input type="text" size="2" value="1" name="quantity"></p>
+                    <p>Price<%=book.getPrice()%><input type="hidden" name="price" value="<%=book.getPrice()%>"></p>
+                    <button onclick="cart()"><input type="hidden" name="action" value="add">Buy</button>
+                </form>
             </div>
-            <% } %>
-
         </div>
-
+        <% } %>
     </div>
+</div>
+
 
 
 <script>

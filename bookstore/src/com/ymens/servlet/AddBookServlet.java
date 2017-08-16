@@ -29,9 +29,10 @@ public class AddBookServlet extends HttpServlet{
     public static String description;
     public  static String image;
     public static long CNP = 0;
-    public static int isbn = 0;
+    public static long isbn = 0;
     public static double price = 0.0;
     public static int id_author;
+
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -47,10 +48,9 @@ public class AddBookServlet extends HttpServlet{
         description = request.getParameter("description");
         image = request.getParameter("image");
         HttpSession session = request.getSession(false);
-
         try{
             CNP = Long.parseLong(cnp);
-            isbn = Integer.parseInt(isbnString);
+            isbn = Long.parseLong(isbnString);
             price = Double.parseDouble(priceString);
         }catch(NumberFormatException e){
             e.printStackTrace();
@@ -60,15 +60,15 @@ public class AddBookServlet extends HttpServlet{
             author = PrintAuthor.getDetails(id_author);
             Book b = new Book(n, isbn, author, price, description, image);
             try {
-                if (AddBookDao.addBook(b, CNP) == 1) {
+                if(AddBookDao.addBook(b, CNP) == 1){
                     RequestDispatcher rd = request.getRequestDispatcher("/selectbooksadminServlet");
                     rd.forward(request, response);
-                } else {
+                }else{
                     RequestDispatcher rd = request.getRequestDispatcher("addbook.jsp");
                     out.println("<font color=red>Please fill all the fields</font>");
                     rd.include(request, response);
                 }
-            } catch (SQLException e1) {
+            }catch (SQLException e1) {
                 e1.printStackTrace();
             }
         }else{

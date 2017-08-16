@@ -1,8 +1,6 @@
 package com.ymens.dao;
 
 import com.ymens.Author;
-import com.ymens.Book;
-import com.ymens.PrintAuthor;
 
 import java.sql.*;
 import java.util.LinkedList;
@@ -36,20 +34,18 @@ public class SearchAuthorDao {
         PreparedStatement pst = null;
         ResultSet rs = null;
 
-        LinkedList<Book> list = new LinkedList();
+        LinkedList <Author> list = new LinkedList();
         try {
-            pst = conn.prepareStatement("select * from books ");
+            pst = conn.prepareStatement("select * from authors ");
             rs = pst.executeQuery();
             while (rs.next()) {
                 String name = rs.getString("name");
-                int id_author = rs.getInt("author_id");
-                Author author = PrintAuthor.getDetails(id_author);
-                int isbn = rs.getInt("isbn");
-                double price = rs.getDouble("price");
+                int age = rs.getInt("age");
+                String nationality = rs.getString("nationality");
                 String description = rs.getString("description");
-                String image = rs.getString("image");
-                Book book = new Book(name, isbn,author, price, description, image);
-                list.add(book);
+                long cnp = rs.getLong("CNP");
+                Author author = new Author(name, age, nationality, description, cnp);
+                list.add(author);
             }
         } catch (SQLException e){
             e.printStackTrace();

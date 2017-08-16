@@ -65,7 +65,7 @@
 			<div class="tab-content" id="tab-content">
 				<h3><%=book.getNume()%></h3>
 				<div class="product">
-					<img src="<%=book.getURLImage()%>">
+					<img src="<%=book.getImage()%>">
 					<form name="model" method="POST" action="/cartadminServlet"><p>Title:
 						<%=book.getNume()%><input type="hidden" name="book" value="<%=book.getNume()%>"></p>
 						<p>Description:
