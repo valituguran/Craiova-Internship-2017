@@ -63,7 +63,7 @@ realname=(String)session.getAttribute("realname");%>
             <div class="tab-content">
                <h3><%=book.getNume()%></h3>
                 <div class="product">
-                    <img src="<%=book.getImage()%>">
+                    <img src="data:image/jpeg;base64,<%=book.getImage()%>" />
                     <form name="model" method="POST" action="/cartadminServlet"><p>Title:
                             <%=book.getNume()%><input type="hidden" name="book" value="<%=book.getNume()%>"></p>
                         <p>Description:

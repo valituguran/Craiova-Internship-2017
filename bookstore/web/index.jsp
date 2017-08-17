@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1"%>
 
-<%@page import="com.ymens.Author"%>
-<%@ page import="com.ymens.Book" %>
+<%@page import="com.ymens.Book"%>
+<%@ page import="com.ymens.dao.SelectBooksDao" %>
 <%@ page import="com.ymens.servlet.ProductsServlet"%>
+<%@ page import="java.io.OutputStream" %>
 <%@ page import="java.util.LinkedList" %>
+<%@ page import="java.sql.Connection" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,7 +57,8 @@
             <div class="tab-content">
                 <h3><%=book.getNume()%></h3>
                 <div class="product">
-                    <img src="data:image/jpeg;base64,.<%=book.getImage()%>" />
+                    <img src="data:image/jpg;base64,<%=book.getImage()%>" />
+
                     Title:<%=book.getNume()%><input type="hidden" name="book" value="<%=book.getNume()%>"></p>
                         <p>Description:
                             ...<input type="hidden" name="description" value="<%=book.getDescription()%>"></p>

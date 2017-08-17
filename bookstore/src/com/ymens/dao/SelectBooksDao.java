@@ -12,7 +12,7 @@ import java.util.LinkedList;
  * Created by madalina.luca on 8/1/2017.
  */
 public class SelectBooksDao {
-    public static byte[] fileData;
+
     public static Connection connect() {
         Connection conn = null;
         String url = "jdbc:mysql://localhost:3306/";
@@ -36,6 +36,7 @@ public class SelectBooksDao {
         ResultSet rs = null;
         Blob image = null;
         LinkedList<Book> list = new LinkedList();
+        byte[] fileData;
         try {
             pst = conn.prepareStatement("select * from books");
             rs = pst.executeQuery();
