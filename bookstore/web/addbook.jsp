@@ -6,26 +6,26 @@
     <title>Title</title>
 </head>
 <body>
-<form  action="addbookServlet" method="post">
+<form action="addbookServlet" method="post" enctype="multipart/form-data">
     <header>Add a book</header>
     <label for="name"> Name:</label>
-    <input type="text" id="name" name="name" required="required">
+    <input type="text" id="name" name="name" required="required" />
 
     <label for="cnp">CNP Author:</label>
-    <input type="text" id="cnp" name="cnp" required="required">
+    <input type="text" id="cnp" name="cnp" required="required" />
 
         <label for="isbn"> ISBN:</label>
-        <input type="text" id="isbn" name="isbn" required="required">
+        <input type="text" id="isbn" name="isbn" required="required" />
 
         <label for="price"> Price:</label>
-        <input type="text" id="price" name="price" required="required">
+        <input type="text" id="price" name="price" required="required" />
 
         <label for="description"> Description:</label>
-        <input type="text" id="description" name="description" required="required">
+        <input type="text" id="description" name="description" required="required" />
 
         <p style="color:black;">Please specify a image:</p><br>
-        <input type="hidden" value="" name="hd1" id="hdFile"/>
-    <input type="file" name="image" id="file" size="40" accept="image/*" style="color:black;" required="required"/>
+        <input type="hidden" value="" name="hd1" id="hdFile" />
+    <input type="file" name="image" id="file" size="40" accept="image/*" style="color:black;" required="required" />
     <button type="submit" >Add</button>
 </form>
 <script>
