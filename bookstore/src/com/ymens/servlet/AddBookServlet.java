@@ -14,8 +14,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.List;
@@ -24,9 +25,6 @@ import java.util.List;
  * Created by madalina.luca on 8/4/2017.
  */
 public class AddBookServlet extends HttpServlet{
-
-    private int maxFileSize = 50 * 1024;
-    private int maxMemSize = 4 * 1024;
 
     private File file ;
 
@@ -48,35 +46,16 @@ public class AddBookServlet extends HttpServlet{
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        boolean isMultipart = ServletFileUpload.isMultipartContent(request);
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
-        HttpSession session = request.getSession(false);
+//        HttpSession session = request.getSession(false);
         id_author = 0;
         Author author = new Author();
-        n = request.getParameter("name");
-        cnp = request.getParameter("cnp");
-        isbnString = request.getParameter("isbn");
-        priceString = request.getParameter("price");
-        description = request.getParameter("description");
-//        String image = request.getParameter("image");
-//        BufferedImage img = ImageIO.read(new File(image));
-//        File f = new File(image);
-//        ImageIO.write(img, "png", f);
 
         DiskFileItemFactory factory = new DiskFileItemFactory();
 
-        // maximum size that will be stored in memory
-        factory.setSizeThreshold(maxMemSize);
-
-        // Location to save data that is larger than maxMemSize.
-        factory.setRepository(new File("C:\\temp"));
-
         // Create a new file upload handler
         ServletFileUpload upload = new ServletFileUpload(factory);
-
-        // maximum file size to be uploaded.
-        upload.setSizeMax( maxFileSize );
 
         String imageStr = null;
 
@@ -104,6 +83,27 @@ public class AddBookServlet extends HttpServlet{
                     fi.write(file);
 
                     System.out.println(fi.get());
+                } else {
+                    switch (fi.getFieldName()) {
+                        case "name":
+                            n = fi.getString();
+                            break;
+                        case "cnp":
+                            cnp = fi.getString();
+                            break;
+                        case "isbn":
+                            isbnString = fi.getString();
+                            break;
+                        case "price":
+                            priceString = fi.getString();
+                            break;
+                        case "description":
+                            description = fi.getString();
+                            break;
+                        default:
+                            System.err.println("Unexpected field " + fi.getFieldName());
+                            break;
+                    }
                 }
             }
         } catch(Exception ex) {
