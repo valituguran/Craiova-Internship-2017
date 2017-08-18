@@ -57,8 +57,8 @@
             <div class="tab-content">
                 <h3><%=book.getNume()%></h3>
                 <div class="product">
-                    <img src="data:image/jpg;base64,<%=book.getImage()%>" />
 
+                    <img src="data:image/jpg;base64,<%=book.getImage()%>" />
                     Title:<%=book.getNume()%><input type="hidden" name="book" value="<%=book.getNume()%>"></p>
                         <p>Description:
                             ...<input type="hidden" name="description" value="<%=book.getDescription()%>"></p>
@@ -71,6 +71,7 @@
         </div>
 </div>
 <script>
+
     function openNav() {
         document.getElementById("mySidenav").style.width = "250px";
     }

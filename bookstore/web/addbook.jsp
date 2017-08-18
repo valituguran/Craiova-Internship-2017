@@ -24,8 +24,14 @@
         <input type="text" id="description" name="description" required="required">
 
         <p style="color:black;">Please specify a image:</p><br>
-        <input type="file" name="image" size="40" accept="image/*" style="color:black;">
-    <button type="submit">Add</button>
+        <input type="hidden" value="" name="hd1" id="hdFile"/>
+    <input type="file" name="image" id="file" size="40" accept="image/*" style="color:black;" required="required"/>
+    <button type="submit" >Add</button>
 </form>
+<script>
+
+
+
+</script>
 </body>
 </html>

@@ -2,7 +2,10 @@ package com.ymens.dao;
 
 import com.ymens.Book;
 
+import javax.imageio.ImageIO;
+import java.io.ByteArrayOutputStream;
 import java.sql.*;
+import java.util.Base64;
 
 /**
  * Created by madalina.luca on 7/27/2017.
@@ -37,16 +40,20 @@ public class AddBookDao {
         int i = 0;
         Connection conn = connect();
         try {
-            ps = conn.prepareStatement("insert into books (name, author_id, isbn, price, description, image) values(?,?,?,?,?, ?)");
+            ps = conn.prepareStatement("insert into `books` (name, author_id, isbn, price, description, image) values(?,?,?,?,?, ?)");
             ps.setString(1, b.getNume());
             ps.setInt(2, AddAuthorDao.getIdAuthor(cnp));
             ps.setLong(3, b.getIsbn());
             ps.setDouble(4, b.getPrice());
             ps.setString(5, b.getDescription());
-            byte[] byteData = b.getImage().getBytes("UTF-8");
-            Blob blobData = conn.createBlob();
-            blobData.setBytes(1, byteData);
-            ps.setBlob(6, blobData);
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ImageIO.write(b.getImage1(), "jpg", baos );
+            byte[] imageInByte = baos.toByteArray();
+            String base64String = Base64.getEncoder().encodeToString(imageInByte);
+            byte[] base64 = Base64.getEncoder().encode(imageInByte);
+            Blob blob = conn.createBlob();
+            blob.setBytes(1, base64);
+            ps.setBlob(6, blob);
             i = ps.executeUpdate();
         } catch (Exception e) {
             status = false;
