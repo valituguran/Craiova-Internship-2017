@@ -52,8 +52,5 @@ public static double orderTotal = 0.0;
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         doPost(request, response);
-        response.setContentType("text/html");
-        String url = "/order.jsp";
-        //RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url).forward(request, response);
     }
 }

@@ -28,7 +28,7 @@
 <div class="topnav">
     <span style="align:left;cursor:pointer;color:white;text-align:center;font-size: 20px;" onclick="openNav()">&#9776;<%=realname%></span>
     <a href="addbook.jsp">Add books</a>
-    <a href="buy.jsp">Cart</a>
+    <a href="shoppingcart_user.jsp">Cart</a>
 </div>
 <div class="content">
     <ul class="breadcrumb">
@@ -52,9 +52,16 @@
     <%
         ArrayList list = CartDao.getCartItems();%>
     <div class="container">
+        <% if (list.size()==0){%>
+        <h1>Cosul dumneavoastra este gol!</h1>
+        <form name="order" method="post" action="products_admin.jsp">
+            <button class="button" type="submit">Produse</button>
+        </form>
+        <%}
+        else {%>
         <%for( int i=0; i<list.size(); i++){
             CartItem cartitem = (CartItem) list.get(i);%>
-        <form name="item" method="POST" action="/cartuserServlet">
+        <form name="item" method="POST" action="/cartadminServlet">
             <p><%=cartitem.getBook().getNume()%></p>
             <input type='hidden' name='name' value="<%=cartitem.getBook().getNume()%>">
             <p>Disponibilitate: in stoc</p>
@@ -72,6 +79,7 @@
         <form name="order" method="post" action="orderServlet">
             <button class="button" type="submit">Plaseaza comanda</button>
         </form>
+        <% }%>
     </div>
 </div>
 <script>

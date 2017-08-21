@@ -21,6 +21,7 @@ import java.util.ArrayList;
 public class CartServlet extends HttpServlet {
     //public static final String addToCart
     public User user;
+    public static int nr = 0;
     public void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -70,6 +71,7 @@ public class CartServlet extends HttpServlet {
             if(CartDao.getIdBook(list.get(i).getBook().getNume()) == id){
                 cartDao.deleteCartItem(id);
                 session.setAttribute("cart", CartDao.getCartItems());
+                nr = list.size();
             }
         }
     }
@@ -85,6 +87,7 @@ public class CartServlet extends HttpServlet {
             if(CartDao.getIdBook(list.get(i).getBook().getNume()) == id){
                 cartDao.updateCartItem(id, strQuantity);
                 session.setAttribute("cart", CartDao.getCartItems());
+                nr = list.size();
             }
         }
 
@@ -113,7 +116,8 @@ public class CartServlet extends HttpServlet {
         cartItem.setTotalCost(cant*price);
         CartDao.alCartItems.add(cartItem);
         session.setAttribute("cart", CartDao.getCartItems());
+        ArrayList<CartItem> list =(ArrayList) session.getAttribute("cart");
+        nr = list.size();
     }
-
 }
 

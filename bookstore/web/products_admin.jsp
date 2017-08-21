@@ -7,6 +7,7 @@
 <%@ page import="com.ymens.servlet.SelectBooksServlet" %>
 
 <%@ page import="com.ymens.dao.SearchAuthorDao" %>
+<%@ page import="com.ymens.servlet.CartServlet" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,6 +21,8 @@
 <body>
 <%String realname;
 realname=(String)session.getAttribute("realname");%>
+<%
+    LinkedList listcart = (LinkedList)session.getAttribute("cart");%>
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <a href="/mycontadminServlet"><%=realname%></a>
@@ -28,7 +31,7 @@ realname=(String)session.getAttribute("realname");%>
 
 <div class="topnav">
     <div style="align:left;cursor:pointer;color:white;font-size: 20px;margin:30px;float:left" onclick="openNav()">&#9776;<%=realname%></div>
-    <a href="/../shoppingcart.jsp">Cart</a>
+    <a href="/../shoppingcart_admin.jsp">Cart</a>
     <a href="addbook.jsp">Add books</a>
     <a href="register.jsp">Add users</a>
 </div>
@@ -38,7 +41,6 @@ realname=(String)session.getAttribute("realname");%>
             <li><a href="products_admin.jsp">Home</a></li>
             <li><a href="#products">Books</a></li>
         </ul>
-
         <div class="form">
             <h4>Filter</h4>
             <form method="get" action="/searchbyauthoradminServlet" id="searchbyauthor">
@@ -50,7 +52,6 @@ realname=(String)session.getAttribute("realname");%>
                 <input name="searchbyname" type="text" size="40" placeholder="Search..." required="required">
             </form>
         </div>
-
     </div>
 </div>
     <img class="logo" src="../images/logo.jpg">

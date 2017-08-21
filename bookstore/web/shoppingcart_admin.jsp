@@ -52,6 +52,13 @@
         <%
             ArrayList list = CartDao.getCartItems();%>
         <div class="container">
+            <% if (list.size()==0){%>
+                <h1>Cosul dumneavoastra este gol!</h1>
+            <form name="order" method="post" action="products_admin.jsp">
+                <button class="button" type="submit">Produse</button>
+            </form>
+            <%}
+            else {%>
             <%for( int i=0; i<list.size(); i++){
                 CartItem cartitem = (CartItem) list.get(i);%>
             <form name="item" method="POST" action="/cartadminServlet">
@@ -72,6 +79,7 @@
                <form name="order" method="post" action="orderServlet">
                    <button class="button" type="submit">Plaseaza comanda</button>
                </form>
+            <% }%>
         </div>
     </div>
     <script>

@@ -20,6 +20,7 @@ public class AddAuthorServlet extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter out=response.getWriter();
         int id_author=0;
+        AddBookDao addbook = new AddBookDao();
         Author a=new Author();
         String name = request.getParameter("name");
         String nationality=request.getParameter("nationality");
@@ -39,7 +40,7 @@ public class AddAuthorServlet extends HttpServlet {
         AddAuthorDao.addAuthor(a);
         Book b=new Book(AddBookServlet.n, isbn, a, price, AddBookServlet.description, AddBookServlet.image);
         try{
-            if(AddBookDao.addBook(b, AddBookServlet.CNP) == 1){
+            if(addbook.addBook(b, AddBookServlet.CNP) == 1){
                 RequestDispatcher rd=request.getRequestDispatcher("/selectbooksadminServlet");
                 rd.forward(request,response);
             } else{

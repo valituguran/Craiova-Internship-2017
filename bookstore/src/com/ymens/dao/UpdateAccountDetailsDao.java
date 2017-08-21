@@ -7,7 +7,7 @@ import java.sql.SQLException;
 /**
  * Created by madalina.luca on 8/18/2017.
  */
-public class UpdateDetailsContDao {
+public class UpdateAccountDetailsDao {
 
     public static Connection connect() {
         Connection conn = null;
@@ -16,7 +16,6 @@ public class UpdateDetailsContDao {
         String driver = "com.mysql.jdbc.Driver";
         String userName = "root";
         String password = "root";
-
         try {
             Class.forName(driver).newInstance();
             conn = DriverManager.getConnection(url + dbName, userName, password);
@@ -27,14 +26,15 @@ public class UpdateDetailsContDao {
             return conn;
         }
     }
-    public  int updatePassword(String pass) throws SQLException
+    public static int UpdatePassword(String pass, String user) throws SQLException
     {
         PreparedStatement ps = null;
         int status = 0;
         Connection conn = connect();
         try {
-            ps = conn.prepareStatement("update users set pass=? ");
+            ps = conn.prepareStatement("update `users` set password=? where username=?");
             ps.setString(1, pass);
+            ps.setString(2, user);
             status = ps.executeUpdate();
         } catch (Exception e) {
             System.out.println(e);
@@ -51,14 +51,15 @@ public class UpdateDetailsContDao {
         }
         return status;
     }
-    public  int updateEmail(String email) throws SQLException
+    public static int UpdateEmail(String email, String user) throws SQLException
     {
         PreparedStatement ps = null;
         int status = 0;
         Connection conn = connect();
         try {
-            ps = conn.prepareStatement("update users set email=? ");
+            ps = conn.prepareStatement("update users set email=? where username=?");
             ps.setString(1, email);
+            ps.setString(2, user);
             status = ps.executeUpdate();
         } catch (Exception e) {
             System.out.println(e);
@@ -75,14 +76,15 @@ public class UpdateDetailsContDao {
         }
         return status;
     }
-    public  int updateRealName(String rn) throws SQLException
+    public static int UpdateRealName(String rn, String user) throws SQLException
     {
         PreparedStatement ps = null;
         int status = 0;
         Connection conn = connect();
         try {
-            ps = conn.prepareStatement("update users set real_name=? ");
+            ps = conn.prepareStatement("update users set real_name=? where username=?");
             ps.setString(1, rn);
+            ps.setString(2, user);
             status = ps.executeUpdate();
         } catch (Exception e) {
             System.out.println(e);

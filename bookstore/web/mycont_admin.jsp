@@ -50,13 +50,18 @@
 </div>
     <img class="logo" src="../images/logo.jpg">
     <div class="products" id="products">
-        <%
-            User user =(User) session.getAttribute("currentuser");%>
+        <%User user =(User) session.getAttribute("currentuser");%>
         <div class="container">
             <div id="tab-1" class="tab-content current">
-                Username:<%=user.getUsername()%><br>
-                Realname: <input class="cont" type='text' name="quantity" value="<%=user.getRealname()%>"><br>
-                Email:<input class="cont" type='text' name="quantity" value="<%=user.getEmail()%>"><br>
+                <form name="item" method="POST" action="/updatecontServlet">
+                Username:<input  type='hidden' name="username" value="<%=user.getUsername()%>"><%=user.getUsername()%><br>
+                Realname: <input  type='text' name="realname" value="<%=user.getRealname()%>"><br>
+                <input type="submit" name="action" value="updaterealname"> <br>
+                Email:<input  type='text' name="email" value="<%=user.getEmail()%>"><br>
+                <input type="submit" name="action" value="updateemail"> <br>
+                Password:<input type='password' name="password" value="<%=user.getPassword()%>"><br>
+                <input type="submit" name="action" value="updatepassword"><br>
+                </form>
             </div>
 
         </div>
@@ -67,11 +72,6 @@
         }
         function closeNav() {
             document.getElementById("mySidenav").style.width = "0";
-        }
-        function cart() {
-            var txt;
-            var r = alert("Produs adaugat cu succes in cos.");
-            document.getElementById("demo").innerHTML = txt;
         }
     </script>
 </body>

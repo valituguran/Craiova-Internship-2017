@@ -40,6 +40,15 @@
 	</servlet-mapping>
 
 	<servlet>
+		<servlet-name>updatecont</servlet-name>
+		<servlet-class>com.ymens.servlet.UpdateAccountDetailsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>updatecont</servlet-name>
+		<url-pattern>/updatecontServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
 		<servlet-name>/products</servlet-name>
 		<servlet-class>com.ymens.servlet.ProductsServlet</servlet-class>
 	</servlet>
@@ -137,16 +146,6 @@
 		<servlet-name>addauthor</servlet-name>
 		<url-pattern>/addauthorServlet</url-pattern>
 	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>searchauthor</servlet-name>
-		<servlet-class>com.ymens.SearchAuthor</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>searchauthor</servlet-name>
-		<url-pattern>/searchauthorServlet</url-pattern>
-	</servlet-mapping>
-
 	<servlet>
 		<servlet-name>CartUserServlet</servlet-name>
 		<servlet-class>com.ymens.servlet.CartServlet</servlet-class>

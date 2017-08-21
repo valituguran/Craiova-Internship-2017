@@ -27,6 +27,7 @@
 
 <div class="topnav">
     <span style="align:left;cursor:pointer;color:white;text-align:center;font-size: 20px;" onclick="openNav()">&#9776;Bookstore</span>
+    <a href="login.jsp">Login</a>
 </div>
 
 <div class="content">
