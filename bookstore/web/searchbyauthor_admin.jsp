@@ -2,12 +2,8 @@
 		 pageEncoding="ISO-8859-1"%>
 
 <%@page import="com.ymens.Book"%>
-<%@ page import="sun.awt.image.ImageWatched" %>
+<%@ page import="com.ymens.servlet.PaginationServlet" %>
 <%@ page import="java.util.LinkedList" %>
-<%@ page import="com.ymens.servlet.SelectBooksServlet"%>
-<%@ page import="com.ymens.dao.SelectBooksDao" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="com.ymens.dao.CartDao" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,6 +18,10 @@
 <body>
 <%String realname;
 	realname=(String)session.getAttribute("realname");%>
+<%int currentpage = PaginationServlet.currentPage;
+	int noOfPages = PaginationServlet.noOfPages;
+	int recordsPerPage = PaginationServlet.recordsPerPage;
+%>
 <div id="mySidenav" class="sidenav">
 	<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 	<a href="/mycontadminServlet"><%=realname%></a>
@@ -83,7 +83,16 @@
 		</div>
 
 	</div>
-
+<div class="bottom">
+	<form  method="POST" action="/paginationServlet">
+		<ul class="pagination">
+			<li> <input type="submit" onclick="pagination()" name="action" value="Prev" id="prev" ></li>
+			<input type="hidden" name="<%=noOfPages%>" id="noOfPages" value="noOfPages">
+			<li>Page <input type="hidden" name="currentpage" id="current" value="<%=currentpage%>"><%=currentpage%>/<%=noOfPages+1%></li>
+			<li> <input type="submit" onclick="pagination()" name="action" value="Next" id="next"></li>
+		</ul>
+	</form>
+</div>
 
 <script>
     function openNav() {

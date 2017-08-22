@@ -12,7 +12,7 @@ import java.util.LinkedList;
  * Created by madalina.luca on 8/1/2017.
  */
 public class SelectBooksDao {
-
+    private static int noOfRecords;
     public static Connection connect() {
         Connection conn = null;
         String url = "jdbc:mysql://localhost:3306/";
@@ -29,6 +29,39 @@ public class SelectBooksDao {
             return conn;
         }
     }
+    public static LinkedList select( int offset, int noOfRecords) {
+        boolean status = false;
+        Connection conn = connect();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        Blob image = null;
+        LinkedList<Book> list = new LinkedList();
+        byte[] fileData;
+        try {
+            String query = "select * from books limit " + offset + ", " + noOfRecords;
+            pst = conn.prepareStatement(query);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                String name = rs.getString("name");
+                int id_author = rs.getInt("author_id");
+                Author author = PrintAuthor.getDetails(id_author);
+                long isbn = rs.getLong("isbn");
+                double price = rs.getDouble("price");
+                String description = rs.getString("description");
+                fileData = rs.getBytes("image");
+                String encode = Base64.getEncoder().encodeToString(fileData);
+                Book book = new Book(name, isbn, author, price, description, encode);
+                list.add(book);
+            }
+            noOfRecords = list.size();
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+    public static int getNoOfRecords() {
+        return noOfRecords;
+    }
     public static LinkedList select() {
         boolean status = false;
         Connection conn = connect();
@@ -38,7 +71,8 @@ public class SelectBooksDao {
         LinkedList<Book> list = new LinkedList();
         byte[] fileData;
         try {
-            pst = conn.prepareStatement("select * from books");
+            String query = "select * from books ";
+            pst = conn.prepareStatement(query);
             rs = pst.executeQuery();
             while (rs.next()) {
                 String name = rs.getString("name");
@@ -57,4 +91,5 @@ public class SelectBooksDao {
         }
         return list;
     }
+
 }

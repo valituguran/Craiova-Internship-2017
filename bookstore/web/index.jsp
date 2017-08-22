@@ -7,6 +7,8 @@
 <%@ page import="java.io.OutputStream" %>
 <%@ page import="java.util.LinkedList" %>
 <%@ page import="java.sql.Connection" %>
+<%@ page import="com.ymens.servlet.SelectBooksServlet" %>
+<%@ page import="com.ymens.servlet.PaginationServlet" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,14 +19,16 @@
     <link src="../scripts/file.js">
 
 </head>
-
 <body>
+<%int currentpage = PaginationServlet.currentPage;
+    int noOfPages = PaginationServlet.noOfPages;
+    int recordsPerPage = PaginationServlet.recordsPerPage;
+%>
 
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <a href="login.jsp">Login</a>
 </div>
-
 <div class="topnav">
     <span style="align:left;cursor:pointer;color:white;text-align:center;font-size: 20px;" onclick="openNav()">&#9776;Bookstore</span>
     <a href="login.jsp">Login</a>
@@ -49,16 +53,17 @@
         </div>
     </div>
 </div>
+
 <div class="products" id="products">
-        <<img class="logo" src="../images/logo.jpg">
-        <%LinkedList list = ProductsServlet.list;%>
+        <img class="logo" src="../images/logo.jpg">
+        <%LinkedList list = PaginationServlet.list;%>
+        <input type ="hidden" id="list" value="<%=list%>">
         <div class="container">
             <%for( int i=0; i<list.size(); i++){
                     Book book = (Book) list.get(i);%>
             <div class="tab-content">
                 <h3><%=book.getNume()%></h3>
                 <div class="product">
-
                     <img src="data:image/jpg;base64,<%=book.getImage()%>" />
                     Title:<%=book.getNume()%><input type="hidden" name="book" value="<%=book.getNume()%>"></p>
                         <p>Description:
@@ -69,10 +74,19 @@
                 </div>
             </div>
             <% } %>
-        </div>
+</div>
+</div>
+<div class="bottom">
+    <form  method="POST" action="/paginationServlet">
+        <ul class="pagination">
+            <li> <input type="submit" onclick="pagination()" name="action" value="Prev" id="prev" ></li>
+            <input type="hidden" name="<%=noOfPages%>" id="noOfPages" value="noOfPages">
+            <li>Page <input type="hidden" name="currentpage" id="current" value="<%=currentpage%>"><%=currentpage%>/<%=noOfPages%></li>
+            <li> <input type="submit" onclick="pagination()" name="action" value="Next" id="next"></li>
+        </ul>
+    </form>
 </div>
 <script>
-
     function openNav() {
         document.getElementById("mySidenav").style.width = "250px";
     }
@@ -89,6 +103,20 @@
         }
         document.getElementById("demo").innerHTML = txt;
     }
+function pagination() {
+    var current = document.getElementById("current");
+    var noOfPages = document.getElementById("noOfPages");
+    if (current == noOfPages) {
+        document.getElementById("prev").style.visibility = "visible";
+    } else {
+        document.getElementById("next").style.visibility = "hidden";
+    }
+    if (current == 1) {
+        document.getElementById("prev").style.visibility = "hidden";
+    } else {
+        document.getElementById("next").style.visibility = "visible";
+    }
+}
 </script>
 </body>
 

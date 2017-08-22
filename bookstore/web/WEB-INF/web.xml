@@ -172,7 +172,15 @@
 		<url-pattern>/orderServlet</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>PaginationServlet</servlet-name>
+		<servlet-class>com.ymens.servlet.PaginationServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PaginationServlet</servlet-name>
+		<url-pattern>/paginationServlet</url-pattern>
+	</servlet-mapping>
 	<welcome-file-list>
-		<welcome-file>productsServlet</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
 </web-app>

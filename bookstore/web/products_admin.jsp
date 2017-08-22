@@ -1,13 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1"%>
 
-<%@page import="com.ymens.Author"%>
-<%@ page import="com.ymens.Book" %>
-<%@ page import="java.util.LinkedList"%>
-<%@ page import="com.ymens.servlet.SelectBooksServlet" %>
+<%@page import="com.ymens.Book"%>
+<%@ page import="java.util.LinkedList" %>
+<%@ page import="java.util.List"%>
+<%@ page import="com.ymens.servlet.PaginationServlet" %>
 
-<%@ page import="com.ymens.dao.SearchAuthorDao" %>
-<%@ page import="com.ymens.servlet.CartServlet" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,14 +19,16 @@
 <body>
 <%String realname;
 realname=(String)session.getAttribute("realname");%>
-<%
-    LinkedList listcart = (LinkedList)session.getAttribute("cart");%>
+<%int currentpage = PaginationServlet.currentPage;
+    int noOfPages = PaginationServlet.noOfPages;
+    int recordsPerPage = PaginationServlet.recordsPerPage;
+%>
+<%LinkedList list = PaginationServlet.list;%>
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <a href="/mycontadminServlet"><%=realname%></a>
-    <a href="index.jsp">Logout</a>
+    <a href="/logoutServlet">Logout</a>
 </div>
-
 <div class="topnav">
     <div style="align:left;cursor:pointer;color:white;font-size: 20px;margin:30px;float:left" onclick="openNav()">&#9776;<%=realname%></div>
     <a href="/../shoppingcart_admin.jsp">Cart</a>
@@ -56,8 +56,7 @@ realname=(String)session.getAttribute("realname");%>
 </div>
     <img class="logo" src="../images/logo.jpg">
     <div class="products" id="products">
-        <%
-            LinkedList list = (LinkedList)session.getAttribute("list");%>
+
         <div class="container">
             <%for( int i=0; i<list.size(); i++){
                     Book book = (Book) list.get(i);%>
@@ -76,10 +75,20 @@ realname=(String)session.getAttribute("realname");%>
                 </div>
             </div>
             <% } %>
-        </div>
-    </div>
-</div>
 
+        </div>
+
+    </div>
+<div class="bottom">
+    <form  method="POST" action="/paginationServlet">
+        <ul class="pagination">
+            <li> <input type="submit" onclick="pagination()" name="action" value="Prev" id="prev" ></li>
+            <input type="hidden" name="<%=noOfPages%>" id="noOfPages" value="noOfPages">
+            <li>Page <input type="hidden" name="currentpage" id="current" value="<%=currentpage%>"><%=currentpage%>/<%=noOfPages+1%></li>
+            <li> <input type="submit" onclick="pagination()" name="action" value="Next" id="next"></li>
+        </ul>
+    </form>
+</div>
 <script>
     function openNav() {
         document.getElementById("mySidenav").style.width = "250px";
@@ -87,16 +96,57 @@ realname=(String)session.getAttribute("realname");%>
     function closeNav() {
         document.getElementById("mySidenav").style.width = "0";
     }
-    function cart() {
-        var txt;
-        var r = alert("Produs adaugat cu succes in cos.");
-        document.getElementById("demo").innerHTML = txt;
+    var current_page = document.getElementById("page");
+    var records_per_page = 9;
+    function prevPage()
+    {
+        if (current_page > 1) {
+            current_page--;
+            changePage(current_page);
+        }
     }
-    document.getElementById("myDIV").onscroll = function() {myFunction()};
 
-    function myFunction() {
-        document.getElementById("demo").innerHTML = "Select a author";
+    function nextPage()
+    {
+        if (current_page < numPages()) {
+            current_page++;
+            changePage(current_page);
+        }
     }
+
+    function changePage(page)
+    {
+        var btn_next = document.getElementById("btn_next");
+        var btn_prev = document.getElementById("btn_prev");
+        var listing_table = document.getElementById("listingTable");
+        var page_span = document.getElementById("page");
+        if (page < 1) page = 1;
+        if (page > numPages()) page = numPages();
+        listing_table.innerHTML = "";
+        page_span.innerHTML = page;
+
+        if (page == 1) {
+            btn_prev.style.visibility = "hidden";
+        } else {
+            btn_prev.style.visibility = "visible";
+        }
+
+        if (page == numPages()) {
+            btn_next.style.visibility = "hidden";
+        } else {
+            btn_next.style.visibility = "visible";
+        }
+    }
+
+    function numPages()
+    {
+        return Math.ceil(objJson.length / records_per_page);
+    }
+
+    window.onload = function() {
+        changePage(1);
+    };
+
 </script>
 </body>
 

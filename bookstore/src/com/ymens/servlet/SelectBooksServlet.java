@@ -22,10 +22,10 @@ public class SelectBooksServlet extends HttpServlet{
     HttpSession session;
     public static OutputStream o;
     private static User user = new User();
-  @Override
-   public void init()
-          throws ServletException {
-   }
+    @Override
+    public void init()
+            throws ServletException {
+    }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
