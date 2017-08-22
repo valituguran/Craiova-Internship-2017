@@ -1,17 +1,18 @@
 package com.ymens.dao;
 
 import com.ymens.Book;
+import com.ymens.servlet.AddBookServlet;
 
-import javax.imageio.ImageIO;
-import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.net.URL;
 import java.sql.*;
-import java.util.Base64;
 
 /**
  * Created by madalina.luca on 7/27/2017.
  */
 public class AddBookDao {
-
 
     public static Connection connect() {
         Connection conn = null;
@@ -31,7 +32,7 @@ public class AddBookDao {
             return conn;
         }
     }
-    public static int addBook(Book b, long cnp) throws SQLException {
+    public int addBook(Book b, long cnp) throws SQLException {
         PreparedStatement ps = null;
         PreparedStatement pst = null;
         ResultSet rs ;
@@ -46,19 +47,13 @@ public class AddBookDao {
             ps.setLong(3, b.getIsbn());
             ps.setDouble(4, b.getPrice());
             ps.setString(5, b.getDescription());
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ImageIO.write(b.getImage1(), "jpg", baos );
-            byte[] imageInByte = baos.toByteArray();
-            String base64String = Base64.getEncoder().encodeToString(imageInByte);
-            byte[] base64 = Base64.getEncoder().encode(imageInByte);
-            Blob blob = conn.createBlob();
-            blob.setBytes(1, base64);
-            ps.setBlob(6, blob);
+            InputStream inputStream = new FileInputStream(AddBookServlet.path);
+            ps.setBlob(6, inputStream);
             i = ps.executeUpdate();
-        } catch (Exception e) {
-            status = false;
-            e.printStackTrace();
-        }
+           } catch (Exception e) {
+           status = false;
+           e.printStackTrace();
+          }
         finally {
             if (ps != null) {
                 try {

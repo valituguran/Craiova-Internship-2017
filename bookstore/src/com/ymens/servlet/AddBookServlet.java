@@ -40,7 +40,7 @@ public class AddBookServlet extends HttpServlet{
     public static long isbn = 0;
     public static double price = 0.0;
     public static int id_author;
-    String path=null;
+    public static  String path=null;
     byte[] userimage=null;
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -51,7 +51,7 @@ public class AddBookServlet extends HttpServlet{
 //        HttpSession session = request.getSession(false);
         id_author = 0;
         Author author = new Author();
-
+        AddBookDao addbook = new AddBookDao();
         DiskFileItemFactory factory = new DiskFileItemFactory();
 
         // Create a new file upload handler
@@ -69,19 +69,15 @@ public class AddBookServlet extends HttpServlet{
             while ( i.hasNext () ) {
                 FileItem fi = (FileItem)i.next();
                 if ( !fi.isFormField () ) {
-                    // Get the uploaded file parameters
                     String fieldName = fi.getFieldName();
                     String fileName = fi.getName();
                     String contentType = fi.getContentType();
                     boolean isInMemory = fi.isInMemory();
                     long sizeInBytes = fi.getSize();
-
                     imageStr = new String(fi.get());
-
-
-                    File file = new File("C:\\temp\\test.png");
-                    fi.write(file);
-
+                    File temp = File.createTempFile("image", ".png");
+                    path = temp.getAbsolutePath();
+                    fi.write(temp);
                     System.out.println(fi.get());
                 } else {
                     switch (fi.getFieldName()) {
@@ -109,26 +105,6 @@ public class AddBookServlet extends HttpServlet{
         } catch(Exception ex) {
             System.out.println(ex);
         }
-
-
-
-        /*String filePart = request.getParameter("image");
-        File pic=new File(filePart);
-        path= pic.getAbsolutePath();
-        TextComponent txt_path = null;
-        txt_path.setText(path.replace('\\','/'));
-        try{
-        File image = new File(path);
-        FileInputStream fis = new FileInputStream(image);
-        ByteArrayOutputStream baos= new ByteArrayOutputStream();
-        byte[] buff = new byte[1024];
-        for(int readNum; (readNum=fis.read(buff)) !=-1 ; ){
-                baos.write(buff,0,readNum);
-        }
-        userimage=baos.toByteArray();
-        Part filePart = request.getPart("image");
-        String fileName = Paths.get(filePart.getName()).getFileName().toString();
-        InputStream fileContent = filePart.getInputStream();*/
         try {
             CNP = Long.parseLong(cnp);
             isbn = Long.parseLong(isbnString);
@@ -141,7 +117,7 @@ public class AddBookServlet extends HttpServlet{
             author = PrintAuthor.getDetails(id_author);
             Book b = new Book(n, isbn, author, price, description, imageStr);
             try{
-                if(AddBookDao.addBook(b, CNP) == 1){
+                if(addbook.addBook(b, CNP) == 1){
                     RequestDispatcher rd = request.getRequestDispatcher("/selectbooksadminServlet");
                     rd.forward(request, response);
                 }else{
