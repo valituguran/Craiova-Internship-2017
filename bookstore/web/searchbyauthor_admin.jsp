@@ -142,6 +142,16 @@
 	window.onload = function() {
 		changePage(1);
 	};
+	function redirectLogin() {
+		var txt;
+		var r = confirm("Please login to continue!!");
+		if (r == true) {
+			window.location="login.jsp";
+		} else {
+			txt = "You pressed Cancel!";
+		}
+		document.getElementById("demo").innerHTML = txt;
+	}
 
 </script>
 </body>

@@ -95,6 +95,16 @@ realname=(String)session.getAttribute("realname");%>
     function closeNav() {
         document.getElementById("mySidenav").style.width = "0";
     }
+    function redirectLogin() {
+        var txt;
+        var r = confirm("Please login to continue!!");
+        if (r == true) {
+            window.location="login.jsp";
+        } else {
+            txt = "You pressed Cancel!";
+        }
+        document.getElementById("demo").innerHTML = txt;
+    }
 </script>
 </body>
 

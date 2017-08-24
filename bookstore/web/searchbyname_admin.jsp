@@ -103,6 +103,16 @@
         var r = alert("Produs adaugat cu succes in cos.");
         document.getElementById("demo").innerHTML = txt;
     }
+    function redirectLogin() {
+        var txt;
+        var r = confirm("Please login to continue!!");
+        if (r == true) {
+            window.location="login.jsp";
+        } else {
+            txt = "You pressed Cancel!";
+        }
+        document.getElementById("demo").innerHTML = txt;
+    }
 </script>
 </body>
 
