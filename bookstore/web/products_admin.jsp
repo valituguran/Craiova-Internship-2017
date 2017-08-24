@@ -71,6 +71,7 @@ realname=(String)session.getAttribute("realname");%>
                 <img src="data:image/jpg;base64,<%=book.getImage()%>" />
                 <form name="model" method="POST" action="/cartadminServlet">
                   <input type="hidden" name="book" value="<%=book.getNume()%>">
+                    <input type="hidden" name="page" value="products_admin.jsp" required="required">
                    <input type="hidden" name="description" value="<%=book.getDescription()%>">
                     Quantity: <input type="text" size="2" value="1" name="quantity">
                     Price<%=book.getPrice()%><input type="hidden" name="price" value="<%=book.getPrice()%>">

@@ -20,6 +20,8 @@
 <body>
 <%String realname;
     realname=(String)session.getAttribute("realname");%>
+<%String text =(String) session.getAttribute("page");%>
+
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <a href="/mycontServlet"><%=realname%></a>
@@ -28,9 +30,7 @@
 
 <div class="topnav">
     <div style="align:left;cursor:pointer;color:white;font-size: 20px;margin:30px;float:left" onclick="openNav()">&#9776;<%=realname%></div>
-
-    <a href="/../shoppingcart.jsp">Cart</a>
-    <a href="addbook.jsp">Add books</a>
+    <a href="<%=text%>">Inapoi la produse</a>
 </div>
 <div class="content">
     <div class="menu-vertical">

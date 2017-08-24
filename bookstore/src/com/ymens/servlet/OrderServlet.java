@@ -32,6 +32,8 @@ public static double orderTotal = 0.0;
             orderTotal +=list.get(i).getTotalCost();
         }
         int order_id;
+        String page = request.getParameter("page");
+        session.setAttribute("page", page);
         if (orderTotal != 0) {
             if(OrderDao.setOrder(orderTotal) != 0) {
                 order_id = OrderDao.getOrderId(orderTotal);
@@ -46,9 +48,8 @@ public static double orderTotal = 0.0;
             RequestDispatcher rd = request.getRequestDispatcher("shoppingcart_user.jsp");
             rd.forward(request, response);
         }
-        getServletContext().getRequestDispatcher("/orderServlet").forward(request, response);
+        //getServletContext().getRequestDispatcher("/orderServlet").forward(request, response);
     }
-
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         doPost(request, response);
