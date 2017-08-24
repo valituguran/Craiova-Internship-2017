@@ -218,9 +218,10 @@ button {
     border-radius: 10px;
     background-color: #8a97a0;
     color: darkcyan;
-    width: 80px;
+    width: 150px;
     height: 30px;
     font-size: 20px;
+
 }
 .button{
     border-radius: 10px;
@@ -228,8 +229,7 @@ button {
     color: darkcyan;
     width: 200px;
     height: 30px;
-    font-size: 20px
-
+    font-size: 20px;
 }
 .scroll{
     border: 1px solid black;

@@ -20,7 +20,7 @@
 <body>
 <%String realname;
     realname=(String)session.getAttribute("realname");%>
-<%String text =(String) session.getAttribute("page");%>
+<%String text =(String) session.getAttribute("currentpage");%>
 
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>

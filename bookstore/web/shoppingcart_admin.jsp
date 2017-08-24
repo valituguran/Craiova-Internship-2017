@@ -78,6 +78,7 @@
                 <h3>Suma totala:</h3><%=CartDao.dblOrderTotal%><br>
                <form name="order" method="post" action="orderServlet">
                    <button class="button" type="submit">Plaseaza comanda</button>
+                   <input type="hidden" name="returnpage" value="products_admin.jsp">
                </form>
             <% }%>
         </div>

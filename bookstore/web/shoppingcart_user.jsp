@@ -76,6 +76,7 @@
         <input type='hidden' name ="orderTotal" value="<%=CartDao.dblOrderTotal%>">
         <h3>Suma totala:</h3><%=CartDao.dblOrderTotal%><br>
         <form name="order" method="post" action="orderServlet">
+            <input type="hidden" name="returnpage" value="products_user.jsp">
             <button class="button" type="submit">Plaseaza comanda</button>
         </form>
         <% }%>

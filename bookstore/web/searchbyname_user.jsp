@@ -21,6 +21,7 @@
 <%int currentpage = PaginationServlet.currentPage;
     int noOfPages = PaginationServlet.noOfPages;
     int recordsPerPage = PaginationServlet.recordsPerPage;
+    int noOfProducts = PaginationServlet.noOfProducts;
 %>
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -58,7 +59,7 @@
     <div class="products" id="products">
         <%LinkedList list = (LinkedList)session.getAttribute("searchbyname");%>
         <div class="container">
-            <%for( int i=(currentpage-1)*recordsPerPage; i<currentpage*recordsPerPage; i++){
+            <%for( int i=(currentpage-1)*recordsPerPage; i<currentpage*recordsPerPage && i<noOfProducts; i++){
                     Book book = (Book) list.get(i);%>
             <div class="tab-content">
                 <form method="get" action="/viewbookServlet" id="">

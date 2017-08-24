@@ -32,8 +32,8 @@ public static double orderTotal = 0.0;
             orderTotal +=list.get(i).getTotalCost();
         }
         int order_id;
-        String page = request.getParameter("page");
-        session.setAttribute("page", page);
+        String page = request.getParameter("returnpage");
+        session.setAttribute("currentpage", page);
         if (orderTotal != 0) {
             if(OrderDao.setOrder(orderTotal) != 0) {
                 order_id = OrderDao.getOrderId(orderTotal);

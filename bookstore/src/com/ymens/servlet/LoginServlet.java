@@ -33,7 +33,7 @@ public class LoginServlet extends HttpServlet {
 				session.setAttribute("null", "no");
 				session.setAttribute("type", "admin");
 				getServletContext().getRequestDispatcher("/selectbooksadminServlet").forward(request, response);
-				getServletContext().getRequestDispatcher("/paginationServlet").forward(request, response);
+//				getServletContext().getRequestDispatcher("/paginationServlet").forward(request, response);
 			}else if (type.equalsIgnoreCase("user")) {
 				session.setAttribute("null", "no");
 				session.setAttribute("type", "user");

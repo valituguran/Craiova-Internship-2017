@@ -19,7 +19,8 @@ public class PaginationServlet extends HttpServlet {
     public static int currentPage = 1;
     HttpSession session;
     public static int recordsPerPage = 9;
-    public static int  noOfPages =1+ SelectBooksDao.select().size()/recordsPerPage;
+    public static int noOfProducts =  SelectBooksDao.select().size();
+    public static int  noOfPages = noOfProducts/recordsPerPage + 1;
     private static User user = new User();
     String page;
     @Override
@@ -28,7 +29,6 @@ public class PaginationServlet extends HttpServlet {
     }
     public void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         String strAction = request.getParameter("action");
         String strcurrent = request.getParameter("currentpage");
         page = request.getParameter("page");
@@ -44,26 +44,22 @@ public class PaginationServlet extends HttpServlet {
                 }
             }
             if (strAction.equals("Next")) {
-                if(currentPage < noOfPages+1) {
+                if(currentPage < noOfPages) {
                     currentPage++;
                 }
             }
         }
-
     }
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         processRequest(request, response);
     }
-
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         doGet(request, response);
-        getServletContext().getRequestDispatcher(page).forward(request, response);
+        response.sendRedirect(page);
             }
-
-    }
+}
 

@@ -44,16 +44,17 @@ public class SelectBooksServlet extends HttpServlet{
         UserType userType = new UserType();
         if( userType.getType(user.username, user.password).equalsIgnoreCase("user")) {
             getServletContext().getRequestDispatcher("/products_user.jsp").forward(request, response);
-            getServletContext().getRequestDispatcher("/mycont_user.jsp").forward(request, response);
-            getServletContext().getRequestDispatcher("/searchbyauthor_user.jsp").forward(request, response);
-            getServletContext().getRequestDispatcher("/searchauthorServlet").forward(request, response);
+            //getServletContext().getRequestDispatcher("/mycont_user.jsp").forward(request, response);
+            //getServletContext().getRequestDispatcher("/searchbyauthor_user.jsp").forward(request, response);
+            //getServletContext().getRequestDispatcher("/searchauthorServlet").forward(request, response);
         }
         else
         {
             getServletContext().getRequestDispatcher("/products_admin.jsp").forward(request, response);
-            getServletContext().getRequestDispatcher("/mycont_admin.jsp").forward(request, response);
-            getServletContext().getRequestDispatcher("/searchbyname_admin.jsp").forward(request, response);
-            getServletContext().getRequestDispatcher("/searchbyauthor_admin.jsp").forward(request, response);
+            //getServletContext().getRequestDispatcher("/mycont_admin.jsp").forward(request, response);
+           // getServletContext().getRequestDispatcher("/searchbyname_admin.jsp").forward(request, response);
+            //getServletContext().getRequestDispatcher("/searchbyauthor_admin.jsp").forward(request, response);
         }
+
     }
 }

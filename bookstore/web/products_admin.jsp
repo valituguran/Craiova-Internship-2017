@@ -23,6 +23,7 @@ realname=(String)session.getAttribute("realname");%>
 <%int currentpage = PaginationServlet.currentPage;
     int noOfPages = PaginationServlet.noOfPages;
     int recordsPerPage = PaginationServlet.recordsPerPage;
+    int noOfProducts = PaginationServlet.noOfProducts;
 %>
 <%LinkedList list = (LinkedList)session.getAttribute("list");%>
 <div id="mySidenav" class="sidenav">
@@ -39,8 +40,8 @@ realname=(String)session.getAttribute("realname");%>
 <div class="content">
     <div class="menu-vertical">
         <ul class="breadcrumb">
-            <li><a href="#">Home</a></li>
-            <li><a href="#products">Books</a></li>
+            <li><a href="#this">Home</a></li>
+            <li><a href="#this">Books</a></li>
         </ul>
         <div class="form">
             <h4>Filter</h4>
@@ -57,10 +58,9 @@ realname=(String)session.getAttribute("realname");%>
 </div>
 <div class="products" >
     <img class="logo" src="../images/logo.jpg">
-
     <div class="container">
         <%int i;
-            for(  i=(currentpage-1)*recordsPerPage; i<currentpage*recordsPerPage; i++){
+        <%for( int i=(currentpage-1)*recordsPerPage; i<currentpage*recordsPerPage && i<noOfProducts; i++){
             Book book = (Book) list.get(i);%>
         <div class="tab-content">
             <form method="get" action="/viewbookServlet" id="">
@@ -71,8 +71,6 @@ realname=(String)session.getAttribute("realname");%>
                 <img src="data:image/jpg;base64,<%=book.getImage()%>" />
                 <form name="model" method="POST" action="/cartadminServlet">
                   <input type="hidden" name="book" value="<%=book.getNume()%>">
-                    <input type="hidden" name="page" value="products_admin.jsp" required="required">
-                   <input type="hidden" name="description" value="<%=book.getDescription()%>">
                     Quantity: <input type="text" size="2" value="1" name="quantity">
                     Price<%=book.getPrice()%><input type="hidden" name="price" value="<%=book.getPrice()%>">
                     <button onclick="cart()"><input type="hidden" name="action" value="add">Buy</button>
@@ -117,7 +115,6 @@ realname=(String)session.getAttribute("realname");%>
     }
     function products(){
         document.getElementById("currentpage").value = "1";
-        window.location = "products_admin.jsp";
     }
 </script>
 </body>

@@ -33,11 +33,28 @@
     </style>
 </head>
 <body>
+<script>
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+    }
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+    }
+    function redirectLogin() {
+        var txt;
+        var r = confirm("Va rugam sa va logati!");
+        if (r == true) {
+            window.location="login.jsp";
+        } else {
+            txt = "You pressed Cancel!";
+        }
+        document.getElementById("demo").innerHTML = txt;
+    }
+</script>
 <%int currentpage = PaginationServlet.currentPage;
     int noOfPages = PaginationServlet.noOfPages;
     int recordsPerPage = PaginationServlet.recordsPerPage;
-    session.setAttribute("null", "yes");
-
+    int noOfProducts = PaginationServlet.noOfProducts;
 %>
 
 <div id="mySidenav" class="sidenav">
@@ -73,9 +90,10 @@
     <img class="logo" src="../images/logo.jpg">
     <%LinkedList list = SelectBooksDao.select();%>
     <div class="container">
-        <%for( int i=(currentpage-1)*recordsPerPage; i<currentpage*recordsPerPage; i++){
-            Book book = (Book) list.get(i);%>
+        <%for( int i=(currentpage-1)*recordsPerPage; i<currentpage*recordsPerPage && i<noOfProducts; i++){
+            %>
         <div class="tab-content">
+                    <%Book book = (Book) list.get(i);%>
             <form method="get" action="/viewbookServlet" id="">
                 <input type="hidden" name="pagetitle" value="index.jsp" class="title">
                 <input name="title" class="title" type="submit" value="<%=book.getNume()%> ">
@@ -96,28 +114,10 @@
         <ul class="pagination">
             <li> <input type="submit" onclick="pagination()" name="action" value="Prev" id="prev" ></li>
             <input class="details" type="hidden" name="<%=noOfPages%>" id="noOfPages" value="noOfPages">
-            <li>Page <input type="hidden" name="currentpage" id="current" value="<%=currentpage%>"><%=currentpage%>/<%=noOfPages%></li>
+            <li> <input type="hidden" name="currentpage" id="current" value="<%=currentpage%>"><%=currentpage%>/<%=noOfPages%></li>
             <li> <input class="details" type="submit" onclick="pagination()" name="action" value="Next" id="next"></li>
         </ul>
     </form>
 </div>
-<script>
-    function openNav() {
-        document.getElementById("mySidenav").style.width = "250px";
-    }
-    function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-    }
-    function redirectLogin() {
-        var txt;
-        var r = confirm("Va rugam sa va logati!");
-        if (r == true) {
-            window.location="login.jsp";
-        } else {
-            txt = "You pressed Cancel!";
-        }
-        document.getElementById("demo").innerHTML = txt;
-    }
-</script>
 </body>
 

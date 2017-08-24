@@ -21,6 +21,7 @@
 <%int currentpage = PaginationServlet.currentPage;
     int noOfPages = PaginationServlet.noOfPages;
     int recordsPerPage = PaginationServlet.recordsPerPage;
+    int noOfProducts = PaginationServlet.noOfProducts;
 %>
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -58,7 +59,7 @@
     <img class="logo" src="../images/logo.jpg">
 
     <div class="container">
-        <%for( int i=(currentpage-1)*recordsPerPage; i<currentpage*recordsPerPage; i++){
+        <%for( int i=(currentpage-1)*recordsPerPage; i<currentpage*recordsPerPage && i<noOfProducts; i++){
             Book book = (Book) list.get(i);%>
         <div class="tab-content">
             <form method="get" action="/viewbookServlet" id="">
@@ -68,8 +69,6 @@
             <div class="product">
                 <img src="data:image/jpg;base64,<%=book.getImage()%>" />
                 <form name="model" method="POST" action="/cartuserServlet">
-                    <input type="hidden" name="book" value="<%=book.getNume()%>">
-                    <input type="hidden" name="description" value="<%=book.getDescription()%>">
                     Quantity: <input type="text" size="2" value="1" name="quantity">
                     Price<%=book.getPrice()%><input type="hidden" name="price" value="<%=book.getPrice()%>">
                     <button onclick="cart()"><input type="hidden" name="action" value="add">Buy</button>
