@@ -59,7 +59,7 @@ realname=(String)session.getAttribute("realname");%>
 <div class="products" >
     <img class="logo" src="../images/logo.jpg">
     <div class="container">
-        <%int i;
+
         <%for( int i=(currentpage-1)*recordsPerPage; i<currentpage*recordsPerPage && i<noOfProducts; i++){
             Book book = (Book) list.get(i);%>
         <div class="tab-content">
@@ -86,7 +86,7 @@ realname=(String)session.getAttribute("realname");%>
         <ul class="pagination">
             <li> <input type="submit" onclick="pagination()" name="action" value="Prev" id="prev" ></li>
             <input type="hidden" name="<%=noOfPages%>" id="noOfPages" value="noOfPages">
-            <li>Page <input type="hidden" name="currentpage" id="current" value="<%=currentpage%>"><%=currentpage%>/<%=noOfPages%></li>
+            <li> <input type="hidden" name="currentpage" id="current" value="<%=currentpage%>"><%=currentpage%>/<%=noOfPages%></li>
             <li> <input type="submit" onclick="pagination()" name="action" value="Next" id="next"></li>
         </ul>
     </form>

@@ -89,7 +89,7 @@
         <ul class="pagination">
             <li> <input type="submit" onclick="pagination()" name="action" value="Prev" id="prev" ></li>
             <li><input type="hidden" name="<%=noOfPages%>" id="noOfPages" value="noOfPages"></li>
-            <li>Page <input type="hidden" name="currentpage" id="current" value="<%=currentpage%>"><%=currentpage%>/<%=noOfPages+1%></li>
+            <li> <input type="hidden" name="currentpage" id="current" value="<%=currentpage%>"><%=currentpage%>/<%=noOfPages+1%></li>
             <li> <input type="submit" onclick="pagination()" name="action" value="Next" id="next"></li>
         </ul>
     </form>
