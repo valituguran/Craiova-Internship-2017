@@ -15,7 +15,6 @@
     <link src="../scripts/file.js">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
 </head>
-
 <body>
 <%String realname;
     realname=(String)session.getAttribute("realname");%>
@@ -90,7 +89,5 @@
         document.getElementById("mySidenav").style.width = "0";
     }
 </script>
-
 </body>
-
 </html>

@@ -22,7 +22,8 @@
 <%int currentpage = PaginationServlet.currentPage;
     int noOfPages = PaginationServlet.noOfPages;
     int recordsPerPage = PaginationServlet.recordsPerPage;
-%>
+<%LinkedList list = (LinkedList)session.getAttribute("list");%>
+
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <a href="/mycontuserServlet"><%=realname%></a>
@@ -37,7 +38,7 @@
 <div class="content">
      <div class="menu-vertical">
     <ul class="breadcrumb">
-        <li><a href="products_user.jsp">Home</a></li>
+        <li>  <button onclick="products()">Home</button></li>
         <li><a href="#products">Books</a></li>
     </ul>
 
@@ -67,9 +68,13 @@
             </form>
             <div class="product">
                 <img src="data:image/jpg;base64,<%=book.getImage()%>" />
-                <p>Quantity: <input class="details" type="text" size="2" value="1" name="quantity"></p>
-                <p>Price <%=book.getPrice()%> lei<input type="hidden" name="price" value="<%=book.getPrice()%>"></p>
-                <button onclick="redirectLogin()"><input type="hidden" name="action" value="add">Buy</button>
+                <form name="model" method="POST" action="/cartauserServlet">
+                    <input type="hidden" name="book" value="<%=book.getNume()%>">
+                    <input type="hidden" name="description" value="<%=book.getDescription()%>">
+                    Quantity: <input type="text" size="2" value="1" name="quantity">
+                    Price<%=book.getPrice()%><input type="hidden" name="price" value="<%=book.getPrice()%>">
+                    <button onclick="cart()"><input type="hidden" name="action" value="add">Buy</button>
+                </form>
             </div>
         </div>
         <% } %>

@@ -67,9 +67,13 @@
                 </form>
                 <div class="product">
                     <img src="data:image/jpg;base64,<%=book.getImage()%>" />
-                    <p>Quantity: <input class="details" type="text" size="2" value="1" name="quantity"></p>
-                    <p>Price<%=book.getPrice()%><input type="hidden" name="price" value="<%=book.getPrice()%>"></p>
-                    <button onclick="redirectLogin()"><input type="hidden" name="action" value="add">Buy</button>
+                    <form name="model" method="POST" action="/cartuserServlet">
+                        <input type="hidden" name="book" value="<%=book.getNume()%>">
+                        <input type="hidden" name="description" value="<%=book.getDescription()%>">
+                        Quantity: <input type="text" size="2" value="1" name="quantity">
+                        Price<%=book.getPrice()%><input type="hidden" name="price" value="<%=book.getPrice()%>">
+                        <button onclick="cart()"><input type="hidden" name="action" value="add">Buy</button>
+                    </form>
                 </div>
             </div>
             <% } %>

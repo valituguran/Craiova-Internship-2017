@@ -39,7 +39,7 @@ realname=(String)session.getAttribute("realname");%>
 <div class="content">
     <div class="menu-vertical">
         <ul class="breadcrumb">
-            <li><a href="products_admin.jsp">Home</a></li>
+            <li><a href="#">Home</a></li>
             <li><a href="#products">Books</a></li>
         </ul>
         <div class="form">
@@ -55,11 +55,12 @@ realname=(String)session.getAttribute("realname");%>
         </div>
     </div>
 </div>
-<div class="products" id="products">
+<div class="products" >
     <img class="logo" src="../images/logo.jpg">
 
     <div class="container">
-        <%for( int i=(currentpage-1)*recordsPerPage; i<currentpage*recordsPerPage; i++){
+        <%int i;
+            for(  i=(currentpage-1)*recordsPerPage; i<currentpage*recordsPerPage; i++){
             Book book = (Book) list.get(i);%>
         <div class="tab-content">
             <form method="get" action="/viewbookServlet" id="">
@@ -68,15 +69,18 @@ realname=(String)session.getAttribute("realname");%>
             </form>
             <div class="product">
                 <img src="data:image/jpg;base64,<%=book.getImage()%>" />
-                <p>Quantity: <input class="details" type="text" size="2" value="1" name="quantity"></p>
-                <p>Price <%=book.getPrice()%> lei<input type="hidden" name="price" value="<%=book.getPrice()%>"></p>
-                <button onclick="redirectLogin()"><input type="hidden" name="action" value="add">Buy</button>
+                <form name="model" method="POST" action="/cartadminServlet">
+                  <input type="hidden" name="book" value="<%=book.getNume()%>">
+                   <input type="hidden" name="description" value="<%=book.getDescription()%>">
+                    Quantity: <input type="text" size="2" value="1" name="quantity">
+                    Price<%=book.getPrice()%><input type="hidden" name="price" value="<%=book.getPrice()%>">
+                    <button onclick="cart()"><input type="hidden" name="action" value="add">Buy</button>
+                </form>
             </div>
         </div>
         <% } %>
     </div>
 </div>
-
 <div class="bottom">
     <form  method="POST" action="/paginationServlet">
         <input type="hidden" name="page" id="page" value="/products_admin.jsp">
@@ -105,9 +109,17 @@ realname=(String)session.getAttribute("realname");%>
         }
         document.getElementById("demo").innerHTML = txt;
     }
+    function cart() {
+        var txt;
+        var r = alert("Produs adaugat cu succes in cos.");
+        document.getElementById("demo").innerHTML = txt;
+    }
+    function products(){
+        document.getElementById("currentpage").value = "1";
+        window.location = "products_admin.jsp";
+    }
 </script>
 </body>
-
 </html>
 
 
