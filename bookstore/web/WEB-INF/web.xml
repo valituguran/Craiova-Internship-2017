@@ -171,6 +171,14 @@
 		<servlet-name>OrderServlet</servlet-name>
 		<url-pattern>/orderServlet</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>viewbook</servlet-name>
+		<servlet-class>com.ymens.servlet.ViewBookServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>viewbook</servlet-name>
+		<url-pattern>/viewbookServlet</url-pattern>
+	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>PaginationServlet</servlet-name>

@@ -16,13 +16,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../styles/style.css">
-    <link src="../scripts/file.js">
-
+    <link href="../scripts/file.js">
+    <style>
+        .title {
+            color: darkcyan;
+            font-size:18px;
+            background-color:none;
+            border: 0px solid white;
+            font-style: italic;
+            font-weight: 900;
+            margin: 0 auto;
+        }
+        .container {
+            margin-left:100px;
+        }
+    </style>
 </head>
 <body>
 <%int currentpage = PaginationServlet.currentPage;
     int noOfPages = PaginationServlet.noOfPages;
     int recordsPerPage = PaginationServlet.recordsPerPage;
+    session.setAttribute("null", "yes");
+
 %>
 
 <div id="mySidenav" class="sidenav">
@@ -55,34 +70,34 @@
 </div>
 
 <div class="products" id="products">
-        <img class="logo" src="../images/logo.jpg">
-        <%LinkedList list = PaginationServlet.list;%>
-        <input type ="hidden" id="list" value="<%=list%>">
-        <div class="container">
-            <%for( int i=0; i<list.size(); i++){
-                    Book book = (Book) list.get(i);%>
-            <div class="tab-content">
-                <h3><%=book.getNume()%></h3>
-                <div class="product">
-                    <img src="data:image/jpg;base64,<%=book.getImage()%>" />
-                    Title:<%=book.getNume()%><input type="hidden" name="book" value="<%=book.getNume()%>"></p>
-                        <p>Description:
-                            ...<input type="hidden" name="description" value="<%=book.getDescription()%>"></p>
-                        <p>Quantity: <input type="text" size="2" value="1" name="quantity"></p>
-                        <p>Price<%=book.getPrice()%><input type="hidden" name="price" value="<%=book.getPrice()%>"></p>
-                        <button onclick="redirectLogin()"><input type="hidden" name="action" value="add">Buy</button>
-                </div>
+    <img class="logo" src="../images/logo.jpg">
+    <%LinkedList list = SelectBooksDao.select();%>
+    <div class="container">
+        <%for( int i=(currentpage-1)*recordsPerPage; i<currentpage*recordsPerPage; i++){
+            Book book = (Book) list.get(i);%>
+        <div class="tab-content">
+            <form method="get" action="/viewbookServlet" id="">
+                <input type="hidden" name="pagetitle" value="index.jsp" class="title">
+                <input name="title" class="title" type="submit" value="<%=book.getNume()%> ">
+            </form>
+            <div class="product">
+                <img src="data:image/jpg;base64,<%=book.getImage()%>" />
+                <p>Quantity: <input class="details" type="text" size="2" value="1" name="quantity"></p>
+                <p>Price <%=book.getPrice()%> lei<input type="hidden" name="price" value="<%=book.getPrice()%>"></p>
+                <button onclick="redirectLogin()"><input type="hidden" name="action" value="add">Buy</button>
             </div>
-            <% } %>
-</div>
+        </div>
+        <% } %>
+    </div>
 </div>
 <div class="bottom">
     <form  method="POST" action="/paginationServlet">
+        <input type="hidden" name="page" id="page" value="/index.jsp">
         <ul class="pagination">
             <li> <input type="submit" onclick="pagination()" name="action" value="Prev" id="prev" ></li>
-            <input type="hidden" name="<%=noOfPages%>" id="noOfPages" value="noOfPages">
+            <input class="details" type="hidden" name="<%=noOfPages%>" id="noOfPages" value="noOfPages">
             <li>Page <input type="hidden" name="currentpage" id="current" value="<%=currentpage%>"><%=currentpage%>/<%=noOfPages%></li>
-            <li> <input type="submit" onclick="pagination()" name="action" value="Next" id="next"></li>
+            <li> <input class="details" type="submit" onclick="pagination()" name="action" value="Next" id="next"></li>
         </ul>
     </form>
 </div>
@@ -103,21 +118,6 @@
         }
         document.getElementById("demo").innerHTML = txt;
     }
-function pagination() {
-    var current = document.getElementById("current");
-    var noOfPages = document.getElementById("noOfPages");
-    if (current == noOfPages) {
-        document.getElementById("prev").style.visibility = "visible";
-    } else {
-        document.getElementById("next").style.visibility = "hidden";
-    }
-    if (current == 1) {
-        document.getElementById("prev").style.visibility = "hidden";
-    } else {
-        document.getElementById("next").style.visibility = "visible";
-    }
-}
 </script>
 </body>
 
-</html>

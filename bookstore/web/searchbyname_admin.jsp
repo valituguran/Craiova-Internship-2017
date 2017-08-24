@@ -60,36 +60,29 @@
         <%
             LinkedList list = (LinkedList)session.getAttribute("searchbyname");%>
         <div class="container">
-            <%
-
-                for( int i=0; i<list.size(); i++){
+            <%for( int i=(currentpage-1)*recordsPerPage; i<currentpage*recordsPerPage; i++){
                     Book book = (Book) list.get(i);
 
             %>
             <div class="tab-content">
-                <h3><%=book.getNume()%></h3>
+                <form method="get" action="/viewbookServlet" id="">
+                    <input type="hidden" name="pagetitle" value="index.jsp" class="title">
+                    <input name="title" class="title" type="submit" value="<%=book.getNume()%> ">
+                </form>
                 <div class="product">
-                    <img src="<%=book.getImage()%>">
-                    <form name="model" method="POST" action="/cartadminServlet"><p>Title:
-                        <%=book.getNume()%><input type="hidden" name="book" value="<%=book.getNume()%>"></p>
-                        <p>Description:
-                            ...<input type="hidden" name="description" value="<%=book.getDescription()%>"></p>
-                        <p>Quantity: <input type="text" size="2" value="1" name="quantity"></p>
-                        <p>Price<%=book.getPrice()%><input type="hidden" name="price" value="<%=book.getPrice()%>"></p>
-                        <button onclick="cart()"><input type="hidden" name="action" value="add">Buy</button>
-                    </form>
-
+                    <img src="data:image/jpg;base64,<%=book.getImage()%>" />
+                    <p>Quantity: <input class="details" type="text" size="2" value="1" name="quantity"></p>
+                    <p>Price<%=book.getPrice()%><input type="hidden" name="price" value="<%=book.getPrice()%>"></p>
+                    <button onclick="redirectLogin()"><input type="hidden" name="action" value="add">Buy</button>
                 </div>
-
             </div>
             <% } %>
-
         </div>
-
     </div>
 
 <div class="bottom">
     <form  method="POST" action="/paginationServlet">
+        <input type="hidden" name="page" id="page" value="/searchbyname_admin.jsp">
         <ul class="pagination">
             <li> <input type="submit" onclick="pagination()" name="action" value="Prev" id="prev" ></li>
             <input type="hidden" name="<%=noOfPages%>" id="noOfPages" value="noOfPages">

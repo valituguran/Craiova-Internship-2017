@@ -30,13 +30,14 @@ public class LoginServlet extends HttpServlet {
 		if (LoginDao.validate(n, p )) {
 			String type = UserType.getType(n,p);
 			if (type.equalsIgnoreCase("admin")) {
+				session.setAttribute("null", "no");
+				session.setAttribute("type", "admin");
 				getServletContext().getRequestDispatcher("/selectbooksadminServlet").forward(request, response);
-				//getServletContext().getRequestDispatcher("/searchauthorServlet").forward(request, response);
 				getServletContext().getRequestDispatcher("/paginationServlet").forward(request, response);
-
 			}else if (type.equalsIgnoreCase("user")) {
+				session.setAttribute("null", "no");
+				session.setAttribute("type", "user");
 				getServletContext().getRequestDispatcher("/selectbooksuserServlet").forward(request, response);
-				getServletContext().getRequestDispatcher("/cartuserServlet").forward(request, response);
 			}
 		}else {
 			out.print("<p style=\"color:red\">Sorry username or password error</p>");

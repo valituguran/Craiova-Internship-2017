@@ -11,11 +11,9 @@ public class LoginDao {
 		String driver = "com.mysql.jdbc.Driver";
 		String userName = "root";
 		String password = "root";
-
 		try {
 			Class.forName(driver).newInstance();
 			conn = DriverManager.getConnection(url + dbName, userName, password);
-
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {
@@ -29,16 +27,12 @@ public class LoginDao {
 		PreparedStatement pst = null;
 		ResultSet rs = null;
 		int type = 0;
-
-
 		try {
 			pst = conn.prepareStatement("select * from users where username=? and password=?");
 			pst.setString(1, name);
 			pst.setString(2, pass);
 			rs = pst.executeQuery();
 			status = rs.next();
-
-
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {

@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.LinkedList;
 
 /**
  * Created by madalina.luca on 8/22/2017.
@@ -18,11 +17,11 @@ import java.util.LinkedList;
 public class PaginationServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     public static int currentPage = 1;
-    public static LinkedList list = SelectBooksDao.select((currentPage - 1) * 9, 9);
     HttpSession session;
     public static int recordsPerPage = 9;
     public static int  noOfPages =1+ SelectBooksDao.select().size()/recordsPerPage;
     private static User user = new User();
+    String page;
     @Override
     public void init()
             throws ServletException {
@@ -32,6 +31,7 @@ public class PaginationServlet extends HttpServlet {
 
         String strAction = request.getParameter("action");
         String strcurrent = request.getParameter("currentpage");
+        page = request.getParameter("page");
         try {
             currentPage = Integer.parseInt(strcurrent);
         } catch (NumberFormatException e) {
@@ -41,13 +41,11 @@ public class PaginationServlet extends HttpServlet {
             if (strAction.equals("Prev")) {
                 if(currentPage > 1) {
                     currentPage--;
-                    list = SelectBooksDao.select((currentPage - 1) * 9, 9);
                 }
             }
             if (strAction.equals("Next")) {
                 if(currentPage < noOfPages+1) {
                     currentPage++;
-                    list = SelectBooksDao.select((currentPage - 1) * 9, 9);
                 }
             }
         }
@@ -64,7 +62,7 @@ public class PaginationServlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         doGet(request, response);
-        getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher(page).forward(request, response);
             }
 
     }

@@ -27,7 +27,7 @@ html, body {
     font-size: 15px;
     line-height: 1.5;
 }
-element {
+.element {
     padding: 24px 48px;
 }
 .w3-text-grey, .w3-hover-text-grey:hover, .w3-text-gray, .w3-hover-text-gray:hover {
@@ -49,8 +49,6 @@ html, body {
     font-size: 15px;
     line-height: 1.5;
 }
-element {
-}
 .w3-jumbo {
     font-size: 64px !important;
 }
@@ -65,8 +63,7 @@ html, body {
     font-size: 15px;
     line-height: 1.5;
 }
-element {
-}
+
 .w3-large {
     font-size: 18px !important;
 }
@@ -76,8 +73,7 @@ element {
 .w3-text-white, .w3-hover-text-white:hover {
     color: #fff !important;
 }
-element {
-}
+
 .w3-white, .w3-hover-white:hover {
     color: #000 !important;
     background-color: #fff !important;

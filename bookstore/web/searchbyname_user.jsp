@@ -11,7 +11,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../styles/style.css">
-    <link src="../scripts/file.js">
+    <link href="../scripts/file.js">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
 </head>
 
@@ -29,9 +29,9 @@
 </div>
 
 <div class="topnav">
-    <span style="align:left;cursor:pointer;color:white;text-align:center;font-size: 20px;" onclick="openNav()">&#9776;<%=realname%></span>
+    <span style="cursor:pointer;color:white;text-align:center;font-size: 20px;" onclick="openNav()">&#9776;<%=realname%></span>
     <a href="addbook.jsp">Add books</a>
-    <a href="buy.jsp">Cart</a>
+    <a href="shoppingcart_user.jsp.jsp">Cart</a>
 </div>
 <div class="content">
     < <div class="menu-vertical">
@@ -58,40 +58,37 @@
     <div class="products" id="products">
         <%LinkedList list = (LinkedList)session.getAttribute("searchbyname");%>
         <div class="container">
-            <%for( int i=0; i<list.size(); i++){
+            <%for( int i=(currentpage-1)*recordsPerPage; i<currentpage*recordsPerPage; i++){
                     Book book = (Book) list.get(i);%>
             <div class="tab-content">
-                <h3><%=book.getNume()%></h3>
+                <form method="get" action="/viewbookServlet" id="">
+                    <input type="hidden" name="pagetitle" value="index.jsp" class="title">
+                    <input name="title" class="title" type="submit" value="<%=book.getNume()%> ">
+                </form>
                 <div class="product">
-                    <img src="<%=book.getImage()%>">
-                    <form name="model" method="POST" action="/cartuserServlet"><p>Title:
-                        <%=book.getNume()%><input type="hidden" name="book" value="<%=book.getNume()%>"></p>
-                        <p>Description:
-                            ...<input type="hidden" name="description" value="<%=book.getDescription()%>"></p>
-                        <p>Quantity</strong>: <input type="text" size="2" value="1" name="quantity"></p>
-                        <p>Price<%=book.getPrice()%><input type="hidden" name="price" value="<%=book.getPrice()%>"></p>
-                        <button onclick="cart()"><input type="hidden" name="action" value="add">Buy</button>
-                    </form>
-
+                    <img src="data:image/jpg;base64,<%=book.getImage()%>" />
+                    <p>Quantity: <input class="details" type="text" size="2" value="1" name="quantity"></p>
+                    <p>Price<%=book.getPrice()%><input type="hidden" name="price" value="<%=book.getPrice()%>"></p>
+                    <button onclick="redirectLogin()"><input type="hidden" name="action" value="add">Buy</button>
                 </div>
-
             </div>
             <% } %>
 
         </div>
 
     </div>
+
 <div class="bottom">
     <form  method="POST" action="/paginationServlet">
+        <input type="hidden" name="page" id="page" value="/searchbyname_user.jsp">
         <ul class="pagination">
             <li> <input type="submit" onclick="pagination()" name="action" value="Prev" id="prev" ></li>
-            <input type="hidden" name="<%=noOfPages%>" id="noOfPages" value="noOfPages">
+            <li><input type="hidden" name="<%=noOfPages%>" id="noOfPages" value="noOfPages"></li>
             <li>Page <input type="hidden" name="currentpage" id="current" value="<%=currentpage%>"><%=currentpage%>/<%=noOfPages+1%></li>
             <li> <input type="submit" onclick="pagination()" name="action" value="Next" id="next"></li>
         </ul>
     </form>
 </div>
-
 <script>
     function openNav() {
         document.getElementById("mySidenav").style.width = "250px";
