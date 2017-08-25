@@ -18,7 +18,7 @@ import java.util.LinkedList;
  */
 public class SearchByNameServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    public LinkedList list = new LinkedList();
+    public static LinkedList list = new LinkedList();
     HttpSession session;
     private static User user = new User();
 
@@ -53,7 +53,7 @@ public class SearchByNameServlet extends HttpServlet {
         }else  if (usertype.equalsIgnoreCase("admin")){
             getServletContext().getRequestDispatcher("/searchbyname_admin.jsp").forward(request, response);
         }
-        else {
+        else{
             getServletContext().getRequestDispatcher("/searchbyname.jsp").forward(request, response);
         }
     }

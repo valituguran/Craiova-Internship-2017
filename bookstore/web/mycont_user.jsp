@@ -25,25 +25,25 @@
 <div class="topnav">
     <div style="align:left;cursor:pointer;color:white;font-size: 20px;margin:30px;float:left" onclick="openNav()">&#9776;<%=realname%></div>
 
-    <a href="/../shoppingcart.jsp">Cart</a>
-    <a href="addbook.jsp">Add books</a>
+    <a href="/../shoppingcart.jsp">Cos de cumparaturi</a>
+    <a href="addbook.jsp">Adauga carte</a>
 </div>
 <div class="content">
     <div class="menu-vertical">
         <ul class="breadcrumb">
-            <li><a href="products_user.jsp">Home</a></li>
-            <li><a href="products_user.jsp">Books</a></li>
+            <li><a href="products_user.jsp">Prima pagina</a></li>
+            <li><a href="products_user.jsp">Produse</a></li>
         </ul>
 
         <div class="form">
             <h4>Filter</h4>
-            <form method="get" action="/searchbyauthoradminServlet" id="searchbyauthor">
-                <h3>Search by author</h3><br>
-                <input name="searchbyauthor" type="text" size="40" placeholder="Search..." required="required">
+            <form method="get" action="/searchbyauthoruserServlet" id="searchbyauthor">
+                <h3>Cautare dupa autor</h3><br>
+                <input name="searchbyauthor" type="text" size="40" placeholder="Cauta..." required="required">
             </form>
-            <form method="get" action="/searchbynameadminServlet" id="searchbyname">
-                <h3>Search by name</h3><br>
-                <input name="searchbyname" type="text" size="40" placeholder="Search..." required="required">
+            <form method="get" action="/searchbynameuserServlet" id="searchbyname">
+                <h3>Cautare dupa nume</h3><br>
+                <input name="searchbyname" type="text" size="40" placeholder="Cauta..." required="required">
             </form>
         </div>
     </div>

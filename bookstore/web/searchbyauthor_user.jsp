@@ -19,9 +19,17 @@
 <%String realname;
     realname=(String)session.getAttribute("realname");%>
 <%int currentpage = PaginationServlet.currentPage;
-    int noOfPages = PaginationServlet.noOfPages;
+    LinkedList list = (LinkedList)session.getAttribute("searchbyauthor");
     int recordsPerPage = PaginationServlet.recordsPerPage;
-    int noOfProducts = PaginationServlet.noOfProducts;
+    int noOfProducts = list.size();
+    int noOfPages;
+    if(noOfProducts/recordsPerPage == 0) {
+        noOfPages = noOfProducts / recordsPerPage ;
+    }
+    else{
+        noOfPages = noOfProducts / recordsPerPage+1;
+    }
+%>
 %>
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -43,22 +51,26 @@
 
     <div class="form">
         <h4>Filter</h4>
-        <form method="get" action="/searchbyauthoradminServlet" id="searchbyauthor">
-            <h3>Search by author</h3><br>
-            <input name="searchbyauthor" type="text" size="40" placeholder="Search..." required="required">
+        <form method="get" action="/searchbyauthoruserServlet" id="searchbyauthor">
+            <h3>Cautare dupa autor</h3><br>
+            <input name="searchbyauthor" type="text" size="40" placeholder="Cauta..." required="required">
         </form>
-        <form method="get" action="/searchbynameadminServlet" id="searchbyname">
-            <h3>Search by name</h3><br>
-            <input name="searchbyname" type="text" size="40" placeholder="Search..." required="required">
+        <form method="get" action="/searchbynameuserServlet" id="searchbyname">
+            <h3>Cautare dupa nume</h3><br>
+            <input name="searchbyname" type="text" size="40" placeholder="Cauta..." required="required">
         </form>
     </div>
 </div>
 </div>
-<%LinkedList list = (LinkedList)session.getAttribute("searchbyauthor");%>
+
 <div class="products" id="products">
     <img class="logo" src="../images/logo.jpg">
 
     <div class="container">
+        <% if(list.size() == 0){%>
+        <h3>Nu exista produse cu acest autor</h3>
+        <a href="products_user.jsp">Toate produsele</a>
+        <%} else{%>
         <%for( int i=(currentpage-1)*recordsPerPage; i<currentpage*recordsPerPage && i<noOfProducts; i++){
             Book book = (Book) list.get(i);%>
         <div class="tab-content">
@@ -78,7 +90,7 @@
         <% } %>
     </div>
 </div>
-
+<%}%>
 
 <div class="bottom">
     <form  method="POST" action="/paginationServlet">

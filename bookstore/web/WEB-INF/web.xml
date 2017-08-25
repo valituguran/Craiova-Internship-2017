@@ -103,12 +103,30 @@
 	</servlet-mapping>
 
 	<servlet>
+		<servlet-name>searchbyname</servlet-name>
+		<servlet-class>com.ymens.servlet.SearchByNameServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>searchbyname</servlet-name>
+		<url-pattern>/searchbynameServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
 		<servlet-name>searchbyauthoruser</servlet-name>
 		<servlet-class>com.ymens.servlet.SearchByAuthorServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>searchbyauthoruser</servlet-name>
 		<url-pattern>/searchbyauthoruserServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>searchbyauthor</servlet-name>
+		<servlet-class>com.ymens.servlet.SearchByAuthorServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>searchbyauthor</servlet-name>
+		<url-pattern>/searchbyauthorServlet</url-pattern>
 	</servlet-mapping>
 
 	<servlet>

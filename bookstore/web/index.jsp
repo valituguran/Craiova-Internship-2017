@@ -21,7 +21,7 @@
         .title {
             color: darkcyan;
             font-size:18px;
-            background-color:none;
+            background-color:white;
             border: 0px solid white;
             font-style: italic;
             font-weight: 900;
@@ -52,9 +52,17 @@
     }
 </script>
 <%int currentpage = PaginationServlet.currentPage;
-    int noOfPages = PaginationServlet.noOfPages;
+    LinkedList list = SelectBooksDao.select();
     int recordsPerPage = PaginationServlet.recordsPerPage;
-    int noOfProducts = PaginationServlet.noOfProducts;
+    int noOfProducts = list.size();
+    int noOfPages;
+    if(noOfProducts %2==1) {
+        noOfPages = noOfProducts / recordsPerPage + 1;
+    }
+    else{
+        noOfPages = noOfProducts / recordsPerPage;
+    }
+%>
 %>
 
 <div id="mySidenav" class="sidenav">
@@ -69,18 +77,18 @@
 <div class="content">
     <div class="menu-vertical">
         <ul class="breadcrumb">
-            <li><a href="#">Home</a></li>
-            <li><a href="#products">Books</a></li>
+            <li><a href="#">Prima pagina</a></li>
+            <li><a href="#products">Produse</a></li>
         </ul>
         <div class="form">
-            <h4>Filter</h4>
-            <form method="get" action="/searchbyauthoradminServlet" id="searchbyauthor">
-                <h3>Search by author</h3><br>
-                <input name="searchbyauthor" type="text" size="40" placeholder="Search..." required="required">
+            <h4>Filtru</h4>
+            <form method="get" action="/searchbyauthorServlet" id="searchbyauthor">
+                <h3>Cautare dupa autor</h3><br>
+                <input name="searchbyauthor" type="text" size="40" placeholder="Cauta..." required="required">
             </form>
-            <form method="get" action="/searchbynameadminServlet" id="searchbyname">
-                <h3>Search by name</h3><br>
-                <input name="searchbyname" type="text" size="40" placeholder="Search..." required="required">
+            <form method="get" action="/searchbynameServlet" id="searchbyname">
+                <h3>Cautare dupa nume</h3><br>
+                <input name="searchbyname" type="text" size="40" placeholder="Cauta..." required="required">
             </form>
         </div>
     </div>
@@ -88,7 +96,7 @@
 
 <div class="products" id="products">
     <img class="logo" src="../images/logo.jpg">
-    <%LinkedList list = SelectBooksDao.select();%>
+
     <div class="container">
         <%for( int i=(currentpage-1)*recordsPerPage; i<currentpage*recordsPerPage && i<noOfProducts; i++){
             %>
@@ -113,7 +121,7 @@
         <input type="hidden" name="page" id="page" value="/index.jsp">
         <ul class="pagination">
             <li> <input type="submit" onclick="pagination()" name="action" value="Prev" id="prev" ></li>
-            <input class="details" type="hidden" name="<%=noOfPages%>" id="noOfPages" value="noOfPages">
+            <input class="details" type="hidden" name="noOfPages" id="noOfPages" value="<%=noOfPages%>">
             <li> <input type="hidden" name="currentpage" id="current" value="<%=currentpage%>"><%=currentpage%>/<%=noOfPages%></li>
             <li> <input class="details" type="submit" onclick="pagination()" name="action" value="Next" id="next"></li>
         </ul>

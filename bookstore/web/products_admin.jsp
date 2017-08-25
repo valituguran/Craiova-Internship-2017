@@ -21,11 +21,18 @@
 <%String realname;
 realname=(String)session.getAttribute("realname");%>
 <%int currentpage = PaginationServlet.currentPage;
-    int noOfPages = PaginationServlet.noOfPages;
+    LinkedList list = (LinkedList)session.getAttribute("list");
     int recordsPerPage = PaginationServlet.recordsPerPage;
-    int noOfProducts = PaginationServlet.noOfProducts;
+    int noOfProducts = list.size();
+    int noOfPages;
+    if(noOfProducts/recordsPerPage == 0) {
+        noOfPages = noOfProducts / recordsPerPage ;
+    }
+    else{
+        noOfPages = noOfProducts / recordsPerPage+1;
+    }
 %>
-<%LinkedList list = (LinkedList)session.getAttribute("list");%>
+%>
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <a href="/mycontadminServlet"><%=realname%></a>
@@ -44,14 +51,14 @@ realname=(String)session.getAttribute("realname");%>
             <li><a href="#this">Books</a></li>
         </ul>
         <div class="form">
-            <h4>Filter</h4>
+            <h4>Filtru</h4>
             <form method="get" action="/searchbyauthoradminServlet" id="searchbyauthor">
-                <h3>Search by author</h3><br>
-                <input name="searchbyauthor" type="text" size="40" placeholder="Search..." required="required">
+                <h3>Cautare dupa autor</h3><br>
+                <input name="searchbyauthor" type="text" size="40" placeholder="Cauta..." required="required">
             </form>
             <form method="get" action="/searchbynameadminServlet" id="searchbyname">
-                <h3>Search by name</h3><br>
-                <input name="searchbyname" type="text" size="40" placeholder="Search..." required="required">
+                <h3>Cautare dupa nume</h3><br>
+                <input name="searchbyname" type="text" size="40" placeholder="Cauta..." required="required">
             </form>
         </div>
     </div>
@@ -59,7 +66,6 @@ realname=(String)session.getAttribute("realname");%>
 <div class="products" >
     <img class="logo" src="../images/logo.jpg">
     <div class="container">
-
         <%for( int i=(currentpage-1)*recordsPerPage; i<currentpage*recordsPerPage && i<noOfProducts; i++){
             Book book = (Book) list.get(i);%>
         <div class="tab-content">

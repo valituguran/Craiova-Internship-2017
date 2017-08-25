@@ -36,21 +36,20 @@
         <li><a href="products_admin.jsp">Books</a></li>
     </ul>
     <div class="form">
-        <h4>Filter</h4>
+        <h4>Filtru</h4>
         <form method="get" action="/searchbyauthoradminServlet" id="searchbyauthor">
-            <h3>Search by author</h3><br>
-            <input name="searchbyauthor" type="text" size="40" placeholder="Search..." required="required">
+            <h3>Cautare dupa autor</h3><br>
+            <input name="searchbyauthor" type="text" size="40" placeholder="Cauta..." required="required">
         </form>
         <form method="get" action="/searchbynameadminServlet" id="searchbyname">
-            <h3>Search by name</h3><br>
-            <input name="searchbyname" type="text" size="40" placeholder="Search..." required="required">
+            <h3>Cautare dupa nume</h3><br>
+            <input name="searchbyname" type="text" size="40" placeholder="Cauta..." required="required">
         </form>
     </div>
 </div>
     <img class="logo" src="../images/logo.jpg">
     <div class="products">
-        <%
-            ArrayList list = CartDao.getCartItems();%>
+        <%ArrayList list = CartDao.getCartItems();%>
         <div class="container">
             <% if (list.size()==0){%>
                 <h1>Cosul dumneavoastra este gol!</h1>

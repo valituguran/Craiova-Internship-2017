@@ -35,9 +35,7 @@ public class SearchByAuthorServlet extends HttpServlet {
         String name = request.getParameter("searchbyauthor");
         list = SearchByAuthorDao.searchByAuthor(name);
         session = request.getSession(false);
-        if (session != null) {
-            session.setAttribute("searchbyauthor", list);
-        }
+        session.setAttribute("searchbyauthor", list);
         user.username = (String) session.getAttribute("name");
         user.password = (String) session.getAttribute("password");
         doPost(request, response);

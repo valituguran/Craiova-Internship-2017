@@ -1,7 +1,6 @@
 package com.ymens.servlet;
 
 import com.ymens.User;
-import com.ymens.dao.SelectBooksDao;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -19,8 +18,7 @@ public class PaginationServlet extends HttpServlet {
     public static int currentPage = 1;
     HttpSession session;
     public static int recordsPerPage = 9;
-    public static int noOfProducts =  SelectBooksDao.select().size();
-    public static int  noOfPages = noOfProducts/recordsPerPage + 1;
+    private int noOfPages;
     private static User user = new User();
     String page;
     @Override
@@ -31,8 +29,12 @@ public class PaginationServlet extends HttpServlet {
             throws ServletException, IOException {
         String strAction = request.getParameter("action");
         String strcurrent = request.getParameter("currentpage");
+        String strnoOfPage = request.getParameter("noOfPages");
+        if(strcurrent == null)
+            currentPage = 1;
         page = request.getParameter("page");
         try {
+        noOfPages=Integer.parseInt(strnoOfPage);
             currentPage = Integer.parseInt(strcurrent);
         } catch (NumberFormatException e) {
             e.printStackTrace();
