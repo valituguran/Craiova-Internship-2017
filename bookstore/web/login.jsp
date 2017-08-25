@@ -14,9 +14,9 @@
 	<header>Login</header>
 	<label>Username <span>*</span></label>
 	<input type="text" id="name" name="name" required="required">
-	<label>Password <span>*</span></label>
+	<label>Parola <span>*</span></label>
 	<input type="password" id="password" name="password" required="required">
-	<button type="submit">Login</button>
+	<button type="submit">Continua</button>
 </form>
 
 

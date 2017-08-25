@@ -14,18 +14,18 @@
 <body>
 <form method="post" action="registerServlet">
     <header>Register</header>
-    <label for="username"> Name:</label>
+    <label for="username"> Username:</label>
     <input type="text" id="username" name="username" required="required">
 
-    <label for="userpass"> Password:</label>
+    <label for="userpass"> Parola:</label>
     <input type="password" id="userpass" name="userpass" required="required">
 
     <label for="email"> Email:</label>
     <input type="text" id="email" name="email" required="required">
 
-    <label for="realname"> Realname:</label>
+    <label for="realname"> Nume:</label>
     <input type="text" id="realname" name="realname" required="required">
-    <button type="submit">Register</button>
+    <button type="submit">Adauga user</button>
 </form>
 </body>
 </html>

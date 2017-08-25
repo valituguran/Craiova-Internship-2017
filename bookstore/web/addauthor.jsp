@@ -7,18 +7,18 @@
 </head>
 <body>
 <form action="addauthorServlet" method="post">
-    <header>Add author details</header>
+    <header>Adauga autor</header>
 
-    <label for="name"> Name :</label>
+    <label for="name"> Nume :</label>
     <input type="text" id="name" name="name" required="required">
 
-    <label for="nationality"> Nationality :</label>
+    <label for="nationality"> Nationalitate :</label>
     <input type="text" id="nationality" name="nationality" required="required">
 
-    <label for="description_author"> Description :</label>
+    <label for="description_author"> Descriere autor :</label>
     <input type="text" id="description_author" name="description_author" required="required">
 
-    <label for="age"> Age:</label>
+    <label for="age"> Varsta:</label>
     <input type="text" id="age" name="age" required="required">
 
     <button type="submit">Add</button>

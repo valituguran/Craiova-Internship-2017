@@ -42,7 +42,7 @@
 
 </div>
 <div class="content">
-    < <div class="menu-vertical">
+    <div class="menu-vertical">
     <ul class="breadcrumb">
         <li><a href="index.jsp">Home</a></li>
         <li><a href="#products">Books</a></li>
@@ -77,15 +77,14 @@
             </form>
             <div class="product">
                 <img src="data:image/jpg;base64,<%=book.getImage()%>" />
-                <p>Quantity: <input class="details" type="text" size="2" value="1" name="quantity"></p>
-                <p>Price <%=book.getPrice()%> lei<input type="hidden" name="price" value="<%=book.getPrice()%>"></p>
-                <button onclick="redirectLogin()"><input type="hidden" name="action" value="add">Buy</button>
+                <input class="details" type="text" size="2" value="1" name="quantity">buc
+                Pret: <%=book.getPrice()%><input type="hidden" name="price" value="<%=book.getPrice()%>">
+                <button onclick="redirectLogin()"><input type="hidden" name="action" value="add">Adauga in cos</button>
             </div>
         </div>
         <% } %>
     </div>
 </div>
-
 <div class="bottom">
     <form  method="POST" action="/paginationServlet">
         <input type="hidden" name="page" id="page" value="/searchbyname.jsp">

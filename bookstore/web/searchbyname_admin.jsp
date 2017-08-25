@@ -39,10 +39,9 @@
 
 <div class="topnav">
     <div style="align:left;cursor:pointer;color:white;font-size: 20px;margin:30px;float:left" onclick="openNav()">&#9776;<%=realname%></div>
-
-    <a href="/../shoppingcart.jsp">Cart</a>
-    <a href="addbook.jsp">Add books</a>
-    <a href="register.jsp">Add users</a>
+    <a href="shoppingcart_admin.jsp">Cos de cumparaturi</a>
+    <a href="addbook.jsp">Adauga o carte</a>
+    <a href="register.jsp">Adauga un utilizator</a>
 </div>
 <div class="content">
     <div class="menu-vertical">
@@ -83,9 +82,9 @@
                     <form name="model" method="POST" action="/cartadminServlet">
                         <input type="hidden" name="book" value="<%=book.getNume()%>">
                         <input type="hidden" name="description" value="<%=book.getDescription()%>">
-                        Quantity: <input type="text" size="2" value="1" name="quantity">
-                        Price<%=book.getPrice()%><input type="hidden" name="price" value="<%=book.getPrice()%>">
-                        <button onclick="cart()"><input type="hidden" name="action" value="add">Buy</button>
+                        <input class="details" type="text" size="2" value="1" name="quantity">buc
+                        Pret: <%=book.getPrice()%><input type="hidden" name="price" value="<%=book.getPrice()%>">
+                        <button onclick="cart()"><input type="hidden" name="action" value="add">Adauga in cos</button>
                     </form>
                 </div>
             </div>

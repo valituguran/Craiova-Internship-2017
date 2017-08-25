@@ -127,11 +127,13 @@ public class CartDao {
             nfe.printStackTrace();
         }
     }
-
-    public void addCartItem(CartItem cartItem) {
-        alCartItems.add(cartItem);
+    public  void setOrderTotal(double dblOrderTotal) {
+        this.dblOrderTotal = dblOrderTotal;
     }
 
+    public static void addCartItem(CartItem cartItem) {
+        alCartItems.add(cartItem);
+    }
     public CartItem getCartItem(int iItemIndex) {
         CartItem cartItem = null;
         if(alCartItems.size()>iItemIndex) {
@@ -139,7 +141,6 @@ public class CartDao {
         }
         return cartItem;
     }
-
     public static ArrayList getCartItems() {
         return alCartItems;
     }
@@ -149,11 +150,7 @@ public class CartDao {
     public static double getOrderTotal() {
         return dblOrderTotal;
     }
-    public void setOrderTotal(double dblOrderTotal) {
-        this.dblOrderTotal = dblOrderTotal;
-    }
-
-    protected void calculateOrderTotal() {
+    protected  void calculateOrderTotal() {
         double dblTotal = 0;
         for(int counter=0;counter<alCartItems.size();counter++) {
             CartItem cartItem = (CartItem) alCartItems.get(counter);
@@ -161,5 +158,4 @@ public class CartDao {
         }
         setOrderTotal(dblTotal);
     }
-
 }

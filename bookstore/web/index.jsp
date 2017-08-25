@@ -71,7 +71,7 @@
 </div>
 <div class="topnav">
     <span style="align:left;cursor:pointer;color:white;text-align:center;font-size: 20px;" onclick="openNav()">&#9776;Bookstore</span>
-    <a href="login.jsp">Login</a>
+    <a href="login.jsp">Contul meu</a>
 </div>
 
 <div class="content">
@@ -108,9 +108,9 @@
             </form>
             <div class="product">
                 <img src="data:image/jpg;base64,<%=book.getImage()%>" />
-                <p>Quantity: <input class="details" type="text" size="2" value="1" name="quantity"></p>
-                <p>Price <%=book.getPrice()%> lei<input type="hidden" name="price" value="<%=book.getPrice()%>"></p>
-                <button onclick="redirectLogin()"><input type="hidden" name="action" value="add">Buy</button>
+                <input class="details" type="text" size="2" value="1" name="quantity">buc
+                <p>Pret: <%=book.getPrice()%> lei<input type="hidden" name="price" value="<%=book.getPrice()%>"></p>
+                <button onclick="redirectLogin()"><input type="hidden" name="action" value="add">Adauga in cos</button>
             </div>
         </div>
         <% } %>

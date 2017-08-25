@@ -20,6 +20,7 @@ public class AddAuthorServlet extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter out=response.getWriter();
         int id_author=0;
+        int cnp=0;
         AddBookDao addbook = new AddBookDao();
         Author a=new Author();
         String name = request.getParameter("name");
@@ -30,7 +31,7 @@ public class AddAuthorServlet extends HttpServlet {
         int isbn = 0;
         double price = 0.0;
         try{
-           ag = Integer.parseInt(age);
+            ag = Integer.parseInt(age);
            isbn = Integer.parseInt(AddBookServlet.isbnString);
            price = Double.parseDouble(AddBookServlet.priceString);
         }catch (NumberFormatException e){

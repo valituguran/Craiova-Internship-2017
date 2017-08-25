@@ -26,13 +26,13 @@
 
 <div class="topnav">
     <span style="align:left;cursor:pointer;color:white;text-align:center;font-size: 20px;" onclick="openNav()">&#9776;<%=realname%></span>
-    <a href="addbook.jsp">Add books</a>
-    <a href="shoppingcart_user.jsp">Cart</a>
+    <a href="shoppingcart_user.jsp"> Cos de cumparaturi</a>
+    <a href="addbook.jsp"> Adauga o carte</a>
 </div>
 <div class="content">
     <ul class="breadcrumb">
-        <li><a href="products_user.jsp">Home</a></li>
-        <li><a href="products_user.jsp">Books</a></li>
+        <li><a href="products_user.jsp">Prima pagina</a></li>
+        <li><a href="products_user.jsp">Produse</a></li>
     </ul>
     <div class="form">
         <h4>Filter</h4>
@@ -48,14 +48,12 @@
 </div>
 <img class="logo" src="../images/logo.jpg">
 <div class="products">
-    <%
-        ArrayList list = CartDao.getCartItems();%>
+    <%ArrayList list = CartDao.getCartItems();%>
+
     <div class="container">
         <% if (list.size()==0){%>
         <h1>Cosul dumneavoastra este gol!</h1>
-        <form name="order" method="post" action="products_admin.jsp">
-            <button class="button" type="submit">Produse</button>
-        </form>
+        <a href="products_admin.jsp">Toate produsele</a>
         <%}
         else {%>
         <%for( int i=0; i<list.size(); i++){
@@ -63,10 +61,9 @@
         <form name="item" method="POST" action="/cartadminServlet">
             <p><%=cartitem.getBook().getNume()%></p>
             <input type='hidden' name='name' value="<%=cartitem.getBook().getNume()%>">
-            <p>Disponibilitate: in stoc</p>
             <input type='text' name="quantity" value="<%=cartitem.getQuantity()%>">
-            <input type="submit" name="action" value="Update">
-            <br/><input type="submit" name="action" value="Delete">
+            <input type="submit" name="action" value="modifica">
+            <br/><input type="submit" name="action" value="sterge">
             <input type='hidden' name='price' value="<%=cartitem.getUnitCost()%>">
             <p>Pret unitar:<%=cartitem.getUnitCost()%></p>
             <p>Cost:<%=cartitem.getTotalCost()%></p>

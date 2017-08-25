@@ -7,23 +7,23 @@
 </head>
 <body>
 <form action="addbookServlet" method="post" enctype="multipart/form-data">
-    <header>Add a book</header>
-    <label for="name"> Name:</label>
+    <header>Adauga o carte noua</header>
+    <label for="name"> Nume:</label>
     <input type="text" id="name" name="name" required="required" />
 
-    <label for="cnp">CNP Author:</label>
+    <label for="cnp">CNP Autor:</label>
     <input type="text" id="cnp" name="cnp" required="required" />
 
         <label for="isbn"> ISBN:</label>
         <input type="text" id="isbn" name="isbn" required="required" />
 
-        <label for="price"> Price:</label>
+        <label for="price"> Pret: </label>
         <input type="text" id="price" name="price" required="required" />
 
-        <label for="description"> Description:</label>
+        <label for="description"> Descriere carte:</label>
         <input type="text" id="description" name="description" required="required" />
 
-        <p style="color:black;">Please specify a image:</p><br>
+        <p style="color:black;">Selecteaza imaginea cartii:</p><br>
     <input type="file" name="image" id="file" size="40" style="color:black;" required="required" />
     <button type="submit" >Add</button>
 </form>

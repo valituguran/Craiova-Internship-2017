@@ -39,11 +39,11 @@
 
 <div class="topnav">
     <span style="align:left;cursor:pointer;color:white;text-align:center;font-size: 20px;" onclick="openNav()">&#9776;<%=realname%></span>
-    <a href="addbook.jsp">Add books</a>
-    <a href="buy.jsp">Cart</a>
+    <a href="shoppingcart_user.jsp">Cos de cumparaturi</a>
+    <a href="addbook.jsp">Adauga o carte</a>
 </div>
 <div class="content">
-    < <div class="menu-vertical">
+     <div class="menu-vertical">
     <ul class="breadcrumb">
         <li><a href="products_user.jsp">Home</a></li>
         <li><a href="#products">Books</a></li>
@@ -81,9 +81,9 @@
             <div class="product">
                 <img src="data:image/jpg;base64,<%=book.getImage()%>" />
                 <form name="model" method="POST" action="/cartuserServlet">
-                    Quantity: <input type="text" size="2" value="1" name="quantity">
-                    Price<%=book.getPrice()%><input type="hidden" name="price" value="<%=book.getPrice()%>">
-                    <button onclick="cart()"><input type="hidden" name="action" value="add">Buy</button>
+                    <input class="details" type="text" size="2" value="1" name="quantity">buc
+                    Pret: <%=book.getPrice()%><input type="hidden" name="price" value="<%=book.getPrice()%>">
+                    <button onclick="cart()"><input type="hidden" name="action" value="add">Adauga in cos</button>
                 </form>
             </div>
         </div>

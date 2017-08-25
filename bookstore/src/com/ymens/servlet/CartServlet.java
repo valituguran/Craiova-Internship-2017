@@ -29,9 +29,9 @@ public class CartServlet extends HttpServlet {
         if(strAction!=null && !strAction.equals("")) {
             if(strAction.equals("add")) {
                 addToCart(request);
-            }  if (strAction.equals("Update")) {
+            }  if (strAction.equals("modifica")) {
                 updateCart(request);
-            } if (strAction.equals("Delete")) {
+            } if (strAction.equals("sterge")) {
                 deleteCart(request);
             }
         }
@@ -90,31 +90,20 @@ public class CartServlet extends HttpServlet {
                 nr = list.size();
             }
         }
-
-
     }
 
     protected void addToCart(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        int cant = 0;
-        double price = 0.0;
+        CartDao cartDao = new CartDao();
         String strTitle = request.getParameter("book");
+        String description = request.getParameter("description");
         Book book = CartDao.getBook(strTitle);
-        String strDescription = request.getParameter("description");
         String strPrice = request.getParameter("price");
         String strQuantity = request.getParameter("quantity");
-        try{
-            cant = Integer.parseInt(strQuantity);
-            price = Double.parseDouble(strPrice);
-        }catch (NumberFormatException e){
-            e.printStackTrace();
-        }
         CartItem cartItem = new CartItem();
         cartItem.setBook(book);
-        cartItem.setQuantity(cant);
-        cartItem.setUnitCost(price);
-        cartItem.setTotalCost(cant*price);
-        CartDao.alCartItems.add(cartItem);
+        cartDao.addCartItem(book, description, strPrice, strQuantity);
+        session.setAttribute("dbOrderTotal", CartDao.getOrderTotal());
         session.setAttribute("cart", CartDao.getCartItems());
         ArrayList<CartItem> list =(ArrayList) session.getAttribute("cart");
         nr = list.size();

@@ -35,8 +35,8 @@
 <div class="content">
     <div class="menu-vertical">
         <ul class="breadcrumb">
-            <li><a href="products_user.jsp">Home</a></li>
-            <li><a href="products_user.jsp">Books</a></li>
+            <li><a href="products_admin.jsp">Home</a></li>
+            <li><a href="products_admin.jsp">Books</a></li>
         </ul>
 
         <div class="form">

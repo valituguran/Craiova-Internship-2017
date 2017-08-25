@@ -40,6 +40,7 @@ public static double orderTotal = 0.0;
                 for (i = 0; i < list.size(); i++) {
                     cartitem = (CartItem) list.get(i);
                     OrderDao.setOrderItem(order_id, cartitem.getBook().getNume(), cartitem.getUnitCost());
+                    list.remove(i);
                     RequestDispatcher rd = request.getRequestDispatcher("order.jsp");
                     rd.forward(request, response);
                 }
@@ -48,7 +49,6 @@ public static double orderTotal = 0.0;
             RequestDispatcher rd = request.getRequestDispatcher("shoppingcart_user.jsp");
             rd.forward(request, response);
         }
-        //getServletContext().getRequestDispatcher("/orderServlet").forward(request, response);
     }
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

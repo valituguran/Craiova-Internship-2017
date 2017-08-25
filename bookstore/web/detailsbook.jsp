@@ -42,14 +42,14 @@ if(user == null ) {
             <li><a href="<%=text%>">Books</a></li>
         </ul>
         <div class="form">
-            <h4>Filter</h4>
+            <h4>Filtru</h4>
             <form method="get" action="<%=searchbyauthor%>" id="searchbyauthor">
-                <h3>Search by author</h3><br>
-                <input name="searchbyauthor" type="text" size="40" placeholder="Search..." required="required">
+                <h3>Cautare dupa autor</h3><br>
+                <input name="searchbyauthor" type="text" size="40" placeholder="Cauta..." required="required">
             </form>
             <form method="get" action="<%=searchbyauthor%>" id="searchbyname">
-                <h3>Search by name</h3><br>
-                <input name="searchbyname" type="text" size="40" placeholder="Search..." required="required">
+                <h3>Cautare dupa numee</h3><br>
+                <input name="searchbyname" type="text" size="40" placeholder="Cauta..." required="required">
             </form>
         </div>
     </div>
@@ -64,10 +64,10 @@ if(user == null ) {
                 <p><%=book.getAuthor().getAge()%></p>
                 <p><%=book.getAuthor().getDescription()%></p>
                 <p><%=book.getAuthor().getNationality()%></p>
-                <p>Description:<%=book.getDescription()%></p>
+                <p>Descriere:<%=book.getDescription()%></p>
                 <p></p>
-                <p>Quantity: <input type="text" size="2" value="1" name="quantity"></p>
-                <p>Price<%=book.getPrice()%><input type="hidden" name="price" value="<%=book.getPrice()%>"></p>
+                <p>Cantitate: <input type="text" size="2" value="1" name="quantity"></p>
+                <p>Pret<%=book.getPrice()%><input type="hidden" name="price" value="<%=book.getPrice()%>"></p>
                 <button onclick="redirectLogin()"><input type="hidden" name="action" value="add">Buy</button>
 
 

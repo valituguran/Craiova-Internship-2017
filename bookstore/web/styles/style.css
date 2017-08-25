@@ -168,6 +168,7 @@ body { font-family: "Lato", sans-serif;  }
     margin-right:200px;
     margin-left: 200px;
     margin-top: 20px;
+
 }
 
 /*------breadcrumb------------ */
@@ -282,4 +283,7 @@ ul.pagination li input {
     border-radiu:20%;
     color:darkcyan;
     background-image: url(search-white.png);
+}
+input{
+    margin-bottom: 8px;
 }

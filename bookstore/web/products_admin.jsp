@@ -40,15 +40,15 @@ realname=(String)session.getAttribute("realname");%>
 </div>
 <div class="topnav">
     <div style="align:left;cursor:pointer;color:white;font-size: 20px;margin:30px;float:left" onclick="openNav()">&#9776;<%=realname%></div>
-    <a href="/../shoppingcart_admin.jsp">Cart</a>
-    <a href="addbook.jsp">Add books</a>
-    <a href="register.jsp">Add users</a>
+    <a href="shoppingcart_admin.jsp">Cos de cumparaturi</a>
+    <a href="addbook.jsp">Adauga o carte</a>
+    <a href="register.jsp">Adauga un utilizator</a>
 </div>
 <div class="content">
     <div class="menu-vertical">
         <ul class="breadcrumb">
-            <li><a href="#this">Home</a></li>
-            <li><a href="#this">Books</a></li>
+            <li><a href="#this">Prima oagina</a></li>
+            <li><a href="#this">Produse</a></li>
         </ul>
         <div class="form">
             <h4>Filtru</h4>
@@ -77,9 +77,9 @@ realname=(String)session.getAttribute("realname");%>
                 <img src="data:image/jpg;base64,<%=book.getImage()%>" />
                 <form name="model" method="POST" action="/cartadminServlet">
                   <input type="hidden" name="book" value="<%=book.getNume()%>">
-                    Quantity: <input type="text" size="2" value="1" name="quantity">
-                    Price<%=book.getPrice()%><input type="hidden" name="price" value="<%=book.getPrice()%>">
-                    <button onclick="cart()"><input type="hidden" name="action" value="add">Buy</button>
+                    <p><input class="details" type="text" size="2" value="1" name="quantity">buc</p>
+                    Pret: <%=book.getPrice()%><input type="hidden" name="price" value="<%=book.getPrice()%>">
+                    <button onclick="cart()"><input type="hidden" name="action" value="add">Adauga in cos</button>
                 </form>
             </div>
         </div>
