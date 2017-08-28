@@ -122,6 +122,7 @@ body { font-family: "Lato", sans-serif;  }
     top: 0px;
     left: 0px;
     margin-bottom:10px;
+
 }
 .topnav span{float:left;color:aliceblue;}
 .topnav a {
@@ -286,4 +287,46 @@ ul.pagination li input {
 }
 input{
     margin-bottom: 8px;
+}
+
+.style{
+    background: white;
+    color:black;
+    border:1px solid white;
+}
+.account{
+    border: 1px solid white;
+    color: red;
+    background-color:white;
+}
+table, td, th {
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 15px;
+}
+.imageaccount {
+    clear:left;
+    width:150px;
+    height:130px;
+}
+.filter{
+    background-color:white;
+    border:1px solid white;
+    color:black;
+}
+.filter input[type="submit"] {
+    font-family: FontAwesome;
+    font-size: 1.3333333333333333em;
+}
+.ordertable{
+    width:80%;
 }

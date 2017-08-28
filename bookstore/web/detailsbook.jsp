@@ -42,7 +42,15 @@ if(user == null ) {
             <li><a href="<%=text%>">Books</a></li>
         </ul>
         <div class="form">
-            <h4>Filtru</h4>
+            <h4>Ordoneaza: </h4>
+            <form method="get" action="/filterbypriceServlet" id="filterbyprice">
+                <input name="filterasc" class="filter" type="submit" value="Pret crescator" required="required">
+                <input type="hidden" name="typelist" value="filterbyprice" required="required">
+            </form>
+            <form method="get" action="/filterbypriceServlet" id="filterbyprice">
+                <input name="filterdesc" class="filter" type="submit" value="Pret descrescator" required="required">
+                <input type="hidden" name="typelist" value="filterbyprice" required="required">
+            </form>
             <form method="get" action="<%=searchbyauthor%>" id="searchbyauthor">
                 <h3>Cautare dupa autor</h3><br>
                 <input name="searchbyauthor" type="text" size="40" placeholder="Cauta..." required="required">
@@ -60,17 +68,41 @@ if(user == null ) {
     <h3><%=book.getNume()%></h3>
 
                 <img src="data:image/jpg;base64,<%=book.getImage()%>" />
-                <p><%=book.getAuthor().getName()%></p>
-                <p><%=book.getAuthor().getAge()%></p>
-                <p><%=book.getAuthor().getDescription()%></p>
-                <p><%=book.getAuthor().getNationality()%></p>
-                <p>Descriere:<%=book.getDescription()%></p>
-                <p></p>
-                <p>Cantitate: <input type="text" size="2" value="1" name="quantity"></p>
-                <p>Pret<%=book.getPrice()%><input type="hidden" name="price" value="<%=book.getPrice()%>"></p>
-                <button onclick="redirectLogin()"><input type="hidden" name="action" value="add">Buy</button>
-
-
+    <table>
+        <tr>
+            <th>Titlu:</th>
+            <th><%=book.getAuthor().getName()%></th>
+        </tr>
+        <tr>
+            <th>Descriere:</th>
+            <th> <%=book.getDescription()%></th>
+        </tr>
+        <tr>
+            <th>Autor:</th>
+            <th><%=book.getAuthor().getName()%></th>
+        </tr>
+        <tr>
+            <th>Varsta Autor:</th>
+            <th><%=book.getAuthor().getAge()%></th>
+        </tr>
+        <tr>
+            <th>Nationatlitate Autor:</th>
+            <th><%=book.getAuthor().getNationality()%></th>
+        </tr>
+        <tr>
+            <th>Descriere Autor:</th>
+            <th><%=book.getAuthor().getDescription()%></th>
+        </tr>
+        <tr>
+            <th>Pret: </th>
+            <th><input type="hidden" name="price" value="<%=book.getPrice()%>"><%=book.getPrice()%></th>
+        </tr>
+        <tr>
+            <th> Cantitate:</th>
+            <th><input type="text" size="2" value="1" name="quantity"></th>
+        </tr>
+    </table>
+    <button onclick="redirectLogin()"><input type="hidden" name="action" value="add">Buy</button>
 </div>
 <script>
     function openNav() {

@@ -19,18 +19,19 @@
 <%String realname;
     realname=(String)session.getAttribute("realname");%>
 <%int currentpage = PaginationServlet.currentPage;
-    LinkedList list = (LinkedList)session.getAttribute("searchbyname");
+    String typelist = (String) session.getAttribute("typelist");
+    LinkedList list = (LinkedList)session.getAttribute(typelist);
     int recordsPerPage = PaginationServlet.recordsPerPage;
     int noOfProducts = list.size();
     int noOfPages;
-    if(noOfProducts/recordsPerPage == 0) {
+    if(noOfProducts%recordsPerPage == 0) {
         noOfPages = noOfProducts / recordsPerPage ;
     }
     else{
         noOfPages = noOfProducts / recordsPerPage+1;
     }
 %>
-%>
+
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <a href="/mycontadminServlet"><%=realname%></a>
@@ -51,14 +52,24 @@
         </ul>
 
         <div class="form">
-            <h4>Filtru</h4>
-            <form method="get" action="/searchbyauthoradminServlet" id="searchbyauthor">
+            <h4>Ordoneaza: </h4>
+            <form method="get" action="/filterbypriceServlet" id="filterbyprice">
+                <input name="filterasc" class="filter" type="submit" value="Pret crescator" required="required">
+                <input type="hidden" name="typelist" value="filterbyprice" required="required">
+            </form>
+            <form method="get" action="/filterbypriceServlet" id="filterbyprice">
+                <input name="filterdesc" class="filter" type="submit" value="Pret descrescator" required="required">
+                <input type="hidden" name="typelist" value="filterbyprice" required="required">
+            </form>
+            <form method="get" action="/searchbyauthorServlet" id="searchbyauthor">
                 <h3>Cautare dupa autor</h3><br>
                 <input name="searchbyauthor" type="text" size="40" placeholder="Cauta..." required="required">
+                <input type="hidden"  name="typelist" value="searchbyauthor" required="required">
             </form>
-            <form method="get" action="/searchbynameadminServlet" id="searchbyname">
+            <form method="get" action="/searchbynameServlet" id="searchbyname">
                 <h3>Cautare dupa nume</h3><br>
                 <input name="searchbyname" type="text" size="40" placeholder="Cauta..." required="required">
+                <input type="hidden"  name="typelist" value="searchbyname" required="required">
             </form>
         </div>
     </div>
@@ -83,7 +94,7 @@
                         <input type="hidden" name="book" value="<%=book.getNume()%>">
                         <input type="hidden" name="description" value="<%=book.getDescription()%>">
                         <input class="details" type="text" size="2" value="1" name="quantity">buc
-                        Pret: <%=book.getPrice()%><input type="hidden" name="price" value="<%=book.getPrice()%>">
+                        <p> Pret: <%=book.getPrice()%><input type="hidden" name="price" value="<%=book.getPrice()%>"></p>
                         <button onclick="cart()"><input type="hidden" name="action" value="add">Adauga in cos</button>
                     </form>
                 </div>
@@ -98,7 +109,7 @@
         <ul class="pagination">
             <li> <input type="submit" onclick="pagination()" name="action" value="Prev" id="prev" ></li>
             <input type="hidden" name="<%=noOfPages%>" id="noOfPages" value="noOfPages">
-            <li> <input type="hidden" name="currentpage" id="current" value="<%=currentpage%>"><%=currentpage%>/<%=noOfPages+1%></li>
+            <li> <input type="hidden" name="currentpage" id="current" value="<%=currentpage%>"><%=currentpage%>/<%=noOfPages%></li>
             <li> <input type="submit" onclick="pagination()" name="action" value="Next" id="next"></li>
         </ul>
     </form>

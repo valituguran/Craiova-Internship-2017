@@ -84,7 +84,7 @@ public class CartDao {
     }
 
     public void deleteCartItem(int iItemIndex) {
-        alCartItems.remove(iItemIndex - 1);
+        alCartItems.remove(iItemIndex);
         calculateOrderTotal();
     }
 
@@ -95,7 +95,7 @@ public class CartDao {
         CartItem cartItem = null;
         iQuantity = Integer.parseInt(strQuantity);
         if(iQuantity>0) {
-            cartItem = (CartItem)alCartItems.get(iItemIndex-1);
+            cartItem = (CartItem)alCartItems.get(iItemIndex);
             dblUnitCost = cartItem.getUnitCost();
             dblTotalCost = dblUnitCost*iQuantity;
             cartItem.setQuantity(iQuantity);

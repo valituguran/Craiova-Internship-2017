@@ -63,6 +63,7 @@ public class CartServlet extends HttpServlet {
 
     protected void deleteCart(HttpServletRequest request) {
         HttpSession session = request.getSession();
+
         String title = request.getParameter("name");
         CartDao cartDao = new CartDao();
         int id = CartDao.getIdBook(title);
@@ -106,6 +107,7 @@ public class CartServlet extends HttpServlet {
         session.setAttribute("dbOrderTotal", CartDao.getOrderTotal());
         session.setAttribute("cart", CartDao.getCartItems());
         ArrayList<CartItem> list =(ArrayList) session.getAttribute("cart");
+        cartDao.setCartItems(list);
         nr = list.size();
     }
 }

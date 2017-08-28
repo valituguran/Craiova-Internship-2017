@@ -94,7 +94,6 @@ public class OrderDao {
         PreparedStatement ps = null;
         int status = 0;
         Connection conn = connect();
-
         try {
             ps = conn.prepareStatement("insert into order_item (order_id, book_id, price) values(?, ?, ?)");
             ps.setInt(1, orderId);

@@ -18,7 +18,7 @@ import java.util.LinkedList;
  */
 public class SearchByAuthorServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    public LinkedList list = new LinkedList();
+    public static LinkedList list = new LinkedList();
     HttpSession session;
     private static User user = new User();
 
@@ -33,9 +33,11 @@ public class SearchByAuthorServlet extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         String name = request.getParameter("searchbyauthor");
+        String typelist = "searchbyauthor";
         list = SearchByAuthorDao.searchByAuthor(name);
         session = request.getSession(false);
         session.setAttribute("searchbyauthor", list);
+        session.setAttribute("typelist", typelist);
         user.username = (String) session.getAttribute("name");
         user.password = (String) session.getAttribute("password");
         doPost(request, response);

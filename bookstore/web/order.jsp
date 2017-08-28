@@ -40,7 +40,15 @@
         </ul>
 
         <div class="form">
-            <h4>Filter</h4>
+            <h4>Ordoneaza: </h4>
+            <form method="get" action="/filterbypriceServlet" id="filterbyprice">
+                <input name="filterasc" class="filter" type="submit" value="Pret crescator" required="required">
+                <input type="hidden" name="typelist" value="filterbyprice" required="required">
+            </form>
+            <form method="get" action="/filterbypriceServlet" id="filterbyprice">
+                <input name="filterdesc" class="filter" type="submit" value="Pret descrescator" required="required">
+                <input type="hidden" name="typelist" value="filterbyprice" required="required">
+            </form>
             <form method="get" action="/searchbyauthoradminServlet" id="searchbyauthor">
                 <h3>Search by author</h3><br>
                 <input name="searchbyauthor" type="text" size="40" placeholder="Search..." required="required">
@@ -54,21 +62,33 @@
 </div>
     <img class="logo" src="../images/logo.jpg">
     <div class="products" id="products">
-        <h2>Comanda dumneavoastra a fost plasata cu succes!</h2>
-        <h3>Produse comandate:</h3><br>
-        <%ArrayList list = CartDao.getCartItems();%>
+        <table class="ordertable">
+        <tr>
+            <th colspan="4"><h3>Comanda dumneavoastra a fost plasata cu succes!</h3></th>
+        </tr>
+            <tr>
+                <th colspan="4"><h3>Produse comandate:</h3></th>
+            </tr>
+            <tr>
+                <th>Nume produs</th>
+                <th>Pret</th>
+                <th>Cantitate</th>
+                <th>Pret total</th>
+            </tr>
+        <%ArrayList list =(ArrayList) session.getAttribute("order");%>
         <%for( int i=0; i<list.size(); i++){
                 CartItem cartitem = (CartItem) list.get(i);%>
-        <p><strong><%=cartitem.getBook().getNume()%></strong></p>
-        <p>Cantitate:<%=cartitem.getQuantity()%></p>
-        <p>Pret unitar:<%=cartitem.getUnitCost()%></p>
-        <p>Cost:<%=cartitem.getTotalCost()%></p>
+            <tr>
+                <th><%=cartitem.getBook().getNume()%></th>
+                <th><%=cartitem.getBook().getPrice()%></th>
+                <th><%=cartitem.getQuantity()%></th>
+                <th><%=cartitem.getTotalCost()%></th>
+            </tr>
         <% } %>
-        <h3>Total de plata:</h3><%=OrderServlet.orderTotal%><br>
-        </div>
-
-
-    <script>
+        </table>
+        <h3>Total de plata:</h3><%=OrderServlet.orderTotal%>
+    </div>
+<script>
         function openNav() {
             document.getElementById("mySidenav").style.width = "250px";
         }
@@ -80,7 +100,6 @@
             var r = alert("Produs adaugat cu succes in cos.");
             document.getElementById("demo").innerHTML = txt;
         }
-    </script>
+</script>
 </body>
-
 </html>

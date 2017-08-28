@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../styles/layout_login.css">
     <title>Add users</title>
 </head>
+
 <body>
 <form method="post" action="registerServlet">
     <header>Register</header>
@@ -28,4 +29,5 @@
     <button type="submit">Adauga user</button>
 </form>
 </body>
+
 </html>

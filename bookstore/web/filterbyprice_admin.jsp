@@ -1,12 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1"%>
-
 <%@page import="com.ymens.Book"%>
 <%@ page import="java.util.LinkedList" %>
 <%@ page import="java.util.List"%>
 <%@ page import="com.ymens.servlet.PaginationServlet" %>
 <%@ page import="com.ymens.dao.SelectBooksDao" %>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,13 +17,14 @@
 </head>
 <body>
 <%String realname;
-realname=(String)session.getAttribute("realname");%>
+    realname=(String)session.getAttribute("realname");%>
 <%int currentpage = PaginationServlet.currentPage;
-    LinkedList list = (LinkedList)session.getAttribute("list");
+    LinkedList list = new LinkedList();
+    list = (LinkedList) session.getAttribute("filterbyprice");
     int recordsPerPage = PaginationServlet.recordsPerPage;
     int noOfProducts = list.size();
     int noOfPages;
-    if(noOfProducts/recordsPerPage == 0) {
+    if(noOfProducts%recordsPerPage == 0) {
         noOfPages = noOfProducts / recordsPerPage ;
     }
     else{
@@ -47,8 +46,7 @@ realname=(String)session.getAttribute("realname");%>
 <div class="content">
     <div class="menu-vertical">
         <ul class="breadcrumb">
-            <li><a href="#this">Prima pagina</a></li>
-            <li><a href="#this">Produse</a></li>
+            <li><a href="products_admin.jsp">Prima pagina</a></li>
         </ul>
         <div class="form">
             <h4>Ordoneaza: </h4>
@@ -73,9 +71,14 @@ realname=(String)session.getAttribute("realname");%>
         </div>
     </div>
 </div>
-<div class="products" >
+<div class="products" id="products">
     <img class="logo" src="../images/logo.jpg">
+
     <div class="container">
+        <% if(list.size() == 0){%>
+        <h3>Nu exista produse cu acest autor</h3>
+        <a href="products_admin.jsp">Toate produsele</a>
+        <%} else{%>
         <%for( int i=(currentpage-1)*recordsPerPage; i<currentpage*recordsPerPage && i<noOfProducts; i++){
             Book book = (Book) list.get(i);%>
         <div class="tab-content">
@@ -86,7 +89,6 @@ realname=(String)session.getAttribute("realname");%>
             <div class="product">
                 <img src="data:image/jpg;base64,<%=book.getImage()%>" />
                 <form name="model" method="POST" action="/cartadminServlet">
-                  <input type="hidden" name="book" value="<%=book.getNume()%>">
                     <input class="details" type="text" size="2" value="1" name="quantity">buc
                     <p> Pret: <%=book.getPrice()%><input type="hidden" name="price" value="<%=book.getPrice()%>"></p>
                     <button onclick="cart()"><input type="hidden" name="action" value="add">Adauga in cos</button>
@@ -98,7 +100,7 @@ realname=(String)session.getAttribute("realname");%>
 </div>
 <div class="bottom">
     <form  method="POST" action="/paginationServlet">
-        <input type="hidden" name="page" id="page" value="/products_admin.jsp">
+        <input type="hidden" name="page" id="page" value="/searchbyauthor_admin.jsp">
         <ul class="pagination">
             <li> <input type="submit" onclick="pagination()" name="action" value="Prev" id="prev" ></li>
             <input type="hidden" name="<%=noOfPages%>" id="noOfPages" value="noOfPages">
@@ -107,6 +109,7 @@ realname=(String)session.getAttribute("realname");%>
         </ul>
     </form>
 </div>
+<%}%>
 <script>
     function openNav() {
         document.getElementById("mySidenav").style.width = "250px";
@@ -114,6 +117,56 @@ realname=(String)session.getAttribute("realname");%>
     function closeNav() {
         document.getElementById("mySidenav").style.width = "0";
     }
+    var current_page = document.getElementById("page");
+    var records_per_page = 9;
+    function prevPage()
+    {
+        if (current_page > 1) {
+            current_page--;
+            changePage(current_page);
+        }
+    }
+
+    function nextPage()
+    {
+        if (current_page < numPages()) {
+            current_page++;
+            changePage(current_page);
+        }
+    }
+
+    function changePage(page)
+    {
+        var btn_next = document.getElementById("btn_next");
+        var btn_prev = document.getElementById("btn_prev");
+        var listing_table = document.getElementById("listingTable");
+        var page_span = document.getElementById("page");
+        if (page < 1) page = 1;
+        if (page > numPages()) page = numPages();
+        listing_table.innerHTML = "";
+        page_span.innerHTML = page;
+
+        if (page == 1) {
+            btn_prev.style.visibility = "hidden";
+        } else {
+            btn_prev.style.visibility = "visible";
+        }
+
+        if (page == numPages()) {
+            btn_next.style.visibility = "hidden";
+        } else {
+            btn_next.style.visibility = "visible";
+        }
+    }
+
+    function numPages()
+    {
+        return Math.ceil(objJson.length / records_per_page);
+    }
+
+    window.onload = function() {
+        changePage(1);
+    };
     function redirectLogin() {
         var txt;
         var r = confirm("Please login to continue!!");
@@ -124,16 +177,10 @@ realname=(String)session.getAttribute("realname");%>
         }
         document.getElementById("demo").innerHTML = txt;
     }
-    function cart() {
-        var txt;
-        var r = alert("Produs adaugat cu succes in cos.");
-        document.getElementById("demo").innerHTML = txt;
-    }
-    function products(){
-        document.getElementById("currentpage").value = "1";
-    }
+
 </script>
 </body>
+
 </html>
 
 

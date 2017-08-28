@@ -30,11 +30,13 @@ public class PaginationServlet extends HttpServlet {
         String strAction = request.getParameter("action");
         String strcurrent = request.getParameter("currentpage");
         String strnoOfPage = request.getParameter("noOfPages");
-        if(strcurrent == null)
+        if(strcurrent == null) {
             currentPage = 1;
+
+        }
         page = request.getParameter("page");
         try {
-        noOfPages=Integer.parseInt(strnoOfPage);
+            noOfPages=Integer.parseInt(strnoOfPage);
             currentPage = Integer.parseInt(strcurrent);
         } catch (NumberFormatException e) {
             e.printStackTrace();
@@ -51,6 +53,13 @@ public class PaginationServlet extends HttpServlet {
                 }
             }
         }
+
+    }
+    public void UpdateCurrentPage(int value){
+        this.currentPage= value;
+    }
+    public void UpdateTotalPage(int value){
+        this.noOfPages= value;
     }
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

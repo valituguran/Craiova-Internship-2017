@@ -28,10 +28,10 @@ public class UpdateAccountDetailsServlet extends HttpServlet {
                 if (strAction.equals("updatepassword")) {
                     updatePassword(request);
                 }
-                if (strAction.equals("updaterealname")) {
+                if (strAction.equals("Modifica")) {
                     updateRealName(request);
                 }
-                if (strAction.equals("updateemail")) {
+                if (strAction.equals("Modifica adresa de email")) {
                     updateEmail(request);
                 }
             } catch (SQLException e) {

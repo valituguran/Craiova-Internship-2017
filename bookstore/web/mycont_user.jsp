@@ -36,7 +36,15 @@
         </ul>
 
         <div class="form">
-            <h4>Filter</h4>
+            <h4>Ordoneaza: </h4>
+            <form method="get" action="/filterbypriceServlet" id="filterbyprice">
+                <input name="filterasc" class="filter" type="submit" value="Pret crescator" required="required">
+                <input type="hidden" name="typelist" value="filterbyprice" required="required">
+            </form>
+            <form method="get" action="/filterbypriceServlet" id="filterbyprice">
+                <input name="filterdesc" class="filter" type="submit" value="Pret descrescator" required="required">
+                <input type="hidden" name="typelist" value="filterbyprice" required="required">
+            </form>
             <form method="get" action="/searchbyauthoruserServlet" id="searchbyauthor">
                 <h3>Cautare dupa autor</h3><br>
                 <input name="searchbyauthor" type="text" size="40" placeholder="Cauta..." required="required">
@@ -49,16 +57,35 @@
     </div>
 </div>
 
-    <img class="logo" src="../images/logo.jpg">
-    <div class="products" id="products">
-        <%
-            User user =(User) session.getAttribute("currentuser");%>
-        <div class="container">
-            <div id="tab-1" class="tab-content current">
-                Username:<%=user.getUsername()%><br>
-                Realname: <%=user.getRealname()%><br>
-                Email:<%=user.getEmail()%><br>
-            </div>
+<img class="logo" src="../images/logo.jpg">
+<div class="products" id="products">
+    <%User user =(User) session.getAttribute("currentuser");%>
+    <div class="container">
+        <div id="tab-1" class="tab-content current">
+            <img class="logo" src="../images/account.jpg">
+            <form name="item" method="POST" action="/updatecontServlet">
+                <table><tr>
+                        <th> Username:</th>
+                        <th> <input  class="account" type='hidden' name="username" value="<%=user.getUsername()%>"><%=user.getUsername()%></th>
+                    </tr>
+                        <tr>
+                            <th> Nume si prenume:</th>
+                            <th><input  class="account" type='text' name="realname" style="color:black;" value="<%=user.getRealname()%>"></th>
+                            <th>  <input class="account" type="submit" name="action" value="Modifica"></th>
+                        </tr>
+                        <tr>
+                            <th> Email:</th>
+                            <th> <input class="account" type='text' name="email" value="<%=user.getEmail()%>" style="color:black;"></th>
+                            <th> <input class="account" type="submit" name="action" value="Modifica adresa de email"></th>
+                        </tr>
+                        <tr>
+                            <th>Parola:</th>
+                            <th><input class="account" type='password' name="password" value="<%=user.getPassword()%>"><br></th>
+                        </tr>
+                    </table>
+
+            </form>
+        </div>
 
     </div>
 </div>

@@ -43,20 +43,30 @@
 </div>
 <div class="content">
      <div class="menu-vertical">
-    <ul class="breadcrumb">
-        <li>  <button onclick="products()">Home</button></li>
-        <li><a href="#products">Books</a></li>
-    </ul>
+         <ul class="breadcrumb">
+             <li><a href="#this">Prima pagina</a></li>
+             <li><a href="#this">Produse</a></li>
+         </ul>
 
     <div class="form">
-        <h4>Filter</h4>
-        <form method="get" action="/searchbyauthoruserServlet" id="searchbyauthor">
+        <h4>Ordoneaza: </h4>
+        <form method="get" action="/filterbypriceServlet" id="filterbyprice">
+            <input name="filterasc" class="filter" type="submit" value="Pret crescator" required="required">
+            <input type="hidden" name="typelist" value="filterbyprice" required="required">
+        </form>
+        <form method="get" action="/filterbypriceServlet" id="filterbyprice">
+            <input name="filterdesc" class="filter" type="submit" value="Pret descrescator" required="required">
+            <input type="hidden" name="typelist" value="filterbyprice" required="required">
+        </form>
+        <form method="get" action="/searchbyauthorServlet" id="searchbyauthor">
             <h3>Cautare dupa autor</h3><br>
             <input name="searchbyauthor" type="text" size="40" placeholder="Cauta..." required="required">
+            <input type="hidden"  name="typelist" value="searchbyauthor" required="required">
         </form>
-        <form method="get" action="/searchbynameuserServlet" id="searchbyname">
+        <form method="get" action="/searchbynameServlet" id="searchbyname">
             <h3>Cautare dupa nume</h3><br>
             <input name="searchbyname" type="text" size="40" placeholder="Cauta..." required="required">
+            <input type="hidden"  name="typelist" value="searchbyname" required="required">
         </form>
     </div>
 </div>
@@ -76,7 +86,7 @@
                 <img src="data:image/jpg;base64,<%=book.getImage()%>" />
                 <form name="model" method="POST" action="/cartuserServlet">
                     <input class="details" type="text" size="2" value="1" name="quantity">buc
-                    Pret: <%=book.getPrice()%><input type="hidden" name="price" value="<%=book.getPrice()%>">
+                    <p> Pret: <%=book.getPrice()%><input type="hidden" name="price" value="<%=book.getPrice()%>"></p>
                     <button onclick="cart()"><input type="hidden" name="action" value="add">Adauga in cos</button>
                 </form>
             </div>

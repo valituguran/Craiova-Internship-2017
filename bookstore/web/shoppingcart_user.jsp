@@ -35,7 +35,15 @@
         <li><a href="products_user.jsp">Produse</a></li>
     </ul>
     <div class="form">
-        <h4>Filter</h4>
+        <h4>Ordoneaza: </h4>
+        <form method="get" action="/filterbypriceServlet" id="filterbyprice">
+            <input name="filterasc" class="filter" type="submit" value="Pret crescator" required="required">
+            <input type="hidden" name="typelist" value="filterbyprice" required="required">
+        </form>
+        <form method="get" action="/filterbypriceServlet" id="filterbyprice">
+            <input name="filterdesc" class="filter" type="submit" value="Pret descrescator" required="required">
+            <input type="hidden" name="typelist" value="filterbyprice" required="required">
+        </form>
         <form method="get" action="/searchbyauthoruserServlet" id="searchbyauthor">
             <h3>Cautare dupa autor</h3><br>
             <input name="searchbyauthor" type="text" size="40" placeholder="Cauta..." required="required">
@@ -46,37 +54,46 @@
         </form>
     </div>
 </div>
+
 <img class="logo" src="../images/logo.jpg">
 <div class="products">
-    <%ArrayList list = CartDao.getCartItems();%>
-
+    <%ArrayList list = (ArrayList)session.getAttribute("cart");%>
     <div class="container">
         <% if (list.size()==0){%>
         <h1>Cosul dumneavoastra este gol!</h1>
         <a href="products_admin.jsp">Toate produsele</a>
         <%}
         else {%>
-        <%for( int i=0; i<list.size(); i++){
-            CartItem cartitem = (CartItem) list.get(i);%>
-        <form name="item" method="POST" action="/cartadminServlet">
-            <p><%=cartitem.getBook().getNume()%></p>
-            <input type='hidden' name='name' value="<%=cartitem.getBook().getNume()%>">
-            <input type='text' name="quantity" value="<%=cartitem.getQuantity()%>">
-            <input type="submit" name="action" value="modifica">
-            <br/><input type="submit" name="action" value="sterge">
-            <input type='hidden' name='price' value="<%=cartitem.getUnitCost()%>">
-            <p>Pret unitar:<%=cartitem.getUnitCost()%></p>
-            <p>Cost:<%=cartitem.getTotalCost()%></p>
-        </form>
-        <% } %>
-        <br><pre></pre>
-        <input type='hidden' name ="orderTotal" value="<%=CartDao.dblOrderTotal%>">
-        <h3>Suma totala:</h3><%=CartDao.dblOrderTotal%><br>
-        <form name="order" method="post" action="orderServlet">
-            <input type="hidden" name="returnpage" value="products_user.jsp">
-            <button class="button" type="submit">Plaseaza comanda</button>
-        </form>
-        <% }%>
+        <table>
+            <tr>
+                <th>Nume produs</th>
+                <th>Pret</th>
+                <th>Cantitate</th>
+                <th>Pret total</th>
+                <th></th>
+            </tr>
+            <%for( int i=0; i<list.size(); i++){
+                CartItem cartitem = (CartItem) list.get(i);%>
+            <tr> <form name="item" method="POST" action="/cartadminServlet">
+                <th><%=cartitem.getBook().getNume()%></th>
+                <input type='hidden' name='name' value="<%=cartitem.getBook().getNume()%>">
+                <th>  <%=cartitem.getUnitCost()%><input type='hidden' name='price' value="<%=cartitem.getUnitCost()%>"></th>
+                <th><input type='text' class="account" name="quantity" value="<%=cartitem.getQuantity()%>"> <input type="submit" name="action" value="modifica"></th>
+                <th><%=cartitem.getTotalCost()%></th>
+                <th>  <input type="submit" name="action" value="sterge"></th>
+            </form>
+            </tr>
+            <% } %>
+            <tr><form name="order" method="POST" action="/orderServlet">
+                <th colspan="3"><input type='hidden' name ="orderTotal" value="<%=CartDao.dblOrderTotal%>">
+                    <h3>Suma totala:</h3><%=CartDao.getOrderTotal()%><br></th>
+                <th colspan="2"> <input class="button" type="submit" value="Plaseaza comanda"></th>
+                <input type="hidden" name="returnpage" value="products_admin.jsp">
+            </form>
+            </tr>
+        </table>
+        <a href="products_admin.jsp">Continua cumparaturile</a>
+        <%}%>
     </div>
 </div>
 <script>

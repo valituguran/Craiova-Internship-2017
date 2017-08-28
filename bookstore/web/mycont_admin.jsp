@@ -23,7 +23,7 @@
 <div class="topnav">
     <div style="align:left;cursor:pointer;color:white;font-size: 20px;margin:30px;float:left" onclick="openNav()">&#9776;<%=realname%></div>
 
-    <a href="/../shoppingcart.jsp">Cart</a>
+    <a href="shoppingcart_admin.jsp">Cos de cumparaturi</a>
     <a href="addbook.jsp">Add books</a>
     <a href="register.jsp">Add users</a>
 </div>
@@ -35,7 +35,15 @@
         </ul>
 
         <div class="form">
-            <h4>Filtru</h4>
+            <h4>Ordoneaza: </h4>
+            <form method="get" action="/filterbypriceServlet" id="filterbyprice">
+                <input name="filterasc" class="filter" type="submit" value="Pret crescator" required="required">
+                <input type="hidden" name="typelist" value="filterbyprice" required="required">
+            </form>
+            <form method="get" action="/filterbypriceServlet" id="filterbyprice">
+                <input name="filterdesc" class="filter" type="submit" value="Pret descrescator" required="required">
+                <input type="hidden" name="typelist" value="filterbyprice" required="required">
+            </form>
             <form method="get" action="/searchbyauthoradminServlet" id="searchbyauthor">
                 <h3>Cautare dupa autor</h3><br>
                 <input name="searchbyauthor" type="text" size="40" placeholder="Cauta..." required="required">
@@ -49,21 +57,35 @@
     </div>
 </div>
     <img class="logo" src="../images/logo.jpg">
+
     <div class="products" id="products">
         <%User user =(User) session.getAttribute("currentuser");%>
+
         <div class="container">
             <div id="tab-1" class="tab-content current">
+                <img class="imageaccount" src="../images/account.jpg">
                 <form name="item" method="POST" action="/updatecontServlet">
-                Username:<input  type='hidden' name="username" value="<%=user.getUsername()%>"><%=user.getUsername()%><br>
-                Realname: <input  type='text' name="realname" value="<%=user.getRealname()%>"><br>
-                <input type="submit" name="action" value="updaterealname"> <br>
-                Email:<input  type='text' name="email" value="<%=user.getEmail()%>"><br>
-                <input type="submit" name="action" value="updateemail"> <br>
-                Password:<input type='password' name="password" value="<%=user.getPassword()%>"><br>
-                <input type="submit" name="action" value="updatepassword"><br>
+                    <table><tr>
+                        <th> Username:</th>
+                        <th> <input  class="account" type='hidden' name="username" value="<%=user.getUsername()%>"><%=user.getUsername()%></th>
+                    </tr>
+                    <tr>
+                        <th> Nume si prenume:</th>
+                        <th><input  class="account" type='text' name="realname" style="color:black;" value="<%=user.getRealname()%>"></th>
+                        <th>  <input class="account" type="submit" name="action" value="Modifica"></th>
+                    </tr>
+                    <tr>
+                        <th> Email:</th>
+                        <th> <input class="account" type='text' name="email" value="<%=user.getEmail()%>" style="color:black;"></th>
+                        <th> <input class="account" type="submit" name="action" value="Modifica adresa de email"></th>
+                    </tr>
+                    <tr>
+                        <th>Parola:</th>
+                        <th><input class="account" type='password' name="password" value="<%=user.getPassword()%>"><br></th>
+                    </tr>
+                    </table>
                 </form>
             </div>
-
         </div>
     </div>
 <script>

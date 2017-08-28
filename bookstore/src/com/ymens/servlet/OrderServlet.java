@@ -40,16 +40,21 @@ public static double orderTotal = 0.0;
                 for (i = 0; i < list.size(); i++) {
                     cartitem = (CartItem) list.get(i);
                     OrderDao.setOrderItem(order_id, cartitem.getBook().getNume(), cartitem.getUnitCost());
-                    list.remove(i);
-                    RequestDispatcher rd = request.getRequestDispatcher("order.jsp");
-                    rd.forward(request, response);
                 }
+                session.setAttribute("order", list);
+                RequestDispatcher rd = request.getRequestDispatcher("order.jsp");
+                rd.forward(request, response);
             }
-        } else {
+        }else {
             RequestDispatcher rd = request.getRequestDispatcher("shoppingcart_user.jsp");
             rd.forward(request, response);
         }
+        CartDao cartDao = new CartDao();
+        for(i=0; i<list.size();i++)
+            cartDao.deleteCartItem(i);
+
     }
+
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         doPost(request, response);

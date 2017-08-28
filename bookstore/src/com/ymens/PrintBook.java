@@ -48,4 +48,17 @@ public class PrintBook {
         }
         return bos != null ? bos.toByteArray() : null;
     }
+
+    public static int compareBook(Object obj1, Object obj2) {
+        Double p1 = ((Book) obj1).getPrice();
+        Double p2 = ((Book) obj2).getPrice();
+
+        if (p1 > p2) {
+            return 1;
+        } else if (p1 < p2){
+            return -1;
+        } else {
+            return 0;
+        }
+    }
 }

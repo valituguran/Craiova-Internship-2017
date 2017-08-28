@@ -40,6 +40,8 @@ public class SearchByNameServlet extends HttpServlet {
         }
         user.username = (String) session.getAttribute("name");
         user.password = (String) session.getAttribute("password");
+        PaginationServlet ps = new PaginationServlet();
+        ps.UpdateCurrentPage(1);
         doPost(request, response);
     }
 

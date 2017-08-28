@@ -130,6 +130,15 @@
 	</servlet-mapping>
 
 	<servlet>
+		<servlet-name>filterbyprice</servlet-name>
+		<servlet-class>com.ymens.servlet.FilterServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>filterbyprice</servlet-name>
+		<url-pattern>/filterbypriceServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
 		<servlet-name>searchbyauthoradmin</servlet-name>
 		<servlet-class>com.ymens.servlet.SearchByAuthorServlet</servlet-class>
 	</servlet>

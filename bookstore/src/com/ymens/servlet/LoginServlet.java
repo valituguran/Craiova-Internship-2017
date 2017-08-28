@@ -44,7 +44,8 @@ public class LoginServlet extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
 			rd.include(request, response);
 		}
-
+		PaginationServlet ps = new PaginationServlet();
+		ps.UpdateCurrentPage(1);
 	}
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
