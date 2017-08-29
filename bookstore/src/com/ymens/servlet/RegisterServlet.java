@@ -37,6 +37,8 @@ public class RegisterServlet extends HttpServlet{
         String e=request.getParameter("email");
         String rn=request.getParameter("realname");
         HttpSession session = request.getSession(false);
+        PaginationServlet ps = new PaginationServlet();
+        ps.UpdateCurrentPage(1);
         if(session!=null)
             session.setAttribute("name", n);
         try {

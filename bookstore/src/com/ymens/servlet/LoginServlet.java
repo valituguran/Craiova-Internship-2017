@@ -1,6 +1,7 @@
 package com.ymens.servlet;
 
 import com.ymens.UserType;
+import com.ymens.dao.CartDao;
 import com.ymens.dao.LoginDao;
 
 import javax.servlet.RequestDispatcher;
@@ -8,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 public class LoginServlet extends HttpServlet {
 
@@ -44,6 +46,8 @@ public class LoginServlet extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
 			rd.include(request, response);
 		}
+		ArrayList cartitems = CartDao.getCartItems();
+		session.setAttribute("cart", cartitems);
 		PaginationServlet ps = new PaginationServlet();
 		ps.UpdateCurrentPage(1);
 	}

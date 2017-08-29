@@ -37,10 +37,6 @@ if(user == null ) {
 </div>
 <div class="content">
     <div class="menu-vertical">
-        <ul class="breadcrumb">
-            <li><a href="<%=text%>">Home</a></li>
-            <li><a href="<%=text%>">Books</a></li>
-        </ul>
         <div class="form">
             <h4>Ordoneaza: </h4>
             <form method="get" action="/filterbypriceServlet" id="filterbyprice">

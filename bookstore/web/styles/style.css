@@ -105,6 +105,16 @@ body { font-family: "Lato", sans-serif;  }
     display: block;
     transition: 0.3s;
 }
+.sidenav input {
+    color: white;
+    font-size:22px;
+    background-color:black;
+    border: 0px solid black;
+    font-weight: 700;
+    margin-left:10px;
+    margin-bottom:30px;
+}
+
 .sidenav a:hover, .offcanvas a:focus{  color: #f1f1f1;  }
 .sidenav .closebtn {
     position: absolute;
@@ -122,7 +132,6 @@ body { font-family: "Lato", sans-serif;  }
     top: 0px;
     left: 0px;
     margin-bottom:10px;
-
 }
 .topnav span{float:left;color:aliceblue;}
 .topnav a {
@@ -169,14 +178,13 @@ body { font-family: "Lato", sans-serif;  }
     margin-right:200px;
     margin-left: 200px;
     margin-top: 20px;
-
 }
 
 /*------breadcrumb------------ */
 ul.breadcrumb {
     padding: 10px 16px;
     list-style: none;
-    background-color: #eee;
+    background-color: white;
     font-size: 17px;
     margin-top:150px;
     width:100%;

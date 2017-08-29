@@ -42,6 +42,8 @@ public class SelectBooksServlet extends HttpServlet{
             throws ServletException, IOException {
         doGet(request, response);
         UserType userType = new UserType();
+        PaginationServlet ps = new PaginationServlet();
+        ps.UpdateCurrentPage(1);
         if( userType.getType(user.username, user.password).equalsIgnoreCase("user")) {
             getServletContext().getRequestDispatcher("/products_user.jsp").forward(request, response);
         }

@@ -15,7 +15,7 @@ import java.util.Base64;
 
 
 public class CartDao {
-    public static ArrayList alCartItems = new ArrayList();
+    public static ArrayList allCartItems = new ArrayList();
     public static double dblOrderTotal;
     public static Connection connect() {
         Connection conn = null;
@@ -82,10 +82,20 @@ public class CartDao {
         }
         return id;
     }
+    public static int getItemBook(String title){
+       CartItem cartItem = new CartItem();
+        for(int i=0; i< allCartItems.size(); i++){
+           cartItem = (CartItem) allCartItems.get(i);
+                   if(cartItem.getBook().getNume().equals(title))
+                       return i;
+        }
+        return 0;
+    }
 
     public void deleteCartItem(int iItemIndex) {
-        alCartItems.remove(iItemIndex);
+        allCartItems.remove(iItemIndex);
         calculateOrderTotal();
+        setCartItems(allCartItems);
     }
 
     public void updateCartItem(int iItemIndex, String strQuantity) {
@@ -95,12 +105,13 @@ public class CartDao {
         CartItem cartItem = null;
         iQuantity = Integer.parseInt(strQuantity);
         if(iQuantity>0) {
-            cartItem = (CartItem)alCartItems.get(iItemIndex);
+            cartItem = (CartItem)allCartItems.get(iItemIndex);
             dblUnitCost = cartItem.getUnitCost();
             dblTotalCost = dblUnitCost*iQuantity;
             cartItem.setQuantity(iQuantity);
             cartItem.setTotalCost(dblTotalCost);
             calculateOrderTotal();
+            setCartItems(allCartItems);
         }
     }
 
@@ -119,7 +130,7 @@ public class CartDao {
                 cartItem.setUnitCost(dblUnitCost);
                 cartItem.setQuantity(iQuantity);
                 cartItem.setTotalCost(dblTotalCost);
-                alCartItems.add(cartItem);
+                allCartItems.add(cartItem);
                 calculateOrderTotal();
             }
         } catch (NumberFormatException nfe) {
@@ -132,28 +143,28 @@ public class CartDao {
     }
 
     public static void addCartItem(CartItem cartItem) {
-        alCartItems.add(cartItem);
+        allCartItems.add(cartItem);
     }
     public CartItem getCartItem(int iItemIndex) {
         CartItem cartItem = null;
-        if(alCartItems.size()>iItemIndex) {
-            cartItem = (CartItem) alCartItems.get(iItemIndex);
+        if(allCartItems.size()>iItemIndex) {
+            cartItem = (CartItem) allCartItems.get(iItemIndex);
         }
         return cartItem;
     }
     public static ArrayList getCartItems() {
-        return alCartItems;
+        return allCartItems;
     }
     public void setCartItems(ArrayList alCartItems) {
-        this.alCartItems = alCartItems;
+        this.allCartItems = alCartItems;
     }
     public static double getOrderTotal() {
         return dblOrderTotal;
     }
     protected  void calculateOrderTotal() {
         double dblTotal = 0;
-        for(int counter=0;counter<alCartItems.size();counter++) {
-            CartItem cartItem = (CartItem) alCartItems.get(counter);
+        for(int counter=0;counter<allCartItems.size();counter++) {
+            CartItem cartItem = (CartItem) allCartItems.get(counter);
             dblTotal+=cartItem.getTotalCost();
         }
         setOrderTotal(dblTotal);

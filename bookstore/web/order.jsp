@@ -24,8 +24,12 @@
 
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a href="/mycontServlet"><%=realname%></a>
-    <a href="index.jsp">Logout</a>
+    <form method="get" action="/mycontadminServlet" >
+        <input name="logout"  type="submit" value="<%=realname%>" required="required">
+    </form>
+    <form method="get" action="/logoutServlet" >
+        <input name="logout" type="submit" value="Logout" required="required">
+    </form>
 </div>
 
 <div class="topnav">
@@ -34,10 +38,7 @@
 </div>
 <div class="content">
     <div class="menu-vertical">
-        <ul class="breadcrumb">
-            <li><a href="products_admin.jsp">Home</a></li>
-            <li><a href="products_admin.jsp">Books</a></li>
-        </ul>
+
 
         <div class="form">
             <h4>Ordoneaza: </h4>
@@ -87,6 +88,7 @@
         <% } %>
         </table>
         <h3>Total de plata:</h3><%=OrderServlet.orderTotal%>
+        <a href="products_admin.jsp">Continua cumparaturile</a>
     </div>
 <script>
         function openNav() {

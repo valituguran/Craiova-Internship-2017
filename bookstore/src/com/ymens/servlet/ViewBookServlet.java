@@ -33,6 +33,8 @@ public class ViewBookServlet extends HttpServlet {
         String page = request.getParameter("pagetitle");
             book =  ViewBookDao.selectBook(title);
         session = request.getSession(false);
+        PaginationServlet ps = new PaginationServlet();
+        ps.UpdateCurrentPage(1);
         if (session != null) {
             session.setAttribute("viewbook", book);
             session.setAttribute("page", page);

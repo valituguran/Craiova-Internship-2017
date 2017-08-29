@@ -34,8 +34,10 @@ public static double orderTotal = 0.0;
         int order_id;
         String page = request.getParameter("returnpage");
         session.setAttribute("currentpage", page);
+        String user =(String) session.getAttribute("name");
+        int user_id = OrderDao.getUserId(user);
         if (orderTotal != 0) {
-            if(OrderDao.setOrder(orderTotal) != 0) {
+            if(OrderDao.setOrder(orderTotal, user_id) != 0) {
                 order_id = OrderDao.getOrderId(orderTotal);
                 for (i = 0; i < list.size(); i++) {
                     cartitem = (CartItem) list.get(i);
@@ -52,7 +54,8 @@ public static double orderTotal = 0.0;
         CartDao cartDao = new CartDao();
         for(i=0; i<list.size();i++)
             cartDao.deleteCartItem(i);
-
+        PaginationServlet ps = new PaginationServlet();
+        ps.UpdateCurrentPage(1);
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)

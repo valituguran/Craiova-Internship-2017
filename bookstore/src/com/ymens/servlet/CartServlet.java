@@ -59,6 +59,8 @@ public class CartServlet extends HttpServlet {
         } else {
             getServletContext().getRequestDispatcher("/shoppingcart_admin.jsp").forward(request, response);
         }
+        PaginationServlet ps = new PaginationServlet();
+        ps.UpdateCurrentPage(1);
     }
 
     protected void deleteCart(HttpServletRequest request) {
@@ -66,10 +68,10 @@ public class CartServlet extends HttpServlet {
 
         String title = request.getParameter("name");
         CartDao cartDao = new CartDao();
-        int id = CartDao.getIdBook(title);
+        int id = CartDao.getItemBook(title);
         ArrayList<CartItem> list =(ArrayList) session.getAttribute("cart");
         for(int i=0; i<list.size(); i++){
-            if(CartDao.getIdBook(list.get(i).getBook().getNume()) == id){
+            if(CartDao.getItemBook(list.get(i).getBook().getNume()) == id){
                 cartDao.deleteCartItem(id);
                 session.setAttribute("cart", CartDao.getCartItems());
                 nr = list.size();
@@ -81,11 +83,11 @@ public class CartServlet extends HttpServlet {
         HttpSession session = request.getSession();
         String strQuantity = request.getParameter("quantity");
         String title = request.getParameter("name");
-        int id = CartDao.getIdBook(title);
+        int id = CartDao.getItemBook(title);
         CartDao cartDao = new CartDao();
         ArrayList<CartItem> list =(ArrayList) session.getAttribute("cart");
         for(int i=0; i<list.size(); i++){
-            if(CartDao.getIdBook(list.get(i).getBook().getNume()) == id){
+            if(CartDao.getItemBook(list.get(i).getBook().getNume()) == id){
                 cartDao.updateCartItem(id, strQuantity);
                 session.setAttribute("cart", CartDao.getCartItems());
                 nr = list.size();

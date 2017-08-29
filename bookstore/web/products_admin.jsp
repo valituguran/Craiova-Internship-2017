@@ -35,8 +35,12 @@ realname=(String)session.getAttribute("realname");%>
 %>
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a href="/mycontadminServlet"><%=realname%></a>
-    <a href="/logoutServlet">Logout</a>
+    <form method="get" action="/mycontadminServlet" >
+        <input name="logout"  type="submit" value="<%=realname%>" required="required">
+    </form>
+    <form method="get" action="/logoutServlet" >
+        <input name="logout"  type="submit" value="Logout" required="required">
+    </form>
 </div>
 <div class="topnav">
     <div style="align:left;cursor:pointer;color:white;font-size: 20px;margin:30px;float:left" onclick="openNav()">&#9776;<%=realname%></div>
@@ -46,10 +50,7 @@ realname=(String)session.getAttribute("realname");%>
 </div>
 <div class="content">
     <div class="menu-vertical">
-        <ul class="breadcrumb">
-            <li><a href="#this">Prima pagina</a></li>
-            <li><a href="#this">Produse</a></li>
-        </ul>
+
         <div class="form">
             <h4>Ordoneaza: </h4>
             <form method="get" action="/filterbypriceServlet" id="filterbyprice">

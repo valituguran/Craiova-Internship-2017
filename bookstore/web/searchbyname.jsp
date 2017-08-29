@@ -42,8 +42,7 @@
 <div class="content">
     <div class="menu-vertical">
     <ul class="breadcrumb">
-        <li><a href="index.jsp">Home</a></li>
-        <li><a href="#products">Books</a></li>
+        <li><a href="index.jsp">Prima pagina</a></li>
     </ul>
 
     <div class="form">

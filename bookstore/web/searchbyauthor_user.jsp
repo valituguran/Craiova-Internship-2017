@@ -35,8 +35,12 @@
 %>
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a href="/mycontuserServlet"><%=realname%></a>
-    <a href="index.jsp">Logout</a>
+    <form method="get" action="/mycontadminServlet" >
+        <input name="logout"  type="submit" value="<%=realname%>" required="required">
+    </form>
+    <form method="get" action="/logoutServlet" >
+        <input name="logout" type="submit" value="Logout" required="required">
+    </form>
 </div>
 
 <div class="topnav">
@@ -47,8 +51,7 @@
 <div class="content">
      <div class="menu-vertical">
     <ul class="breadcrumb">
-        <li><a href="products_user.jsp">Home</a></li>
-        <li><a href="#products">Books</a></li>
+        <li><a href="products_user.jsp">Prima pagina</a></li>
     </ul>
 
     <div class="form">

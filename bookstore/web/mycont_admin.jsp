@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@page import="com.ymens.User"%>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.ymens.UserType" %>
+<%@ page import="com.ymens.dao.CartDao" %>
+<%@ page import="com.ymens.dao.OrderDao" %>
+<%@ page import="com.ymens.dao.History" %>
+<%@ page import="java.util.LinkedList" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,16 +16,21 @@
     <link src="../scripts/file.js">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
 </head>
-
 <body>
 <%String realname;
-    realname=(String)session.getAttribute("realname");%>
+    realname=(String)session.getAttribute("realname");
+    String name = (String) session.getAttribute("name");
+    ArrayList list =(ArrayList) session.getAttribute("orders");
+%>
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a href="/mycontServlet"><%=realname%></a>
-    <a href="index.jsp">Logout</a>
+    <form method="get" action="/mycontadminServlet" >
+        <input name="logout"  type="submit" value="<%=realname%>" required="required">
+    </form>
+    <form method="get" action="/logoutServlet" >
+        <input name="logout" type="submit" value="Logout" required="required">
+    </form>
 </div>
-
 <div class="topnav">
     <div style="align:left;cursor:pointer;color:white;font-size: 20px;margin:30px;float:left" onclick="openNav()">&#9776;<%=realname%></div>
 
@@ -30,8 +41,7 @@
 <div class="content">
     <div class="menu-vertical">
         <ul class="breadcrumb">
-            <li><a href="products_admin.jsp">Home</a></li>
-            <li><a href="products_admin.jsp">Books</a></li>
+            <li><a href="products_admin.jsp">Prima pagina</a></li>
         </ul>
 
         <div class="form">
@@ -52,7 +62,6 @@
                 <h3>Cautare dupa nume</h3><br>
                 <input name="searchbyname" type="text" size="40" placeholder="Cauta..." required="required">
             </form>
-
         </div>
     </div>
 </div>
@@ -85,6 +94,39 @@
                     </tr>
                     </table>
                 </form>
+                <table style="width:900px;margin-top:100px;margin-bottom:100px">
+                    <tr>
+                        <th colspan="3">Istoricul comenziilor mele</th>
+                    </tr>
+                    <%if (list.size() == 0){%>
+                    <tr>
+                        <th colspan="3"></th>
+                    </tr><tr>
+                    <th>Id Comanda</th>
+                    <th>Produse comandate</th>
+                    <th>Suma totala</th>
+                </tr>
+                    <% } else {
+                       ArrayList list1 = new ArrayList();
+                       String string;
+                       for(int i=0; i<list.size(); i++){
+                           string = String.format("%s%d", "orders", i);
+                           list1 = (ArrayList) session.getAttribute(string);
+                   %>
+                    <tr>
+                        <th><%=i+1%></th>
+                        <th><% String str;
+                            int book_id;
+                            for (int j=0; j<list1.size(); j++){%>
+                            <%str = list1.get(j).toString();
+                            book_id = History.getIdBook(str);%>
+                            <p><%=History.getBook(book_id)%></p>
+                           <%}%></th>
+                        <th><%=(Double)session.getAttribute("price"+string)%></th>
+                        </tr>
+                            <%}%>
+                    <%}%>
+                </table>
             </div>
         </div>
     </div>

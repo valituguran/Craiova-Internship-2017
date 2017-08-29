@@ -54,6 +54,8 @@ public class UpdateAccountDetailsServlet extends HttpServlet {
         String n =(String) session.getAttribute("name");
         String p = (String)session.getAttribute("password");
         User user = MyContDao.select(n, p);
+        PaginationServlet ps = new PaginationServlet();
+        ps.UpdateCurrentPage(1);
         if (session != null) {
             session.setAttribute("currentuser", user);
         }
@@ -80,6 +82,7 @@ public class UpdateAccountDetailsServlet extends HttpServlet {
         String newName = request.getParameter("realname");
         String username = request.getParameter("username");
         UpdateAccountDetailsDao.UpdateRealName(newName, username);
+        session.setAttribute("realname", newName);
     }
     protected void updateEmail(HttpServletRequest request) throws SQLException {
         HttpSession session = request.getSession();

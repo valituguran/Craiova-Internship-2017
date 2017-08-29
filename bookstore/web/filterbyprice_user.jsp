@@ -34,8 +34,12 @@
 %>
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a href="/mycontuserServlet"><%=realname%></a>
-    <a href="index.jsp">Logout</a>
+    <form method="get" action="/mycontadminServlet" >
+        <input name="logout"  type="submit" value="<%=realname%>" required="required">
+    </form>
+    <form method="get" action="/logoutServlet" >
+        <input name="logout" type="submit" value="Logout" required="required">
+    </form>
 </div>
 
 <div class="topnav">
@@ -104,7 +108,7 @@
 
 <div class="bottom">
     <form  method="POST" action="/paginationServlet">
-        <input type="hidden" name="page" id="page" value="/searchbyauthor_user.jsp">
+        <input type="hidden" name="page" id="page" value="/filterbyprice_user.jsp">
         <ul class="pagination">
             <li> <input type="submit" onclick="pagination()" name="action" value="Prev" id="prev" ></li>
             <input type="hidden" name="<%=noOfPages%>" id="noOfPages" value="noOfPages">

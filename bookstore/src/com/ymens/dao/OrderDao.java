@@ -22,14 +22,34 @@ public class OrderDao {
             return conn;
         }
     }
-    public static int setOrder(Double orderTotal)
+    public static int getUserId (String title){
+        boolean status = false;
+            Connection conn = connect();
+            PreparedStatement pst = null;
+            ResultSet rs = null;
+            int id = 0;
+            try {
+                pst = conn.prepareStatement("select * from users where username=?");
+                pst.setString(1, title);
+                rs = pst.executeQuery();
+                if (rs.next()) {
+                    id = rs.getInt("id");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return id;
+        }
+
+    public static int setOrder(Double orderTotal, int user_id)
     {
         PreparedStatement ps = null;
         int status = 0;
         Connection conn = connect();
         try {
-            ps = conn.prepareStatement("insert into `order`(total_price) values(?)");
+            ps = conn.prepareStatement("insert into `order`(total_price, user_id) values(?, ?)");
             ps.setDouble(1, orderTotal);
+            ps.setInt(2, user_id);
             status = ps.executeUpdate();
         } catch (Exception e) {
             System.out.println(e);
@@ -90,6 +110,7 @@ public class OrderDao {
             return id;
         }
     }
+
     public static void setOrderItem(int orderId, String title, double price) {
         PreparedStatement ps = null;
         int status = 0;
@@ -104,6 +125,7 @@ public class OrderDao {
             e.printStackTrace();
         }
     }
+
 }
 
 

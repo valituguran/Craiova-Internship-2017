@@ -20,11 +20,13 @@ import java.io.PrintWriter;
             response.setContentType("text/html");
             PrintWriter out=response.getWriter();
             HttpSession session = request.getSession();
+            //session.removeAttribute("name");
+            //session.removeAttribute("password");
+            //session.removeAttribute("realname");
             session.invalidate();
             PaginationServlet ps = new PaginationServlet();
             ps.UpdateCurrentPage(1);
             request.getRequestDispatcher("index.jsp").include(request, response);
-
         }
     }
 

@@ -94,7 +94,7 @@
 
 <div class="bottom">
     <form  method="POST" action="/paginationServlet">
-        <input type="hidden" name="page" id="page" value="/searchbyauthor.jsp">
+        <input type="hidden" name="page" id="page" value="/filterbyprice.jsp">
         <ul class="pagination">
             <li> <input type="submit" onclick="pagination()" name="action" value="Prev" id="prev" ></li>
             <input type="hidden" name="noOfPages" id="noOfPages" value="<%=noOfPages%>">

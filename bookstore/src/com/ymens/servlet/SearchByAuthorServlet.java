@@ -40,6 +40,8 @@ public class SearchByAuthorServlet extends HttpServlet {
         session.setAttribute("typelist", typelist);
         user.username = (String) session.getAttribute("name");
         user.password = (String) session.getAttribute("password");
+        PaginationServlet ps = new PaginationServlet();
+        ps.UpdateCurrentPage(1);
         doPost(request, response);
     }
 

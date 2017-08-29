@@ -20,8 +20,12 @@
     realname=(String)session.getAttribute("realname");%>
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a href="/mycontuserServlet"><%=realname%></a>
-    <a href="index.jsp">Logout</a>
+    <form method="get" action="/mycontadminServlet" >
+        <input name="logout"  type="submit" value="<%=realname%>" required="required">
+    </form>
+    <form method="get" action="/logoutServlet" >
+        <input name="logout" type="submit" value="Logout" required="required">
+    </form>
 </div>
 
 <div class="topnav">
@@ -32,7 +36,6 @@
 <div class="content">
     <ul class="breadcrumb">
         <li><a href="products_user.jsp">Prima pagina</a></li>
-        <li><a href="products_user.jsp">Produse</a></li>
     </ul>
     <div class="form">
         <h4>Ordoneaza: </h4>
