@@ -91,7 +91,6 @@
         <% }%>
     </div>
 </div>
-
 <div class="bottom">
     <form  method="POST" action="/paginationServlet">
         <input type="hidden" name="page" id="page" value="/filterbyprice.jsp">
