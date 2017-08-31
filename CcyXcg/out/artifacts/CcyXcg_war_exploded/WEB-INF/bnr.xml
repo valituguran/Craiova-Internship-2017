@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataSet xsi:schemaLocation="http://www.bnr.ro/xsd nbrfxrates.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.bnr.ro/xsd">
+    <Header>
+        <Publisher>National Bank of Romania</Publisher>
+        <PublishingDate>2017-08-28</PublishingDate>
+        <MessageType>DR</MessageType>
+    </Header>
+    <Body>
+        <Subject>Reference rates</Subject>
+        <OrigCurrency>RON</OrigCurrency>
+        <Cube date="2017-08-28">
+            <Rate currency="AED">1.0486</Rate>
+            <Rate currency="AUD">3.0611</Rate>
+            <Rate currency="BGN">2.3498</Rate>
+            <Rate currency="BRL">1.2187</Rate>
+            <Rate currency="CAD">3.0895</Rate>
+            <Rate currency="CHF">4.0387</Rate>
+            <Rate currency="CNY">0.5811</Rate>
+            <Rate currency="CZK">0.1760</Rate>
+            <Rate currency="DKK">0.6178</Rate>
+            <Rate currency="EGP">0.2177</Rate>
+            <Rate currency="EUR">4.5958</Rate>
+            <Rate currency="GBP">4.9690</Rate>
+            <Rate currency="HRK">0.6199</Rate>
+            <Rate currency="HUF" multiplier="100">1.5110</Rate>
+            <Rate currency="INR">0.0603</Rate>
+            <Rate currency="JPY" multiplier="100">3.5264</Rate>
+            <Rate currency="KRW" multiplier="100">0.3436</Rate>
+            <Rate currency="MDL">0.2173</Rate>
+            <Rate currency="MXN">0.2175</Rate>
+            <Rate currency="NOK">0.4967</Rate>
+            <Rate currency="NZD">2.7888</Rate>
+            <Rate currency="PLN">1.0784</Rate>
+            <Rate currency="RSD">0.0386</Rate>
+            <Rate currency="RUB">0.0659</Rate>
+            <Rate currency="SEK">0.4829</Rate>
+            <Rate currency="THB">0.1159</Rate>
+            <Rate currency="TRY">1.1161</Rate>
+            <Rate currency="UAH">0.1510</Rate>
+            <Rate currency="USD">3.8513</Rate>
+            <Rate currency="XAU">160.6229</Rate>
+            <Rate currency="XDR">5.4587</Rate>
+            <Rate currency="ZAR">0.2946</Rate>
+        </Cube>
+    </Body>
+</DataSet>

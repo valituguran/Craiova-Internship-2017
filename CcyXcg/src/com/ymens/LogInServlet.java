@@ -2,8 +2,6 @@
 
 package com.ymens;
 
-import dao.PaginationDao;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,7 +11,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class PaginationServlet extends HttpServlet{
+public class LogInServlet extends HttpServlet{
 
     private static final long serialVersionUID = 1L;
 
@@ -23,16 +21,23 @@ public class PaginationServlet extends HttpServlet{
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 
-        Integer page= Integer.valueOf(request.getParameter("page"));
+        String n=request.getParameter("name");
+        String p=request.getParameter("password");
+
         HttpSession session = request.getSession(false);
-        session.setAttribute("page", page);
-        if (request.getParameter("button1") != null) {
-            PaginationDao.add(page);
-        } else if (request.getParameter("button2") != null) {
-            PaginationDao.minus(page);
+        if(session!=null)
+            session.setAttribute("name", n);
+
+        if(com.ymens.LogInDao.validate(n,p,1)==true){
+            response.sendRedirect("admin.jsp");
+        }
+        else if(com.ymens.LogInDao.validate(n,p,0)==true){
+            response.sendRedirect("homeuser.jsp");
+        }
+        else{
+            out.write("Username or password incorect!");
         }
 
-        getServletContext().getRequestDispatcher("/home.jsp").forward(request, response);
         out.close();
     }
 }
