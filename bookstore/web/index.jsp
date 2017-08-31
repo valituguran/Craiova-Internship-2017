@@ -14,6 +14,7 @@
 <head>
     <title>Bookstore</title>
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../styles/style.css">
     <link href="../scripts/file.js">
@@ -63,7 +64,7 @@
 <div class="content">
     <div class="menu-vertical">
         <ul class="breadcrumb">
-            <li><a href="#products">Prima Pagina</a></li>
+
         </ul>
         <div class="form">
             <h4>Ordoneaza: </h4>
@@ -121,6 +122,9 @@
         </ul>
     </form>
 </div>
+<script>
+
+</script>
 </body>
 </html>
 

@@ -42,10 +42,10 @@ public class FilterServlet extends HttpServlet {
             case "filterbyprice":
                 list = SelectBooksDao.select();
                 break;
-            case "searchbyauthor":
+            case "filtersearchbyauthor":
                 list = SearchByAuthorServlet.list;
                 break;
-            case "searchbyname":
+            case "filtersearchbyname":
                 list = SearchByNameServlet.list;
                 break;
         }
@@ -55,7 +55,7 @@ public class FilterServlet extends HttpServlet {
         if (strfilterdesc != null && !strfilterdesc.equals("")) {
             Collections.sort(list, new PriceComparatorDesc());
         }
-        session.setAttribute("filterbyprice", list);
+        session.setAttribute(type_list, list);
         session.setAttribute("typelist", type_list);
         user.username = (String) session.getAttribute("name");
         user.password = (String) session.getAttribute("password");
@@ -71,7 +71,7 @@ public class FilterServlet extends HttpServlet {
                     getServletContext().getRequestDispatcher("/filterbyprice.jsp").forward(request, response);
                 }
                 break;
-            case "searchbyname":
+            case "filtersearchbyname":
                 if (usertype.equalsIgnoreCase("user")) {
                     getServletContext().getRequestDispatcher("/searchbyname_user.jsp").forward(request, response);
                 } else if (usertype.equalsIgnoreCase("admin")) {
@@ -80,7 +80,7 @@ public class FilterServlet extends HttpServlet {
                     getServletContext().getRequestDispatcher("/searchbyname.jsp").forward(request, response);
                 }
                 break;
-            case "searchbyauthor":
+            case "filtersearchbyauthor":
                 if (usertype.equalsIgnoreCase("user")) {
                     getServletContext().getRequestDispatcher("/searchbyauthor_user.jsp").forward(request, response);
                 } else if (usertype.equalsIgnoreCase("admin")) {
@@ -89,8 +89,6 @@ public class FilterServlet extends HttpServlet {
                     getServletContext().getRequestDispatcher("/searchbyauthor.jsp").forward(request, response);
                 }
                 break;
-
-
         }
     }
     public void doGet(HttpServletRequest request, HttpServletResponse response)

@@ -18,8 +18,10 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
 </head>
 <body>
+
 <%String realname;
-realname=(String)session.getAttribute("realname");%>
+realname=(String)session.getAttribute("realname");
+%>
 <%int currentpage = PaginationServlet.currentPage;
     LinkedList list = (LinkedList)session.getAttribute("list");
     int recordsPerPage = PaginationServlet.recordsPerPage;
@@ -39,7 +41,7 @@ realname=(String)session.getAttribute("realname");%>
         <input name="logout"  type="submit" value="<%=realname%>" required="required">
     </form>
     <form method="get" action="/logoutServlet" >
-        <input name="logout"  type="submit" value="Logout" required="required">
+        <input onclick="ClearHistory()" name="logout"  type="submit" value="Logout" required="required">
     </form>
 </div>
 <div class="topnav">
@@ -133,6 +135,14 @@ realname=(String)session.getAttribute("realname");%>
     function products(){
         document.getElementById("currentpage").value = "1";
     }
+
+            function ClearHistory()
+            {
+                var backlen = history.length;
+                history.go(-backlen);
+                window.location.href = "login.jsp";
+            }
+
 </script>
 </body>
 </html>

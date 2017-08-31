@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html >
 <head>
-	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title> Login Form</title>
+
+
+
 	<link rel="stylesheet" href="../styles/layout_login.css">
 	<style>
 

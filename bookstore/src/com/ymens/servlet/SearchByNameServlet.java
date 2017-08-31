@@ -22,10 +22,8 @@ public class SearchByNameServlet extends HttpServlet {
     HttpSession session;
     private static User user = new User();
 
-    @Override
-    public void init()
-            throws ServletException {
-    }
+
+
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -33,10 +31,12 @@ public class SearchByNameServlet extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         String n = request.getParameter("searchbyname");
+        String typelist = "searchbyname";
         list = SearchByNameDao.searchByName(n);
         session = request.getSession(false);
         if (session != null) {
             session.setAttribute("searchbyname", list);
+            session.setAttribute("typelist", typelist);
         }
         user.username = (String) session.getAttribute("name");
         user.password = (String) session.getAttribute("password");

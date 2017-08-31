@@ -58,11 +58,11 @@
             <h4>Ordoneaza: </h4>
             <form method="get" action="/filterbypriceServlet" id="filterbyprice">
                 <input name="filterasc" class="filter" type="submit" value="Pret crescator" required="required">
-                <input type="hidden" name="typelist" value="filterbyprice" required="required">
+                <input type="hidden" name="typelist" value="filtersearchbyname" required="required">
             </form>
             <form method="get" action="/filterbypriceServlet" id="filterbyprice">
                 <input name="filterdesc" class="filter" type="submit" value="Pret descrescator" required="required">
-                <input type="hidden" name="typelist" value="filterbyprice" required="required">
+                <input type="hidden" name="typelist" value="filtersearchbyname" required="required">
             </form>
             <form method="get" action="/searchbyauthorServlet" id="searchbyauthor">
                 <h3>Cautare dupa autor</h3><br>

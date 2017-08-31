@@ -23,7 +23,7 @@ public class LoginServlet extends HttpServlet {
 		String n = request.getParameter("name");
 		String p = request.getParameter("password");
 		HttpSession session = request.getSession(false);
-        String realname = LoginDao.getRealName(n, p);
+		String realname = LoginDao.getRealName(n, p);
 		if (session != null) {
 			session.setAttribute("name", n);
 			session.setAttribute("password", p);
@@ -41,7 +41,7 @@ public class LoginServlet extends HttpServlet {
 				session.setAttribute("type", "user");
 				getServletContext().getRequestDispatcher("/selectbooksuserServlet").forward(request, response);
 			}
-		}else {
+		} else {
 			out.print("<p style=\"color:red\">Sorry username or password error</p>");
 			RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
 			rd.include(request, response);
@@ -56,4 +56,3 @@ public class LoginServlet extends HttpServlet {
 		doPost(request, response);
 	}
 }
-

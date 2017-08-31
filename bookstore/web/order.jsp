@@ -88,7 +88,7 @@
         <% } %>
         </table>
         <h3>Total de plata:</h3><%=OrderServlet.orderTotal%>
-        <a href="products_admin.jsp">Continua cumparaturile</a>
+        <p><a href="products_admin.jsp">Continua cumparaturile</a></p>
     </div>
 <script>
         function openNav() {
