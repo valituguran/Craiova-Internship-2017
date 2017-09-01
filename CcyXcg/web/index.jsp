@@ -4,6 +4,7 @@
 <%@ page import="com.ymens.Parse" %>
 <%@ page import="dao.SearchDao" %>
 <%@ page import="com.ymens.SearchServlet" %>
+<%@ page import="dao.PaginationDao" %>
 <%--
   Created by IntelliJ IDEA.
   User: lucian.Nicolescu
@@ -31,7 +32,6 @@
       <li><a href="Aici trebuie adaugata calea catre Currencies">Currencies</a></li>
       <li><a href="Aici trebuie adaugata calea catre history">History</a></li>
       <a href="login.jsp">Login</a>
-      <a href="BNRCurrency.jsp">BNR Currency</a>
     </ul>
   </div>
 </div>
@@ -42,6 +42,19 @@
     <input type="submit" value="Search">
 
   </form>
+  <%
+    int lensearch = (int) session.getAttribute("lenght");//lensearch este dimensiunea listei de cautari
+  %>
+  <%
+    int len;//len este indexul paginii
+    if(session.getAttribute("page")==null)
+    {
+      len=1;
+    }
+    else{
+      len = (int) session.getAttribute("page");
+    }
+  %>
   <div class="table-div">
 
     <table class="tablee" frame="box">
@@ -50,19 +63,19 @@
         <th>Value</th>
         <th>Actions</th>
       </tr>
-      <%
-        int len = (int) session.getAttribute("lenght");
-      %>
-      <%if (len >0){
+
+      <%if (lensearch >0){
           LinkedList list = (LinkedList) session.getAttribute("search");
-        for (int i=0; i<len; i=i+2){%>
+        for (int i=0; i<lensearch; i=i+2){%>
       <tr>
         <th><%=list.get(i)%></th>
         <th><%=list.get(i+1)%></th>
         <th>Buy/Sell</th>
-      </tr><%}} else if(len==0){%>
+      </tr>
+      <!------------------------------------------------------------------------------------------------------------>
+      <%}} else if(lensearch==0){%>
          <p class="errorpairname">Pair name doesn't exist</p>
-        <%for (int i=0; i<pairs.size(); i++){%>
+        <%for (int i = PaginationDao.pagination(len); i< PaginationDao.pagination(len+1); i++){%>
         <%  String pair = (String)pairs.get(i);
             Double value = (Double) values.get(i);%>
         <tr>
@@ -75,7 +88,11 @@
 
 
     </table>
-
+    <form action="PaginationServlet" method="get">
+      <input type="submit" name="button1" value="▲" />
+      <input type="submit" name="button2" value="▼" />
+      <input class="search" name="page" type="text">
+    </form>
   </div>
 </div>
 </body>

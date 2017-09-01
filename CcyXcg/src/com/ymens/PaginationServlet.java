@@ -22,16 +22,21 @@ public class PaginationServlet extends HttpServlet{
 
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
-
-        Integer page= Integer.valueOf(request.getParameter("page"));
-        HttpSession session = request.getSession(false);
-        session.setAttribute("page", page);
-        if (request.getParameter("button1") != null) {
-            PaginationDao.add(page);
-        } else if (request.getParameter("button2") != null) {
-            PaginationDao.minus(page);
+        int page = 1;
+        try {
+            page= Integer.parseInt(request.getParameter("page"));
+        }catch (NumberFormatException e){
+            e.printStackTrace();
         }
 
+        HttpSession session = request.getSession(false);
+        if (request.getParameter("button1") != null) {
+            page = PaginationDao.add(page);
+        }
+        else if (request.getParameter("button2") != null) {
+            page = PaginationDao.minus(page);
+        }
+        session.setAttribute("page", page);
         getServletContext().getRequestDispatcher("/home.jsp").forward(request, response);
         out.close();
     }

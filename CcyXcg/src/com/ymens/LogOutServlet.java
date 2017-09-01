@@ -19,6 +19,7 @@ public class LogOutServlet extends HttpServlet{
             throws ServletException, IOException {
 
         request.getSession().invalidate();
-        response.sendRedirect("home.jsp");
+        //if()
+        getServletContext().getRequestDispatcher("/home.jsp").forward(request, response);
     }
 }

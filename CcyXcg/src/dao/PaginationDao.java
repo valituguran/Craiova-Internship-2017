@@ -7,11 +7,16 @@ public class PaginationDao {
         return pageindex*10;
     }
     public static int add(int pageindex){
-
-        return pageindex++;
+        if(ParseDao.pairs.size()>pagination(pageindex))
+        return ++pageindex;
+        else
+            return pageindex;
     }
     public static int minus(int pageindex){
-        return pageindex--;
+        if(pageindex > 1)
+        return --pageindex;
+        else
+            return pageindex;
     }
 
 }

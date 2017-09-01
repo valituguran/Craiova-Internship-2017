@@ -29,8 +29,8 @@
     <div>
         <ul>
             <a class="titlehref"href="home.jsp">CCy Xcg</a>
-            <li><a href="Aici trebuie adaugata calea catre Currencies">Currencies</a></li>
-            <li><a href="Aici trebuie adaugata calea catre history">History</a></li>
+            <li><a href="home.jsp">Currencies</a></li>
+            <li><a href="History.jsp">History</a></li>
             <a href="login.jsp">Login</a>
         </ul>
     </div>
@@ -46,15 +46,15 @@
 </div>
 <div class="table-div">
     <%
-        int len;
-        if(session.getAttribute("page")==null)
-        {
-            len=1;
-        }
-        else{
+    int len;
+    if(session.getAttribute("page")==null)
+    {
+        len=1;
+    }
+    else{
         len = (int) session.getAttribute("page");
-        }
-    %>
+    }
+%>
     <table class="tablee " frame="box"  id="currencyTable">
         <col span="1" width="300">
         <tr>
@@ -62,23 +62,21 @@
                 <th>Value</th>
                 <th>Actions</th>
             </tr>
-            <%for (int i = PaginationDao.pagination(len)+1; i< PaginationDao.pagination(len+1); i++){%>
-            <%  String pair = (String)pairs.get(i);
-                Double value = (Double) values.get(i);%>
-
-
+            <%for (int i = PaginationDao.pagination(len-1); i< PaginationDao.pagination(len); i++){%>
+            <%String pair = (String)pairs.get(i);
+                Double value = (Double)values.get(i);%>
             <tr>
                 <th><%=pair%></th>
                 <th><%=value%></th>
                 <th>Buy/Sell</th>
             </tr>
-            <%}%>
+        <%}%>
         </table>
 
     <form action="PaginationServlet" method="get">
-        <input type="submit" name="button1" value="▲" />
-        <input type="submit" name="button2" value="▼" />
-        <input class="search" name="page" type="text">
+        <input type="submit" name="button1" value="▲" required="required">
+        <input type="submit" name="button2" value="▼" required="required">
+        <input class="search" name="page" type="text" value="<%=len%>">
     </form>
 
     <script>
