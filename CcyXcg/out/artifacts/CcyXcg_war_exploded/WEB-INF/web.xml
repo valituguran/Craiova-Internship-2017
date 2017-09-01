@@ -51,7 +51,14 @@
         <servlet-name>pagination</servlet-name>
         <url-pattern>/PaginationServlet</url-pattern>
     </servlet-mapping>
-
+    <servlet>
+        <servlet-name>chart</servlet-name>
+        <servlet-class>com.ymens.ChartServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>chart</servlet-name>
+        <url-pattern>/ChartServlet</url-pattern>
+    </servlet-mapping>
     <welcome-file-list>
         <welcome-file>/parseServlet</welcome-file>
     </welcome-file-list>
