@@ -9,13 +9,13 @@
 <html>
 <head>
     <head>
-        <link rel="stylesheet" type="text/css" href="../Stylesheets/LoginStyle.css">
+        <link rel="stylesheet" type="text/css" href="../StyleSheet/registerStyle.css">
     </head>
     <title>Register</title>
 </head>
 <body>
-<div>Register</div>
-<form class="form" method="get" action="registerServlet" >
+
+<form class="register" method="get" action="registerServlet" >
    Name: <input name="name" required="Please enter a name"><br>
     Email: <input name="email" required="Please enter the email"><br>
     Username: <input name="username" required="Please enter a username"><br>

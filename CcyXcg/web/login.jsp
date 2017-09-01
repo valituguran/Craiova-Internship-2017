@@ -9,13 +9,12 @@
 <html>
 <head>
     <head>
-        <link rel="stylesheet" type="text/css" href="../Stylesheets/LoginStyle.css">
+        <link rel="stylesheet" type="text/css" href="../StyleSheet/loginStyle.css">
     </head>
     <title>Login</title>
 </head>
 <body>
-<div class="loginmessage">LogIn Form</div>
-<form class="form" method="get" action="loginServlet" >
+<form class="login" method="get" action="loginServlet" >
    Name: <input name="name" required="Please enter a name"><br>
     Password: <input name="password" type="password" required="Please enter a password"><br>
     <input type="submit" value="Login"><br>

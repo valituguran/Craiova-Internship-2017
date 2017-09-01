@@ -24,7 +24,7 @@
     ParseDao.getcurrency();
     LinkedList pairs =   ParseDao.pairs;
     LinkedList values = ParseDao.values;%>
-
+<%if(session.getAttribute("name")==null) {%>
 <div class="header">
     <div>
         <ul>
@@ -145,5 +145,129 @@
     </script>
 
 </div>
+<%}else if(session.getAttribute("name")!=null){%>
+<div class="header">
+    <div>
+        <ul>
+            <a class="titlehref"href="home.jsp">CCy Xcg</a>
+            <li><a href="home.jsp">Currencies</a></li>
+            <li><a href="History.jsp">History</a></li>
+            <%String name = (String) session.getAttribute("name");%>
+            <li>Hello<%=name%></li>
+            <form action="logoutServlet" method="post">
+                <input type="submit" value="Logout" />
+            </form>
+        </ul>
+    </div>
+</div>
+<div class="filterbox">
+    <div >Filter</div>
+    <form action="searchServlet" method="get">
+        <input class="search" name="search" type="text" placeholder="Pair name">
+        <input type="submit" value="Search">
+
+    </form>
+
+</div>
+<div class="table-div">
+        <%
+    int len;
+    if(session.getAttribute("page")==null)
+    {
+        len=1;
+    }
+    else{
+        len = (int) session.getAttribute("page");
+    }
+%>
+    <table class="tablee " frame="box"  id="currencyTable">
+        <col span="1" width="300">
+        <tr>
+            <th>Pair name<a onclick="sortTableAscending()">▲</a><a onclick="sortTableDescending()">▼</a> </th>
+            <th>Value</th>
+            <th>Actions</th>
+        </tr>
+        <%for (int i = PaginationDao.pagination(len-1); i< PaginationDao.pagination(len); i++){%>
+        <%String pair = (String)pairs.get(i);
+            Double value = (Double)values.get(i);%>
+        <tr>
+            <th><%=pair%></th>
+            <th><%=value%></th>
+            <th>Buy/Sell</th>
+        </tr>
+        <%}%>
+    </table>
+
+    <form action="PaginationServlet" method="get">
+        <input type="submit" name="button1" value="▲" required="required">
+        <input type="submit" name="button2" value="▼" required="required">
+        <input class="search" name="page" type="text" value="<%=len%>">
+    </form>
+
+    <script>
+        function sortTableAscending() {
+            var table, rows, switching, i, x, y, shouldSwitch;
+            table = document.getElementById("currencyTable");
+            switching = true;
+
+            while (switching) {
+
+                switching = false;
+                rows = table.getElementsByTagName("TR");
+
+                for (i = 1; i < (rows.length - 1); i++) {
+
+                    shouldSwitch = false;
+
+                    x = rows[i].getElementsByTagName("TH")[0];
+                    y = rows[i + 1].getElementsByTagName("TH")[0];
+
+                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+
+                        shouldSwitch= true;
+                        break;
+                    }
+                }
+                if (shouldSwitch) {
+                    /*If a switch has been marked, make the switch
+                     and mark that a switch has been done:*/
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                }
+            }
+        }
+        function sortTableDescending() {
+            var table, rows, switching, i, x, y, shouldSwitch;
+            table = document.getElementById("currencyTable");
+            switching = true;
+
+            while (switching) {
+
+                switching = false;
+                rows = table.getElementsByTagName("TR");
+
+                for (i = 1; i < (rows.length - 1); i++) {
+
+                    shouldSwitch = false;
+
+                    x = rows[i].getElementsByTagName("TH")[0];
+                    y = rows[i + 1].getElementsByTagName("TH")[0];
+
+                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+
+                        shouldSwitch= true;
+                        break;
+                    }
+                }
+                if (shouldSwitch) {
+                    /*If a switch has been marked, make the switch
+                     and mark that a switch has been done:*/
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                }
+            }
+        }
+    </script>
+<%}%>
 </body>
 </html>
