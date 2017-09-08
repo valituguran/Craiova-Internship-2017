@@ -10,6 +10,7 @@
 <head>
     <head>
         <link rel="stylesheet" type="text/css" href="../StyleSheet/loginStyle.css">
+        <link rel="stylesheet" type="text/css" href="../StyleSheet/homeStyle.css">
     </head>
     <title>Login</title>
 </head>

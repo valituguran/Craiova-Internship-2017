@@ -9,12 +9,17 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="../StyleSheet/homeStyle.css">
+
 </head>
 <body>
 <a href="register.jsp">Register an user</a>
 <form action="logoutServlet" method="post">
     <input type="submit" value="Logout" />
     <a href="BNRCurrency.jsp">Update the Currency Values</a>
+</form>
+<form class="form" method="get" action="ParseHistoryServlet" >
+    <input type="submit" value="Insert history in database"><br>
 </form>
 </body>
 </html>

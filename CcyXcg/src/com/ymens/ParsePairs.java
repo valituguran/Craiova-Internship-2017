@@ -14,7 +14,7 @@ public class ParsePairs {
 
         int x;
         int y;
-        a = "E:\\workspace\\Craiova-Internship-2017\\parse\\src\\parse.xml";
+        a = "E:\\workspace\\Craiova-Internship-2017\\CcyXcg\\web\\WEB-INF\\bnr.xml";
         ArrayList<String> list = new ArrayList<String>();
         ArrayList<String> list2 = new ArrayList<String>();
         try {

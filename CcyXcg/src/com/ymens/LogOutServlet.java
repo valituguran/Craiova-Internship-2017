@@ -1,7 +1,4 @@
-
-
 package com.ymens;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -19,7 +16,6 @@ public class LogOutServlet extends HttpServlet{
             throws ServletException, IOException {
 
         request.getSession().invalidate();
-        //if()
         getServletContext().getRequestDispatcher("/home.jsp").forward(request, response);
     }
 }

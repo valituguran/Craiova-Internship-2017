@@ -1,8 +1,9 @@
 body{
     width:1200px;
+    background-color: #f7f9f9;
 }
 .header{
-    margin-top: 50px;
+    margin-top: 30px;
 }
 ul {
     width:100%;
@@ -13,16 +14,19 @@ li {
     display:inline-block;
     *display:inline; /*IE7*/
     *zoom:1; /*IE7*/
-    margin-right:10px;
+    margin: 10px 10px 10px 70px;
     border-style: outset;
-    border-color: black;
+    border-color:#f7f9f9;
     text-decoration: none;
     text-align: center;
+    border-width:7px;
 }
 ul a{
-    float:right;
-    margin-right: 100;
     text-decoration: none;
+    color:black;
+}
+ul a:active {
+    color: black;
 }
 .title{
     font-size:100%;
@@ -82,4 +86,10 @@ tr:nth-child(even){background-color: #f2f2f2}
     width: 200px;
     height: 400px;
     overflow: auto;
+}
+#headerparagraph{
+    font-size: 20;
+}
+#logout{
+    border-style: none;
 }

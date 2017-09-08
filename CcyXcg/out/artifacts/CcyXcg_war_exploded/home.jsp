@@ -5,6 +5,7 @@
 <%@ page import="dao.SearchDao" %>
 <%@ page import="com.ymens.SearchServlet" %>
 <%@ page import="dao.PaginationDao" %>
+<%@ page import="dao.ChartDao" %>
 <%--
   Created by IntelliJ IDEA.
   User: lucian.Nicolescu
@@ -146,7 +147,7 @@
 
 </div>
 <%}else if(session.getAttribute("name")!=null){%>
-<div class="header">
+<div id="headerparagraph" class="header">
     <div>
         <ul>
             <a class="titlehref"href="home.jsp">CCy Xcg</a>

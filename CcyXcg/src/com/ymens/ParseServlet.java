@@ -21,7 +21,7 @@ public class ParseServlet extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession(false);
-        String a = "E:\\workspace\\Craiova-Internship-2017\\parse\\src\\parse.xml";
+        String a = "E:\\workspace\\Craiova-Internship-2017\\CcyXcg\\web\\WEB-INF\\bnr.xml";
         for (i = 0; i < Parse.values(a).size(); i++) {
             dao.ParseDao.addcurrency(ParsePairs.pairs(a).get(i), Parse.values(a).get(i));
         }

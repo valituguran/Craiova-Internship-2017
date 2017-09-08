@@ -59,6 +59,30 @@
         <servlet-name>chart</servlet-name>
         <url-pattern>/ChartServlet</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>history</servlet-name>
+        <servlet-class>com.ymens.ParseHistoryServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>history</servlet-name>
+        <url-pattern>/ParseHistoryServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>json</servlet-name>
+        <servlet-class>com.ymens.jSonServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>json</servlet-name>
+        <url-pattern>/jSonServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>json1</servlet-name>
+        <servlet-class>com.ymens.jSonServlet1</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>json1</servlet-name>
+        <url-pattern>/jSonServlet1</url-pattern>
+    </servlet-mapping>
     <welcome-file-list>
         <welcome-file>/parseServlet</welcome-file>
     </welcome-file-list>

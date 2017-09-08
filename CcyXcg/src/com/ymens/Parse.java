@@ -16,7 +16,7 @@ public class Parse {
     private static int y;
     public static ArrayList<Double> values(String a) {
 
-        a="E:\\workspace\\Craiova-Internship-2017\\parse\\src\\parse.xml";
+        a="E:\\workspace\\Craiova-Internship-2017\\CcyXcg\\web\\WEB-INF\\bnr.xml";
         ArrayList<Double > value = new ArrayList<Double>();
         try {
             File fXmlFile = new File(a);

@@ -26,11 +26,11 @@
     LinkedList pairs =   ParseDao.pairs;
     LinkedList values = ParseDao.values;%>
 
-<div class="header">
+<div id="headerparagraph" class="header">
     <div>
         <ul>
             <a class="titlehref"href="home.jsp">CCy Xcg</a>
-            <li><a href="Aici trebuie adaugata calea catre Currencies">Currencies</a></li>
+            <li><a href="home.jsp">Currencies</a></li>
             <li><a href="History.jsp">History</a></li>
             <%String name= (String) session.getAttribute("name");%>
             <li>Hello<%=name%></li>
