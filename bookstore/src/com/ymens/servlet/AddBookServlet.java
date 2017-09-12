@@ -1,10 +1,10 @@
 package com.ymens.servlet;
 
-import com.ymens.Author;
-import com.ymens.Book;
-import com.ymens.PrintAuthor;
 import com.ymens.dao.AddAuthorDao;
 import com.ymens.dao.AddBookDao;
+import com.ymens.hibernate.Books;
+import com.ymens.hibernate.PrintAuthor;
+import com.ymens.spring.beans.Author;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -41,7 +41,7 @@ public class AddBookServlet extends HttpServlet{
     public static double price = 0.0;
     public static int id_author;
     public static  String path=null;
-    byte[] userimage=null;
+    public static byte[] bytes ;
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -114,8 +114,9 @@ public class AddBookServlet extends HttpServlet{
         }
         if (AddAuthorDao.getIdAuthor(CNP) != 0){
             id_author = AddAuthorDao.getIdAuthor(CNP);
-            author = PrintAuthor.getDetails(id_author);
-            Book b = new Book(n, isbn, author, price, description, imageStr);
+             author = PrintAuthor.getDetails(id_author);
+              bytes = imageStr.getBytes();
+            Books b = new Books(n, id_author,isbn, price, description, bytes);
             try{
                 if(addbook.addBook(b, CNP) == 1){
                     RequestDispatcher rd = request.getRequestDispatcher("/selectbooksadminServlet");

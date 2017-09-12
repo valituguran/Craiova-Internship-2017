@@ -3,9 +3,21 @@
 <html>
 <head>
     <link rel="stylesheet" href="../styles/layout_login.css" type="text/css">
+    <link rel="stylesheet" href="../styles/style.css" type="text/css">
     <title>Title</title>
 </head>
 <body>
+<%session.setAttribute("page", "products_admin.jsp");
+String name = (String) session.getAttribute("type");
+if (name.equalsIgnoreCase("admin")){%>
+<div class="topnav">
+    <a href="products_admin.jsp">Inapoi</a>
+</div>
+<%} else {%>
+<div class="topnav">
+    <a href="products_user.jsp">Inapoi</a>
+</div>
+<%}%>
 <form action="addbookServlet" method="post" enctype="multipart/form-data">
     <header>Adauga o carte noua</header>
     <label for="name"> Nume:</label>

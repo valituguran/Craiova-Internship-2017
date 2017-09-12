@@ -1,14 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1"%>
 
-<%@page import="com.ymens.Book"%>
-<%@ page import="com.ymens.dao.SelectBooksDao" %>
-<%@ page import="com.ymens.servlet.ProductsServlet"%>
-<%@ page import="java.io.OutputStream" %>
-<%@ page import="java.util.LinkedList" %>
-<%@ page import="java.sql.Connection" %>
-<%@ page import="com.ymens.servlet.SelectBooksServlet" %>
-<%@ page import="com.ymens.servlet.PaginationServlet" %>
+
+<%@ page import="com.ymens.hibernate.PrintAuthor" %>
+<%@ page import="com.ymens.spring.beans.Author"%>
+<%@ page import="com.ymens.spring.beans.Book" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,7 +36,7 @@ if(user == null ) {
     <div class="menu-vertical">
         <div class="form">
             <h4>Ordoneaza: </h4>
-            <form method="get" action="/filterbypriceServlet" id="filterbyprice">
+            <form method="get" action="/filterbypriceServlet" >
                 <input name="filterasc" class="filter" type="submit" value="Pret crescator" required="required">
                 <input type="hidden" name="typelist" value="filterbyprice" required="required">
             </form>
@@ -61,13 +58,13 @@ if(user == null ) {
 <div class="products" id="products">
     <img class="logo" src="../images/logo.jpg">
     <%Book book = (Book) session.getAttribute("viewbook");%>
-    <h3><%=book.getNume()%></h3>
+    <h3><%=book.getName()%></h3>
 
-                <img src="data:image/jpg;base64,<%=book.getImage()%>" />
+                <img src="data:image/jpg;base64,<%=book.getStrImage(book.getImage())%>" />
     <table>
         <tr>
             <th>Titlu:</th>
-            <th><%=book.getAuthor().getName()%></th>
+            <th><%=book.getAuthor_id()%></th>
         </tr>
         <tr>
             <th>Descriere:</th>
@@ -75,19 +72,21 @@ if(user == null ) {
         </tr>
         <tr>
             <th>Autor:</th>
-            <th><%=book.getAuthor().getName()%></th>
+            <%  Author a = new Author();
+            a =PrintAuthor.getDetails(book.getAuthor_id());%>
+            <th><%=a.getName()%></th>
         </tr>
         <tr>
             <th>Varsta Autor:</th>
-            <th><%=book.getAuthor().getAge()%></th>
+            <th><%=a.getAge()%></th>
         </tr>
         <tr>
             <th>Nationatlitate Autor:</th>
-            <th><%=book.getAuthor().getNationality()%></th>
+            <th><%=a.getNationality()%></th>
         </tr>
         <tr>
             <th>Descriere Autor:</th>
-            <th><%=book.getAuthor().getDescription()%></th>
+            <th><%=a.getDescription()%></th>
         </tr>
         <tr>
             <th>Pret: </th>

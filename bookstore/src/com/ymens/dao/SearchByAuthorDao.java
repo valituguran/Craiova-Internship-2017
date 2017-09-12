@@ -1,8 +1,8 @@
 package com.ymens.dao;
 
-import com.ymens.Author;
-import com.ymens.Book;
-import com.ymens.PrintAuthor;
+import com.ymens.hibernate.PrintAuthor;
+import com.ymens.spring.beans.Author;
+import com.ymens.spring.beans.Book;
 
 import java.sql.*;
 import java.util.Base64;
@@ -39,7 +39,7 @@ public class SearchByAuthorDao {
         LinkedList<Integer> list = new LinkedList();
         try {
             pst = conn.prepareStatement("select * from authors where name like ?");
-            pst.setString(1,value+'%');
+            pst.setString(1,'%'+value+'%');
             rs = pst.executeQuery();
             int id;
             while (rs.next()) {
@@ -75,7 +75,7 @@ public class SearchByAuthorDao {
                     String description = rs.getString("description");
                     fileData = rs.getBytes("image");
                     String encode = Base64.getEncoder().encodeToString(fileData);
-                    Book book = new Book(name, isbn, author, price, description, encode);
+                    Book book = new Book(name, id_author, isbn, price, description, fileData);
                     list.add(book);
                 }
             }catch (SQLException e) {

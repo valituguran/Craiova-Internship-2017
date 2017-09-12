@@ -1,9 +1,9 @@
 package com.ymens.servlet;
 
-import com.ymens.PriceComparatorAsc;
-import com.ymens.PriceComparatorDesc;
-import com.ymens.User;
-import com.ymens.UserType;
+import com.ymens.hibernate.PriceComparatorAsc;
+import com.ymens.hibernate.PriceComparatorDesc;
+import com.ymens.hibernate.User;
+import com.ymens.hibernate.UserType;
 import com.ymens.dao.SelectBooksDao;
 
 import javax.servlet.ServletException;

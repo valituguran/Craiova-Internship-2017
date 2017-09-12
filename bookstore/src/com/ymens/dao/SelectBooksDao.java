@@ -1,8 +1,8 @@
 package com.ymens.dao;
 
-import com.ymens.Author;
-import com.ymens.Book;
-import com.ymens.PrintAuthor;
+import com.ymens.hibernate.PrintAuthor;
+import com.ymens.spring.beans.Author;
+import com.ymens.spring.beans.Book;
 
 import java.sql.*;
 import java.util.Base64;
@@ -50,7 +50,7 @@ public class SelectBooksDao {
                 String description = rs.getString("description");
                 fileData = rs.getBytes("image");
                 String encode = Base64.getEncoder().encodeToString(fileData);
-                Book book = new Book(name, isbn, author, price, description, encode);
+                Book book = new Book(name, id_author,isbn, price, description, fileData);
                 list.add(book);
             }
             noOfRecords = list.size();
@@ -62,6 +62,7 @@ public class SelectBooksDao {
     public static int getNoOfRecords() {
         return noOfRecords;
     }
+
     public static LinkedList select() {
         boolean status = false;
         Connection conn = connect();
@@ -83,7 +84,7 @@ public class SelectBooksDao {
                 String description = rs.getString("description");
                 fileData = rs.getBytes("image");
                 String encode = Base64.getEncoder().encodeToString(fileData);
-                Book book = new Book(name, isbn, author, price, description, encode);
+                Book book = new Book(name, id_author, isbn, price, description, fileData);
                 list.add(book);
             }
         }catch (SQLException e) {

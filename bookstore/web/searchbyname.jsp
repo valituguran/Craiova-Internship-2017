@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1"%>
 
-<%@page import="com.ymens.Book"%>
+
 <%@ page import="com.ymens.servlet.PaginationServlet" %>
+<%@ page import="com.ymens.spring.beans.Book" %>
 <%@ page import="java.util.LinkedList" %>
-<%@ page import="com.ymens.servlet.SearchByNameServlet" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -80,10 +80,10 @@
         <div class="tab-content">
             <form method="get" action="/viewbookServlet" id="">
                 <input type="hidden" name="pagetitle" value="index.jsp" class="title">
-                <input name="title" class="title" type="submit" value="<%=book.getNume()%> ">
+                <input name="title" class="title" type="submit" value="<%=book.getName()%> ">
             </form>
             <div class="product">
-                <img src="data:image/jpg;base64,<%=book.getImage()%>" />
+                <img src="data:image/jpg;base64,<%=book.getStrImage(book.getImage())%>" />
                 <input class="details" type="text" size="2" value="1" name="quantity">buc
                 <p> Pret: <%=book.getPrice()%><input type="hidden" name="price" value="<%=book.getPrice()%>"></p>
                 <button onclick="redirectLogin()"><input type="hidden" name="action" value="add">Adauga in cos</button>

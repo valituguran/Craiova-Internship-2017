@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee"
+	version="2.5">
+	<servlet>
+		<servlet-name>login</servlet-name>
+		<servlet-class>com.ymens.servlet.LoginServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>login</servlet-name>
+		<url-pattern>/loginServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>logout</servlet-name>
+		<servlet-class>com.ymens.servlet.LogoutServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>logout</servlet-name>
+		<url-pattern>/logoutServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>mycontuser</servlet-name>
+		<servlet-class>com.ymens.servlet.MyContServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>mycontuser</servlet-name>
+		<url-pattern>/mycontuserServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>mycontadmin</servlet-name>
+		<servlet-class>com.ymens.servlet.MyContServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>mycontadmin</servlet-name>
+		<url-pattern>/mycontadminServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>updatecont</servlet-name>
+		<servlet-class>com.ymens.servlet.UpdateAccountDetailsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>updatecont</servlet-name>
+		<url-pattern>/updatecontServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>/products</servlet-name>
+		<servlet-class>com.ymens.servlet.ProductsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>/products</servlet-name>
+		<url-pattern>/productsServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+	<servlet-name>selectbooksuser</servlet-name>
+	<servlet-class>com.ymens.servlet.SelectBooksServlet</servlet-class>
+    </servlet>
+	<servlet-mapping>
+		<servlet-name>selectbooksuser</servlet-name>
+		<url-pattern>/selectbooksuserServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>selectbooks</servlet-name>
+		<servlet-class>com.ymens.servlet.SelectBooksServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>selectbooks</servlet-name>
+		<url-pattern>/selectbooksServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>selectbooksadmin</servlet-name>
+		<servlet-class>com.ymens.servlet.SelectBooksServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>selectbooksadmin</servlet-name>
+		<url-pattern>/selectbooksadminServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>searchbynameuser</servlet-name>
+		<servlet-class>com.ymens.servlet.SearchByNameServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>searchbynameuser</servlet-name>
+		<url-pattern>/searchbynameuserServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>searchbynameadmin</servlet-name>
+		<servlet-class>com.ymens.servlet.SearchByNameServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>searchbynameadmin</servlet-name>
+		<url-pattern>/searchbynameadminServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>searchbyname</servlet-name>
+		<servlet-class>com.ymens.servlet.SearchByNameServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>searchbyname</servlet-name>
+		<url-pattern>/searchbynameServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>searchbyauthoruser</servlet-name>
+		<servlet-class>com.ymens.servlet.SearchByAuthorServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>searchbyauthoruser</servlet-name>
+		<url-pattern>/searchbyauthoruserServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>searchbyauthor</servlet-name>
+		<servlet-class>com.ymens.servlet.SearchByAuthorServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>searchbyauthor</servlet-name>
+		<url-pattern>/searchbyauthorServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>filterbyprice</servlet-name>
+		<servlet-class>com.ymens.servlet.FilterServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>filterbyprice</servlet-name>
+		<url-pattern>/filterbypriceServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>searchbyauthoradmin</servlet-name>
+		<servlet-class>com.ymens.servlet.SearchByAuthorServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>searchbyauthoradmin</servlet-name>
+		<url-pattern>/searchbyauthoradminServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>register</servlet-name>
+		<servlet-class>com.ymens.servlet.RegisterServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>register</servlet-name>
+		<url-pattern>/registerServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>addbook</servlet-name>
+		<servlet-class>com.ymens.servlet.SelectBooksServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>addbook</servlet-name>
+		<url-pattern>/addbookServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>addauthor</servlet-name>
+		<servlet-class>com.ymens.servlet.AddAuthorServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>addauthor</servlet-name>
+		<url-pattern>/addauthorServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>CartUserServlet</servlet-name>
+		<servlet-class>com.ymens.servlet.CartServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CartUserServlet</servlet-name>
+		<url-pattern>/cartuserServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>CartAdminServlet</servlet-name>
+		<servlet-class>com.ymens.servlet.CartServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CartAdminServlet</servlet-name>
+		<url-pattern>/cartadminServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>OrderServlet</servlet-name>
+		<servlet-class>com.ymens.servlet.OrderServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>OrderServlet</servlet-name>
+		<url-pattern>/orderServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>viewbook</servlet-name>
+		<servlet-class>com.ymens.servlet.ViewBookServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>viewbook</servlet-name>
+		<url-pattern>/viewbookServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>PaginationServlet</servlet-name>
+		<servlet-class>com.ymens.servlet.PaginationServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PaginationServlet</servlet-name>
+		<url-pattern>/paginationServlet</url-pattern>
+	</servlet-mapping>
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+
+</web-app>

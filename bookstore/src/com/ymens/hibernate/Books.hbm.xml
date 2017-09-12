@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.ymens.hibernate.Books" table="books">
+        <meta attribute="class-description">
+        </meta>
+        <id name="id" type="int" column="id">
+            <generator class="native"/>
+        </id>
+        <property name="name" column="name" type="string"/>
+        <property name="author_id" column="author_id" type="int"/>
+        <property name="isbn" column="isbn" type="long"/>
+        <property name="price" column="price" type="double"/>
+        <property name="description" column="description" type="string"/>
+        <property name="image" column="image" type="byte[]"/>
+    </class>
+    <class name="com.ymens.hibernate.Authors" table="authors">
+        <meta attribute="class-description">
+        </meta>
+        <id name="id" type="int" column="id">
+            <generator class="native"/>
+        </id>
+        <property name="name" column="name" type="string"/>
+        <property name="age" column="age" type="int"/>
+        <property name="nationality" column="nationality" type="string"/>
+        <property name="description" column="description" type="string"/>
+        <property name="cnp" column="CNP" type="long"/>
+    </class>
+    <class name="com.ymens.hibernate.Users" table="users">
+        <meta attribute="class-description">
+        </meta>
+        <id name="id" type="int" column="id">
+            <generator class="native"/>
+        </id>
+        <property name="username" column="username" type="string"/>
+        <property name="password" column="password" type="string"/>
+        <property name="email" column="email" type="string"/>
+        <property name="realName" column="real_name" type="string"/>
+        <property name="type" column="type" type="int"/>
+    </class>
+</hibernate-mapping>

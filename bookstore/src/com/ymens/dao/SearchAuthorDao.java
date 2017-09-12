@@ -1,6 +1,6 @@
 package com.ymens.dao;
 
-import com.ymens.Author;
+import com.ymens.spring.beans.Author;
 
 import java.sql.*;
 import java.util.LinkedList;

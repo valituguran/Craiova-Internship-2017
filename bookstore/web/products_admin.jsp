@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1"%>
 
-<%@page import="com.ymens.Book"%>
-<%@ page import="java.util.LinkedList" %>
-<%@ page import="java.util.List"%>
 <%@ page import="com.ymens.servlet.PaginationServlet" %>
-<%@ page import="com.ymens.dao.SelectBooksDao" %>
+<%@ page import="com.ymens.spring.beans.Author"%>
+<%@ page import="com.ymens.spring.beans.Book" %>
+<%@ page import="java.util.LinkedList" %>
+<%@ page import="com.ymens.spring.dao.AuthorsDao" %>
 
 <!DOCTYPE html>
 <html>
@@ -34,11 +34,15 @@ realname=(String)session.getAttribute("realname");
         noOfPages = noOfProducts / recordsPerPage+1;
     }
 %>
-%>
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <form method="get" action="/mycontadminServlet" >
-        <input name="logout"  type="submit" value="<%=realname%>" required="required">
+        <input name="as"  type="submit" value="Detalii cont" required="required">
+        <input name="type" type="hidden" value="accountdetails" required="required">
+    </form>
+    <form method="get" action="/mycontadminServlet" >
+        <input name="as"  type="submit" value="Comenziile mele" required="required">
+        <input name="type" type="hidden" value="myorders" required="required">
     </form>
     <form method="get" action="/logoutServlet" >
         <input onclick="ClearHistory()" name="logout"  type="submit" value="Logout" required="required">
@@ -48,6 +52,7 @@ realname=(String)session.getAttribute("realname");
     <div style="align:left;cursor:pointer;color:white;font-size: 20px;margin:30px;float:left" onclick="openNav()">&#9776;<%=realname%></div>
     <a href="shoppingcart_admin.jsp">Cos de cumparaturi</a>
     <a href="addbook.jsp">Adauga o carte</a>
+    <%session.setAttribute("page", "products_admin.jsp");%>
     <a href="register.jsp">Adauga un utilizator</a>
 </div>
 <div class="content">
@@ -55,7 +60,7 @@ realname=(String)session.getAttribute("realname");
 
         <div class="form">
             <h4>Ordoneaza: </h4>
-            <form method="get" action="/filterbypriceServlet" id="filterbyprice">
+            <form method="get" action="/filterbypriceServlet" >
                 <input name="filterasc" class="filter" type="submit" value="Pret crescator" required="required">
                 <input type="hidden" name="typelist" value="filterbyprice" required="required">
             </form>
@@ -79,17 +84,24 @@ realname=(String)session.getAttribute("realname");
 <div class="products" >
     <img class="logo" src="../images/logo.jpg">
     <div class="container">
-        <%for( int i=(currentpage-1)*recordsPerPage; i<currentpage*recordsPerPage && i<noOfProducts; i++){
+        <%Author a;
+        int id;
+            for( int i=(currentpage-1)*recordsPerPage; i<currentpage*recordsPerPage && i<noOfProducts; i++){
             Book book = (Book) list.get(i);%>
         <div class="tab-content">
             <form method="get" action="/viewbookServlet" id="">
                 <input type="hidden" name="pagetitle" value="index.jsp" class="title">
-                <input name="title" class="title" type="submit" value="<%=book.getNume()%> ">
+                <input name="title" class="title" type="submit" value="<%=book.getName()%> ">
             </form>
             <div class="product">
-                <img src="data:image/jpg;base64,<%=book.getImage()%>" />
+                <img src="data:image/jpg;base64,<%=book.getStrImage(book.getImage())%>" />
+                <%AuthorsDao ad = new AuthorsDao();
+                    id = ad.getIdAuthor(book);
+                 a = ad.getAuthor(id);
+                %>
+                <p><%=a.getName()%></p>
                 <form name="model" method="POST" action="/cartadminServlet">
-                  <input type="hidden" name="book" value="<%=book.getNume()%>">
+                  <input type="hidden" name="book" value="<%=book.getName()%>">
                     <input class="details" type="text" size="2" value="1" name="quantity">buc
                     <p> Pret: <%=book.getPrice()%><input type="hidden" name="price" value="<%=book.getPrice()%>"></p>
                     <button onclick="cart()"><input type="hidden" name="action" value="add">Adauga in cos</button>

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1"%>
 
-<%@page import="com.ymens.CartItem"%>
+<%@page import="com.ymens.hibernate.CartItem"%>
 <%@ page import="com.ymens.dao.CartDao" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.ymens.dao.OrderDao" %>
@@ -46,7 +46,7 @@
                 <input name="filterasc" class="filter" type="submit" value="Pret crescator" required="required">
                 <input type="hidden" name="typelist" value="filterbyprice" required="required">
             </form>
-            <form method="get" action="/filterbypriceServlet" id="filterbyprice">
+            <form method="get" action="/filterbypriceServlet" >
                 <input name="filterdesc" class="filter" type="submit" value="Pret descrescator" required="required">
                 <input type="hidden" name="typelist" value="filterbyprice" required="required">
             </form>
@@ -80,7 +80,7 @@
         <%for( int i=0; i<list.size(); i++){
                 CartItem cartitem = (CartItem) list.get(i);%>
             <tr>
-                <th><%=cartitem.getBook().getNume()%></th>
+                <th><%=cartitem.getBook().getName()%></th>
                 <th><%=cartitem.getBook().getPrice()%></th>
                 <th><%=cartitem.getQuantity()%></th>
                 <th><%=cartitem.getTotalCost()%></th>

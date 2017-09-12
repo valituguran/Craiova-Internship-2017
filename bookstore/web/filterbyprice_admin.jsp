@@ -1,10 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1"%>
-<%@page import="com.ymens.Book"%>
-<%@ page import="java.util.LinkedList" %>
-<%@ page import="java.util.List"%>
+
 <%@ page import="com.ymens.servlet.PaginationServlet" %>
-<%@ page import="com.ymens.dao.SelectBooksDao" %>
+<%@ page import="com.ymens.spring.beans.Book"%>
+<%@ page import="java.util.LinkedList" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,7 +34,12 @@
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <form method="get" action="/mycontadminServlet" >
-        <input name="mycont"  type="submit" value="<%=realname%>" required="required">
+        <input name="as"  type="submit" value="Detalii cont" required="required">
+        <input name="type" type="hidden" value="accountdetails" required="required">
+    </form>
+    <form method="get" action="/mycontadminServlet" >
+        <input name="as"  type="submit" value="Comenziile mele" required="required">
+        <input name="type" type="hidden" value="myorders" required="required">
     </form>
     <form method="get" action="/logoutServlet" >
         <input name="logout" type="submit" value="Logout" required="required">
@@ -88,10 +92,10 @@
         <div class="tab-content">
             <form method="get" action="/viewbookServlet" id="">
                 <input type="hidden" name="pagetitle" value="index.jsp" class="title">
-                <input name="title" class="title" type="submit" value="<%=book.getNume()%> ">
+                <input name="title" class="title" type="submit" value="<%=book.getName()%> ">
             </form>
             <div class="product">
-                <img src="data:image/jpg;base64,<%=book.getImage()%>" />
+                <img src="data:image/jpg;base64,<%=book.getStrImage(book.getImage())%>" />
                 <form name="model" method="POST" action="/cartadminServlet">
                     <input class="details" type="text" size="2" value="1" name="quantity">buc
                     <p> Pret: <%=book.getPrice()%><input type="hidden" name="price" value="<%=book.getPrice()%>"></p>

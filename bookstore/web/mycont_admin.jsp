@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@page import="com.ymens.User"%>
+<%@page import="com.ymens.hibernate.User"%>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="com.ymens.UserType" %>
+<%@ page import="com.ymens.hibernate.UserType" %>
 <%@ page import="com.ymens.dao.CartDao" %>
 <%@ page import="com.ymens.dao.OrderDao" %>
 <%@ page import="com.ymens.dao.History" %>
@@ -20,12 +20,17 @@
 <%String realname;
     realname=(String)session.getAttribute("realname");
     String name = (String) session.getAttribute("name");
-    ArrayList list =(ArrayList) session.getAttribute("orders");
+    String type = (String) session.getAttribute("type");
 %>
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <form method="get" action="/mycontadminServlet" >
-        <input name="logout"  type="submit" value="<%=realname%>" required="required">
+        <input name="as"  type="submit" value="Detalii cont" required="required">
+        <input name="type" type="hidden" value="accountdetails" required="required">
+    </form>
+    <form method="get" action="/mycontadminServlet" >
+        <input name="as"  type="submit" value="Comenziile mele" required="required">
+        <input name="type" type="hidden" value="myorders" required="required">
     </form>
     <form method="get" action="/logoutServlet" >
         <input name="logout" type="submit" value="Logout" required="required">
@@ -68,7 +73,8 @@
     <img class="logo" src="../images/logo.jpg">
 
     <div class="products" id="products">
-        <%User user =(User) session.getAttribute("currentuser");%>
+        <%if(type.equals("accountdetails")){
+            User user =(User) session.getAttribute("currentuser");%>
 
         <div class="container">
             <div id="tab-1" class="tab-content current">
@@ -94,6 +100,9 @@
                     </tr>
                     </table>
                 </form>
+                <%} else if(type.equals("myorders")){
+
+                    ArrayList list =(ArrayList) session.getAttribute("orders");%>
                 <table style="width:900px;margin-top:100px;margin-bottom:100px">
                     <tr>
                         <th colspan="3">Istoricul comenziilor mele</th>
@@ -127,6 +136,7 @@
                             <%}%>
                     <%}%>
                 </table>
+                <%}%>
             </div>
         </div>
     </div>
