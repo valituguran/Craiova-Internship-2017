@@ -25,16 +25,20 @@ public class RegisterServlet extends HttpServlet{
         String p=request.getParameter("password");
         String user=request.getParameter("username");
         String email=request.getParameter("email");
+        Double balance= Double.valueOf(request.getParameter("balance"));
+        String currency =request.getParameter("currency");
         int type =0;
 
 
         HttpSession session = request.getSession(false);
         if(session!=null)
             session.setAttribute("name", n);
+            session.setAttribute("balance",balance);
+            session.setAttribute("currency",currency);
 
-        if(com.ymens.RegisterDao.adduser(n,p,user,email,type) ==1){
+        if(com.ymens.RegisterDao.adduser(n,p,user,email,type,balance,currency) ==1){
             out.print("<p style=\"color:red\">You are now register</p>");
-            response.sendRedirect("home.jsp");
+            response.sendRedirect("login.jsp");
         }
         else if(n.length()<3 && p.length()<3){
             out.print("<p style=\"color:red\">Your password or username are not allowed</p>");

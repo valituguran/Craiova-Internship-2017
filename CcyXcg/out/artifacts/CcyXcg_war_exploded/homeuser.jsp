@@ -30,7 +30,7 @@
     <div>
         <ul>
             <a class="titlehref"href="home.jsp">CCy Xcg</a>
-            <li><a href="home.jsp">Currencies</a></li>
+            <li><a href="Currency.jsp">Currencies</a></li>
             <li><a href="History.jsp">History</a></li>
             <%String name= (String) session.getAttribute("name");%>
             <li>Hello<%=name%></li>
@@ -76,13 +76,14 @@
             <th>Buy/Sell</th>
         </tr>
         <%}%>
+        <form action="PaginationServlet" method="get">
+            <input type="submit" name="button1" value="▲" required="required">
+            <input type="submit" name="button2" value="▼" required="required">
+            <input class="search" name="page" type="text" value="<%=len%>">
+        </form>
     </table>
 
-    <form action="PaginationServlet" method="get">
-        <input type="submit" name="button1" value="▲" required="required">
-        <input type="submit" name="button2" value="▼" required="required">
-        <input class="search" name="page" type="text" value="<%=len%>">
-    </form>
+
 
     <script>
         function sortTableAscending() {

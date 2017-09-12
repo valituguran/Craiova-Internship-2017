@@ -1,4 +1,5 @@
-<%--
+<%@ page import="com.ymens.ParseSymbol" %>
+<%@ page import="com.ymens.Parse" %><%--
   Created by IntelliJ IDEA.
   User: lucian.Nicolescu
   Date: 8/23/2017
@@ -16,11 +17,20 @@
 <body>
 
 <form class="register" method="get" action="registerServlet" >
-   Name: <input name="name" required="Please enter a name"><br>
+    Name: <input name="name" required="Please enter a name"><br>
     Email: <input name="email" required="Please enter the email"><br>
     Username: <input name="username" required="Please enter a username"><br>
-   Password : <input name="password" type="password" required="Please enter a password"><br>
-   Retype Password : <input name="retypepassword" required="Please enter the password"><br>
+    Password : <input name="password" type="password" required="Please enter a password"><br>
+    Retype Password : <input name="retypepassword" required="Please enter the password"><br>
+    Balance : <input name="balance" required="Please enter the client balance"><br>
+    <%String a = "E:\\workspace\\Craiova-Internship-2017\\CcyXcg\\web\\WEB-INF\\bnr.xml";%>
+    Currency :<select name="currency">
+    <%ParseSymbol.parsesymb("E:\\workspace\\Craiova-Internship-2017\\CcyXcg\\web\\WEB-INF\\bnr.xml");%>
+    <%for(int i=0;i< ParseSymbol.symbol.size();i++){%>
+    <%String pair = (String) ParseSymbol.symbol.get(i);%>
+    <option value="<%=pair%>"><%=pair%></option>
+    <%}%>
+</select>
     <input type="submit" value="Register"><br>
 </form>
 </body>

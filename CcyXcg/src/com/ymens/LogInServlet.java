@@ -2,6 +2,7 @@
 
 package com.ymens;
 
+import com.ymens.myAccountDao;
 import dao.ChartDao;
 
 import javax.servlet.RequestDispatcher;
@@ -25,16 +26,17 @@ public class LogInServlet extends HttpServlet{
 
         String n=request.getParameter("name");
         String p=request.getParameter("password");
-
         HttpSession session = request.getSession(false);
-        if(session!=null)
+        myAccountDao.getDetails(n,p);
+        if(session!=null){
             session.setAttribute("name", n);
-
+            session.setAttribute("password",p);
+        }
         if(com.ymens.LogInDao.validate(n,p,1)==true){
             response.sendRedirect("admin.jsp");
         }
         else if(com.ymens.LogInDao.validate(n,p,0)==true){
-            response.sendRedirect("homeuser.jsp");
+            response.sendRedirect("home.jsp");
         }
         else{
             out.write("Username or password incorect!");

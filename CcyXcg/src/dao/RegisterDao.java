@@ -6,7 +6,7 @@ import java.sql.*;
  * Created by lucian.Nicolescu on 8/23/2017.
  */
 public class RegisterDao {
-    public static int adduser(String name, String pass,String username,String email,int type) {
+    public static int adduser(String name, String pass,String username,String email,int type,double balance,String currency) {
         int i = 0;
         Connection conn = null;
         PreparedStatement pst = null;
@@ -22,12 +22,14 @@ public class RegisterDao {
             conn = DriverManager
                     .getConnection(url + dbName, userName, password);
 
-            pst = conn.prepareStatement("INSERT INTO `users`(`name` , username , password , email , `type` ) values (?, ?,?,?,?)");
+            pst = conn.prepareStatement("INSERT INTO `users`(`name` , username , password , email , `type`,`Balance`,`Currency` ) values (?, ?,?,?,?,?,?)");
             pst.setString(1, name);
             pst.setString(2, username);
             pst.setString(3, pass);
             pst.setString(4, email);
             pst.setInt(5, type);
+            pst.setDouble(6,balance);
+            pst.setString(7,currency);
             i = pst.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();

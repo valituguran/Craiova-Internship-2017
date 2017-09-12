@@ -5,6 +5,7 @@
 <%@ page import="dao.SearchDao" %>
 <%@ page import="com.ymens.SearchServlet" %>
 <%@ page import="dao.PaginationDao" %>
+<%@ page import="dao.UserDao" %>
 <%--
   Created by IntelliJ IDEA.
   User: lucian.Nicolescu
@@ -17,6 +18,7 @@
 <head>
   <title>Ccy Xcg</title>
   <link rel="stylesheet" type="text/css" href="../StyleSheet/homeStyle.css">
+  <link rel="stylesheet" type="text/css" href="../StyleSheet/myAccountStyle.css">
   <link rel="stylesheet" type="text/css" href="E:\workspace\Craiova-Internship-2017\CcyXcg\web\StyleSheet\tableStyleSheet.css">
 </head>
 <body>
@@ -25,21 +27,18 @@
 <%
   ParseDao.getcurrency();
   LinkedList pairs =   ParseDao.pairs;
-  LinkedList values = ParseDao.values;%>
+  LinkedList values = ParseDao.values;
+  UserDao user = new UserDao();%>
 
-<div class="header">
-  <div>
-    <ul>
-        <a class="titlehref"href="home.jsp">CCy Xcg</a>
-      <li><a href="home.jsp">Currencies</a></li>
-      <li><a href="History.jsp">History</a></li>
-
-
-        <li>Hello<%=name%></li>
-        <form action="logoutServlet" method="post">
-        <input type="submit" value="Logout" />
-      </form>
-    </ul>
+<div class="topnav">
+  <a class="active" href="home.jsp">Ccy Xcg </a>
+  <a href="home.jsp">Currencies</a>
+  <a href="History.jsp">History</a>
+  <a href="myAccount.jsp" id="nameandbalance">Hello <%=user.username%> <br> Balance:<%=user.balance%><%=user.currency%> </a>
+  <div id="logoutt">
+    <form action="logoutServlet" method="post">
+      <a>  <input type="submit" id="logout" value="Logout" />   </a>
+    </form>
   </div>
 </div>
 <div class="filterbox">
@@ -107,15 +106,11 @@
   LinkedList pairs =   ParseDao.pairs;
   LinkedList values = ParseDao.values;%>
 
-<div class="header">
-  <div>
-    <ul>
-      <a class="titlehref"href="home.jsp">CCy Xcg</a>
-      <li><a href="home.jsp">Currencies</a></li>
-      <li><a href="History.jsp">History</a></li>
-     <a href="login.jsp">Login</a>
-    </ul>
-  </div>
+<div class="topnav">
+  <a class="active" href="home.jsp">Ccy Xcg </a>
+  <a href="home.jsp">Currencies</a>
+  <a href="History.jsp">History</a>
+  <a href="login.jsp">Login</a>
 </div>
 <div class="filterbox">
   <div >Filter</div>
