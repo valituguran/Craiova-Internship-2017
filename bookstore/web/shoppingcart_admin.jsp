@@ -49,7 +49,7 @@
             <input name="filterasc" class="filter" type="submit" value="Pret crescator" required="required">
             <input type="hidden" name="typelist" value="filterbyprice" required="required">
         </form>
-        <form method="get" action="/filterbypriceServlet" id="filterbyprice">
+        <form method="get" action="/filterbypriceServlet" >
             <input name="filterdesc" class="filter" type="submit" value="Pret descrescator" required="required">
             <input type="hidden" name="typelist" value="filterbyprice" required="required">
         </form>
