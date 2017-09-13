@@ -158,7 +158,7 @@
 
     <servlet>
         <servlet-name>addbook</servlet-name>
-        <servlet-class>com.ymens.servlet.AddBookServlet</servlet-class>
+        <servlet-class>com.ymens.spring.manager.AddBook</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>addbook</servlet-name>
@@ -167,7 +167,7 @@
 
     <servlet>
         <servlet-name>addauthor</servlet-name>
-        <servlet-class>com.ymens.servlet.AddAuthorServlet</servlet-class>
+        <servlet-class>com.ymens.spring.manager.AddAuthor</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>addauthor</servlet-name>

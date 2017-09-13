@@ -12,18 +12,17 @@ public class Book {
     private double price;
     private String description;
     private byte[] image;
-    private int author_id;
     private JdbcTemplate jdbcTemplate;
 
     public Book() {
     }
 
     public int getAuthor_id() {
-        return author_id;
+        return authorId;
     }
 
     public void setAuthor_id(int author_id) {
-        this.author_id = author_id;
+        this.authorId = author_id;
     }
 
     public Book(String name, int author_id, long isbn, double price, String description, byte[] image) {

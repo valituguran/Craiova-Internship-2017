@@ -5,6 +5,7 @@ import com.ymens.hibernate.UserType;
 import com.ymens.servlet.PaginationServlet;
 import com.ymens.spring.beans.Book;
 import com.ymens.spring.dao.BooksDao;
+import com.ymens.spring.interfaces.IBook;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
@@ -50,7 +51,8 @@ public class SelectBooks extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html");
-        list = BooksDao.selectBooks(ds);
+        IBook book = new BooksDao();
+        list = book.selectBooks();
         session = request.getSession(false);
         if (session != null) {
             session.setAttribute("list", list);

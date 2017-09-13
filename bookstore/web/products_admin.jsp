@@ -4,6 +4,7 @@
 <%@ page import="com.ymens.servlet.PaginationServlet" %>
 <%@ page import="com.ymens.spring.beans.Author"%>
 <%@ page import="com.ymens.spring.beans.Book" %>
+<%@ page import="com.ymens.spring.interfaces.IAuthor" %>
 <%@ page import="java.util.LinkedList" %>
 <%@ page import="com.ymens.spring.dao.AuthorsDao" %>
 
@@ -95,11 +96,11 @@ realname=(String)session.getAttribute("realname");
             </form>
             <div class="product">
                 <img src="data:image/jpg;base64,<%=book.getStrImage(book.getImage())%>" />
-                <%AuthorsDao ad = new AuthorsDao();
-                    id = ad.getIdAuthor(book);
-                 a = ad.getAuthor(id);
+                <%IAuthor ad = new AuthorsDao();
+                    int author_id = book.getAuthorId();
+                    String nameAuthor = ad.getName(author_id);
                 %>
-                <p><%=a.getName()%></p>
+                <p><%=nameAuthor%></p>
                 <form name="model" method="POST" action="/cartadminServlet">
                   <input type="hidden" name="book" value="<%=book.getName()%>">
                     <input class="details" type="text" size="2" value="1" name="quantity">buc
