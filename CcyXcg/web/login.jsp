@@ -5,20 +5,34 @@
   Time: 1:56 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<!---------------------------------------------------------->
+<!DOCTYPE html>
+<html >
 <head>
-    <head>
-        <link rel="stylesheet" type="text/css" href="../StyleSheet/loginStyle.css">
-        <link rel="stylesheet" type="text/css" href="../StyleSheet/homeStyle.css">
-    </head>
+    <meta charset="UTF-8">
     <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="../StyleSheet/loginStyle.css">
 </head>
 <body>
-<form class="login" method="get" action="loginServlet" >
-   Name: <input name="name" required="Please enter a name"><br>
-    Password: <input name="password" type="password" required="Please enter a password"><br>
-    <input type="submit" value="Login"><br>
-</form>
+<body class="align">
+<div class="grid">
+    <form action="loginServlet" method="get" class="form login">
+        <header class="login__header">
+            <h3 class="login__title">Login</h3>
+        </header>
+        <div class="login__body">
+            <div class="form__field">
+                <input name="name" type="username" placeholder="Username" required>
+            </div>
+            <div class="form__field">
+                <input name="password" type="password" placeholder="Password" required>
+            </div>
+        </div>
+        <footer class="login__footer">
+            <input type="submit" value="Login">
+        </footer>
+    </form>
+</div>
+</body>
 </body>
 </html>
