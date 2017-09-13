@@ -10,7 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
 
-public class RegisterDao implements IUser{
+public class UserDao implements IUser{
     static DataSource dataSource = AppConfig.dataSource();
     static JdbcOperations jdbcTemplateObject = new JdbcTemplate(dataSource);
 

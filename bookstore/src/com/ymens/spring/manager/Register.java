@@ -6,7 +6,7 @@ import com.ymens.servlet.PaginationServlet;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import com.ymens.spring.beans.User;
-import com.ymens.spring.dao.RegisterDao;
+import com.ymens.spring.dao.UserDao;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -49,7 +49,7 @@ public class Register extends HttpServlet {
             user.setEmail(e);
             user.setRealName(rn);
             user.setType(UserType.user);
-            RegisterDao regDao = new RegisterDao();
+            UserDao regDao = new UserDao();
             if(regDao.insertUser(user) == 1) {
                 RequestDispatcher rd = request.getRequestDispatcher("products_admin.jsp");
                 rd.forward(request, response);

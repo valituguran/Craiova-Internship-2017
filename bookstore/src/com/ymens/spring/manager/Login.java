@@ -4,7 +4,7 @@ import com.ymens.hibernate.UserType;
 import com.ymens.dao.CartDao;
 import com.ymens.dao.LoginDao;
 import com.ymens.servlet.PaginationServlet;
-import com.ymens.spring.dao.RegisterDao;
+import com.ymens.spring.dao.UserDao;
 import com.ymens.spring.interfaces.IUser;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
@@ -38,7 +38,7 @@ public class Login extends HttpServlet {
         String p = request.getParameter("password");
         HttpSession session = request.getSession(false);
         String realname = LoginDao.getRealName(n, p);
-        IUser regDao = new RegisterDao();
+        IUser regDao = new UserDao();
         if (session != null) {
             session.setAttribute("name", n);
             session.setAttribute("password", p);
