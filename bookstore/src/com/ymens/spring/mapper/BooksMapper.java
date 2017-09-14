@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class BooksMapper implements RowMapper<Book> {
 
@@ -18,6 +19,22 @@ public class BooksMapper implements RowMapper<Book> {
             book.setDescription(rs.getString("description"));
             book.setPrice(rs.getDouble("price"));
             book.setAuthor_id(rs.getInt("author_id"));
+            return book;
+        }
+
+        public Book setBook(List<Book> list){
+            Book book = new Book();
+            Book b = new Book();
+            for(int i=0; i<list.size(); i++){
+                b = list.get(i);
+                book.setId(b.getId());
+                book.setName(b.getName());
+                book.setIsbn(b.getIsbn());
+                book.setImage(b.getImage());
+                book.setDescription(b.getDescription());
+                book.setPrice(b.getPrice());
+                book.setAuthor_id(b.getAuthor_id());
+            }
             return book;
         }
     }

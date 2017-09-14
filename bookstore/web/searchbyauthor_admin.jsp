@@ -3,7 +3,9 @@
 
 <%@ page import="com.ymens.servlet.PaginationServlet" %>
 <%@ page import="com.ymens.spring.beans.Book"%>
+<%@ page import="com.ymens.spring.dao.AuthorsDao" %>
 <%@ page import="java.util.LinkedList" %>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,8 +21,10 @@
 	realname=(String)session.getAttribute("realname");%>
 <%int currentpage = PaginationServlet.currentPage;
 	String typelist = (String)session.getAttribute("typelist");
-	LinkedList list = new LinkedList();
-	list = (LinkedList) session.getAttribute(typelist);
+	List<String> listAuthors = (List)session.getAttribute("listAuthors");
+	String nameAuthor;
+	AuthorsDao author = new AuthorsDao();
+	LinkedList<Book> list = (LinkedList<Book>)session.getAttribute(typelist);
 	int recordsPerPage = PaginationServlet.recordsPerPage;
 	int noOfProducts = list.size();
 	int noOfPages;
@@ -59,7 +63,7 @@
 		</ul>
 		<div class="form">
 			<h4>Ordoneaza: </h4>
-			<form method="get" action="/filterbypriceServlet" id="filterbyprice">
+			<form method="get" action="/filterbypriceServlet" >
 				<input name="filterasc" class="filter" type="submit" value="Pret crescator" required="required">
 				<input type="hidden" name="typelist" value="filtersearchbyauthor" required="required">
 			</form>
@@ -97,6 +101,8 @@
 			</form>
 			<div class="product">
 				<img src="data:image/jpg;base64,<%=book.getStrImage(book.getImage())%>" />
+				<%nameAuthor = (String) listAuthors.get(i);%>
+				<p><%=nameAuthor%></p>
 				<form name="model" method="POST" action="/cartadminServlet">
 					<input class="details" type="text" size="2" value="1" name="quantity">buc
 					<p> Pret: <%=book.getPrice()%><input type="hidden" name="price" value="<%=book.getPrice()%>"></p>

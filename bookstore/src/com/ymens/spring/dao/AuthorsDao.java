@@ -1,21 +1,25 @@
 package com.ymens.spring.dao;
 
 
-import com.ymens.spring.AppConfig;
 import com.ymens.spring.beans.Author;
 import com.ymens.spring.interfaces.IAuthor;
 import com.ymens.spring.mapper.AuthorMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.util.List;
 
-
+@Repository
 public class AuthorsDao implements IAuthor {
-    static DataSource dataSource = AppConfig.dataSource();
-    static JdbcOperations jdbcTemplateObject = new JdbcTemplate(dataSource);
+    private static JdbcTemplate jdbcTemplateObject;
+
+    @Autowired
+    public void setDataSource(DataSource dataSource) {
+        this.jdbcTemplateObject = new JdbcTemplate(dataSource);
+    }
 
 
     @Override
@@ -60,4 +64,5 @@ public class AuthorsDao implements IAuthor {
         }
         return id;
     }
+
 }

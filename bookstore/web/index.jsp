@@ -1,13 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1"%>
-
 <%@page import="com.ymens.spring.beans.Book"%>
-
-<%@ page import="com.ymens.dao.ManageBook" %>
 <%@ page import="com.ymens.servlet.PaginationServlet" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.ymens.servlet.SelectBooksServlet" %>
-<%@ page import="com.ymens.dao.SelectBooksDao" %>
+<%@ page import="com.ymens.spring.dao.BooksDao" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,7 +38,8 @@
     }
 </script>
 <%int currentpage = PaginationServlet.currentPage;
-     List<Book> list = SelectBooksDao.select();
+     BooksDao bookDao = new BooksDao();
+     List<Book> list = bookDao.selectBooks();
     int recordsPerPage = PaginationServlet.recordsPerPage;
     int noOfProducts = list.size();
     int noOfPages;

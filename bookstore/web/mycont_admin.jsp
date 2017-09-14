@@ -1,11 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@page import="com.ymens.hibernate.User"%>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="com.ymens.hibernate.UserType" %>
-<%@ page import="com.ymens.dao.CartDao" %>
-<%@ page import="com.ymens.dao.OrderDao" %>
+
 <%@ page import="com.ymens.dao.History" %>
-<%@ page import="java.util.LinkedList" %>
+<%@ page import="com.ymens.spring.beans.User" %>
+<%@ page import="java.util.ArrayList" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,11 +49,11 @@
 
         <div class="form">
             <h4>Ordoneaza: </h4>
-            <form method="get" action="/filterbypriceServlet" id="filterbyprice">
+            <form method="get" action="/filterbypriceServlet" >
                 <input name="filterasc" class="filter" type="submit" value="Pret crescator" required="required">
                 <input type="hidden" name="typelist" value="filterbyprice" required="required">
             </form>
-            <form method="get" action="/filterbypriceServlet" id="filterbyprice">
+            <form method="get" action="/filterbypriceServlet" >
                 <input name="filterdesc" class="filter" type="submit" value="Pret descrescator" required="required">
                 <input type="hidden" name="typelist" value="filterbyprice" required="required">
             </form>
@@ -86,7 +84,7 @@
                     </tr>
                     <tr>
                         <th> Nume si prenume:</th>
-                        <th><input  class="account" type='text' name="realname" style="color:black;" value="<%=user.getRealname()%>"></th>
+                        <th><input  class="account" type='text' name="realname" style="color:black;" value="<%=user.getRealName()%>"></th>
                         <th>  <input class="account" type="submit" name="action" value="Modifica"></th>
                     </tr>
                     <tr>

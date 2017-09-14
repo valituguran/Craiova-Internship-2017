@@ -12,5 +12,11 @@ public interface IUser {
      int getId(String name, String password) ;
 
      int insertUser(User u);
+    int UpdatePassword(String pass, String user);
+
+     int UpdateEmail(String email, String user);
+
+     int UpdateRealName(String rn, String user);
+
 
 }

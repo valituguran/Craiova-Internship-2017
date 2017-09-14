@@ -4,9 +4,9 @@
 <%@ page import="com.ymens.servlet.PaginationServlet" %>
 <%@ page import="com.ymens.spring.beans.Author"%>
 <%@ page import="com.ymens.spring.beans.Book" %>
-<%@ page import="com.ymens.spring.interfaces.IAuthor" %>
-<%@ page import="java.util.LinkedList" %>
 <%@ page import="com.ymens.spring.dao.AuthorsDao" %>
+<%@ page import="com.ymens.spring.interfaces.IAuthor" %>
+<%@ page import="java.util.List" %>
 
 <!DOCTYPE html>
 <html>
@@ -24,10 +24,14 @@
 realname=(String)session.getAttribute("realname");
 %>
 <%int currentpage = PaginationServlet.currentPage;
-    LinkedList list = (LinkedList)session.getAttribute("list");
+    List<Book> list = (List)session.getAttribute("list");
+    List<String> listAuthors = (List)session.getAttribute("listAuthors");
+    String nameAuthor;
+    AuthorsDao author = new AuthorsDao();
     int recordsPerPage = PaginationServlet.recordsPerPage;
     int noOfProducts = list.size();
     int noOfPages;
+
     if(noOfProducts/recordsPerPage == 0) {
         noOfPages = noOfProducts / recordsPerPage ;
     }
@@ -85,21 +89,17 @@ realname=(String)session.getAttribute("realname");
 <div class="products" >
     <img class="logo" src="../images/logo.jpg">
     <div class="container">
-        <%Author a;
-        int id;
+        <%int id;
             for( int i=(currentpage-1)*recordsPerPage; i<currentpage*recordsPerPage && i<noOfProducts; i++){
             Book book = (Book) list.get(i);%>
         <div class="tab-content">
             <form method="get" action="/viewbookServlet" id="">
                 <input type="hidden" name="pagetitle" value="index.jsp" class="title">
-                <input name="title" class="title" type="submit" value="<%=book.getName()%> ">
+                <input name="title" class="title" type="submit" value="<%=book.getName()%>">
             </form>
             <div class="product">
                 <img src="data:image/jpg;base64,<%=book.getStrImage(book.getImage())%>" />
-                <%IAuthor ad = new AuthorsDao();
-                    int author_id = book.getAuthorId();
-                    String nameAuthor = ad.getName(author_id);
-                %>
+                <%nameAuthor =(String) listAuthors.get(i);%>
                 <p><%=nameAuthor%></p>
                 <form name="model" method="POST" action="/cartadminServlet">
                   <input type="hidden" name="book" value="<%=book.getName()%>">

@@ -2,9 +2,9 @@
          pageEncoding="ISO-8859-1"%>
 
 
-<%@ page import="com.ymens.dao.CartDao" %>
+<%@ page import="com.ymens.spring.dao.CartItemDao" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="com.ymens.hibernate.CartItem" %>
+<%@ page import="com.ymens.spring.beans.Cart" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -81,7 +81,7 @@
                 <th></th>
             </tr>
             <%for( int i=0; i<list.size(); i++){
-                CartItem cartitem = (CartItem) list.get(i);%>
+                Cart cartitem = (Cart) list.get(i);%>
             <tr> <form name="item" method="POST" action="/cartadminServlet">
                 <th><%=cartitem.getBook().getName()%></th>
                 <input type='hidden' name='name' value="<%=cartitem.getBook().getName()%>">
@@ -93,8 +93,8 @@
             </tr>
             <% } %>
             <tr><form name="order" method="POST" action="/orderServlet">
-                <th colspan="3"><input type='hidden' name ="orderTotal" value="<%=CartDao.dblOrderTotal%>">
-                    <h3>Suma totala:</h3><%=CartDao.getOrderTotal()%><br></th>
+                <th colspan="3"><input type='hidden' name ="orderTotal" value="<%=CartItemDao.dblOrderTotal%>">
+                    <h3>Suma totala:</h3><%=CartItemDao.getOrderTotal()%><br></th>
                 <th colspan="2"> <input class="button" type="submit" value="Plaseaza comanda"></th>
                 <input type="hidden" name="returnpage" value="products_admin.jsp">
             </form>

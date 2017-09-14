@@ -43,5 +43,7 @@
     <orderEntry type="library" name="mysql-connector-java-5.1.43-bin" level="project" />
     <orderEntry type="library" name="Spring-4.3.10.RELEASE" level="project" />
     <orderEntry type="library" name="spring-web-4.3.1.RELEASE" level="project" />
+    <orderEntry type="library" name="spring-aop-4.3.10.RELEASE" level="project" />
+    <orderEntry type="library" name="spring-webmvc-4.2.0.RELEASE" level="project" />
   </component>
 </module>

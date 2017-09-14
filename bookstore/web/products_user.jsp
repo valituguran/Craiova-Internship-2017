@@ -4,7 +4,8 @@
 
 <%@ page import="com.ymens.servlet.PaginationServlet" %>
 <%@ page import="com.ymens.spring.beans.Book" %>
-<%@ page import="java.util.LinkedList" %>
+<%@ page import="com.ymens.spring.dao.AuthorsDao" %>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +21,10 @@
 <%String realname;
     realname=(String)session.getAttribute("realname");%>
 <%int currentpage = PaginationServlet.currentPage;
-    LinkedList list = (LinkedList)session.getAttribute("list");
+    List<Book> list = (List)session.getAttribute("list");
+    List<String> listAuthors = (List)session.getAttribute("listAuthors");
+    String nameAuthor;
+    AuthorsDao author = new AuthorsDao();
     int recordsPerPage = PaginationServlet.recordsPerPage;
     int noOfProducts = list.size();
     int noOfPages;
@@ -89,6 +93,8 @@
             </form>
             <div class="product">
                 <img src="data:image/jpg;base64,<%=book.getStrImage(book.getImage())%>" />
+                <%nameAuthor = (String) listAuthors.get(i);%>
+                <p><%=nameAuthor%></p>
                 <form name="model" method="POST" action="/cartuserServlet">
                     <input class="details" type="text" size="2" value="1" name="quantity">buc
                     <p> Pret: <%=book.getPrice()%><input type="hidden" name="price" value="<%=book.getPrice()%>"></p>

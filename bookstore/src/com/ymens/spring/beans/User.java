@@ -1,9 +1,5 @@
 package com.ymens.spring.beans;
 
-import org.springframework.jdbc.core.JdbcTemplate;
-
-import javax.sql.DataSource;
-
 public class User {
       private int id;
         private String username;
@@ -11,8 +7,7 @@ public class User {
         private String realName;
         private String email;
         private int type;
-    private JdbcTemplate jdbcTemplate;
-    private DataSource dataSource;
+
     public User(){}
 
         public User(String username, String password, String realname, String email, int type) {
@@ -22,13 +17,6 @@ public class User {
             this.email = email;
             this.type = type;
         }
-
-    public  DataSource getDataSource() {
-        return this.dataSource;
-    }
-    public void setDataSource(DataSource dataSource) {
-         this.dataSource = dataSource;
-    }
 
     public int getId() {
             return id;
@@ -62,7 +50,6 @@ public class User {
             this.password = password;
         }
 
-
         public String getRealName() {
             return realName;
         }
@@ -79,11 +66,4 @@ public class User {
             this.email = email;
         }
 
-    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
-
-    public JdbcTemplate getJdbcTemplate() {
-        return jdbcTemplate;
-    }
 }

@@ -1,8 +1,8 @@
 package com.ymens.spring.beans;
 
-import org.springframework.jdbc.core.JdbcTemplate;
-
 import java.util.Base64;
+
+
 
 public class Book {
     private int id;
@@ -12,7 +12,9 @@ public class Book {
     private double price;
     private String description;
     private byte[] image;
-    private JdbcTemplate jdbcTemplate;
+
+
+
 
     public Book() {
     }
@@ -94,11 +96,7 @@ public class Book {
         String encode = Base64.getEncoder().encodeToString(image);
         return encode;
     }
-    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
 
-    public JdbcTemplate getJdbcTemplate() {
-        return jdbcTemplate;
-    }
+
+
 }

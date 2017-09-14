@@ -3,7 +3,9 @@
 
 <%@ page import="com.ymens.servlet.PaginationServlet" %>
 <%@ page import="com.ymens.spring.beans.Book" %>
+<%@ page import="com.ymens.spring.dao.AuthorsDao" %>
 <%@ page import="java.util.LinkedList" %>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,6 +21,9 @@
     LinkedList list = new LinkedList();
     list = (LinkedList) session.getAttribute("filterbyprice");
     int recordsPerPage = PaginationServlet.recordsPerPage;
+    List<String> listAuthors = (List)session.getAttribute("listAuthors");
+    String nameAuthor;
+    AuthorsDao author = new AuthorsDao();
     int noOfProducts = list.size();
     int noOfPages;
     if(noOfProducts%recordsPerPage == 0) {
@@ -83,6 +88,8 @@
             </form>
             <div class="product">
                 <img src="data:image/jpg;base64,<%=book.getStrImage(book.getImage())%>" />
+                <%nameAuthor = (String) listAuthors.get(i);%>
+                <p><%=nameAuthor%></p>
                 <input class="details" type="text" size="2" value="1" name="quantity">buc
                 <p> Pret: <%=book.getPrice()%><input type="hidden" name="price" value="<%=book.getPrice()%>"></p>
                 <button onclick="redirectLogin()"><input type="hidden" name="action" value="add">Adauga in cos</button>
