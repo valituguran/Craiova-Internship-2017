@@ -37,7 +37,7 @@
         noOfPages = noOfProducts / recordsPerPage+1;
     }
 %>
-%>
+
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <form method="get" action="/mycontadminServlet" >
