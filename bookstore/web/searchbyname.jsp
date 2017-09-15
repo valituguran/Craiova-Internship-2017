@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1"%>
 
-<%@page import="com.ymens.Book"%>
+
 <%@ page import="com.ymens.servlet.PaginationServlet" %>
-<%@ page import="java.util.LinkedList" %>
-<%@ page import="com.ymens.servlet.SearchByNameServlet" %>
+<%@ page import="com.ymens.spring.beans.Book" %>
+<%@ page import="com.ymens.spring.manager.SelectBooks" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.ymens.spring.manager.SearchByName" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,8 +21,9 @@
 <body>
 <%int currentpage = PaginationServlet.currentPage;
     String typelist = (String) session.getAttribute("typelist");
-    LinkedList list = (LinkedList)session.getAttribute(typelist);
-
+    List<Book> list = (List)session.getAttribute(typelist);
+    SearchByName sb = new SearchByName();
+    List<String> listAuthors = sb.listAuthors;
     int recordsPerPage = PaginationServlet.recordsPerPage;
     int noOfProducts = list.size();
     int noOfPages;
@@ -75,15 +78,19 @@
         <h3>Nu exista produse cu acest nume</h3>
         <a href="index.jsp">Toate produsele</a>
         <%} else{%>
-        <%for( int i=(currentpage-1)*recordsPerPage; i<currentpage*recordsPerPage && i<noOfProducts; i++){
+        <%
+            String nameAuthor;
+            for( int i=(currentpage-1)*recordsPerPage; i<currentpage*recordsPerPage && i<noOfProducts; i++){
             Book book = (Book) list.get(i);%>
         <div class="tab-content">
             <form method="get" action="/viewbookServlet" id="">
                 <input type="hidden" name="pagetitle" value="index.jsp" class="title">
-                <input name="title" class="title" type="submit" value="<%=book.getNume()%> ">
+                <input name="title" class="title" type="submit" value="<%=book.getName()%> ">
             </form>
             <div class="product">
-                <img src="data:image/jpg;base64,<%=book.getImage()%>" />
+                <img src="data:image/jpg;base64,<%=book.getStrImage(book.getImage())%>" />
+                <%nameAuthor = (String) listAuthors.get(i);%>
+                <p><%=nameAuthor%></p>
                 <input class="details" type="text" size="2" value="1" name="quantity">buc
                 <p> Pret: <%=book.getPrice()%><input type="hidden" name="price" value="<%=book.getPrice()%>"></p>
                 <button onclick="redirectLogin()"><input type="hidden" name="action" value="add">Adauga in cos</button>

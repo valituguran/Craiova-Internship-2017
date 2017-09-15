@@ -4,10 +4,10 @@ package com.ymens.dao;
  * Created by madalina.luca on 8/9/2017.
  */
 
-import com.ymens.Author;
-import com.ymens.Book;
-import com.ymens.CartItem;
-import com.ymens.PrintAuthor;
+import com.ymens.hibernate.CartItem;
+import com.ymens.hibernate.PrintAuthor;
+import com.ymens.spring.beans.Author;
+import com.ymens.spring.beans.Book;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -56,7 +56,7 @@ public class CartDao {
                     String description = rs.getString("description");
                     fileData = rs.getBytes("image");
                     String encode = Base64.getEncoder().encodeToString(fileData);
-                    book = new Book(namebook, isbn, author, price, description, encode);
+                    book = new Book(namebook, id_author,isbn, price, description, fileData);
                 }
         } catch (SQLException e) {
                 e.printStackTrace();
@@ -86,7 +86,7 @@ public class CartDao {
        CartItem cartItem = new CartItem();
         for(int i=0; i< allCartItems.size(); i++){
            cartItem = (CartItem) allCartItems.get(i);
-                   if(cartItem.getBook().getNume().equals(title))
+                   if(cartItem.getBook().getName().equals(title))
                        return i;
         }
         return 0;

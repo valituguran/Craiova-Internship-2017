@@ -1,6 +1,6 @@
 package com.ymens.servlet;
 
-import com.ymens.CartItem;
+import com.ymens.hibernate.CartItem;
 import com.ymens.dao.CartDao;
 import com.ymens.dao.OrderDao;
 
@@ -41,7 +41,7 @@ public static double orderTotal = 0.0;
                 order_id = OrderDao.getOrderId(orderTotal);
                 for (i = 0; i < list.size(); i++) {
                     cartitem = (CartItem) list.get(i);
-                    OrderDao.setOrderItem(order_id, cartitem.getBook().getNume(), cartitem.getUnitCost());
+                    OrderDao.setOrderItem(order_id, cartitem.getBook().getName(), cartitem.getUnitCost());
                 }
                 session.setAttribute("order", list);
                 RequestDispatcher rd = request.getRequestDispatcher("order.jsp");

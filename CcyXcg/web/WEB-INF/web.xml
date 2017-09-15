@@ -51,6 +51,7 @@
         <servlet-name>pagination</servlet-name>
         <url-pattern>/PaginationServlet</url-pattern>
     </servlet-mapping>
+<<<<<<< HEAD
 
     <servlet>
         <servlet-name>history</servlet-name>
@@ -99,6 +100,15 @@
     <servlet-mapping>
         <servlet-name>download</servlet-name>
         <url-pattern>/downloadServlet</url-pattern>
+=======
+    <servlet>
+        <servlet-name>chart</servlet-name>
+        <servlet-class>com.ymens.ChartServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>chart</servlet-name>
+        <url-pattern>/ChartServlet</url-pattern>
+>>>>>>> 3f388d2b93ed725a76c885622f61a590f6163e4f
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>/parseServlet</welcome-file>

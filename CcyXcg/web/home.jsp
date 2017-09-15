@@ -3,6 +3,7 @@
 <%@ page import="com.ymens.ParseServlet" %>
 <%@ page import="com.ymens.Parse" %>
 <%@ page import="com.ymens.SearchServlet" %>
+<<<<<<< HEAD
 <%@ page import="javax.jws.soap.SOAPBinding" %>
 <%@ page import="dao.*" %>
 <%@ page import="java.text.DecimalFormat" %>
@@ -10,6 +11,16 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Date" %>
 <%@ page import="java.util.Timer" %>
+=======
+<%@ page import="dao.PaginationDao" %>
+<%--
+  Created by IntelliJ IDEA.
+  User: lucian.Nicolescu
+  Date: 8/28/2017
+  Time: 9:29 AM
+  To change this template use File | Settings | File Templates.
+--%>
+>>>>>>> 3f388d2b93ed725a76c885622f61a590f6163e4f
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!------------------------------------------>
 <html>
@@ -161,6 +172,7 @@
             myChart.setOption(option);
         }
     </script>
+<<<<<<< HEAD
     </div>
     <%}else if(session.getAttribute("name")!=null){%>
     <div class="topnav">
@@ -169,6 +181,19 @@
         <a href="History.jsp">History</a>
         <a href="myAccount.jsp" id="nameandbalance">Hello <%=user.username%> <br> Balance:<%=df.format(user.balance)%><%=user.currency%> </a>
         <div id="logoutt">
+=======
+
+</div>
+<%}else if(session.getAttribute("name")!=null){%>
+<div class="header">
+    <div>
+        <ul>
+            <a class="titlehref"href="home.jsp">CCy Xcg</a>
+            <li><a href="home.jsp">Currencies</a></li>
+            <li><a href="History.jsp">History</a></li>
+            <%String name = (String) session.getAttribute("name");%>
+            <li>Hello<%=name%></li>
+>>>>>>> 3f388d2b93ed725a76c885622f61a590f6163e4f
             <form action="logoutServlet" method="post">
                 <a>  <input type="submit" id="logout" value="Logout" />   </a>
             </form>

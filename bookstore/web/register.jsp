@@ -9,10 +9,13 @@
 <html>
 <head>
     <link rel="stylesheet" href="../styles/layout_login.css">
+    <link rel="stylesheet" href="../styles/style.css">
     <title>Add users</title>
 </head>
-
 <body>
+<div class="topnav">
+    <a href="products_admin.jsp">Inapoi</a>
+</div>
 <form method="post" action="registerServlet">
     <header>Register</header>
     <label for="username"> Username:</label>
@@ -29,5 +32,4 @@
     <button type="submit">Adauga user</button>
 </form>
 </body>
-
 </html>

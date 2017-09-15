@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1"%>
 
-<%@page import="com.ymens.Book"%>
-<%@ page import="com.ymens.dao.CartDao" %>
+
+<%@ page import="com.ymens.spring.dao.CartItemDao" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="com.ymens.CartItem" %>
+<%@ page import="com.ymens.spring.beans.Cart" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +21,12 @@
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <form method="get" action="/mycontadminServlet" >
-        <input name="logout"  type="submit" value="<%=realname%>" required="required">
+        <input name="as"  type="submit" value="Detalii cont" required="required">
+        <input name="type" type="hidden" value="accountdetails" required="required">
+    </form>
+    <form method="get" action="/mycontadminServlet" >
+        <input name="as"  type="submit" value="Comenziile mele" required="required">
+        <input name="type" type="hidden" value="myorders" required="required">
     </form>
     <form method="get" action="/logoutServlet" >
         <input name="logout" type="submit" value="Logout" required="required">
@@ -76,10 +81,10 @@
                 <th></th>
             </tr>
             <%for( int i=0; i<list.size(); i++){
-                CartItem cartitem = (CartItem) list.get(i);%>
+                Cart cartitem = (Cart) list.get(i);%>
             <tr> <form name="item" method="POST" action="/cartadminServlet">
-                <th><%=cartitem.getBook().getNume()%></th>
-                <input type='hidden' name='name' value="<%=cartitem.getBook().getNume()%>">
+                <th><%=cartitem.getBook().getName()%></th>
+                <input type='hidden' name='name' value="<%=cartitem.getBook().getName()%>">
                 <th>  <%=cartitem.getUnitCost()%><input type='hidden' name='price' value="<%=cartitem.getUnitCost()%>"></th>
                 <th><input type='text' class="account" name="quantity" value="<%=cartitem.getQuantity()%>"> <input type="submit" name="action" value="modifica"></th>
                 <th><%=cartitem.getTotalCost()%></th>
@@ -88,8 +93,8 @@
             </tr>
             <% } %>
             <tr><form name="order" method="POST" action="/orderServlet">
-                <th colspan="3"><input type='hidden' name ="orderTotal" value="<%=CartDao.dblOrderTotal%>">
-                    <h3>Suma totala:</h3><%=CartDao.getOrderTotal()%><br></th>
+                <th colspan="3"><input type='hidden' name ="orderTotal" value="<%=CartItemDao.dblOrderTotal%>">
+                    <h3>Suma totala:</h3><%=CartItemDao.getOrderTotal()%><br></th>
                 <th colspan="2"> <input class="button" type="submit" value="Plaseaza comanda"></th>
                 <input type="hidden" name="returnpage" value="products_admin.jsp">
             </form>

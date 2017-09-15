@@ -15,7 +15,6 @@
 <body>
 <form class="form" method="get" action="parseServlet" >
     <input type="submit" value="Insert in database"><br>
-    <form class="form" method="get" action="ParseHistoryServlet" >
-        <input type="submit" value="Insert history in database"><br>
+
 </body>
 </html>

@@ -9,7 +9,13 @@
 <!DOCTYPE html>
 <html >
 <head>
+<<<<<<< HEAD
     <meta charset="UTF-8">
+=======
+    <head>
+        <link rel="stylesheet" type="text/css" href="../StyleSheet/loginStyle.css">
+    </head>
+>>>>>>> 3f388d2b93ed725a76c885622f61a590f6163e4f
     <title>Login</title>
     <link rel="stylesheet" type="text/css" href="../StyleSheet/loginStyle.css">
 </head>

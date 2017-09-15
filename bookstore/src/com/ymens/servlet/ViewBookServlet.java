@@ -1,8 +1,8 @@
 package com.ymens.servlet;
 
-import com.ymens.Book;
-import com.ymens.User;
+import com.ymens.hibernate.User;
 import com.ymens.dao.ViewBookDao;
+import com.ymens.spring.beans.Book;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

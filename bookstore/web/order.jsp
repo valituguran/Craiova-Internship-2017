@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1"%>
 
-<%@page import="com.ymens.CartItem"%>
-<%@ page import="com.ymens.dao.CartDao" %>
+<%@page import="com.ymens.spring.beans.Cart"%>
+<%@ page import="com.ymens.spring.dao.CartItemDao" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="com.ymens.dao.OrderDao" %>
-<%@ page import="com.ymens.servlet.OrderServlet" %>
+<%@ page import="com.ymens.spring.dao.OrderDao" %>
+<%@ page import="com.ymens.spring.manager.Order" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,7 +46,7 @@
                 <input name="filterasc" class="filter" type="submit" value="Pret crescator" required="required">
                 <input type="hidden" name="typelist" value="filterbyprice" required="required">
             </form>
-            <form method="get" action="/filterbypriceServlet" id="filterbyprice">
+            <form method="get" action="/filterbypriceServlet" >
                 <input name="filterdesc" class="filter" type="submit" value="Pret descrescator" required="required">
                 <input type="hidden" name="typelist" value="filterbyprice" required="required">
             </form>
@@ -78,16 +78,16 @@
             </tr>
         <%ArrayList list =(ArrayList) session.getAttribute("order");%>
         <%for( int i=0; i<list.size(); i++){
-                CartItem cartitem = (CartItem) list.get(i);%>
+                Cart cartitem = (Cart) list.get(i);%>
             <tr>
-                <th><%=cartitem.getBook().getNume()%></th>
+                <th><%=cartitem.getBook().getName()%></th>
                 <th><%=cartitem.getBook().getPrice()%></th>
                 <th><%=cartitem.getQuantity()%></th>
                 <th><%=cartitem.getTotalCost()%></th>
             </tr>
         <% } %>
         </table>
-        <h3>Total de plata:</h3><%=OrderServlet.orderTotal%>
+        <h3>Total de plata:</h3><%=Order.orderTotal%>
         <p><a href="products_admin.jsp">Continua cumparaturile</a></p>
     </div>
 <script>

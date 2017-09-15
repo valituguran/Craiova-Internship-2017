@@ -1,7 +1,7 @@
 package com.ymens.servlet;
 
-import com.ymens.User;
-import com.ymens.UserType;
+import com.ymens.hibernate.User;
+import com.ymens.hibernate.UserType;
 import com.ymens.dao.SearchByNameDao;
 
 import javax.servlet.ServletException;

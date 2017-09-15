@@ -1,8 +1,8 @@
 package com.ymens.dao;
 
-import com.ymens.Author;
-import com.ymens.Book;
-import com.ymens.PrintAuthor;
+import com.ymens.hibernate.PrintAuthor;
+import com.ymens.spring.beans.Author;
+import com.ymens.spring.beans.Book;
 
 import java.sql.*;
 import java.util.Base64;
@@ -47,7 +47,7 @@ public class ViewBookDao {
                 String description = rs.getString("description");
                 fileData = rs.getBytes("image");
                 String encode = Base64.getEncoder().encodeToString(fileData);
-                book = new Book(name, isbn,author, price, description, encode);
+                book = new Book(name, id_author, isbn, price, description, fileData);
             }
         } catch (SQLException e) {
             e.printStackTrace();

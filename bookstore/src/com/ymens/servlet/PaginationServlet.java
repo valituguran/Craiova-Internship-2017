@@ -1,6 +1,6 @@
 package com.ymens.servlet;
 
-import com.ymens.User;
+import com.ymens.hibernate.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

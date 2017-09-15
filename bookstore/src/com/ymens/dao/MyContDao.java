@@ -1,6 +1,6 @@
 package com.ymens.dao;
 
-import com.ymens.User;
+import com.ymens.hibernate.User;
 
 import java.sql.*;
 

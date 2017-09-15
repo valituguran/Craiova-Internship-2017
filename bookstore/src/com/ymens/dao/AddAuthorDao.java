@@ -1,6 +1,6 @@
 package com.ymens.dao;
 
-import com.ymens.Author;
+import com.ymens.spring.beans.Author;
 
 import java.sql.*;
 
@@ -53,7 +53,7 @@ public class AddAuthorDao {
             ps.setInt(2, a.getAge());
             ps.setString(3, a.getNationality());
             ps.setString(4, a.getDescription());
-            ps.setLong(5, a.getCNP());
+            ps.setLong(5, a.getCnp());
             status = ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

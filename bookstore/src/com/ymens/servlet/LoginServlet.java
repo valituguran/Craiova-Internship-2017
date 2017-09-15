@@ -1,6 +1,6 @@
 package com.ymens.servlet;
 
-import com.ymens.UserType;
+import com.ymens.hibernate.UserType;
 import com.ymens.dao.CartDao;
 import com.ymens.dao.LoginDao;
 

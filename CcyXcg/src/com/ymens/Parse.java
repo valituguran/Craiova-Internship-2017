@@ -15,6 +15,11 @@ public class Parse {
     private static int x;
     private static int y;
     public static ArrayList<Double> values(String a) {
+<<<<<<< HEAD
+=======
+
+        a="E:\\workspace\\Craiova-Internship-2017\\parse\\src\\parse.xml";
+>>>>>>> 3f388d2b93ed725a76c885622f61a590f6163e4f
         ArrayList<Double > value = new ArrayList<Double>();
         try {
             File fXmlFile = new File(a);

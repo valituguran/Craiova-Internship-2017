@@ -1,14 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1"%>
-
-<%@page import="com.ymens.Book"%>
-<%@ page import="com.ymens.dao.SelectBooksDao" %>
-<%@ page import="com.ymens.servlet.ProductsServlet"%>
-<%@ page import="java.io.OutputStream" %>
-<%@ page import="java.util.LinkedList" %>
-<%@ page import="java.sql.Connection" %>
-<%@ page import="com.ymens.servlet.SelectBooksServlet" %>
+<%@page import="com.ymens.spring.beans.Book"%>
 <%@ page import="com.ymens.servlet.PaginationServlet" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.ymens.spring.dao.BooksDao" %>
+<%@ page import="com.ymens.spring.manager.SelectBooks" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,14 +22,16 @@
     function openNav() {
         document.getElementById("mySidenav").style.width = "250px";
     }
+
     function closeNav() {
         document.getElementById("mySidenav").style.width = "0";
     }
+
     function redirectLogin() {
         var txt;
         var r = confirm("Va rugam sa va logati!");
         if (r == true) {
-            window.location="login.jsp";
+            window.location = "login.jsp";
         } else {
             txt = "You pressed Cancel!";
         }
@@ -41,12 +39,16 @@
     }
 </script>
 <%int currentpage = PaginationServlet.currentPage;
-
-    LinkedList list = SelectBooksDao.select();
+    BooksDao bookDao = new BooksDao();
+    List<Book> list = bookDao.selectBooks();
+    SelectBooks sb = new SelectBooks();
+    sb.process();
+    List<String> listAuthors = sb.listAuthors;
+    String nameAuthor;
     int recordsPerPage = PaginationServlet.recordsPerPage;
     int noOfProducts = list.size();
     int noOfPages;
-    if(noOfProducts % noOfProducts== 0) {
+    if(noOfProducts % recordsPerPage== 0) {
         noOfPages = noOfProducts / recordsPerPage + 1;
     }
     else{
@@ -64,7 +66,6 @@
 <div class="content">
     <div class="menu-vertical">
         <ul class="breadcrumb">
-
         </ul>
         <div class="form">
             <h4>Ordoneaza: </h4>
@@ -72,7 +73,7 @@
                 <input name="filterasc" class="filter" type="submit" value="Pret crescator" required="required">
                 <input type="hidden" name="typelist" value="filterbyprice" required="required">
             </form>
-            <form method="get" action="/filterbypriceServlet" id="filterbyprice">
+            <form method="get" action="/filterbypriceServlet" >
                 <input name="filterdesc" class="filter" type="submit" value="Pret descrescator" required="required">
                 <input type="hidden" name="typelist" value="filterbyprice" required="required">
             </form>
@@ -94,21 +95,25 @@
     <img class="logo" src="../images/logo.jpg">
 
     <div class="container">
-        <%for( int i=(currentpage-1)*recordsPerPage; i<currentpage*recordsPerPage && i<noOfProducts; i++){%>
+        <%Book book = new Book();
+            for( int i=(currentpage-1)*recordsPerPage; i<currentpage*recordsPerPage && i<noOfProducts; i++){%>
         <div class="tab-content">
-                    <%Book book = (Book) list.get(i);%>
+            <%book = list.get(i);%>
             <form method="get" action="/viewbookServlet" id="">
                 <input type="hidden" name="pagetitle" value="index.jsp" class="title">
-                <input name="title" class="title" type="submit" value="<%=book.getNume()%> ">
+                <input name="title" class="title" type="submit" value="<%=book.getName()%> ">
             </form>
             <div class="product">
-                <img src="data:image/jpg;base64,<%=book.getImage()%>" />
+                <img src="data:image/jpg;base64,<%=book.getStrImage(book.getImage())%>" />
+                <%nameAuthor = listAuthors.get(i);%>
+                <p><%=nameAuthor%></p>
                 <input class="details" type="text" size="2" value="1" name="quantity">buc
                 <p>Pret: <%=book.getPrice()%> lei<input type="hidden" name="price" value="<%=book.getPrice()%>"></p>
                 <button onclick="redirectLogin()"><input type="hidden" name="action" value="add">Adauga in cos</button>
             </div>
         </div>
         <% } %>
+
     </div>
 </div>
 <div class="bottom">
@@ -123,7 +128,6 @@
     </form>
 </div>
 <script>
-
 </script>
 </body>
 </html>

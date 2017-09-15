@@ -1,12 +1,10 @@
 package com.ymens.dao;
 
-import com.ymens.Book;
+import com.ymens.hibernate.Books;
 import com.ymens.servlet.AddBookServlet;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.net.URL;
 import java.sql.*;
 
 /**
@@ -32,17 +30,18 @@ public class AddBookDao {
             return conn;
         }
     }
-    public int addBook(Book b, long cnp) throws SQLException {
+    public int addBook(Books b, long cnp) throws SQLException {
         PreparedStatement ps = null;
         PreparedStatement pst = null;
         ResultSet rs ;
         int author_id = 0;
         boolean status = true;
         int i = 0;
+
         Connection conn = connect();
         try {
             ps = conn.prepareStatement("insert into `books` (name, author_id, isbn, price, description, image) values(?,?,?,?,?, ?)");
-            ps.setString(1, b.getNume());
+            ps.setString(1, b.getName());
             ps.setInt(2, AddAuthorDao.getIdAuthor(cnp));
             ps.setLong(3, b.getIsbn());
             ps.setDouble(4, b.getPrice());

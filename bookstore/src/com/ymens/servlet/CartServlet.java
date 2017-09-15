@@ -1,11 +1,11 @@
 package com.ymens.servlet;
 
-import com.ymens.Book;
-import com.ymens.CartItem;
-import com.ymens.User;
-import com.ymens.UserType;
+import com.ymens.hibernate.CartItem;
+import com.ymens.hibernate.User;
+import com.ymens.hibernate.UserType;
 import com.ymens.dao.CartDao;
 import com.ymens.dao.MyContDao;
+import com.ymens.spring.beans.Book;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -30,7 +30,11 @@ public class CartServlet extends HttpServlet {
             if(strAction.equals("add")) {
                 addToCart(request);
             }  if (strAction.equals("modifica")) {
-                updateCart(request);
+                if (updateCart(request) == false){
+                    System.out.println("Error");
+                } else {
+                    updateCart(request);
+                }
             } if (strAction.equals("sterge")) {
                 deleteCart(request);
             }
@@ -71,7 +75,7 @@ public class CartServlet extends HttpServlet {
         int id = CartDao.getItemBook(title);
         ArrayList<CartItem> list =(ArrayList) session.getAttribute("cart");
         for(int i=0; i<list.size(); i++){
-            if(CartDao.getItemBook(list.get(i).getBook().getNume()) == id){
+            if(CartDao.getItemBook(list.get(i).getBook().getName()) == id){
                 cartDao.deleteCartItem(id);
                 session.setAttribute("cart", CartDao.getCartItems());
                 nr = list.size();
@@ -79,20 +83,28 @@ public class CartServlet extends HttpServlet {
         }
     }
 
-    protected void updateCart(HttpServletRequest request) {
+    protected boolean updateCart(HttpServletRequest request) {
         HttpSession session = request.getSession();
         String strQuantity = request.getParameter("quantity");
+        int quantity = 0;
+        boolean status = true;
+        try {
+            quantity = Integer.parseInt(strQuantity);
+        } catch(NumberFormatException e){
+            status = false;
+        }
         String title = request.getParameter("name");
         int id = CartDao.getItemBook(title);
         CartDao cartDao = new CartDao();
         ArrayList<CartItem> list =(ArrayList) session.getAttribute("cart");
         for(int i=0; i<list.size(); i++){
-            if(CartDao.getItemBook(list.get(i).getBook().getNume()) == id){
+            if(CartDao.getItemBook(list.get(i).getBook().getName()) == id){
                 cartDao.updateCartItem(id, strQuantity);
                 session.setAttribute("cart", CartDao.getCartItems());
                 nr = list.size();
             }
         }
+        return status;
     }
 
     protected void addToCart(HttpServletRequest request) {

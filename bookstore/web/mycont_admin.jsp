@@ -1,11 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@page import="com.ymens.User"%>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="com.ymens.UserType" %>
-<%@ page import="com.ymens.dao.CartDao" %>
-<%@ page import="com.ymens.dao.OrderDao" %>
+
 <%@ page import="com.ymens.dao.History" %>
-<%@ page import="java.util.LinkedList" %>
+<%@ page import="com.ymens.spring.beans.User" %>
+<%@ page import="java.util.ArrayList" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,12 +18,17 @@
 <%String realname;
     realname=(String)session.getAttribute("realname");
     String name = (String) session.getAttribute("name");
-    ArrayList list =(ArrayList) session.getAttribute("orders");
+    String type = (String) session.getAttribute("type");
 %>
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <form method="get" action="/mycontadminServlet" >
-        <input name="logout"  type="submit" value="<%=realname%>" required="required">
+        <input name="as"  type="submit" value="Detalii cont" required="required">
+        <input name="type" type="hidden" value="accountdetails" required="required">
+    </form>
+    <form method="get" action="/mycontadminServlet" >
+        <input name="as"  type="submit" value="Comenziile mele" required="required">
+        <input name="type" type="hidden" value="myorders" required="required">
     </form>
     <form method="get" action="/logoutServlet" >
         <input name="logout" type="submit" value="Logout" required="required">
@@ -46,11 +49,11 @@
 
         <div class="form">
             <h4>Ordoneaza: </h4>
-            <form method="get" action="/filterbypriceServlet" id="filterbyprice">
+            <form method="get" action="/filterbypriceServlet" >
                 <input name="filterasc" class="filter" type="submit" value="Pret crescator" required="required">
                 <input type="hidden" name="typelist" value="filterbyprice" required="required">
             </form>
-            <form method="get" action="/filterbypriceServlet" id="filterbyprice">
+            <form method="get" action="/filterbypriceServlet" >
                 <input name="filterdesc" class="filter" type="submit" value="Pret descrescator" required="required">
                 <input type="hidden" name="typelist" value="filterbyprice" required="required">
             </form>
@@ -68,7 +71,8 @@
     <img class="logo" src="../images/logo.jpg">
 
     <div class="products" id="products">
-        <%User user =(User) session.getAttribute("currentuser");%>
+        <%if(type.equals("accountdetails")){
+            User user =(User) session.getAttribute("currentuser");%>
 
         <div class="container">
             <div id="tab-1" class="tab-content current">
@@ -80,7 +84,7 @@
                     </tr>
                     <tr>
                         <th> Nume si prenume:</th>
-                        <th><input  class="account" type='text' name="realname" style="color:black;" value="<%=user.getRealname()%>"></th>
+                        <th><input  class="account" type='text' name="realname" style="color:black;" value="<%=user.getRealName()%>"></th>
                         <th>  <input class="account" type="submit" name="action" value="Modifica"></th>
                     </tr>
                     <tr>
@@ -94,6 +98,9 @@
                     </tr>
                     </table>
                 </form>
+                <%} else if(type.equals("myorders")){
+
+                    ArrayList list =(ArrayList) session.getAttribute("orders");%>
                 <table style="width:900px;margin-top:100px;margin-bottom:100px">
                     <tr>
                         <th colspan="3">Istoricul comenziilor mele</th>
@@ -127,6 +134,7 @@
                             <%}%>
                     <%}%>
                 </table>
+                <%}%>
             </div>
         </div>
     </div>

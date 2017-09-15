@@ -14,6 +14,10 @@ public class ParsePairs {
 
         int x;
         int y;
+<<<<<<< HEAD
+=======
+        a = "E:\\workspace\\Craiova-Internship-2017\\parse\\src\\parse.xml";
+>>>>>>> 3f388d2b93ed725a76c885622f61a590f6163e4f
         ArrayList<String> list = new ArrayList<String>();
         ArrayList<String> list2 = new ArrayList<String>();
         try {

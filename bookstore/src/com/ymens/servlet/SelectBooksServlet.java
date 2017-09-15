@@ -1,8 +1,10 @@
 package com.ymens.servlet;
 
-import com.ymens.User;
-import com.ymens.UserType;
+
+import com.ymens.hibernate.User;
+import com.ymens.hibernate.UserType;
 import com.ymens.dao.SelectBooksDao;
+import com.ymens.spring.beans.Book;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -20,7 +22,7 @@ import java.util.LinkedList;
  */
 public class SelectBooksServlet extends HttpServlet{
     private static final long serialVersionUID = 1L;
-    public LinkedList list = new LinkedList();
+    public LinkedList<Book> list = new LinkedList();
     HttpSession session;
     public static OutputStream o;
     private static User user = new User();
