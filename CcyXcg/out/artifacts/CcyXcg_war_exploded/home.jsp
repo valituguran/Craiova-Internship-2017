@@ -43,7 +43,7 @@
         <a href="login.jsp">Login</a>
     </div>
     <%DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date date = dateFormatter .parse("2017-09-15 15:58:00");
+        Date date = dateFormatter .parse("2018-09-15 15:58:00");
        // int seconds = (int) (milliseconds / 1000) % 60 ;
        // int hours   = (int) ((milliseconds / (1000*60*60)) % 24);
         //Now create the time and schedule it
