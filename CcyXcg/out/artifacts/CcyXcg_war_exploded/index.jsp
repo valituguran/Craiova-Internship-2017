@@ -7,6 +7,7 @@
 <%@ page import="com.ymens.SearchServlet" %>
 <%@ page import="dao.PaginationDao" %>
 <%@ page import="dao.UserDao" %>
+<%@ page import="java.text.DecimalFormat" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!------------------------------------------------------------->
 <html>
@@ -23,13 +24,14 @@
     LinkedList values = ParseDao.values;
     UserDao user = new UserDao();
     int lensearch = (int) session.getAttribute("lenght");
+    DecimalFormat df = new DecimalFormat("0.0000");
   %>
   <%if(session.getAttribute("name")!=null){%>
   <div class="topnav">
     <a class="active" href="home.jsp">Ccy Xcg </a>
     <a href="home.jsp">Currencies</a>
     <a href="History.jsp">History</a>
-    <a href="myAccount.jsp" id="nameandbalance">Hello <%=user.username%> <br> Balance:<%=user.balance%><%=user.currency%> </a>
+    <a href="myAccount.jsp" id="nameandbalance">Hello <%=user.username%> <br> Balance:<%=df.format(user.balance)%><%=user.currency%> </a>
       <div id="logoutt">
         <form action="logoutServlet" method="post">
           <a>  <input type="submit" id="logout" value="Logout" />   </a>

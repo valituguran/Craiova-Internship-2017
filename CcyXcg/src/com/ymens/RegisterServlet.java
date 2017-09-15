@@ -38,7 +38,9 @@ public class RegisterServlet extends HttpServlet{
 
         if(com.ymens.RegisterDao.adduser(n,p,user,email,type,balance,currency) ==1){
             out.print("<p style=\"color:red\">You are now register</p>");
+            request.getSession().invalidate();
             response.sendRedirect("login.jsp");
+            return;
         }
         else if(n.length()<3 && p.length()<3){
             out.print("<p style=\"color:red\">Your password or username are not allowed</p>");

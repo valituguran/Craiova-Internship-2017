@@ -32,12 +32,27 @@ public class PaginationServlet extends HttpServlet{
         HttpSession session = request.getSession(false);
         if (request.getParameter("button1") != null) {
             page = PaginationDao.add(page);
+            getServletContext().getRequestDispatcher("/home.jsp").forward(request, response);
         }
         else if (request.getParameter("button2") != null) {
             page = PaginationDao.minus(page);
+            getServletContext().getRequestDispatcher("/home.jsp").forward(request, response);
+        }
+        if (request.getParameter("jump") != null) {
+            page = Integer.parseInt(request.getParameter("jump"));
+            getServletContext().getRequestDispatcher("/home.jsp").forward(request, response);
+        }
+        if (request.getParameter("buttonCurrency1") != null) {
+            page = PaginationDao.addCurrency(page);
+            getServletContext().getRequestDispatcher("/Currency.jsp").forward(request, response);
+        }
+        else if (request.getParameter("buttonCurrency2") != null) {
+            page = PaginationDao.minusCurrency(page);
+            getServletContext().getRequestDispatcher("/Currency.jsp").forward(request, response);
         }
         session.setAttribute("page", page);
-        getServletContext().getRequestDispatcher("/home.jsp").forward(request, response);
+
+
         out.close();
     }
 }

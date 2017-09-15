@@ -28,10 +28,14 @@ public class LogInServlet extends HttpServlet{
         String p=request.getParameter("password");
         HttpSession session = request.getSession(false);
         myAccountDao.getDetails(n,p);
+        int quantity=1;
         if(session!=null){
             session.setAttribute("name", n);
             session.setAttribute("password",p);
+            session.setAttribute("quantity",quantity);
+            session.setAttribute("page", 1);
         }
+
         if(com.ymens.LogInDao.validate(n,p,1)==true){
             response.sendRedirect("admin.jsp");
         }

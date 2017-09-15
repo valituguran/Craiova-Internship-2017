@@ -19,6 +19,11 @@
     <link rel="stylesheet" type="text/css" href="../StyleSheet/myAccountStyle.css">
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/3.7.1/echarts.min.js"></script>
+    <script>
+        function pageIndex(){
+            document.getElementsByName("page").innerHTML=1;
+        }
+    </script>
 </head>
 <body onload="getSparePartsAdditionHorizontalBar1()">
 <!----------------Java include needed---------------->
@@ -33,22 +38,22 @@
     <%if(session.getAttribute("name")==null) {%>
     <div class="topnav">
         <a class="active" href="home.jsp">Ccy Xcg </a>
-        <a href="home.jsp">Currencies</a>
+        <a href="home.jsp" >Currencies</a>
         <a href="History.jsp">History</a>
         <a href="login.jsp">Login</a>
     </div>
-    <form method="get" action="downloadServlet">
-        <input type="submit" value="Download">
-    </form>
     <%DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date date = dateFormatter .parse("2017-09-13 17:59:30");
-
+        Date date = dateFormatter .parse("2018-09-15 15:58:00");
+       // int seconds = (int) (milliseconds / 1000) % 60 ;
+       // int hours   = (int) ((milliseconds / (1000*60*60)) % 24);
         //Now create the time and schedule it
         Timer timer = new Timer();
 
         //Use this if you want to execute it once
-        timer.schedule(new TimerDao.MyTimeTask(), date);
+        //timer.schedule(new TimerDao.MyTimeTask(), date);
+        int period = 36000000;//10hours
 
+        timer.schedule(new TimerDao.MyTimeTask(), date);
     %>
     <div id="searchandtable">
         <div class="filterbox">
@@ -93,7 +98,7 @@
             </div>
     </div>
     </div>
-    <script>
+<script>
         function getSparePartsAdditionHorizontalBar1(pair) {
             var HttpClient = function() {
                 this.get = function(aUrl, aCallback) {
@@ -160,9 +165,9 @@
     <%}else if(session.getAttribute("name")!=null){%>
     <div class="topnav">
         <a class="active" href="home.jsp">Ccy Xcg </a>
-        <a href="Currency.jsp">Currencies Shop</a>
+        <a href="Currency.jsp" onclick="pageIndex()">Currencies Shop</a>
         <a href="History.jsp">History</a>
-        <a href="myAccount.jsp" id="nameandbalance">Hello <%=user.username%> <br> Balance:<%=user.balance%><%=user.currency%> </a>
+        <a href="myAccount.jsp" id="nameandbalance">Hello <%=user.username%> <br> Balance:<%=df.format(user.balance)%><%=user.currency%> </a>
         <div id="logoutt">
             <form action="logoutServlet" method="post">
                 <a>  <input type="submit" id="logout" value="Logout" />   </a>
@@ -205,7 +210,8 @@
                     <form action="PaginationServlet" method="get">
                     <th><input type="submit" name="button1" value="▲" required="required">
                         <input type="submit" name="button2" value="▼" required="required"></th>
-                    <th><input class="search" name="page" type="text" value="<%=len%>"></th>
+                        <input class="search" name="page" type="hidden" value="<%=len%>">
+                    <th><input class="jump" name="page" type="text" value="<%=len%>"></th>
                     </form>
                 </tr>
             </table>
