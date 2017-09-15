@@ -1,0 +1,1 @@
+select quantity from shop where pairname="DKKEUR" and id=1

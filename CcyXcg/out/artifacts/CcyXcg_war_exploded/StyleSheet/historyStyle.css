@@ -1,0 +1,65 @@
+body{
+
+    background-color: #f7f9f9;
+}
+.firstselect{
+    display:block;
+    margin-top: 100px;
+}
+.secondselect{
+    display: block;
+    margin-top: 140px;
+}
+.firstdayselect{
+    display: block;
+    margin-top:110px;
+}
+.seconddayselect{
+    display: block;
+    margin-top:110px;
+}
+#main{
+    float:left;
+    margin-top:-550px;
+    margin-left: 530px;
+}
+#main2{
+    float:left;
+    margin-top:-200px;
+    margin-left: 530px;
+}
+#myChart{
+    float:right;
+    width: 700px;
+    height: 700px;
+}
+#diagrama{
+
+    margin-top:-220px;
+    margin-left: 530px;
+    border-style: groove;
+    border-color:gainsboro;
+}
+#diagrama2{
+    float:left;
+    margin-top:-170px;
+    margin-left: 530px;
+    border-style: groove;
+    border-color:gainsboro;
+}
+.selectoptions{
+    margin-top:100px;
+}
+.oneselect{
+    float:left;
+    margin-top:100px;
+  }
+.twoselect{
+margin-top:500px;
+}
+#headerparagraph{
+    font-size: 20;
+}
+#logout{
+    border-style: none;
+}
