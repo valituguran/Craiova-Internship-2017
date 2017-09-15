@@ -4,6 +4,7 @@
 <%@ page import="com.ymens.servlet.PaginationServlet" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.ymens.spring.dao.BooksDao" %>
+<%@ page import="com.ymens.spring.manager.SelectBooks" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,8 +39,12 @@
     }
 </script>
 <%int currentpage = PaginationServlet.currentPage;
-     BooksDao bookDao = new BooksDao();
-     List<Book> list = bookDao.selectBooks();
+    BooksDao bookDao = new BooksDao();
+    List<Book> list = bookDao.selectBooks();
+    SelectBooks sb = new SelectBooks();
+    sb.process();
+    List<String> listAuthors = sb.listAuthors;
+    String nameAuthor;
     int recordsPerPage = PaginationServlet.recordsPerPage;
     int noOfProducts = list.size();
     int noOfPages;
@@ -61,7 +66,6 @@
 <div class="content">
     <div class="menu-vertical">
         <ul class="breadcrumb">
-
         </ul>
         <div class="form">
             <h4>Ordoneaza: </h4>
@@ -101,6 +105,8 @@
             </form>
             <div class="product">
                 <img src="data:image/jpg;base64,<%=book.getStrImage(book.getImage())%>" />
+                <%nameAuthor = listAuthors.get(i);%>
+                <p><%=nameAuthor%></p>
                 <input class="details" type="text" size="2" value="1" name="quantity">buc
                 <p>Pret: <%=book.getPrice()%> lei<input type="hidden" name="price" value="<%=book.getPrice()%>"></p>
                 <button onclick="redirectLogin()"><input type="hidden" name="action" value="add">Adauga in cos</button>

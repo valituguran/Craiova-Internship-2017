@@ -3,7 +3,7 @@
 
 <%@ page import="com.ymens.servlet.PaginationServlet" %>
 <%@ page import="com.ymens.spring.beans.Book" %>
-<%@ page import="com.ymens.spring.dao.AuthorsDao" %>
+<%@ page import="com.ymens.spring.manager.SelectBooks" %>
 <%@ page import="java.util.LinkedList" %>
 <%@ page import="java.util.List" %>
 <!DOCTYPE html>
@@ -21,9 +21,10 @@
     LinkedList list = new LinkedList();
     list = (LinkedList) session.getAttribute("filterbyprice");
     int recordsPerPage = PaginationServlet.recordsPerPage;
-    List<String> listAuthors = (List)session.getAttribute("listAuthors");
+    SelectBooks sb = new SelectBooks();
+    sb.process();
     String nameAuthor;
-    AuthorsDao author = new AuthorsDao();
+    List<String> listAuthors = sb.listAuthors;
     int noOfProducts = list.size();
     int noOfPages;
     if(noOfProducts%recordsPerPage == 0) {

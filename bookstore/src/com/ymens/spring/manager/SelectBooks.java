@@ -54,21 +54,23 @@ public class SelectBooks extends HttpServlet {
             System.out.println("error");
         }
     }
-
-    public void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html");
-
-
+    public void process(){
         list = book.selectBooks();
         Book b;
-         int author_id;
+        int author_id;
         for(int i=0; i<list.size(); i++) {
             b = (Book) list.get(i);
             author_id = b.getAuthorId();
             nameAuthor = author.getName(author_id);
             listAuthors.add(nameAuthor);
         }
+    }
+
+    public void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html");
+
+        process();
         session = request.getSession(false);
         if (session != null) {
             session.setAttribute("list", list);
@@ -91,9 +93,12 @@ public class SelectBooks extends HttpServlet {
         if( userType.getType(user.username, user.password).equalsIgnoreCase("user")) {
             getServletContext().getRequestDispatcher("/products_user.jsp").forward(request, response);
         }
-        else
+        else  if( userType.getType(user.username, user.password).equalsIgnoreCase("admin"))
         {
             getServletContext().getRequestDispatcher("/products_admin.jsp").forward(request, response);
+        }
+        else {
+            getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
         }
 
     }

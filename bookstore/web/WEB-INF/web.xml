@@ -89,7 +89,7 @@
 
     <servlet>
         <servlet-name>searchbynameuser</servlet-name>
-        <servlet-class>com.ymens.servlet.SearchByNameServlet</servlet-class>
+        <servlet-class>com.ymens.spring.manager.SearchByName</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>searchbynameuser</servlet-name>
@@ -98,7 +98,7 @@
 
     <servlet>
         <servlet-name>searchbynameadmin</servlet-name>
-        <servlet-class>com.ymens.servlet.SearchByNameServlet</servlet-class>
+        <servlet-class>com.ymens.spring.manager.SearchByName</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>searchbynameadmin</servlet-name>
@@ -107,7 +107,7 @@
 
     <servlet>
         <servlet-name>searchbyname</servlet-name>
-        <servlet-class>com.ymens.servlet.SearchByNameServlet</servlet-class>
+        <servlet-class>com.ymens.spring.manager.SearchByName</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>searchbyname</servlet-name>
@@ -116,7 +116,7 @@
 
     <servlet>
         <servlet-name>searchbyauthoruser</servlet-name>
-        <servlet-class>com.ymens.servlet.SearchByAuthorServlet</servlet-class>
+        <servlet-class>com.ymens.spring.manager.SearchByAuthor</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>searchbyauthoruser</servlet-name>
@@ -228,8 +228,6 @@
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
-
-
 
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>

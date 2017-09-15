@@ -27,7 +27,6 @@ realname=(String)session.getAttribute("realname");
     List<Book> list = (List)session.getAttribute("list");
     List<String> listAuthors = (List)session.getAttribute("listAuthors");
     String nameAuthor;
-    AuthorsDao author = new AuthorsDao();
     int recordsPerPage = PaginationServlet.recordsPerPage;
     int noOfProducts = list.size();
     int noOfPages;

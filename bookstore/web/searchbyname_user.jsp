@@ -5,6 +5,7 @@
 <%@ page import="com.ymens.servlet.PaginationServlet" %>
 <%@ page import="com.ymens.spring.beans.Book" %>
 <%@ page import="com.ymens.spring.dao.AuthorsDao" %>
+<%@ page import="com.ymens.spring.manager.SearchByName" %>
 <%@ page import="java.util.LinkedList" %>
 <%@ page import="java.util.List" %>
 <!DOCTYPE html>
@@ -23,10 +24,11 @@
     realname=(String)session.getAttribute("realname");%>
 <%int currentpage = PaginationServlet.currentPage;
     String typelist = (String) session.getAttribute("typelist");
-    List<String> listAuthors = (List)session.getAttribute("listAuthors");
+    SearchByName sb = new SearchByName();
+    List<String> listAuthors = sb.listAuthors;
     String nameAuthor;
     AuthorsDao author = new AuthorsDao();
-    LinkedList list = (LinkedList)session.getAttribute(typelist);
+    List<Book>  list = (LinkedList)session.getAttribute(typelist);
     int recordsPerPage = PaginationServlet.recordsPerPage;
     int noOfProducts = list.size();
     int noOfPages;

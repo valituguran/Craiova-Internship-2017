@@ -16,4 +16,6 @@ public interface IBook {
 
 
     List<Book> searchbyAuthor(List list);
+
+    List<Book> searchByName(String n);
 }

@@ -66,18 +66,24 @@ public class BooksDao implements IBook {
 
     @Override
     public List<Book> searchbyAuthor(List list) {
-        String sql ;
+        String sql;
         List<Book> listBook, listB = new LinkedList<>();
         Book book;
         for(int i=0; i<list.size(); i++) {
             sql = "SELECT * FROM books where author_id="+(Integer)list.get(i);
+            int j=0;
             listBook= jdbcTemplate.query(sql, new BooksMapper());
-            for(int j=0; j<listBook.size(); j++) {
-                 book = listBook.get(i);
+            for(; j<listBook.size(); j++) {
+                 book = listBook.get(j);
                  listB.add(book);
             }
         }
         return listB;
+    }
+    @Override
+    public List<Book> searchByName(String n){
+        String sql = "SELECT * FROM books where name like ?";
+        return jdbcTemplate.query(sql,new Object[]{"%"+n+"%"}, new BooksMapper());
     }
 }
 

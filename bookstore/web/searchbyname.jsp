@@ -4,9 +4,9 @@
 
 <%@ page import="com.ymens.servlet.PaginationServlet" %>
 <%@ page import="com.ymens.spring.beans.Book" %>
-<%@ page import="com.ymens.spring.dao.AuthorsDao" %>
-<%@ page import="java.util.LinkedList" %>
+<%@ page import="com.ymens.spring.manager.SelectBooks" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.ymens.spring.manager.SearchByName" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,10 +21,9 @@
 <body>
 <%int currentpage = PaginationServlet.currentPage;
     String typelist = (String) session.getAttribute("typelist");
-    LinkedList list = (LinkedList)session.getAttribute(typelist);
-    List<String> listAuthors = (List)session.getAttribute("listAuthors");
-    String nameAuthor;
-    AuthorsDao author = new AuthorsDao();
+    List<Book> list = (List)session.getAttribute(typelist);
+    SearchByName sb = new SearchByName();
+    List<String> listAuthors = sb.listAuthors;
     int recordsPerPage = PaginationServlet.recordsPerPage;
     int noOfProducts = list.size();
     int noOfPages;
@@ -79,7 +78,9 @@
         <h3>Nu exista produse cu acest nume</h3>
         <a href="index.jsp">Toate produsele</a>
         <%} else{%>
-        <%for( int i=(currentpage-1)*recordsPerPage; i<currentpage*recordsPerPage && i<noOfProducts; i++){
+        <%
+            String nameAuthor;
+            for( int i=(currentpage-1)*recordsPerPage; i<currentpage*recordsPerPage && i<noOfProducts; i++){
             Book book = (Book) list.get(i);%>
         <div class="tab-content">
             <form method="get" action="/viewbookServlet" id="">

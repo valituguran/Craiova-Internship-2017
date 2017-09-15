@@ -4,10 +4,10 @@
 
 <%@ page import="com.ymens.servlet.PaginationServlet" %>
 <%@ page import="com.ymens.spring.beans.Book" %>
-<%@ page import="com.ymens.spring.dao.AuthorsDao" %>
+<%@ page import="com.ymens.spring.manager.SelectBooks" %>
 <%@ page import="java.util.LinkedList" %>
 <%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.ymens.spring.manager.SearchByAuthor" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,6 +23,9 @@
 <%int currentpage = PaginationServlet.currentPage;
     String typelist = (String) session.getAttribute("typelist");
     LinkedList<Book> list = (LinkedList<Book>)session.getAttribute(typelist);
+    SearchByAuthor sb = new SearchByAuthor();
+    List<String> listAuthors = sb.listAuthors;
+    String nameAuthor;
     int recordsPerPage = PaginationServlet.recordsPerPage;
     int noOfProducts = list.size();
     int noOfPages;
@@ -71,7 +74,6 @@
 </div>
 <div class="products" id="products">
     <img class="logo" src="../images/logo.jpg">
-
     <div class="container">
         <% if(list.size() == 0){%>
         <h3>Nu exista produse cu acest autor</h3>
@@ -86,6 +88,8 @@
             </form>
             <div class="product">
                 <img src="data:image/jpg;base64,<%=book.getStrImage(book.getImage())%>" />
+                <%nameAuthor = (String) listAuthors.get(i);%>
+                <p><%=nameAuthor%></p>
                 <input class="details" type="text" size="2" value="1" name="quantity">buc
                <p> Pret: <%=book.getPrice()%><input type="hidden" name="price" value="<%=book.getPrice()%>"></p>
                 <button onclick="redirectLogin()"><input type="hidden" name="action" value="add">Adauga in cos</button>
@@ -94,7 +98,6 @@
         <% }%>
     </div>
 </div>
-
 <div class="bottom">
     <form  method="POST" action="/paginationServlet">
         <input type="hidden" name="page" id="page" value="/searchbyauthor.jsp">
