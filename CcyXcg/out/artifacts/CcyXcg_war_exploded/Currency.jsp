@@ -58,7 +58,7 @@
         }
         %>
         <div class="table-div">
-        <table class="tablee " frame="box"  id="currencyTable" style="height:500px;overflow:auto;">
+        <table class="tablee" frame="box"  id="currencyTable" style="height:500px;overflow:auto;">
             <col span="1" width="300">
             <tr>
                 <th>Pair name<a onclick="sortTableAscending()">▲</a><a onclick="sortTableDescending()">▼</a> </th>

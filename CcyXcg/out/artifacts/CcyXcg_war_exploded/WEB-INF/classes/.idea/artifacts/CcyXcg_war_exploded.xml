@@ -15,6 +15,7 @@
           <element id="library" level="project" name="com.github.abel533:ECharts:3.0.0.2" />
         </element>
       </element>
+      <element id="module-output" name="CcyXcg" />
     </root>
   </artifact>
 </component>

@@ -3,7 +3,6 @@
 <%@ page import="com.ymens.ParseServlet" %>
 <%@ page import="com.ymens.Parse" %>
 <%@ page import="com.ymens.SearchServlet" %>
-<<<<<<< HEAD
 <%@ page import="javax.jws.soap.SOAPBinding" %>
 <%@ page import="dao.*" %>
 <%@ page import="java.text.DecimalFormat" %>
@@ -11,7 +10,6 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Date" %>
 <%@ page import="java.util.Timer" %>
-=======
 <%@ page import="dao.PaginationDao" %>
 <%--
   Created by IntelliJ IDEA.
@@ -20,7 +18,7 @@
   Time: 9:29 AM
   To change this template use File | Settings | File Templates.
 --%>
->>>>>>> 3f388d2b93ed725a76c885622f61a590f6163e4f
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!------------------------------------------>
 <html>
@@ -172,28 +170,16 @@
             myChart.setOption(option);
         }
     </script>
-<<<<<<< HEAD
-    </div>
-    <%}else if(session.getAttribute("name")!=null){%>
-    <div class="topnav">
+</body>
+<%}else if(session.getAttribute("name")!=null){%>
+<body onload="getSparePartsAdditionHorizontalBar2()">
+<a>Datasearch:<%=ChartDao.datasearch%></a>
+<div class="topnav">
         <a class="active" href="home.jsp">Ccy Xcg </a>
         <a href="Currency.jsp" onclick="pageIndex()">Currencies Shop</a>
         <a href="History.jsp">History</a>
         <a href="myAccount.jsp" id="nameandbalance">Hello <%=user.username%> <br> Balance:<%=df.format(user.balance)%><%=user.currency%> </a>
         <div id="logoutt">
-=======
-
-</div>
-<%}else if(session.getAttribute("name")!=null){%>
-<div class="header">
-    <div>
-        <ul>
-            <a class="titlehref"href="home.jsp">CCy Xcg</a>
-            <li><a href="home.jsp">Currencies</a></li>
-            <li><a href="History.jsp">History</a></li>
-            <%String name = (String) session.getAttribute("name");%>
-            <li>Hello<%=name%></li>
->>>>>>> 3f388d2b93ed725a76c885622f61a590f6163e4f
             <form action="logoutServlet" method="post">
                 <a>  <input type="submit" id="logout" value="Logout" />   </a>
             </form>
@@ -208,7 +194,7 @@
             </form>
         </div>
         <div id="tableandchart">
-        <div id="diagramaa" style="width: 600px;height:400px;"></div>
+            <div id="diagramaa1" style="width: 600px;height:400px;"></div>
         <div class="table-div">
         <%if(session.getAttribute("page")==null)
             {
@@ -218,7 +204,7 @@
                 len = (int) session.getAttribute("page");
             }
         %>
-            <table class="pure-table pure-table-bordered" frame="box" width="700" id="currencyTable">
+            <table class="tablee" frame="box" width="700" id="currencyTable">
                 <tr>
                     <th>Pair name<a onclick="sortTableAscending()">▲</a><a onclick="sortTableDescending()">▼</a> </th>
                     <th>Value</th>
@@ -227,7 +213,7 @@
                 <%String pair = (String)pairs.get(i);
                 Double value = (Double)values.get(i);%>
                 <tr>
-                    <th><button id="drawchart" value="<%=pair%>" onclick="getSparePartsAdditionHorizontalBar2()"><%=pair%></button></th>
+                    <th><button id="drawchartt" value="<%=pair%>" onclick="getSparePartsAdditionHorizontalBar2()"><%=pair%></button></th>
                     <th><%=df.format(value)%></th>
                 </tr>
                 <%}%>
@@ -242,7 +228,7 @@
             </table>
         </div>
     </div>
-
+    </div>
 <!-----------------Script for chart when login-------------->
     <script>
     function getSparePartsAdditionHorizontalBar2(pair) {
@@ -260,7 +246,7 @@
             }
         }
         aClient = new HttpClient();
-        var url = "jSonServlet?op="+select1()+"&day="+7;
+        var url = "jSonServlet?op="+select2()+"&day="+7;
         aClient.get(url, function(response) {
             var values = eval('(' + response + ')');
             var x = Array();
@@ -277,7 +263,7 @@
     <script type="text/javascript">
     function createChart(x,y) {
         // based on prepared DOM, initialize echarts instance
-        var myChart = echarts.init(document.getElementById('diagramaa'));
+        var myChart = echarts.init(document.getElementById('diagramaa1'));
 
         // specify chart configuration item and data
         var option = {
@@ -366,6 +352,11 @@
 <script>
     function select1() {
         var x = document.getElementById("drawchart").value;
+        console.log(x);
+        return x;
+    }
+    function select2() {
+        var x = document.getElementById("drawchartt").value;
         console.log(x);
         return x;
     }

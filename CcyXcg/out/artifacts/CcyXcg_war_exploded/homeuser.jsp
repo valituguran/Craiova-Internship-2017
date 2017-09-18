@@ -30,11 +30,8 @@
     <div>
         <ul>
             <a class="titlehref"href="home.jsp">CCy Xcg</a>
-<<<<<<< HEAD
             <li><a href="Currency.jsp">Currencies</a></li>
-=======
             <li><a href="Aici trebuie adaugata calea catre Currencies">Currencies</a></li>
->>>>>>> 3f388d2b93ed725a76c885622f61a590f6163e4f
             <li><a href="History.jsp">History</a></li>
             <%String name= (String) session.getAttribute("name");%>
             <li>Hello<%=name%></li>

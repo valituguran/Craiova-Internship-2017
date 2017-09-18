@@ -2,12 +2,11 @@
 
 package com.ymens;
 
-<<<<<<< HEAD
+import javax.servlet.http.HttpServlet;
 import com.ymens.myAccountDao;
 import dao.ChartDao;
 
-=======
->>>>>>> 3f388d2b93ed725a76c885622f61a590f6163e4f
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,7 +16,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class LogInServlet extends HttpServlet{
+public class LogInServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 

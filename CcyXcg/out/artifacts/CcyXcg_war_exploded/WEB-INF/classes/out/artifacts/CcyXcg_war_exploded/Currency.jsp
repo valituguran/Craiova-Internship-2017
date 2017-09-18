@@ -58,7 +58,7 @@
         }
         %>
         <div class="table-div">
-        <table class="tablee " frame="box"  id="currencyTable" style="height:500px;overflow:auto;">
+        <table class="tablee" frame="box"  id="currencyTable" style="height:500px;overflow:auto;">
             <col span="1" width="300">
             <tr>
                 <th>Pair name<a onclick="sortTableAscending()">▲</a><a onclick="sortTableDescending()">▼</a> </th>
@@ -67,7 +67,7 @@
                 <th>Actions</th>
             </tr>
             <input type="hidden" name="quantity" value=1>
-            <%for (int i = PaginationDao.pagination(len-1); i< PaginationDao.pagination(len); i++){%>
+            <%for (int i = PaginationDao.paginationCurrency(len-1); i< PaginationDao.paginationCurrency(len); i++){%>
             <%String pair = (String) object.list1.get(i);
                 Double value = (Double) object.list2.get(i);%>
                 <form method="get" action="shopServlet">
@@ -81,8 +81,8 @@
                 <%}%>
             <tr>
                 <form action="PaginationServlet" method="get">
-                    <th><input type="submit" name="button1" value="▲" required="required">
-                        <input type="submit" name="button2" value="▼" required="required"></th>
+                    <th><input type="submit" name="buttonCurrency1" value="▲" required="required">
+                        <input type="submit" name="buttonCurrency2" value="▼" required="required"></th>
                     <th><input class="search" name="page" type="text" value="<%=len%>"></th>
                 </form>
             </tr>

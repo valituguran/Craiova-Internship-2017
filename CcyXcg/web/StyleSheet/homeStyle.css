@@ -1,6 +1,5 @@
 body {margin:0;}
 body{
-<<<<<<< HEAD
     background-color: #f7f9f9;
 =======
     width:1200px;
@@ -88,8 +87,6 @@ tr:nth-child(even){background-color: #f2f2f2}
 
     width: 200px;
     height: 400px;
-<<<<<<< HEAD
-
 }
 #headerparagraph{
     font-size: 20;
@@ -115,6 +112,12 @@ tr:nth-child(even){background-color: #f2f2f2}
     background: none;
     font-size: 18;
 }
+#drawchartt{
+    padding: 0;
+    border: none;
+    background: none;
+    font-size: 18;
+}
 #diagrama{
 width:50%;
     float:left;
@@ -123,6 +126,13 @@ width:50%;
 
 }
 #diagramaa{
+    width:50%;
+    float:left;
+    margin-top:-100px;
+
+
+}
+#diagramaa1{
     width:50%;
     float:left;
     margin-top:-100px;
