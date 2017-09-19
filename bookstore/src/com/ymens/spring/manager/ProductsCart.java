@@ -1,15 +1,21 @@
 package com.ymens.spring.manager;
 
 
-import com.ymens.dao.MyContDao;
-import com.ymens.hibernate.User;
-import com.ymens.hibernate.UserType;
-import com.ymens.servlet.PaginationServlet;
 import com.ymens.spring.beans.Book;
 import com.ymens.spring.beans.Cart;
+import com.ymens.spring.beans.User;
 import com.ymens.spring.dao.BooksDao;
 import com.ymens.spring.dao.CartItemDao;
+import com.ymens.spring.dao.UserDao;
+import com.ymens.spring.dao.UserTypeDao;
+import com.ymens.spring.interfaces.IAuthor;
+import com.ymens.spring.interfaces.IBook;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,9 +25,39 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class ProductsCart  extends HttpServlet {
-    //public static final String addToCart
-    public User user;
     public static int nr = 0;
+    public User user;
+    @Autowired
+    IBook bookDao ;
+    @Autowired
+    IAuthor authorDao ;
+    @Autowired
+    UserDao userDao ;
+    @Autowired
+    UserTypeDao userTypeDao;
+    @Autowired
+    CartItemDao cartItemDao;
+    private String ses;
+    public void init(ServletConfig conf) throws ServletException {
+        super.init(conf);
+        ServletContext context = getServletContext();
+        WebApplicationContext ctx = WebApplicationContextUtils
+                .getWebApplicationContext(context);
+        ServletContext service = conf.getServletContext();
+        bookDao= (IBook) ctx.getBean("booksDao");
+        authorDao = (IAuthor) ctx.getBean("authorsDao");
+        userTypeDao = (UserTypeDao) ctx.getBean("userTypeDao");
+        cartItemDao = (CartItemDao) ctx.getBean("cartItemDao");
+        ses = conf.getInitParameter("name");
+        if (ses == null) {
+            System.out.println("error");
+        }
+        ses = (String) service.getAttribute("name");
+        if (ses == null){
+            System.out.println("error");
+        }
+    }
+
     public void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -51,32 +87,29 @@ public class ProductsCart  extends HttpServlet {
         response.setContentType("text/html");
         String n =(String) session.getAttribute("name");
         String p = (String)session.getAttribute("password");
-        user = MyContDao.select(n, p);
+        user = userDao.getUser(n, p);
         if (session != null) {
             session.setAttribute("currentuser", user);
         }
-        user.username = (String)session.getAttribute("name");
-        user.password = (String)session.getAttribute("password");
-        UserType userType = new UserType();
-        if( userType.getType(user.getUsername(), user.getPassword()).equalsIgnoreCase("user")) {
+        user.setUsername((String)session.getAttribute("name"));
+        user.setPassword((String)session.getAttribute("password"));
+        if( userTypeDao.getType(user.getUsername(), user.getPassword()).equalsIgnoreCase("user")) {
             getServletContext().getRequestDispatcher("/shoppingcart_user.jsp").forward(request, response);
         } else {
             getServletContext().getRequestDispatcher("/shoppingcart_admin.jsp").forward(request, response);
         }
-        PaginationServlet ps = new PaginationServlet();
+        Pagination ps = new Pagination();
         ps.UpdateCurrentPage(1);
     }
 
     protected void deleteCart(HttpServletRequest request) {
         HttpSession session = request.getSession();
-
         String title = request.getParameter("name");
-        CartItemDao cartDao = new CartItemDao();
         int id = CartItemDao.getItemBook(title);
         ArrayList<Cart> list =(ArrayList) session.getAttribute("cart");
         for(int i=0; i<list.size(); i++){
             if(CartItemDao.getItemBook(list.get(i).getBook().getName()) == id){
-                cartDao.deleteCartItem(id);
+                cartItemDao.deleteCartItem(id);
                 session.setAttribute("cart", CartItemDao.getCartItems());
                 nr = list.size();
             }
@@ -95,11 +128,10 @@ public class ProductsCart  extends HttpServlet {
         }
         String title = request.getParameter("name");
         int id = CartItemDao.getItemBook(title);
-        CartItemDao cartDao = new CartItemDao();
         ArrayList<Cart> list =(ArrayList) session.getAttribute("cart");
         for(int i=0; i<list.size(); i++){
             if(CartItemDao.getItemBook(list.get(i).getBook().getName()) == id){
-                cartDao.updateCartItem(id, strQuantity);
+                cartItemDao.updateCartItem(id, strQuantity);
                 session.setAttribute("cart", CartItemDao.getCartItems());
                 nr = list.size();
             }
@@ -109,7 +141,6 @@ public class ProductsCart  extends HttpServlet {
 
     protected void addToCart(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        CartItemDao cartDao = new CartItemDao();
         String strTitle = request.getParameter("book");
         String description = request.getParameter("description");
         BooksDao bookDao = new BooksDao();
@@ -118,11 +149,11 @@ public class ProductsCart  extends HttpServlet {
         String strQuantity = request.getParameter("quantity");
         Cart cartItem = new Cart();
         cartItem.setBook(book);
-        cartDao.addCartItem(book, description, strPrice, strQuantity);
+        cartItemDao.addCartItem(book, description, strPrice, strQuantity);
         session.setAttribute("dbOrderTotal", CartItemDao.getOrderTotal());
         session.setAttribute("cart", CartItemDao.getCartItems());
         ArrayList<Cart> list =(ArrayList) session.getAttribute("cart");
-        cartDao.setCartItems(list);
+        cartItemDao.setCartItems(list);
         nr = list.size();
     }
 }

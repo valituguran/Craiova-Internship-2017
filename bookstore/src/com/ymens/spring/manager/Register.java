@@ -1,12 +1,12 @@
 package com.ymens.spring.manager;
 
 
-import com.ymens.hibernate.UserType;
-import com.ymens.servlet.PaginationServlet;
+import com.ymens.spring.beans.User;
+import com.ymens.spring.dao.UserTypeDao;
+import com.ymens.spring.interfaces.IUser;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
-import com.ymens.spring.beans.User;
-import com.ymens.spring.dao.UserDao;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -23,6 +23,11 @@ public class Register extends HttpServlet {
  private static final long serialVersionUID = 1L;
         public static User user = new User();
 
+    @Autowired
+    IUser userdao;
+    @Autowired
+    UserTypeDao userTypeDao;
+
     public void init() {
     }
         public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -31,7 +36,8 @@ public class Register extends HttpServlet {
             WebApplicationContext ctx =
                     WebApplicationContextUtils
                             .getWebApplicationContext(context);
-            User user = ctx.getBean("userdao", User.class);
+            userdao = (IUser) ctx.getBean("userDao");
+            userTypeDao = (UserTypeDao) ctx.getBean("userTypeDao");
             response.setContentType("text/html");
 
             PrintWriter out = response.getWriter();
@@ -40,7 +46,7 @@ public class Register extends HttpServlet {
             String e=request.getParameter("email");
             String rn=request.getParameter("realname");
             HttpSession session = request.getSession(false);
-            PaginationServlet ps = new PaginationServlet();
+            Pagination ps = new Pagination();
             ps.UpdateCurrentPage(1);
             if(session!=null)
                 session.setAttribute("name", n);
@@ -48,9 +54,8 @@ public class Register extends HttpServlet {
             user.setPassword(p);
             user.setEmail(e);
             user.setRealName(rn);
-            user.setType(UserType.user);
-            UserDao regDao = new UserDao();
-            if(regDao.insertUser(user) == 1) {
+            user.setType(userTypeDao.getIdUser());
+            if(userdao.insertUser(user) == 1) {
                 RequestDispatcher rd = request.getRequestDispatcher("products_admin.jsp");
                 rd.forward(request, response);
             } else {

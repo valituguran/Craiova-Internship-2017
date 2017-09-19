@@ -4,8 +4,12 @@ public class Order {
     private int id;
     private Double totalPrice;
     private Integer userId;
-
-
+    public Order(int id, double t, int userId){
+        this.id = id;
+        this.totalPrice = t;
+        this.userId = userId;
+    }
+    public Order(){}
     public int getId() {
         return id;
     }

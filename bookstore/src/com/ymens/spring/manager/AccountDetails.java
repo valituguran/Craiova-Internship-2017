@@ -1,27 +1,65 @@
 package com.ymens.spring.manager;
 
-import com.ymens.dao.History;
-import com.ymens.hibernate.UserType;
-import com.ymens.servlet.PaginationServlet;
+import com.ymens.spring.beans.Order;
+import com.ymens.spring.beans.OrderItem;
 import com.ymens.spring.beans.User;
+import com.ymens.spring.dao.OrderDao;
+import com.ymens.spring.dao.OrderItemDao;
 import com.ymens.spring.dao.UserDao;
+import com.ymens.spring.dao.UserTypeDao;
+import com.ymens.spring.interfaces.IAuthor;
+import com.ymens.spring.interfaces.IBook;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 public class AccountDetails extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
     //public LinkedList list = new LinkedList();
     public User user;
-    @Override
-    public void init() throws ServletException {
-
+    @Autowired
+    IBook bookDao ;
+    @Autowired
+    IAuthor authorDao ;
+    @Autowired
+    UserDao userDao ;
+    @Autowired
+    UserTypeDao userTypeDao;
+    @Autowired
+    OrderDao orderDao;
+    @Autowired
+    OrderItemDao orderItemDao;
+    private String ses;
+    public void init(ServletConfig conf) throws ServletException {
+        super.init(conf);
+        ServletContext context = getServletContext();
+        WebApplicationContext ctx = WebApplicationContextUtils
+                .getWebApplicationContext(context);
+        ServletContext service = conf.getServletContext();
+        bookDao= (IBook) ctx.getBean("booksDao");
+        authorDao = (IAuthor) ctx.getBean("authorsDao");
+        userTypeDao = (UserTypeDao) ctx.getBean("userTypeDao");
+        orderDao = (OrderDao) ctx.getBean("orderDao");
+        orderItemDao = (OrderItemDao) ctx.getBean("orderItemDao");
+        ses = conf.getInitParameter("name");
+        if (ses == null) {
+            System.out.println("error");
+        }
+        ses = (String) service.getAttribute("name");
+        if (ses == null){
+            System.out.println("error");
+        }
     }
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -38,25 +76,25 @@ public class AccountDetails extends HttpServlet {
             session.setAttribute("type", type);
             session.setAttribute("currentuser", user);
         } else if(type.equals("myorders")) {
-            ArrayList list = History.getOrders(user.getUsername());
+            List<Order> list = orderDao.getOrders(user.getUsername(), user.getPassword());
             session.setAttribute("type", type);
             session.setAttribute("orders", list);
             String string, str;
             int book_id;
             double price;
-            PaginationServlet ps = new PaginationServlet();
+            Pagination ps = new Pagination();
             ps.UpdateCurrentPage(1);
             for (int i = 0; i < list.size(); i++) {
                 string = list.get(i).toString();
-                price = History.getTotalPrice(string);
+                price = orderDao.getTotalPrice(string);
                 str = String.format("%s%d", "orders", i);
-                ArrayList list1 = History.getOrderItems(string);
+                List<OrderItem> list1 = orderItemDao.getOrderItems(string);
                 session.setAttribute(str, list1);
                 session.setAttribute("price" + str, price);
             }
         }
-        UserType userType = new UserType();
-        if (userType.getType(user.getUsername(), user.getPassword()).equalsIgnoreCase("user")) {
+
+        if (userTypeDao.getType(user.getUsername(), user.getPassword()).equalsIgnoreCase("user")) {
             getServletContext().getRequestDispatcher("/mycont_user.jsp").forward(request, response);
         } else {
             getServletContext().getRequestDispatcher("/mycont_admin.jsp").forward(request, response);

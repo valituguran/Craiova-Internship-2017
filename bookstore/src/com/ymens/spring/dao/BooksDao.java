@@ -3,7 +3,7 @@ package com.ymens.spring.dao;
 import com.ymens.spring.beans.Book;
 import com.ymens.spring.interfaces.IBook;
 import com.ymens.spring.mapper.BooksMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -12,14 +12,21 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Repository
+@Configurable
 public class BooksDao implements IBook {
     public static JdbcTemplate jdbcTemplate;
+   public BooksDao(){}
 
-    @Autowired
-    public void setDataSource(DataSource dataSource) {
+
+    public BooksDao(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
+    /*@Autowired
+    public void setDataSource(DataSource dataSource) {
+        this.jdbcTemplate = new JdbcTemplate(dataSource);
+    }
+*/
     @Override
     public List<Book> selectBooks() {
         String sql = "SELECT * FROM books";
@@ -84,6 +91,11 @@ public class BooksDao implements IBook {
     public List<Book> searchByName(String n){
         String sql = "SELECT * FROM books where name like ?";
         return jdbcTemplate.query(sql,new Object[]{"%"+n+"%"}, new BooksMapper());
+    }
+
+    public int getId(String name) {
+        String sql = "SELECT id FROM books WHERE name=?";
+        return jdbcTemplate.queryForObject(sql, new Object[]{name}, Integer.class);
     }
 }
 

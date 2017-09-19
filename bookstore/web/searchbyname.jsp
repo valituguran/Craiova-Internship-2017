@@ -1,12 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1"%>
 
-
-<%@ page import="com.ymens.servlet.PaginationServlet" %>
 <%@ page import="com.ymens.spring.beans.Book" %>
-<%@ page import="com.ymens.spring.manager.SelectBooks" %>
-<%@ page import="java.util.List" %>
+<%@ page import="com.ymens.spring.manager.Pagination" %>
 <%@ page import="com.ymens.spring.manager.SearchByName" %>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,12 +17,11 @@
 </head>
 
 <body>
-<%int currentpage = PaginationServlet.currentPage;
+<%int currentpage = Pagination.currentPage;
     String typelist = (String) session.getAttribute("typelist");
     List<Book> list = (List)session.getAttribute(typelist);
-    SearchByName sb = new SearchByName();
-    List<String> listAuthors = sb.listAuthors;
-    int recordsPerPage = PaginationServlet.recordsPerPage;
+    List<String> listAuthors = (List)session.getAttribute("listAuthors");
+    int recordsPerPage = Pagination.recordsPerPage;
     int noOfProducts = list.size();
     int noOfPages;
     if(noOfProducts % recordsPerPage == 0) {

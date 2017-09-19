@@ -11,6 +11,8 @@ public interface IAuthor {
 
     Author getAuthor(long cnp);
 
+    Author getAuthor(int id);
+
     int addAuthor(Author a );
 
     int getId (int cnp);

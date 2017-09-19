@@ -1,32 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1"%>
+
 <%@page import="com.ymens.spring.beans.Book"%>
-<%@ page import="com.ymens.servlet.PaginationServlet" %>
+<%@ page import="com.ymens.spring.manager.Pagination" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.ymens.spring.dao.BooksDao" %>
-<%@ page import="com.ymens.spring.manager.SelectBooks" %>
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>Bookstore</title>
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../styles/style.css">
     <link href="../scripts/file.js">
-    <style>
-    </style>
 </head>
 <body>
 <script>
     function openNav() {
         document.getElementById("mySidenav").style.width = "250px";
     }
-
     function closeNav() {
         document.getElementById("mySidenav").style.width = "0";
     }
-
     function redirectLogin() {
         var txt;
         var r = confirm("Va rugam sa va logati!");
@@ -38,14 +33,11 @@
         document.getElementById("demo").innerHTML = txt;
     }
 </script>
-<%int currentpage = PaginationServlet.currentPage;
-    BooksDao bookDao = new BooksDao();
-    List<Book> list = bookDao.selectBooks();
-    SelectBooks sb = new SelectBooks();
-    sb.process();
-    List<String> listAuthors = sb.listAuthors;
+<%  int currentpage = Pagination.currentPage;
+    List<Book> list = (List) session.getAttribute("list");
+    List<String> listAuthors = (List) session.getAttribute("listAuthors");
     String nameAuthor;
-    int recordsPerPage = PaginationServlet.recordsPerPage;
+    int recordsPerPage = Pagination.recordsPerPage;
     int noOfProducts = list.size();
     int noOfPages;
     if(noOfProducts % recordsPerPage== 0) {
@@ -62,7 +54,6 @@
 <div class="topnav">
     <a href="login.jsp">Login</a>
 </div>
-
 <div class="content">
     <div class="menu-vertical">
         <ul class="breadcrumb">
@@ -90,12 +81,11 @@
         </div>
     </div>
 </div>
-
 <div class="products" id="products">
     <img class="logo" src="../images/logo.jpg">
 
     <div class="container">
-        <%Book book = new Book();
+        <%Book book ;
             for( int i=(currentpage-1)*recordsPerPage; i<currentpage*recordsPerPage && i<noOfProducts; i++){%>
         <div class="tab-content">
             <%book = list.get(i);%>
@@ -113,7 +103,6 @@
             </div>
         </div>
         <% } %>
-
     </div>
 </div>
 <div class="bottom">
@@ -131,4 +120,3 @@
 </script>
 </body>
 </html>
-

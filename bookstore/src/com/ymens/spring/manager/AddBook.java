@@ -1,7 +1,6 @@
 package com.ymens.spring.manager;
 
 
-import com.ymens.spring.beans.Author;
 import com.ymens.spring.beans.Book;
 import com.ymens.spring.dao.AuthorsDao;
 import com.ymens.spring.dao.BooksDao;
@@ -48,15 +47,13 @@ public class AddBook extends HttpServlet{
 
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
-//        HttpSession session = request.getSession(false);
         id_author = 0;
-        Author author = new Author();
         IBook bookDao = new BooksDao();
         IAuthor authorDao = new AuthorsDao();
 
         DiskFileItemFactory factory = new DiskFileItemFactory();
 
-        // Create a new file upload handler
+
         ServletFileUpload upload = new ServletFileUpload(factory);
 
         String imageStr = null;

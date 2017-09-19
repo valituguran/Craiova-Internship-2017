@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1"%>
 
-<%@ page import="com.ymens.servlet.PaginationServlet" %>
+
 <%@ page import="com.ymens.spring.beans.Book" %>
+<%@ page import="com.ymens.spring.manager.Pagination" %>
 <%@ page import="com.ymens.spring.manager.SelectBooks" %>
 <%@ page import="java.util.LinkedList" %>
 <%@ page import="java.util.List" %>
@@ -17,14 +18,12 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
 </head>
 <body>
-<%int currentpage = PaginationServlet.currentPage;
-    LinkedList list = new LinkedList();
-    list = (LinkedList) session.getAttribute("filterbyprice");
-    int recordsPerPage = PaginationServlet.recordsPerPage;
-    SelectBooks sb = new SelectBooks();
-    sb.process();
+<%
     String nameAuthor;
-    List<String> listAuthors = sb.listAuthors;
+    int currentpage = Pagination.currentPage;
+    List<Book> list  = (List) session.getAttribute("filterbyprice");
+    int recordsPerPage = Pagination.recordsPerPage;
+    List<String> listAuthors = (List)session.getAttribute("listAuthors");
     int noOfProducts = list.size();
     int noOfPages;
     if(noOfProducts%recordsPerPage == 0) {

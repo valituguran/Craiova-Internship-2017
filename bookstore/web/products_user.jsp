@@ -1,10 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1"%>
 
-
-<%@ page import="com.ymens.servlet.PaginationServlet" %>
 <%@ page import="com.ymens.spring.beans.Book" %>
 <%@ page import="com.ymens.spring.dao.AuthorsDao" %>
+<%@ page import="com.ymens.spring.manager.Pagination" %>
 <%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
@@ -20,12 +19,11 @@
 <body>
 <%String realname;
     realname=(String)session.getAttribute("realname");%>
-<%int currentpage = PaginationServlet.currentPage;
+<%int currentpage = Pagination.currentPage;
     List<Book> list = (List)session.getAttribute("list");
     List<String> listAuthors = (List)session.getAttribute("listAuthors");
     String nameAuthor;
-    AuthorsDao author = new AuthorsDao();
-    int recordsPerPage = PaginationServlet.recordsPerPage;
+    int recordsPerPage = Pagination.recordsPerPage;
     int noOfProducts = list.size();
     int noOfPages;
     if(noOfProducts/recordsPerPage == 0) {

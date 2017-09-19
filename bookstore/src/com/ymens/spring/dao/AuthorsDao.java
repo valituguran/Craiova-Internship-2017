@@ -27,13 +27,18 @@ public class AuthorsDao implements IAuthor {
         String sql="SELECT * FROM authors";
         return jdbcTemplateObject.query(sql, new AuthorMapper());
     }
-
+    @Override
     public  Author getAuthor(long cnp) {
         String sql = "select * from authors where CNP = ?";
-        return jdbcTemplateObject.queryForObject(sql, (Object[]) new Object[]{cnp}, Author.class);
+        return jdbcTemplateObject.queryForObject(sql, new Object[]{cnp}, new AuthorMapper());
 
     }
+    @Override
+    public  Author getAuthor(int id) {
+        String sql = "select * from authors where id = ?";
+        return jdbcTemplateObject.queryForObject(sql, new Object[]{id},  new AuthorMapper());
 
+    }
     @Override
     public int addAuthor(Author a) {
         String sql = "insert into `authors` (name, age,nationality, description, CNP) values(?,?,?,?,?)";

@@ -1,7 +1,5 @@
-package com.ymens.servlet;
 
-import com.ymens.hibernate.User;
-
+package com.ymens.spring.manager;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -10,16 +8,12 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-/**
- * Created by madalina.luca on 8/22/2017.
- */
-public class PaginationServlet extends HttpServlet {
+public class Pagination extends HttpServlet {
     private static final long serialVersionUID = 1L;
     public static int currentPage = 1;
     HttpSession session;
     public static int recordsPerPage = 9;
     private int noOfPages;
-    private static User user = new User();
     String page;
     @Override
     public void init()
@@ -30,9 +24,9 @@ public class PaginationServlet extends HttpServlet {
         String strAction = request.getParameter("action");
         String strcurrent = request.getParameter("currentpage");
         String strnoOfPage = request.getParameter("noOfPages");
+
         if(strcurrent == null) {
             currentPage = 1;
-
         }
         page = request.getParameter("page");
         try {
@@ -71,6 +65,6 @@ public class PaginationServlet extends HttpServlet {
             throws ServletException, IOException {
         doGet(request, response);
         response.sendRedirect(page);
-            }
+    }
 }
 

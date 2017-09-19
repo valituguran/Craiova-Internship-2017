@@ -1,8 +1,10 @@
 package com.ymens.spring.manager;
 
 
+import com.ymens.spring.beans.Author;
 import com.ymens.spring.beans.Book;
-import com.ymens.spring.beans.User;
+import com.ymens.spring.dao.OrderDao;
+import com.ymens.spring.dao.OrderItemDao;
 import com.ymens.spring.dao.UserDao;
 import com.ymens.spring.dao.UserTypeDao;
 import com.ymens.spring.interfaces.IAuthor;
@@ -19,16 +21,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.LinkedList;
-import java.util.List;
 
-public class SearchByAuthor extends HttpServlet {
+public class DetailsBook extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    public static List<Integer> list = new LinkedList();
-    public static List<Book> listBooks = new LinkedList();
-    public static List<String> listAuthors = new LinkedList();
+    public Book book = new Book();
     HttpSession session;
-    private static User user = new User();
     @Autowired
     IBook bookDao ;
     @Autowired
@@ -37,9 +34,11 @@ public class SearchByAuthor extends HttpServlet {
     UserDao userDao ;
     @Autowired
     UserTypeDao userTypeDao;
+    @Autowired
+    OrderDao orderDao;
+    @Autowired
+    OrderItemDao orderItemDao;
     private String ses;
-    private String nameAuthor;
-
     public void init(ServletConfig conf) throws ServletException {
         super.init(conf);
         ServletContext context = getServletContext();
@@ -49,6 +48,8 @@ public class SearchByAuthor extends HttpServlet {
         bookDao= (IBook) ctx.getBean("booksDao");
         authorDao = (IAuthor) ctx.getBean("authorsDao");
         userTypeDao = (UserTypeDao) ctx.getBean("userTypeDao");
+        orderDao = (OrderDao) ctx.getBean("orderDao");
+        orderItemDao = (OrderItemDao) ctx.getBean("orderItemDao");
         ses = conf.getInitParameter("name");
         if (ses == null) {
             System.out.println("error");
@@ -58,49 +59,28 @@ public class SearchByAuthor extends HttpServlet {
             System.out.println("error");
         }
     }
-    public void process(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String n = request.getParameter("searchbyname");
-        String name = request.getParameter("searchbyauthor");
-
-        list = bookDao.searchAuthors(name);
-        listBooks = bookDao.searchbyAuthor(list);
-        Book b;
-        int author_id;
-        for(int i=0; i<listBooks.size(); i++) {
-            b =  listBooks.get(i);
-            author_id = b.getAuthorId();
-            nameAuthor = authorDao.getName(author_id);
-            listAuthors.add(nameAuthor);
-        }
-    }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         response.setContentType("text/html");
-        String typelist = "searchbyauthor";
-        process(request, response);
+        String title = request.getParameter("title");
+        String page = request.getParameter("pagetitle");
+        book =  bookDao.getBook(title);
+        int id = bookDao.getIdAuthor(title);
         session = request.getSession(false);
-        session.setAttribute("searchbyauthor", listBooks);
-        session.setAttribute("typelist", typelist);
-        user.setUsername( (String)session.getAttribute("name"));
-        user.setPassword((String) session.getAttribute("password"));
         Pagination ps = new Pagination();
         ps.UpdateCurrentPage(1);
+        Author a = authorDao.getAuthor(id);
+        if (session != null) {
+            session.setAttribute("viewbook", book);
+            session.setAttribute("page", page);
+            session.setAttribute("author", a);
+        }
         doPost(request, response);
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        String usertype = userTypeDao.getType(user.getUsername(), user.getPassword());
-        if (usertype.equalsIgnoreCase("user")) {
-            getServletContext().getRequestDispatcher("/searchbyauthor_user.jsp").forward(request, response);
-        } else if (usertype.equalsIgnoreCase("admin")){
-            getServletContext().getRequestDispatcher("/searchbyauthor_admin.jsp").forward(request, response);
-        } else{
-            getServletContext().getRequestDispatcher("/searchbyauthor.jsp").forward(request, response);
-        }
+        getServletContext().getRequestDispatcher("/detailsbook.jsp").forward(request, response);
     }
 }

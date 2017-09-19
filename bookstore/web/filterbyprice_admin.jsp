@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1"%>
 
-<%@ page import="com.ymens.servlet.PaginationServlet" %>
+
 <%@ page import="com.ymens.spring.beans.Book"%>
-<%@ page import="com.ymens.spring.dao.AuthorsDao" %>
+<%@ page import="com.ymens.spring.manager.Pagination" %>
+<%@ page import="com.ymens.spring.manager.SelectBooks" %>
 <%@ page import="java.util.LinkedList" %>
 <%@ page import="java.util.List" %>
 <!DOCTYPE html>
@@ -19,13 +20,11 @@
 <body>
 <%String realname;
     realname=(String)session.getAttribute("realname");%>
-<%int currentpage = PaginationServlet.currentPage;
-    LinkedList list = new LinkedList();
+<%int currentpage = Pagination.currentPage;
+    List<Book> list  = (List) session.getAttribute("filterbyprice");
     List<String> listAuthors = (List)session.getAttribute("listAuthors");
     String nameAuthor;
-    AuthorsDao author = new AuthorsDao();
-    list = (LinkedList) session.getAttribute("filterbyprice");
-    int recordsPerPage = PaginationServlet.recordsPerPage;
+    int recordsPerPage = Pagination.recordsPerPage;
     int noOfProducts = list.size();
     int noOfPages;
     if(noOfProducts%recordsPerPage == 0) {
@@ -34,7 +33,6 @@
     else{
         noOfPages = noOfProducts / recordsPerPage+1;
     }
-%>
 %>
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -63,11 +61,11 @@
         </ul>
         <div class="form">
             <h4>Ordoneaza: </h4>
-            <form method="get" action="/filterbypriceServlet" id="filterbyprice">
+            <form method="get" action="/filterbypriceServlet" >
                 <input name="filterasc" class="filter" type="submit" value="Pret crescator" required="required">
                 <input type="hidden" name="typelist" value="filterbyprice" required="required">
             </form>
-            <form method="get" action="/filterbypriceServlet" id="filterbyprice">
+            <form method="get" action="/filterbypriceServlet" >
                 <input name="filterdesc" class="filter" type="submit" value="Pret descrescator" required="required">
                 <input type="hidden" name="typelist" value="filterbyprice" required="required">
             </form>
@@ -141,7 +139,6 @@
             changePage(current_page);
         }
     }
-
     function nextPage()
     {
         if (current_page < numPages()) {
@@ -149,7 +146,6 @@
             changePage(current_page);
         }
     }
-
     function changePage(page)
     {
         var btn_next = document.getElementById("btn_next");
@@ -173,12 +169,10 @@
             btn_next.style.visibility = "visible";
         }
     }
-
     function numPages()
     {
         return Math.ceil(objJson.length / records_per_page);
     }
-
     window.onload = function() {
         changePage(1);
     };

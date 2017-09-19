@@ -1,11 +1,17 @@
 package com.ymens.spring.manager;
 
 
-import com.ymens.hibernate.UserType;
-import com.ymens.servlet.PaginationServlet;
 import com.ymens.spring.beans.User;
 import com.ymens.spring.dao.UserDao;
+import com.ymens.spring.dao.UserTypeDao;
+import com.ymens.spring.interfaces.IAuthor;
+import com.ymens.spring.interfaces.IBook;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,8 +23,33 @@ import java.sql.SQLException;
 import static java.lang.System.out;
 
 public class UpdateAccount extends HttpServlet {
-    UserDao userDao = new UserDao();
-
+    @Autowired
+    IBook bookDao ;
+    @Autowired
+    IAuthor authorDao ;
+    @Autowired
+    UserDao userDao ;
+    @Autowired
+    UserTypeDao userTypeDao;
+    private String ses;
+    public void init(ServletConfig conf) throws ServletException {
+        super.init(conf);
+        ServletContext context = getServletContext();
+        WebApplicationContext ctx = WebApplicationContextUtils
+                .getWebApplicationContext(context);
+        ServletContext service = conf.getServletContext();
+        bookDao= (IBook) ctx.getBean("booksDao");
+        authorDao = (IAuthor) ctx.getBean("authorsDao");
+        userTypeDao = (UserTypeDao) ctx.getBean("userTypeDao");
+        ses = conf.getInitParameter("name");
+        if (ses == null) {
+            System.out.println("error");
+        }
+        ses = (String) service.getAttribute("name");
+        if (ses == null){
+            System.out.println("error");
+        }
+    }
     public void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String strAction = request.getParameter("action");
@@ -54,14 +85,12 @@ public class UpdateAccount extends HttpServlet {
         String p = (String) session.getAttribute("password");
         UserDao userDao = new UserDao();
         User user = userDao.getUser(n, p);
-        PaginationServlet ps = new PaginationServlet();
+        Pagination ps = new Pagination();
         ps.UpdateCurrentPage(1);
         if (session != null) {
             session.setAttribute("currentuser", user);
         }
-
-        UserType userType = new UserType();
-        if (userType.getType(n, p).equalsIgnoreCase("user")) {
+        if (userTypeDao.getType(n, p).equalsIgnoreCase("user")) {
             getServletContext().getRequestDispatcher("/mycont_user.jsp").forward(request, response);
         } else {
             getServletContext().getRequestDispatcher("/mycont_admin.jsp").forward(request, response);

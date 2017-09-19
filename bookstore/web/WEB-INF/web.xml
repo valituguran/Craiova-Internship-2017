@@ -17,7 +17,7 @@
 
     <servlet>
         <servlet-name>login</servlet-name>
-        <servlet-class>com.ymens.spring.manager.Login</servlet-class>
+        <servlet-class>com.ymens.spring.manager.LogIn</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>login</servlet-name>
@@ -26,7 +26,7 @@
 
     <servlet>
         <servlet-name>logout</servlet-name>
-        <servlet-class>com.ymens.servlet.LogoutServlet</servlet-class>
+        <servlet-class>com.ymens.spring.manager.LogOut</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>logout</servlet-name>
@@ -75,7 +75,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>selectbooks</servlet-name>
-        <url-pattern>/selectbooksServlet</url-pattern>
+        <url-pattern></url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -134,7 +134,7 @@
 
     <servlet>
         <servlet-name>filterbyprice</servlet-name>
-        <servlet-class>com.ymens.servlet.FilterServlet</servlet-class>
+        <servlet-class>com.ymens.spring.manager.Filter</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>filterbyprice</servlet-name>
@@ -143,7 +143,7 @@
 
     <servlet>
         <servlet-name>searchbyauthoradmin</servlet-name>
-        <servlet-class>com.ymens.servlet.SearchByAuthorServlet</servlet-class>
+        <servlet-class>com.ymens.spring.manager.SearchByAuthor</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>searchbyauthoradmin</servlet-name>
@@ -203,7 +203,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>viewbook</servlet-name>
-        <servlet-class>com.ymens.servlet.ViewBookServlet</servlet-class>
+        <servlet-class>com.ymens.spring.manager.DetailsBook</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>viewbook</servlet-name>
@@ -212,7 +212,7 @@
 
     <servlet>
         <servlet-name>PaginationServlet</servlet-name>
-        <servlet-class>com.ymens.servlet.PaginationServlet</servlet-class>
+        <servlet-class>com.ymens.spring.manager.Pagination</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>PaginationServlet</servlet-name>
@@ -230,7 +230,7 @@
     </listener>
 
     <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
+        <welcome-file></welcome-file>
     </welcome-file-list>
 
 </web-app>

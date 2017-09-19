@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1"%>
 
-<%@ page import="com.ymens.servlet.PaginationServlet" %>
 <%@ page import="com.ymens.spring.beans.Book" %>
+<%@ page import="com.ymens.spring.manager.Pagination" %>
 <%@ page import="com.ymens.spring.manager.SearchByName" %>
 <%@ page import="java.util.LinkedList" %>
 <%@ page import="java.util.List" %>
@@ -20,13 +20,12 @@
 <body>
 <%String realname;
     realname=(String)session.getAttribute("realname");%>
-<%int currentpage = PaginationServlet.currentPage;
+<%int currentpage = Pagination.currentPage;
     String typelist = (String) session.getAttribute("typelist");
-    SearchByName sb = new SearchByName();
-    List<String> listAuthors = sb.listAuthors;
+    List<String> listAuthors = (List)session.getAttribute("listAuthors");
     String nameAuthor;
-    List<Book>  list = (LinkedList)session.getAttribute(typelist);
-    int recordsPerPage = PaginationServlet.recordsPerPage;
+    List<Book>  list = (List)session.getAttribute(typelist);
+    int recordsPerPage = Pagination.recordsPerPage;
     int noOfProducts = list.size();
     int noOfPages;
     if(noOfProducts%recordsPerPage == 0) {

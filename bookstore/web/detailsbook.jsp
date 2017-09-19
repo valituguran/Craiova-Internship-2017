@@ -2,9 +2,9 @@
          pageEncoding="ISO-8859-1"%>
 
 
-<%@ page import="com.ymens.hibernate.PrintAuthor" %>
 <%@ page import="com.ymens.spring.beans.Author"%>
 <%@ page import="com.ymens.spring.beans.Book" %>
+<%@ page import="com.ymens.spring.manager.DetailsBook" %>
 
 <!DOCTYPE html>
 <html>
@@ -59,8 +59,7 @@ if(user == null ) {
     <img class="logo" src="../images/logo.jpg">
     <%Book book = (Book) session.getAttribute("viewbook");%>
     <h3><%=book.getName()%></h3>
-
-                <img src="data:image/jpg;base64,<%=book.getStrImage(book.getImage())%>" />
+    <img src="data:image/jpg;base64,<%=book.getStrImage(book.getImage())%>"  />
     <table>
         <tr>
             <th>Titlu:</th>
@@ -72,8 +71,8 @@ if(user == null ) {
         </tr>
         <tr>
             <th>Autor:</th>
-            <%  Author a = new Author();
-            a =PrintAuthor.getDetails(book.getAuthor_id());%>
+            <%  Author a ;
+            a = (Author) session.getAttribute("author");%>
             <th><%=a.getName()%></th>
         </tr>
         <tr>

@@ -1,7 +1,6 @@
 package com.ymens.spring.dao;
 
 
-import com.ymens.hibernate.UserType;
 import com.ymens.spring.beans.User;
 import com.ymens.spring.interfaces.IUser;
 import com.ymens.spring.mapper.UserMapper;
@@ -22,9 +21,9 @@ public class UserDao implements IUser{
     }
 
     @Override
-    public int insertUser(final User u) {
+    public int insertUser(User u) {
         String SQL = "insert into users (username, password, real_name, email, type) values(?,?,?,?,?)";
-        return jdbcTemplateObject.update(SQL, new Object[]{u.getUsername(), u.getPassword(), u.getRealName(), u.getEmail(), UserType.user});
+        return jdbcTemplateObject.update(SQL, new Object[]{u.getUsername(), u.getPassword(), u.getRealName(), u.getEmail(), u.getType()});
     }
 
     @Override
@@ -86,6 +85,11 @@ public class UserDao implements IUser{
     public int UpdateRealName(String rn, String user) {
         String sql = "update `users` set real_name=? where username=?";
         return jdbcTemplateObject.update(sql, new Object[]{rn, user});
+    }
+    @Override
+    public String getRealName(String n, String p){
+        String sql="SELECT real_name FROM users WHERE username=? and password=?";
+        return jdbcTemplateObject.queryForObject(sql, new Object[]{n, p}, String.class);
     }
 
 

@@ -2,9 +2,9 @@
          pageEncoding="ISO-8859-1"%>
 
 
-<%@ page import="com.ymens.servlet.PaginationServlet" %>
 <%@ page import="com.ymens.spring.beans.Book" %>
 <%@ page import="com.ymens.spring.dao.AuthorsDao" %>
+<%@ page import="com.ymens.spring.manager.Pagination" %>
 <%@ page import="com.ymens.spring.manager.SearchByName" %>
 <%@ page import="java.util.LinkedList" %>
 <%@ page import="java.util.List" %>
@@ -22,14 +22,12 @@
 <body>
 <%String realname;
     realname=(String)session.getAttribute("realname");%>
-<%int currentpage = PaginationServlet.currentPage;
+<%int currentpage = Pagination.currentPage;
     String typelist = (String) session.getAttribute("typelist");
-    SearchByName sb = new SearchByName();
-    List<String> listAuthors = sb.listAuthors;
+    List<String> listAuthors = (List)session.getAttribute("listAuthors");
     String nameAuthor;
-    AuthorsDao author = new AuthorsDao();
-    List<Book>  list = (LinkedList)session.getAttribute(typelist);
-    int recordsPerPage = PaginationServlet.recordsPerPage;
+    List<Book>  list = (List)session.getAttribute(typelist);
+    int recordsPerPage = Pagination.recordsPerPage;
     int noOfProducts = list.size();
     int noOfPages;
     if(noOfProducts%recordsPerPage == 0) {
@@ -67,11 +65,11 @@
     </ul>
     <div class="form">
         <h4>Ordoneaza: </h4>
-        <form method="get" action="/filterbypriceServlet" id="filterbyprice">
+        <form method="get" action="/filterbypriceServlet">
             <input name="filterasc" class="filter" type="submit" value="Pret crescator" required="required">
             <input type="hidden" name="typelist" value="filtersearchbyname" required="required">
         </form>
-        <form method="get" action="/filterbypriceServlet" id="filterbyprice">
+        <form method="get" action="/filterbypriceServlet" >
             <input name="filterdesc" class="filter" type="submit" value="Pret descrescator" required="required">
             <input type="hidden" name="typelist" value="filtersearchbyname" required="required">
         </form>
@@ -96,7 +94,7 @@
             <a href="products_user.jsp">Toate produsele</a>
             <%} else{%>
             <%for( int i=(currentpage-1)*recordsPerPage; i<currentpage*recordsPerPage && i<noOfProducts; i++){
-                    Book book = (Book) list.get(i);%>
+                    Book book =  list.get(i);%>
             <div class="tab-content">
                 <form method="get" action="/viewbookServlet" id="">
                     <input type="hidden" name="pagetitle" value="index.jsp" class="title">
@@ -104,7 +102,7 @@
                 </form>
                 <div class="product">
                     <img src="data:image/jpg;base64,<%=book.getStrImage(book.getImage())%>" />
-                    <%nameAuthor = (String) listAuthors.get(i);%>
+                    <%nameAuthor =  listAuthors.get(i);%>
                     <p><%=nameAuthor%></p>
                     <form name="model" method="POST" action="/cartuserServlet">
                         <input type="hidden" name="book" value="<%=book.getName()%>">

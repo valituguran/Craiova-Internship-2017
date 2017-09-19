@@ -1,11 +1,21 @@
-package com.ymens.servlet;
+package com.ymens.spring.manager;
 
-import com.ymens.hibernate.PriceComparatorAsc;
-import com.ymens.hibernate.PriceComparatorDesc;
-import com.ymens.hibernate.User;
-import com.ymens.hibernate.UserType;
-import com.ymens.dao.SelectBooksDao;
+import com.ymens.spring.beans.Book;
+import com.ymens.spring.beans.PriceComparatorAsc;
+import com.ymens.spring.beans.PriceComparatorDesc;
+import com.ymens.spring.beans.User;
+import com.ymens.spring.dao.OrderDao;
+import com.ymens.spring.dao.OrderItemDao;
+import com.ymens.spring.dao.UserDao;
+import com.ymens.spring.dao.UserTypeDao;
+import com.ymens.spring.interfaces.IAuthor;
+import com.ymens.spring.interfaces.IBook;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -13,21 +23,49 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.util.Collections;
-import java.util.LinkedList;
+import java.util.List;
 
-/**
- * Created by madalina.luca on 8/25/2017.
- */
-public class FilterServlet extends HttpServlet {
+public class Filter extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    public LinkedList list = new LinkedList();
+    public List<Book> list;
     HttpSession session;
     public static OutputStream o;
     protected int currentPage = 1;
     private static User user = new User();
-
+    @Autowired
+    IBook bookDao ;
+    @Autowired
+    IAuthor authorDao ;
+    @Autowired
+    UserDao userDao ;
+    @Autowired
+    UserTypeDao userTypeDao;
+    @Autowired
+    OrderDao orderDao;
+    @Autowired
+    OrderItemDao orderItemDao;
+    private String ses;
+    public void init(ServletConfig conf) throws ServletException {
+        super.init(conf);
+        ServletContext context = getServletContext();
+        WebApplicationContext ctx = WebApplicationContextUtils
+                .getWebApplicationContext(context);
+        ServletContext service = conf.getServletContext();
+        bookDao= (IBook) ctx.getBean("booksDao");
+        authorDao = (IAuthor) ctx.getBean("authorsDao");
+        userTypeDao = (UserTypeDao) ctx.getBean("userTypeDao");
+        orderDao = (OrderDao) ctx.getBean("orderDao");
+        orderItemDao = (OrderItemDao) ctx.getBean("orderItemDao");
+        ses = conf.getInitParameter("name");
+        if (ses == null) {
+            System.out.println("error");
+        }
+        ses = (String) service.getAttribute("name");
+        if (ses == null){
+            System.out.println("error");
+        }
+    }
     public void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -35,18 +73,16 @@ public class FilterServlet extends HttpServlet {
         String strfilterdesc = request.getParameter("filterdesc");
         String type_list = request.getParameter("typelist");
         session = request.getSession(false);
-        PaginationServlet ps = new PaginationServlet();
-        ps.UpdateCurrentPage(1);
-        ps.UpdateTotalPage(list.size() / 9);
+
         switch (type_list) {
             case "filterbyprice":
-                list = SelectBooksDao.select();
+                list = bookDao.selectBooks();
                 break;
             case "filtersearchbyauthor":
-                list = SearchByAuthorServlet.list;
+                list = SearchByAuthor.listBooks;
                 break;
             case "filtersearchbyname":
-                list = SearchByNameServlet.list;
+                list = SearchByName.list;
                 break;
         }
         if (strfilterasc != null && !strfilterasc.equals("")) {
@@ -55,12 +91,14 @@ public class FilterServlet extends HttpServlet {
         if (strfilterdesc != null && !strfilterdesc.equals("")) {
             Collections.sort(list, new PriceComparatorDesc());
         }
+        Pagination ps = new Pagination();
+        ps.UpdateCurrentPage(1);
+        ps.UpdateTotalPage(list.size() / 9);
         session.setAttribute(type_list, list);
         session.setAttribute("typelist", type_list);
-        user.username = (String) session.getAttribute("name");
-        user.password = (String) session.getAttribute("password");
-        UserType userType = new UserType();
-        String usertype = userType.getType(user.username, user.password);
+        user.setUsername((String)session.getAttribute("name"));
+        user.setPassword ((String)session.getAttribute("password"));
+        String usertype = userTypeDao.getType(user.getUsername(), user.getPassword()) ;
         switch (type_list) {
             case "filterbyprice":
                 if (usertype.equalsIgnoreCase("user")) {
@@ -94,8 +132,6 @@ public class FilterServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
         processRequest(request, response);
     }
 }
-

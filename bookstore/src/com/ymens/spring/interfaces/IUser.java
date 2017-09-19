@@ -19,4 +19,5 @@ public interface IUser {
      int UpdateRealName(String rn, String user);
 
 
+    String getRealName(String n, String p);
 }

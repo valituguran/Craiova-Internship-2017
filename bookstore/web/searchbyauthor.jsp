@@ -2,12 +2,12 @@
          pageEncoding="ISO-8859-1"%>
 
 
-<%@ page import="com.ymens.servlet.PaginationServlet" %>
+
 <%@ page import="com.ymens.spring.beans.Book" %>
-<%@ page import="com.ymens.spring.manager.SelectBooks" %>
+<%@ page import="com.ymens.spring.manager.Pagination" %>
+<%@ page import="com.ymens.spring.manager.SearchByAuthor" %>
 <%@ page import="java.util.LinkedList" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.ymens.spring.manager.SearchByAuthor" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,13 +20,12 @@
 </head>
 
 <body>
-<%int currentpage = PaginationServlet.currentPage;
+<%int currentpage = Pagination.currentPage;
     String typelist = (String) session.getAttribute("typelist");
-    LinkedList<Book> list = (LinkedList<Book>)session.getAttribute(typelist);
-    SearchByAuthor sb = new SearchByAuthor();
-    List<String> listAuthors = sb.listAuthors;
+    List<Book> list = (List<Book>)session.getAttribute(typelist);
+    List<String> listAuthors = (List)session.getAttribute("listAuthors");
     String nameAuthor;
-    int recordsPerPage = PaginationServlet.recordsPerPage;
+    int recordsPerPage = Pagination.recordsPerPage;
     int noOfProducts = list.size();
     int noOfPages;
     if(noOfProducts % recordsPerPage == 0) {
@@ -80,7 +79,7 @@
         <a href="index.jsp">Toate produsele</a>
         <%} else{%>
         <%for( int i=(currentpage-1)*recordsPerPage; i<currentpage*recordsPerPage && i<noOfProducts; i++){
-            Book book = (Book) list.get(i);%>
+            Book book = list.get(i);%>
         <div class="tab-content">
             <form method="get" action="/viewbookServlet" id="">
                 <input type="hidden" name="pagetitle" value="index.jsp" class="title">
@@ -88,7 +87,7 @@
             </form>
             <div class="product">
                 <img src="data:image/jpg;base64,<%=book.getStrImage(book.getImage())%>" />
-                <%nameAuthor = (String) listAuthors.get(i);%>
+                <%nameAuthor = listAuthors.get(i);%>
                 <p><%=nameAuthor%></p>
                 <input class="details" type="text" size="2" value="1" name="quantity">buc
                <p> Pret: <%=book.getPrice()%><input type="hidden" name="price" value="<%=book.getPrice()%>"></p>

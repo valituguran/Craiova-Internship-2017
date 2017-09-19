@@ -1,13 +1,15 @@
 package com.ymens.spring.mapper;
 
-import com.ymens.hibernate.UserType;
+
 import com.ymens.spring.beans.User;
+import com.ymens.spring.dao.UserTypeDao;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserMapper implements RowMapper<User> {
+    UserTypeDao userTypeDao = new UserTypeDao();
 public User mapRow(ResultSet rs, int rowNum) throws SQLException {
     User user = new User();
         user.setId(rs.getInt("id"));
@@ -15,7 +17,7 @@ public User mapRow(ResultSet rs, int rowNum) throws SQLException {
         user.setPassword(rs.getString("password"));
         user.setEmail(rs.getString("email"));
         user.setRealName(rs.getString("real_name"));
-        user.setType(UserType.getIdType(user.getUsername(), user.getPassword()));
+        user.setType(userTypeDao.getIdType(user.getUsername(), user.getPassword()));
         return user;
         }
 }
