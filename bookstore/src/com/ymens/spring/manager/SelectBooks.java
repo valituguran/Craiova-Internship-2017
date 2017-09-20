@@ -6,57 +6,47 @@ import com.ymens.spring.dao.UserTypeDao;
 import com.ymens.spring.interfaces.IAuthor;
 import com.ymens.spring.interfaces.IBook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.LinkedList;
 import java.util.List;
 
 @Component
 public class SelectBooks extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    public static List<Book> list = new LinkedList();
-    public static List<String> listAuthors = new LinkedList();
-    HttpSession session;
-    public static OutputStream o;
-    String nameAuthor;
-    private static User user = new User();
+
     @Autowired
     private IBook book ;
     @Autowired
     private IAuthor author ;
     @Autowired
     private UserTypeDao userTypeDao ;
-    private String ses;
+    public static List<Book> list = new LinkedList();
+    public static List<String> listAuthors = new LinkedList();
+    HttpSession session;
+    String nameAuthor;
+    private static User user = new User();
     public SelectBooks() {}
-    public void init(ServletConfig conf) throws ServletException {
-        super.init(conf);
-        ServletContext context = getServletContext();
-        WebApplicationContext ctx = WebApplicationContextUtils
-                .getWebApplicationContext(context);
-        ServletContext service = conf.getServletContext();
+    protected AutowireCapableBeanFactory ctx;
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        ctx = ((ApplicationContext) getServletContext().getAttribute(
+                "applicationContext")).getAutowireCapableBeanFactory();
+
         book= (IBook) ctx.getBean("booksDao");
         author = (IAuthor) ctx.getBean("authorsDao");
         userTypeDao = (UserTypeDao) ctx.getBean("userTypeDao");
-        ses = conf.getInitParameter("name");
-        if (ses == null) {
-            System.out.println("error");
-        }
-        ses = (String) service.getAttribute("name");
-        if (ses == null){
-            System.out.println("error");
-        }
     }
+
 
     public void process(){
         list = book.selectBooks();
@@ -108,4 +98,6 @@ public class SelectBooks extends HttpServlet {
             throws ServletException, IOException {
         doGet(request, response);
     }
+
+
 }

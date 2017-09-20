@@ -35,7 +35,23 @@ public class CartItemDao {
             setCartItems(allCartItems);
         }
     }
+    public void addExisting(int iItemIndex, String strQuantity) {
+        double dblTotalCost = 0.0;
+        double dblUnitCost = 0.0;
+        int iQuantity = 0;
+        Cart cart = null;
+        iQuantity = Integer.parseInt(strQuantity);
+        if (iQuantity > 0) {
+            cart = (Cart) allCartItems.get(iItemIndex);
+            dblUnitCost = cart.getUnitCost();
+            dblTotalCost = dblUnitCost * iQuantity;
+            cart.setQuantity(iQuantity + 1);
+            cart.setTotalCost(dblTotalCost);
+            calculateOrderTotal();
+            setCartItems(allCartItems);
+        }
 
+    }
     public void addCartItem(Book book, String strDescription,
                             String strUnitCost, String strQuantity) {
         double dblTotalCost = 0.0;
@@ -82,7 +98,7 @@ public class CartItemDao {
         }
         return cart;
     }
-    public static ArrayList getCartItems() {
+    public  ArrayList getCartItems() {
         return allCartItems;
     }
     public void setCartItems(ArrayList alCartItems) {

@@ -45,5 +45,6 @@
     <orderEntry type="library" name="spring-web-4.3.1.RELEASE" level="project" />
     <orderEntry type="library" name="spring-aop-4.3.10.RELEASE" level="project" />
     <orderEntry type="library" name="spring-webmvc-4.2.0.RELEASE" level="project" />
+    <orderEntry type="library" name="aspectjrt" level="project" />
   </component>
 </module>

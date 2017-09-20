@@ -4,18 +4,14 @@ package com.ymens.spring.manager;
 import com.ymens.spring.beans.Book;
 import com.ymens.spring.beans.Cart;
 import com.ymens.spring.beans.User;
-import com.ymens.spring.dao.BooksDao;
-import com.ymens.spring.dao.CartItemDao;
-import com.ymens.spring.dao.UserDao;
-import com.ymens.spring.dao.UserTypeDao;
+import com.ymens.spring.dao.*;
 import com.ymens.spring.interfaces.IAuthor;
 import com.ymens.spring.interfaces.IBook;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
+import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
+import org.springframework.context.ApplicationContext;
 
 import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -37,25 +33,17 @@ public class ProductsCart  extends HttpServlet {
     UserTypeDao userTypeDao;
     @Autowired
     CartItemDao cartItemDao;
-    private String ses;
+
     public void init(ServletConfig conf) throws ServletException {
         super.init(conf);
-        ServletContext context = getServletContext();
-        WebApplicationContext ctx = WebApplicationContextUtils
-                .getWebApplicationContext(context);
-        ServletContext service = conf.getServletContext();
+        AutowireCapableBeanFactory ctx;
+        ctx = ((ApplicationContext) getServletContext().getAttribute(
+                "applicationContext")).getAutowireCapableBeanFactory();
         bookDao= (IBook) ctx.getBean("booksDao");
         authorDao = (IAuthor) ctx.getBean("authorsDao");
+        userDao = (UserDao) ctx.getBean("userDao");
         userTypeDao = (UserTypeDao) ctx.getBean("userTypeDao");
         cartItemDao = (CartItemDao) ctx.getBean("cartItemDao");
-        ses = conf.getInitParameter("name");
-        if (ses == null) {
-            System.out.println("error");
-        }
-        ses = (String) service.getAttribute("name");
-        if (ses == null){
-            System.out.println("error");
-        }
     }
 
     public void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -110,7 +98,7 @@ public class ProductsCart  extends HttpServlet {
         for(int i=0; i<list.size(); i++){
             if(CartItemDao.getItemBook(list.get(i).getBook().getName()) == id){
                 cartItemDao.deleteCartItem(id);
-                session.setAttribute("cart", CartItemDao.getCartItems());
+                session.setAttribute("cart", cartItemDao.getCartItems());
                 nr = list.size();
             }
         }
@@ -132,7 +120,7 @@ public class ProductsCart  extends HttpServlet {
         for(int i=0; i<list.size(); i++){
             if(CartItemDao.getItemBook(list.get(i).getBook().getName()) == id){
                 cartItemDao.updateCartItem(id, strQuantity);
-                session.setAttribute("cart", CartItemDao.getCartItems());
+                session.setAttribute("cart", cartItemDao.getCartItems());
                 nr = list.size();
             }
         }
@@ -149,12 +137,30 @@ public class ProductsCart  extends HttpServlet {
         String strQuantity = request.getParameter("quantity");
         Cart cartItem = new Cart();
         cartItem.setBook(book);
-        cartItemDao.addCartItem(book, description, strPrice, strQuantity);
-        session.setAttribute("dbOrderTotal", CartItemDao.getOrderTotal());
-        session.setAttribute("cart", CartItemDao.getCartItems());
-        ArrayList<Cart> list =(ArrayList) session.getAttribute("cart");
-        cartItemDao.setCartItems(list);
-        nr = list.size();
+        if(cartItemDao.getCartItems().size() > 0){
+        for(int i=0 ;i<cartItemDao.getCartItems().size(); i++) {
+            cartItem = (Cart) cartItemDao.getCartItems().get(i);
+            if (strTitle.equalsIgnoreCase(cartItem.getBook().getName())) {
+                cartItemDao.addExisting(i, strQuantity);
+                break;
+            }else {
+                cartItemDao.addCartItem(book, description, strPrice, strQuantity);
+                session.setAttribute("dbOrderTotal", CartItemDao.getOrderTotal());
+                session.setAttribute("cart", cartItemDao.getCartItems());
+                ArrayList<Cart> list = (ArrayList) session.getAttribute("cart");
+                cartItemDao.setCartItems(list);
+                nr = list.size();
+                break;
+            }
+        }}else {
+            cartItemDao.addCartItem(book, description, strPrice, strQuantity);
+            session.setAttribute("dbOrderTotal", CartItemDao.getOrderTotal());
+            session.setAttribute("cart", cartItemDao.getCartItems());
+            ArrayList<Cart> list = (ArrayList) session.getAttribute("cart");
+            cartItemDao.setCartItems(list);
+            nr = list.size();
+        }
+
     }
 }
 

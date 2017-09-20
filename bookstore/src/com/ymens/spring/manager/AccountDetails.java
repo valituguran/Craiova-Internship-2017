@@ -10,11 +10,10 @@ import com.ymens.spring.dao.UserTypeDao;
 import com.ymens.spring.interfaces.IAuthor;
 import com.ymens.spring.interfaces.IBook;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
+import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
+import org.springframework.context.ApplicationContext;
 
 import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -40,26 +39,18 @@ public class AccountDetails extends HttpServlet {
     OrderDao orderDao;
     @Autowired
     OrderItemDao orderItemDao;
-    private String ses;
+    protected AutowireCapableBeanFactory ctx;
     public void init(ServletConfig conf) throws ServletException {
         super.init(conf);
-        ServletContext context = getServletContext();
-        WebApplicationContext ctx = WebApplicationContextUtils
-                .getWebApplicationContext(context);
-        ServletContext service = conf.getServletContext();
+        ctx = ((ApplicationContext) getServletContext().getAttribute(
+                "applicationContext")).getAutowireCapableBeanFactory();
+
         bookDao= (IBook) ctx.getBean("booksDao");
         authorDao = (IAuthor) ctx.getBean("authorsDao");
         userTypeDao = (UserTypeDao) ctx.getBean("userTypeDao");
         orderDao = (OrderDao) ctx.getBean("orderDao");
         orderItemDao = (OrderItemDao) ctx.getBean("orderItemDao");
-        ses = conf.getInitParameter("name");
-        if (ses == null) {
-            System.out.println("error");
-        }
-        ses = (String) service.getAttribute("name");
-        if (ses == null){
-            System.out.println("error");
-        }
+
     }
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

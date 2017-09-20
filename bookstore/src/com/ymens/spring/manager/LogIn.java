@@ -1,16 +1,18 @@
 package com.ymens.spring.manager;
 
-import com.ymens.spring.dao.*;
+import com.ymens.spring.dao.CartItemDao;
+import com.ymens.spring.dao.OrderDao;
+import com.ymens.spring.dao.OrderItemDao;
+import com.ymens.spring.dao.UserTypeDao;
 import com.ymens.spring.interfaces.IAuthor;
 import com.ymens.spring.interfaces.IBook;
 import com.ymens.spring.interfaces.IUser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
+import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
+import org.springframework.context.ApplicationContext;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -37,13 +39,13 @@ public class LogIn extends HttpServlet {
     OrderItemDao orderItemDao;
     @Autowired
     CartItemDao cartItemDao;
-    private String ses;
+
     public void init(ServletConfig conf) throws ServletException {
         super.init(conf);
-        ServletContext context = getServletContext();
-        WebApplicationContext ctx = WebApplicationContextUtils
-                .getWebApplicationContext(context);
-        ServletContext service = conf.getServletContext();
+        AutowireCapableBeanFactory ctx;
+        ctx = ((ApplicationContext) getServletContext().getAttribute(
+                "applicationContext")).getAutowireCapableBeanFactory();
+
         bookDao= (IBook) ctx.getBean("booksDao");
         authorDao = (IAuthor) ctx.getBean("authorsDao");
         userDao = (IUser) ctx.getBean("userDao");
@@ -51,14 +53,7 @@ public class LogIn extends HttpServlet {
         orderDao = (OrderDao) ctx.getBean("orderDao");
         orderItemDao = (OrderItemDao) ctx.getBean("orderItemDao");
         cartItemDao = (CartItemDao) ctx.getBean("cartItemDao");
-        ses = conf.getInitParameter("name");
-        if (ses == null) {
-            System.out.println("error");
-        }
-        ses = (String) service.getAttribute("name");
-        if (ses == null){
-            System.out.println("error");
-        }
+
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
