@@ -2,7 +2,8 @@
 <%@ page import="dao.ActionsDao" %>
 <%@ page import="dao.BuyDao" %>
 <%@ page import="java.text.DecimalFormat" %>
-<%@ page import="dao.PaginationDao" %><%--
+<%@ page import="dao.PaginationDao" %>
+<%@ page import="com.ymens.Parse" %><%--
   Created by IntelliJ IDEA.
   User: lucian.Nicolescu
   Date: 9/8/2017
@@ -34,6 +35,7 @@
     </div>
     <div id="detailsandtransaction">
     <div id="accountdetails">
+
         <table id="details">
             <tr>
                 <th>Account Details</th>
@@ -55,7 +57,6 @@
             </tr>
         </table>
     </div>
-    <div id="tabletransaction">
         <%if(session.getAttribute("page")==null)
         {
             len=1;
@@ -64,10 +65,13 @@
             len = (int) session.getAttribute("page");
         }
         %>
+        <div id="tabletransaction">
         <table class="tablee " frame="box"  id="currencyTable">
-        <tr>
+            <input type="hidden" name="quantity" value=1>
+            <tr>
             <th>My Transaction</th>
             <th>Value Buy</th>
+            <th>State</th>
             <th>Actual Value</th>
             <th>Total</th>
             <th>Quantity</th>
@@ -77,28 +81,39 @@
             ActionsDao.getShopping(id);
             BuyDao buy = new BuyDao();
         %>
-        <input type="hidden" name="quantity" value=1>
-        <%for(int i = PaginationDao.pagination(len-1); i< PaginationDao.pagination(len); i++){%>
+
+        <%for(int i = PaginationDao.paginationTransaction(len-1); i< PaginationDao.paginationTransaction(len); i++){%>
             <%String pair = (String) ActionsDao.list1.get(i);
               Double value = (Double) ActionsDao.list2.get(i);%>
         <form method="get" action="sellServlet">
         <tr>
             <input type="hidden" name="pairtosell" value="<%=pair%>"><th><%=pair%></th>
-            <input type="hidden" name="valuetosell" value="<%=value%>"><th><%=df.format(value)%></th>
-            <th><%=df.format(value)%></th>
-            <th><%=df.format(((buy.selectquantity(pair,id)*value)))%></th>
+            <input type="hidden" name="valuetoselll" value="<%=df.format(value)%>"><th><%=df.format(value)%></th>
+            <%if(value>Parse.currencypairs.get(pair)){%>
+            <th><img id="downarrow" src="E:\workspace\Craiova-Internship-2017\CcyXcg\images\arrow_down.png"></th>
+            <%}else if(value<Parse.currencypairs.get(pair)){%>
+            <th><img id="uparrow" src="E:\workspace\Craiova-Internship-2017\CcyXcg\images\arrow_up.png"></th>
+            <%}else {%>
+            <th>─</th>
+            <%}%>
+            <input type="hidden" name="valuetosell" value="<%=df.format(Parse.currencypairs.get(pair))%>"><th><%=df.format(Parse.currencypairs.get(pair))%></th>
+            <th><%=df.format(((buy.selectquantity(pair,id)*Parse.currencypairs.get(pair))))%></th>
             <th><input type="text" name="quant" value=<%=buy.selectquantity(pair,id)%>></th>
             <th><input type="submit" value="Sell"></th>
         </tr>
         </form>
-
-            <%}%>
+                <%}%>
             <tr>
                 <form action="PaginationServlet" method="get">
-                    <th><input type="submit" name="button1" value="▲" required="required">
-                        <input type="submit" name="button2" value="▼" required="required"></th>
+                    <th><input type="submit" name="buttonTransactions1" value="▲" required="required">
+                        <input type="submit" name="buttonTransactions2" value="▼" required="required"></th>
                     <th><input class="search" name="page" type="text" value="<%=len%>"></th>
+                    <th></th>
+                    <th></th>
                 </form>
+                <th></th>
+                <th></th>
+                <th></th>
             </tr>
         </table>
             </div>

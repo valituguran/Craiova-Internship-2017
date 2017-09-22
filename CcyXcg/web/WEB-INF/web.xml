@@ -28,10 +28,6 @@
         <servlet-name>logout</servlet-name>
         <url-pattern>/logoutServlet</url-pattern>
     </servlet-mapping>
-    <servlet>
-        <servlet-name>parse</servlet-name>
-        <servlet-class>com.ymens.ParseServlet</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>parse</servlet-name>
         <url-pattern>/parseServlet</url-pattern>
@@ -52,12 +48,6 @@
         <servlet-name>pagination</servlet-name>
         <url-pattern>/PaginationServlet</url-pattern>
     </servlet-mapping>
-
-
-    <servlet>
-        <servlet-name>history</servlet-name>
-        <servlet-class>com.ymens.ParseHistoryServlet</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>history</servlet-name>
         <url-pattern>/ParseHistoryServlet</url-pattern>
@@ -102,7 +92,9 @@
         <servlet-name>download</servlet-name>
         <url-pattern>/downloadServlet</url-pattern>
     </servlet-mapping>
-    <welcome-file-list>
-        <welcome-file>/parseServlet</welcome-file>
-    </welcome-file-list>
+    <listener>
+        <listener-class>
+            com.ymens.TimerServlet
+        </listener-class>
+    </listener>
 </web-app>

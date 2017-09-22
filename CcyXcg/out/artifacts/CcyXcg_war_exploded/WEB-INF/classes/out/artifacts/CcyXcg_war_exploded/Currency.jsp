@@ -84,6 +84,8 @@
                     <th><input type="submit" name="buttonCurrency1" value="▲" required="required">
                         <input type="submit" name="buttonCurrency2" value="▼" required="required"></th>
                     <th><input class="search" name="page" type="text" value="<%=len%>"></th>
+                    <th></th>
+                    <th></th>
                 </form>
             </tr>
         </table>

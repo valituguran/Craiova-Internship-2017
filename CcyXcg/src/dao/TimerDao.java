@@ -8,21 +8,16 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 /**
  * Created by lucian.Nicolescu on 9/13/2017.
  */
-public class TimerDao {
-    public static LinkedList pairs = new LinkedList();
-    public static LinkedList values = new LinkedList();
-    public static class MyTimeTask extends TimerTask {
+public class TimerDao extends TimerTask {
 
-        public void run() {
-
+    public  void run() {
+            System.out.println("Thread id: "+Thread.currentThread().getId());
+            String a="E:\\workspace\\Craiova-Internship-2017\\CcyXcg\\web\\WEB-INF\\download.xml";
             String url = "http://www.bnr.ro/nbrfxrates.xml";
             try {
                 DownloadDao.downloadUsingStream(url, "E:/workspace/Craiova-Internship-2017/CcyXcg/web/WEB-INF/download.xml");
@@ -30,17 +25,16 @@ public class TimerDao {
                 e.printStackTrace();
             }
             DeleteDao.delete();
-            String a = "E:\\workspace\\Craiova-Internship-2017\\CcyXcg\\web\\WEB-INF\\download.xml";
-            for (int i = 0; i < Parse.values(a).size(); i++) {
-                dao.ParseDao.addcurrency(ParsePairs.pairs(a).get(i), Parse.values(a).get(i));
-               // dao.ParseHistoryDao.addcurrency(ParsePairs.pairs(a).get(i), Parse.values(a).get(i));
+            Parse.pairs(a);//parsarea
+            //System.out.println("vberb " + Parse.pairs(a).size());
+            for (Map.Entry i:Parse.currencypairs.entrySet()) {
+               dao.ParseDao.addcurrency(String.valueOf(i.getKey()),Double.valueOf((Double) i.getValue()));
+               // dao.ParseHistoryDao.addcurrency(ParsePairs.pairs(a).get(i), Parse.pairs(a).get(i));
             }
-            ParseDao.getcurrency();
-            pairs = ParseDao.pairs;
-            values = ParseDao.values;
+            SelectActualValueDao.select();
         }
     }
-}
+
 
    /* public static void main(String[] args) throws ParseException {
 

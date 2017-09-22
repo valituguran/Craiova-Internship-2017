@@ -194,37 +194,41 @@
     </script>
 <!----------------------------------->
 <!---------------Scripts for select-------------->
-    <script>
-        function select1() {
-            var x = document.getElementById("select").value;
-                return x;
-        }
-        function selectday1() {
-            var x = document.getElementById("day").value;
-            return x;
-        }
-        function selectday2() {
-            var x = document.getElementById("day1").value;
-            return x;
-        }
+<script>
+    function select1() {
+        var x = document.getElementById("select").value;
+        console.log(x);
+        return x;
+    }
+    function selectday1() {
+        var x = document.getElementById("day").value;
+        console.log(x);
+        return x;
+    }
+    function selectday2() {
+        var x = document.getElementById("day1").value;
+        console.log(x);
+        return x;
+    }
 
-        function select2() {
-            var x = document.getElementById("secondselect").value;
-            return x;
-        }
-        $(document).on("click", "#valueid", function () { // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
-            getSparePartsAdditionHorizontalBar1();
-        });
-        $(document).on("click", "#dayid", function () { // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
-            getSparePartsAdditionHorizontalBar1();
-        });
-        $(document).on("click", "#dayid1", function () { // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
-            getSparePartsAdditionHorizontalBar2();
-        });
-        $(document).on("click", "#secondvalueid", function () { // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
-            getSparePartsAdditionHorizontalBar2();
-        });
-    </script>
+    function select2() {
+        var x = document.getElementById("secondselect").value;
+        console.log(x);
+        return x;
+    }
+    $(document).on("click", "#valueid", function () { // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
+        getSparePartsAdditionHorizontalBar1();
+    });
+    $(document).on("click", "#dayid", function () { // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
+        getSparePartsAdditionHorizontalBar1();
+    });
+    $(document).on("click", "#dayid1", function () { // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
+        getSparePartsAdditionHorizontalBar2();
+    });
+    $(document).on("click", "#secondvalueid", function () { // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
+        getSparePartsAdditionHorizontalBar2();
+    });
+</script>
 <!--------------------------------------->
 </body>
 </html>

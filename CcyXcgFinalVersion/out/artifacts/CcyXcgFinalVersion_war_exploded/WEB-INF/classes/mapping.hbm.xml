@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="hibernate.Currencypairs" table="currencypairs" schema="ccyxcgdatabase">
+        <id name="id" column="ID"/>
+        <property name="pair" column="pair"/>
+        <property name="values" column="values"/>
+        <property name="dateTime" column="DateTime"/>
+    </class>
+
+    <class name="hibernate.Hisotryvalues" table="hisotryvalues" schema="ccyxcgdatabase">
+        <property name="pair" column="pair"/>
+        <property name="value" column="value"/>
+        <property name="date" column="date"/>
+    </class>
+    <class name="hibernate.Shop" table="shop" schema="ccyxcgdatabase">
+        <property name="pairname" column="pairname"/>
+        <property name="value" column="value"/>
+        <property name="valuetosell" column="valuetosell"/>
+        <property name="quantity" column="quantity"/>
+        <property name="total" column="total"/>
+    </class>
+    <class name="hibernate.Users" table="users" schema="ccyxcgdatabase">
+        <id name="id" column="ID"/>
+        <property name="type" column="type"/>
+        <property name="name" column="name"/>
+        <property name="username" column="username"/>
+        <property name="password" column="password"/>
+        <property name="email" column="email"/>
+        <property name="balance" column="Balance"/>
+        <property name="currency" column="Currency"/>
+    </class>
+</hibernate-mapping>

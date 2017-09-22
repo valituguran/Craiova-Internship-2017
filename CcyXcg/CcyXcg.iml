@@ -11,6 +11,25 @@
         </webroots>
       </configuration>
     </facet>
+    <facet type="hibernate" name="Hibernate">
+      <configuration>
+        <datasource-map>
+          <unit-entry name="hibernate.cfg.xml" />
+        </datasource-map>
+        <naming-strategy-map />
+        <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/src/hibernate.cfg.xml" />
+      </configuration>
+    </facet>
+    <facet type="web" name="Web2">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/out/artifacts/CcyXcg_war_exploded/WEB-INF/classes/out/artifacts/CcyXcg_war_exploded/WEB-INF/classes/out/artifacts/CcyXcg_war_exploded/WEB-INF/classes/out/artifacts/CcyXcg_war_exploded/WEB-INF/classes/out/artifacts/CcyXcg_war_exploded/WEB-INF/classes/web/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/out/artifacts/CcyXcg_war_exploded/WEB-INF/classes/out/artifacts/CcyXcg_war_exploded/WEB-INF/classes/out/artifacts/CcyXcg_war_exploded/WEB-INF/classes/out/artifacts/CcyXcg_war_exploded/WEB-INF/classes/out/artifacts/CcyXcg_war_exploded/WEB-INF/classes/web" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
@@ -26,5 +45,9 @@
     <orderEntry type="library" name="jfree:jfreechart:1.0.9" level="project" />
     <orderEntry type="library" name="java-json" level="project" />
     <orderEntry type="library" name="com.github.abel533:ECharts:3.0.0.2" level="project" />
+    <orderEntry type="library" name="lib1" level="project" />
+    <orderEntry type="library" name="Hibernate 5.2.11-5.2.11" level="project" />
+    <orderEntry type="library" name="dom4j-1.6.1" level="project" />
+    <orderEntry type="library" name="lib11" level="project" />
   </component>
 </module>

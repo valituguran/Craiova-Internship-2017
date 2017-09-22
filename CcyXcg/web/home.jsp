@@ -1,16 +1,10 @@
 <!-------------Java imports-------------->
-<%@ page import="java.util.LinkedList" %>
-<%@ page import="com.ymens.ParseServlet" %>
-<%@ page import="com.ymens.Parse" %>
-<%@ page import="com.ymens.SearchServlet" %>
-<%@ page import="javax.jws.soap.SOAPBinding" %>
-<%@ page import="dao.*" %>
-<%@ page import="java.text.DecimalFormat" %>
-<%@ page import="java.text.DateFormat" %>
-<%@ page import="java.text.SimpleDateFormat" %>
-<%@ page import="java.util.Date" %>
-<%@ page import="java.util.Timer" %>
 <%@ page import="dao.PaginationDao" %>
+<%@ page import="dao.ParseDao" %>
+<%@ page import="dao.SelectActualValueDao" %>
+<%@ page import="dao.UserDao" %>
+<%@ page import="java.text.DecimalFormat" %>
+<%@ page import="java.util.LinkedList" %>
 <%--
   Created by IntelliJ IDEA.
   User: lucian.Nicolescu
@@ -42,7 +36,8 @@
         LinkedList pairs =   ParseDao.pairs;
         LinkedList values = ParseDao.values;
         int len;
-        UserDao user = new UserDao();%>
+        UserDao user = new UserDao();
+                %>
 <!------------------------------------------------>
     <%if(session.getAttribute("name")==null) {%>
     <div class="topnav">
@@ -51,19 +46,8 @@
         <a href="History.jsp">History</a>
         <a href="login.jsp">Login</a>
     </div>
-    <%DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date date = dateFormatter .parse("2018-09-15 15:58:00");
-       // int seconds = (int) (milliseconds / 1000) % 60 ;
-       // int hours   = (int) ((milliseconds / (1000*60*60)) % 24);
-        //Now create the time and schedule it
-        Timer timer = new Timer();
+    <%SelectActualValueDao.select();%>
 
-        //Use this if you want to execute it once
-        //timer.schedule(new TimerDao.MyTimeTask(), date);
-        int period = 36000000;//10hours
-
-        timer.schedule(new TimerDao.MyTimeTask(), date);
-    %>
     <div id="searchandtable">
         <div class="filterbox">
             <div >Filter</div>
@@ -173,7 +157,6 @@
 </body>
 <%}else if(session.getAttribute("name")!=null){%>
 <body onload="getSparePartsAdditionHorizontalBar2()">
-<a>Datasearch:<%=ChartDao.datasearch%></a>
 <div class="topnav">
         <a class="active" href="home.jsp">Ccy Xcg </a>
         <a href="Currency.jsp" onclick="pageIndex()">Currencies Shop</a>

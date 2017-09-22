@@ -1,6 +1,5 @@
 <!-----------------------------Java Imports----------------->
 <%@ page import="java.util.LinkedList" %>
-<%@ page import="com.ymens.ParseServlet" %>
 <%@ page import="dao.ParseDao" %>
 <%@ page import="com.ymens.Parse" %>
 <%@ page import="dao.SearchDao" %>
@@ -60,102 +59,81 @@
           <tr>
             <th>Pair name</th>
             <th>Value</th>
-            <th>Actions</th>
           </tr>
-      <%if (lensearch >0){
-          LinkedList list = (LinkedList) session.getAttribute("search");
-          for (int i=0; i<lensearch; i=i+2){%>
+      <%if (lensearch >0 || lensearch==0){
+          for (int i = PaginationDao.paginationIndex(len-1); i< PaginationDao.paginationIndex(len); i++){%>
           <tr>
-            <th><%=list.get(i)%></th>
-            <th><%=list.get(i+1)%></th>
-          <th>Buy/Sell</th>
+            <th><%=SearchDao.list1.get(i)%></th>
+            <th><%=SearchDao.list2.get(i)%></th>
           </tr>
-      <!------------------------------------------------------------------------------------------------------------>
-      <%}} else if(lensearch==0){%>
-         <p class="errorpairname">Pair name doesn't exist</p>
-          <%for (int i = PaginationDao.pagination(len); i< PaginationDao.pagination(len+1); i++){%>
-            <%  String pair = (String)pairs.get(i);
-                Double value = (Double) values.get(i);%>
-            <tr>
-              <th><%=pair%></th>
-              <th><%=value%></th>
-              <th>Buy/Sell</th>
-            </tr>
-            <%}%>
-            <%} %>
-        </table>
+          <%}%>
+          <tr>
           <form action="PaginationServlet" method="get">
-            <input type="submit" name="button1" value="▲" />
-            <input type="submit" name="button2" value="▼" />
-            <input class="search" name="page" type="text">
+            <th><input type="submit" name="buttonIndex1" value="▲" />
+              <input type="submit" name="buttonIndex2" value="▼"/></th>
+            <th><input class="search" name="page" type="text" value=<%=len%>></th>
           </form>
-      </div>
-    </div>
-  </div>
-  </div>
-<%}else if(session.getAttribute("name")==null){%>
-  <div class="topnav">
-    <a class="active" href="home.jsp">Ccy Xcg </a>
-    <a href="home.jsp">Currencies</a>
-    <a href="History.jsp">History</a>
-    <a href="login.jsp">Login</a>
-  </div>
-  <div id="searchandtable">
-  <div class="filterbox">
-  <div >Filter</div>
-    <form action="searchServlet" method="get">
-      <input class="search" name="search" type="text" placeholder="Pair name">
-      <input type="submit" value="Search">
-    </form>
-    <%
-      int len;//len este indexul paginii
-      if(session.getAttribute("page")==null)
-        {
-          len=1;
-        }
-      else{
-        len = (int) session.getAttribute("page");
-        }
-    %>
-    <div class="table-div">
-      <table class="tablee" frame="box">
-        <tr>
-          <th>Pair name</th>
-          <th>Value</th>
-          <th>Actions</th>
         </tr>
-      <%if (lensearch >0){
-        LinkedList list = (LinkedList) session.getAttribute("search");
-        for (int i=0; i<lensearch; i=i+2){%>
-      <tr>
-        <th><%=list.get(i)%></th>
-        <th><%=list.get(i+1)%></th>
-        <th>Buy/Sell</th>
-      </tr>
-      <!------------------------------------------------------------------------------------------------------------>
-      <%}} else if(lensearch==0){%>
-        <p class="errorpairname">Pair name doesn't exist</p>
-        <%for (int i = PaginationDao.pagination(len); i< PaginationDao.pagination(len+1); i++){%>
-        <%  String pair = (String)pairs.get(i);
-          Double value = (Double) values.get(i);%>
-      <tr>
-        <th><%=pair%></th>
-        <th><%=value%></th>
-        <th>Buy/Sell</th>
-      </tr>
+      </table>
         <%}%>
-        <%} %>
+      <!------------------------------------------------------------------------------------------------------------>
 
-
-    </table>
-    <form action="PaginationServlet" method="get">
-      <input type="submit" name="button1" value="▲" />
-      <input type="submit" name="button2" value="▼" />
-      <input class="search" name="page" type="text">
-    </form>
       </div>
     </div>
+    <%}else if(session.getAttribute("name")==null){%>
+    <div class="topnav">
+      <a class="active" href="home.jsp">Ccy Xcg </a>
+      <a href="home.jsp">Currencies</a>
+      <a href="History.jsp">History</a>
+      <a href="login.jsp">Login</a>
     </div>
+      <div id="searchandtable">
+          <div class="filterbox">
+              <div >Filter</div>
+              <form action="searchServlet" method="get">
+                  <input class="search" name="search" type="text" placeholder="Pair name">
+                  <input type="submit" value="Search">
+              </form>
+              <%
+                  int len;//len este indexul paginii
+                  if(session.getAttribute("page")==null)
+                  {
+                      len=1;
+                  }
+                  else{
+                      len = (int) session.getAttribute("page");
+                  }
+              %>
+              <div class="table-div">
+                  <table class="tablesearch" frame="box">
+                      <tr>
+                          <th>Pair name</th>
+                          <th>Value</th>
+                      </tr>
+                      <%if (lensearch >0 || lensearch==0){
+                          for (int i = PaginationDao.paginationIndex(len-1); i< PaginationDao.paginationIndex(len); i++){%>
+                      <tr>
+                          <th><%=SearchDao.list1.get(i)%></th>
+                          <th><%=SearchDao.list2.get(i)%></th>
+                      </tr>
+                      <%}%>
+                      <tr>
+                          <form action="PaginationServlet" method="get">
+                              <th><input type="submit" name="buttonIndex1" value="▲" />
+                                  <input type="submit" name="buttonIndex2" value="▼"/></th>
+                              <th><input class="search" name="page" type="text" value=<%=len%>></th>
+                          </form>
+                      </tr>
+                  </table>
+                  <%}%>
+
+                  <%if(session.getAttribute()){%>
+                  <p id="notexist">Pair doesn`t exist</p>
+                  <%}%>
+                  <!------------------------------------------------------------------------------------------------------------>
+
+              </div>
+          </div>
   </div>
   <%}%>
 </body>

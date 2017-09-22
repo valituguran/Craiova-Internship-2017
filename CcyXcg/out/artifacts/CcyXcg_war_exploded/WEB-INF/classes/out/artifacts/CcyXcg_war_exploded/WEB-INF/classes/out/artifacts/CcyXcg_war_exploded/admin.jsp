@@ -18,8 +18,7 @@
             </form>
         </div>
     </div>
-    <form class="form" method="get" action="ParseHistoryServlet" >
-        <input type="submit" value="Insert history in database"><br>
-    </form>
+    <title>Title</title>
+</head>
 </body>
 </html>

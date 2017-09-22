@@ -3,6 +3,8 @@ package dao;
 
 
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 
@@ -42,6 +44,7 @@ public class ChartDao {
         LinkedList<Double> value = new LinkedList<>();
         LinkedList<String> date = new LinkedList<>();
         java.util.Date data = new Date();
+        DateFormat df = new SimpleDateFormat("MM dd ");
         try {
             pst = conn.prepareStatement("select * from `hisotryvalues` where pair=?  ");
             pst.setString(1, pair);
@@ -52,7 +55,7 @@ public class ChartDao {
                pairs=rs.getString("pair");
                value.add(rs.getDouble("value"));
                data=rs.getDate("date");
-               date.add(String.valueOf(data));
+               date.add(String.valueOf(df.format(data)));
             }
             object.setpair(pairs);
             object.setValues(value);

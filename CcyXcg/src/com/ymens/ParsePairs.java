@@ -14,7 +14,6 @@ public class ParsePairs {
 
         int x;
         int y;
-        a = "E:\\workspace\\Craiova-Internship-2017\\parse\\src\\parse.xml";
         ArrayList<String> list = new ArrayList<String>();
         ArrayList<String> list2 = new ArrayList<String>();
         try {
@@ -31,8 +30,8 @@ public class ParsePairs {
                     list.add(eElement.getAttribute("currency"));
                 }
             }
-            for( x=0;x<32;x++){
-                for( y=0;y<32;y++){
+            for( x=0;x< nList.getLength();x++){
+                for( y=0;y< nList.getLength();y++){
                     list2.add(list.get(x)+list.get(y));
                 }
             }

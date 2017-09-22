@@ -13,6 +13,8 @@
           <element id="library" level="project" name="jfree:jfreechart:1.0.9" />
           <element id="library" level="project" name="java-json" />
           <element id="library" level="project" name="com.github.abel533:ECharts:3.0.0.2" />
+          <element id="library" level="project" name="lib1" />
+          <element id="library" level="project" name="Hibernate 5.2.11-5.2.11" />
         </element>
       </element>
       <element id="module-output" name="CcyXcg" />
