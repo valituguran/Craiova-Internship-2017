@@ -1,0 +1,1 @@
+UPDATE  `users` SET  Balance=100 WHERE ID=18
