@@ -36,11 +36,11 @@ public class TwitterCloneApplication implements CommandLineRunner {
 			// fetch an individual customer
 			System.out.println("user found with findByFirstname('user'):");
 			System.out.println("--------------------------------");
-			System.out.println(repository.findByFirstName("aaa").getFirstname());
+			System.out.println(repository.findByFirstName("user").getFirstname());
 
 			System.out.println("user found with findByLastname('user'):");
 			System.out.println("--------------------------------");
-			for (User user : repository.findByLastName("aaa")) {
+			for (User user : repository.findByLastName("user")) {
 				System.out.println(user.getFirstname() + " " + user.getLastname());
 			}
 
