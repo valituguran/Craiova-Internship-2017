@@ -1,20 +1,23 @@
 package com.twitter.entity;
 
+import org.springframework.data.annotation.Id;
+
 public class User {
 
-    private int id;
-    private String firstname;
-    private String lastname;
-    private String username;
+    @Id
+    private String id;
+    private String firstName;
+    private String lastName;
+    private String userName;
     private String password;
     private String email;
     private String adress;
 
-    public User(int id, String firstname, String lastname, String username, String password, String email, String adress) {
+    public User(String id, String firstname, String lastname, String username, String password, String email, String adress) {
         this.id = id;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.username = username;
+        this.firstName = firstname;
+        this.lastName = lastname;
+        this.userName = username;
         this.password = password;
         this.email = email;
         this.adress = adress;
@@ -23,20 +26,20 @@ public class User {
     public User() {
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
     public String getFirstname() {
-        return firstname;
+        return firstName;
     }
 
     public String getLastname() {
-        return lastname;
+        return lastName;
     }
 
     public String getUsername() {
-        return username;
+        return userName;
     }
 
     public String getPassword() {
