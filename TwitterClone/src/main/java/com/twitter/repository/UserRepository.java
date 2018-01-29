@@ -15,4 +15,7 @@ public interface UserRepository extends MongoRepository<User, String> {
 
     @Query("{ 'password' : ?0 }")
     List<User> findByThePersonsPassword(String password);
+
+    @Query("{ $and: [ { 'username' : ?0} ,{ 'password' : ?1 } ] }")
+    List<User> loginQuery(String username,String password);
 }

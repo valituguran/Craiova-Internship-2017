@@ -13,7 +13,8 @@ import java.util.List;
 @RestController
 public class UserController {
 
-    @Autowired private UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
 
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
@@ -22,18 +23,16 @@ public class UserController {
         return user.showDetails();
     }
 
-    @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public String loginUser(@RequestBody User user){
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String loginUser(@RequestBody User user) {
 
-        if(userRepository.findByThePersonsUsername(user.getUsername()) != null && userRepository.findByThePersonsPassword(user.getPassword()) != null){
-            return "Login Succesfull!" + userRepository.findByThePersonsUsername(user.getUsername());
-        }
-        else{
+        if (userRepository.loginQuery(user.getUsername(), user.getPassword()).size() != 0) {
+            for (User u : userRepository.loginQuery(user.getUsername(), user.getPassword())) {
+                return "Login Succesfull!" + u.getUsername() + "  " + u.getPassword();
+            }
+        } else {
             return "Login Failed!";
         }
+        return "ala";
     }
-
-
-
-
 }
