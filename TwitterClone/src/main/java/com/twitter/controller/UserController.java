@@ -32,7 +32,7 @@ public class UserController {
         }
         return "ala";
     }
-    @RequestMapping(value = "/users", method = RequestMethod.GET)
+    @GetMapping("/users")
     public List<User> getAll(){
         List<User> users = this.userRepository.findAll();
         return users;
