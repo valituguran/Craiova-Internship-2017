@@ -1,11 +1,8 @@
 package com.twitter.controller;
 
-import com.mongodb.util.JSON;
 import com.twitter.entity.User;
 import com.twitter.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,5 +31,16 @@ public class UserController {
             return "Login Failed!";
         }
         return "ala";
+    }
+    @RequestMapping(value = "/users", method = RequestMethod.GET)
+    public List<User> getAll(){
+        List<User> users = this.userRepository.findAll();
+        return users;
+    }
+
+    @GetMapping("/{id}")
+    public User getById(@PathVariable("id") String id){
+        User user = this.userRepository.findById(id);
+        return user;
     }
 }
