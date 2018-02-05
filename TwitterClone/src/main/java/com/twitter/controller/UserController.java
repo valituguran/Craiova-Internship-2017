@@ -43,4 +43,16 @@ public class UserController {
         User user = this.userRepository.findById(id);
         return user;
     }
+
+    @RequestMapping(value = {"/follow"},method = RequestMethod.GET)
+    public User follow(@RequestParam("id_user") String id_user,@RequestParam("id_follow") String id_follow){
+        System.out.println("a intrat");
+        User fallowUser = getById(id_follow);
+        User user = getById(id_user);
+        user.addFollowingList(fallowUser.getId());
+        fallowUser.addFollowerList(user.getId());
+        userRepository.save(user);
+        userRepository.save(fallowUser);
+        return fallowUser;
+        }
 }
