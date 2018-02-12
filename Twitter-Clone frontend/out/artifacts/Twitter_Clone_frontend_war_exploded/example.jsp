@@ -15,8 +15,14 @@
 </head>
 <body>
 This is the example for Madalina Luca,who think that the frontend will not work!
-<div ng-app="twitterclone" >
-    <p ng-controller="example">The ID is {{r.firstname}} {{exemplu}}</p>
+<div ng-app="twitterclone" ng-controller="example" >
+    <p >The ID is: {{r.id}}</p><br>
+    <p >The First Name is: {{r.firstname}} </p><br>
+    <p >The Second Name is: {{r.lastname}} </p><br>
+    <p >The Password is: {{r.password}} </p><br>
+    <p >The Email is: {{r.email}} </p><br>
+    <p >The Adress is: {{r.adress}} </p><br>
+    <p >The Username is: {{r.username}} </p><br>
 </div>
 <script>
 
