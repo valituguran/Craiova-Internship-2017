@@ -21,18 +21,12 @@ public class UserController {
         return user.showDetails();
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String loginUser(@RequestBody User user) {
-
-        if (userRepository.loginQuery(user.getUsername(), user.getPassword()).size() != 0) {
-            for (User u : userRepository.loginQuery(user.getUsername(), user.getPassword())) {
-                return "Login Succesfull!" + u.getUsername() + "  " + u.getPassword();
-            }
-        } else {
-            return "Login Failed!";
-        }
-        return "ala";
+    @GetMapping("/login?username={username}&password={pass}")
+    public User loginUser(@PathVariable("username") String username,@PathVariable("pass") String pass) {
+        User user = this.userRepository.loginQuery(username, pass);
+        return user;
     }
+
     @GetMapping("/users")
     public List<User> getAll(){
         List<User> users = this.userRepository.findAll();
