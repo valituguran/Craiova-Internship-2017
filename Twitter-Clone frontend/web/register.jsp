@@ -11,23 +11,48 @@
     <title>Register</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js">
     </script>
+    <link rel="stylesheet"  type="text/css" href="./styles/register.css">
     <script src="./scripts/registercontroller.js"></script>
 </head>
-<body>
-<div ng-app="twitterclone" ng-controller="registercontroller">
+<body ng-app="twitterclone" ng-controller="registercontroller">
 
-    <div>
-        First Name : <input ng-model="firstname" /><br/><br/>
-        Last Name : <input ng-model="lastname" /><br/><br/>
-        Username : <input ng-model="username" /><br/><br/>
-        Password : <input type=password ng-model="password" /><br/><br/>
-        Email : <input ng-model="email" /><br/><br/>
-        Adress : <input ng-model="adress" /><br/><br/>
-        <input type="button" value="Register" ng-click="registerFunction(firstname, lastname, username, password, email, adress)" /> <br/><br/>
-    </div>
-
-    <p>Output Message : {{mesaj}}</p>
+<div class="header">
+    <h2>twitterClone</h2>
 
 </div>
+
+<form>
+    <fieldset>
+        <legend>Registration Form</legend>
+        <div>
+            <label for="fullname">Frist Name:</label>
+            <input type="text"  ng-model="firstname" name="firstname" id="fullname" class="txt" />
+        </div>
+        <div>
+            <label for="fullname">Last Name:</label>
+            <input type="text"  ng-model="lastname"  name="lastname" id="fullname" class="txt" />
+        </div>
+        <div>
+            <label for="fullname">Username:</label>
+            <input type="text"  ng-model="username"  name="username" id="fullname" class="txt" />
+        </div>
+        <div>
+            <label for="email">Email Address:</label>
+            <input type="text"  ng-model="email"  name="email" id="email" class="txt" />
+        </div>
+        <div>
+            <label for="password1">Password:</label>
+            <input type="password"  ng-model="password"  name="password" id="password1" class="txt" />
+        </div>
+        <div>
+            <label for="password1">Adress:</label>
+            <input type="text"  ng-model="adress"  name="adress" id="password1" class="txt" />
+        </div>
+    </fieldset>
+    <div>
+        <input type="button"  ng-click="registerFunction(firstname, lastname, username, password, email, adress)"  name="btnSubmit" id="btnSubmit" value="Sign Up!" class="btn" />
+    </div>
+</form>
 </body>
 </html>
+

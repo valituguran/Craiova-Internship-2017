@@ -14,7 +14,7 @@ app.controller('registercontroller' ,function($scope,$http) {
             username : username,
             password : password,
             email : email,
-            adress :adress
+            adress :adress,
         };
         console.log("a intrat1");
         console.log(JSON.stringify(obj));
