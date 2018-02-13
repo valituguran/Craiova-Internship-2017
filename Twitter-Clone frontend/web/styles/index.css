@@ -1,0 +1,114 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial;
+    padding: 18px;
+    background: #f1f1f1;
+}
+
+/* Header/Blog Title */
+.header {
+    height: 50px;
+    padding: 5px;
+    font-size: 20px;
+    text-align: center;
+    background: deepskyblue;
+}
+.topnav p {
+    float: left;
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 4px 6px;
+    text-decoration: none;
+}
+
+/* Style the top navigation bar */
+.topnav {
+    overflow: hidden;
+    background-color: deepskyblue;
+}
+
+/* Style the topnav links */
+
+
+/* Change color on hover */
+.topnav a:hover {
+    background-color: deepskyblue;
+    color: black;
+}
+
+/* Create two unequal columns that floats next to each other */
+/* Left column */
+.leftcolumn {
+    float: left;
+    width: 75%;
+}
+
+/* Right column */
+.rightcolumn {
+    float: left;
+    width: 25%;
+    background-color: #f1f1f1;
+    padding-left: 20px;
+}
+
+/* Fake image */
+.fakeimg {
+    background-color: deepskyblue;
+    width: 100%;
+    padding: 20px;
+}
+
+/* Add a card effect for articles */
+.card {
+    background-color: white;
+    padding: 20px;
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+.card input{
+    float:left;
+    height: 40px;
+    width: 300px;
+    border-radius: 10px;
+    background-color: lightblue;
+    padding: 2px;
+    margin-right: 150px;
+    margin-bottom: 20px;
+}
+.card2{
+    margin-top:300px;
+}
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Footer */
+.footer {
+    padding: 20px;
+    text-align: center;
+    background: deepskyblue;
+    margin-top: 20px;
+}
+
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+@media (max-width: 800px) {
+    .leftcolumn, .rightcolumn {
+        width: 100%;
+        padding: 0;
+    }
+}
+
+/* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+@media (max-width: 400px) {
+    .topnav a {
+        float: none;
+        width:100%;
+    }
+}
