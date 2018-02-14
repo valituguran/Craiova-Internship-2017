@@ -14,7 +14,6 @@
     <script src="./scripts/examplecontroller.js"></script>
 </head>
 <body>
-This is the example for Madalina Luca,who think that the frontend will not work!
 <div ng-app="twitterclone" ng-controller="example" >
     <p >The ID is: {{r.id}}</p><br>
     <p >The First Name is: {{r.firstname}} </p><br>

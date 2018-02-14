@@ -79,6 +79,12 @@ body {
     margin-right: 150px;
     margin-bottom: 20px;
 }
+.card button{
+    margin-left:20px;
+    background-color: #2ab7ec;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
 .card2{
     margin-top:300px;
 }

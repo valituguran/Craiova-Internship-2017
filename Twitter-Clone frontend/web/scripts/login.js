@@ -20,11 +20,30 @@ app.controller('logincontroller' ,function($scope,$http, $window) {
             }),
             body: JSON.stringify(obj)
         }).then(function (success){
-            $window.location.assign('http://localhost:9999/index.jsp');
+            $window.location.assign('http://localhost:9999/menu.jsp');
         },function (error){
 
         });
 
     };
 });
-
+app.controller('logoutController', function($scope, $window){
+    $scope.logout = function(){
+        $scope.username = '';
+        $scope.password = '';
+        $window.location.assign('http://localhost:9999/index.jsp');
+    }
+})
+app.controller('list', function($scope, $http){
+    // Here the array would be your response.text:
+    $scope.names = ['John', 'Jessie', 'Johanna', 'Joy', 'Mary', 'Peter', 'Sebastian', 'Erika', 'Patrick', 'Samantha'];
+    $http({ method:'GET',
+        url: "http://localhost:8080/users",
+        headers: new Headers({
+            'Content-Type': 'application/json'
+        })
+    }).then(function(response) {
+        console.log("a intrat in then");
+        $scope.users = response.data;
+    });
+});
