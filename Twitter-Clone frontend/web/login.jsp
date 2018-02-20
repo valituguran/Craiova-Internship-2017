@@ -24,7 +24,7 @@
     <input type="text" placeholder="username" ng-model="username" id="username">
     <input type="password" ng-model="password" placeholder="password" id="password">
     <a href="#" class="forgot">forgot password?</a>
-    <input type="button" ng-click="login(username, password)"  name="btnSubmit" id="btnSubmit" value="Sign In">
+    <input type="button" ng-click="login(username,password)"  name="btnSubmit" id="btnSubmit" value="Sign In">
     <p>or</p>
     <a href="http://localhost:9999/register.jsp" class="signUp">Sign Up</a>
 </div>

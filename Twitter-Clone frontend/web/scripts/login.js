@@ -1,6 +1,6 @@
 var app =  angular.module('myApp', []);
+var userwhoislogin = null;
 app.controller('logincontroller' ,function($scope,$http, $window) {
-
     $scope.username = null;
     $scope.password = null;
     $scope.login = function (username,password){
@@ -19,13 +19,36 @@ app.controller('logincontroller' ,function($scope,$http, $window) {
                 'Content-Type': 'application/json'
             }),
             body: JSON.stringify(obj)
-        }).then(function (success){
-            $window.location.assign('http://localhost:9999/menu.jsp');
-        },function (error){
-
+        }).then(function (response){
+            if(response.data == ''){
+                $scope.message = "Username or password are wrong!"
+                window.alert($scope.message);
+                console.log($scope.message);
+            }
+            else {
+                $window.location.assign('http://localhost:9999/menu.jsp');
+                $scope.userwhoislogin = response.data;
+            }
         });
-
     };
+
+    $scope.followfunction = function () {
+        console.log("am intrat in functia de follow");
+        console.log($scope.userwhoislogin);
+        $http({
+            url: 'http://localhost:8080/follow/',
+            method: "GET",
+            params: {
+                id_follow: '5a7823c39b18960f18f4d408',
+                id_user: $scope.userwhoislogin
+            }
+        }).then(function (success) {
+            console.log("operatiunea s-a finalizat cu succes!");
+            $scope.userwhoislogin = success.data;
+        }, function (error) {
+            console.log("operatiunea s-a finalizat cu eroare!");
+        });
+    }
 });
 app.controller('logoutController', function($scope, $window){
     $scope.logout = function(){
@@ -45,5 +68,6 @@ app.controller('list', function($scope, $http){
     }).then(function(response) {
         console.log("a intrat in then");
         $scope.users = response.data;
+        console.log(userwhoislogin);
     });
 });
