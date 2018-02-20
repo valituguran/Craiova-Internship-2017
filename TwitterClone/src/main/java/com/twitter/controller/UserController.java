@@ -21,8 +21,8 @@ public class UserController {
         return user.showDetails();
     }
 
-    @GetMapping("/login?username={username}&password={pass}")
-    public User loginUser(@PathVariable("username") String username,@PathVariable("pass") String pass) {
+    @RequestMapping(value = "/login",method = RequestMethod.GET)
+    public User loginUser(@RequestParam("username") String username,@RequestParam("password") String pass) {
         User user = this.userRepository.loginQuery(username, pass);
         return user;
     }
