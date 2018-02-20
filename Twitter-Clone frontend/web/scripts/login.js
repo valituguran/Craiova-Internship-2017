@@ -1,6 +1,7 @@
+
 var app =  angular.module('myApp', []);
-var userwhoislogin = null;
-app.controller('logincontroller' ,function($scope,$http, $window) {
+
+app.controller('logincontroller',function($scope,$http,$window) {
     $scope.username = null;
     $scope.password = null;
 
@@ -18,30 +19,29 @@ app.controller('logincontroller' ,function($scope,$http, $window) {
                 console.log($scope.message);
             }
             else {
-                console.log("succesfully login!");
-                $scope.userwhoislogin = response.data;
+                sessionStorage.setItem("userwhoislogin",JSON.stringify(response.data));
                 $window.location.assign('http://localhost:9999/menu.jsp');
             }
         });
     };
 
-    $scope.followfunction = function () {
-        console.log("am intrat in functia de follow");
-        console.log($scope.userwhoislogin);
-        $http({
-            url: 'http://localhost:8080/follow/',
-            method: "GET",
-            params: {
-                id_follow: '5a7823c39b18960f18f4d408',
-                id_user: $scope.userwhoislogin
-            }
-        }).then(function (success) {
-            console.log("operatiunea s-a finalizat cu succes!");
-            $scope.userwhoislogin = success.data;
-        }, function (error) {
-            console.log("operatiunea s-a finalizat cu eroare!");
-        });
-    }
+    // $scope.followfunction = function () {
+    //     console.log("am intrat in functia de follow");
+    //     console.log($scope.userwhoislogin);
+    //     $http({
+    //         url: 'http://localhost:8080/follow/',
+    //         method: "GET",
+    //         params: {
+    //             id_follow: '5a7823c39b18960f18f4d408',
+    //             id_user: $scope.userwhoislogin
+    //         }
+    //     }).then(function (success) {
+    //         console.log("operatiunea s-a finalizat cu succes!");
+    //         userwhoislogin = success.data;
+    //     }, function (error) {
+    //         console.log("operatiunea s-a finalizat cu eroare!");
+    //     });
+    // }
 });
 app.controller('logoutController', function($scope, $window){
     $scope.logout = function(){
@@ -52,7 +52,7 @@ app.controller('logoutController', function($scope, $window){
 })
 
 
-app.controller('userInfo', function($scope, $http){
+app.controller('userInfo',function($scope, $http){
     $http({ method:'GET',
         url: "http://localhost:8080/users",
         headers: new Headers({
@@ -60,6 +60,7 @@ app.controller('userInfo', function($scope, $http){
         })
     }).then(function(response) {
         $scope.users = response.data;
-        console.log(userwhoislogin);
+        $scope.userwhoislogin = JSON.parse(sessionStorage.getItem("userwhoislogin"));
+        console.log("User-ul care este logat este:" +$scope.userwhoislogin.username);
     });
 });

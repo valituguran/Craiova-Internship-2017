@@ -15,7 +15,7 @@
     <script src="./scripts/registercontroller.js"></script>
     <link rel="stylesheet" type="text/css" href="./styles/index.css">
 </head>
-<body ng-app="myApp" ng-controller="logincontroller">
+<body ng-app="myApp">
 
 <div class="header">
     <h2>twitterClone</h2>
@@ -24,7 +24,7 @@
 <div class="topnav">
     <div ng-app="myApp" ng-controller="logoutController">
         <div style="float:right">
-            <p><input type="button" value="Log Out" ng-click="logout()"/> </p>
+            <p ng-controller="userInfo">{{userwhoislogin.username}}<input type="button" value="Log Out" ng-click="logout()"/> </p>
         </div>
     </div>
 </div>
@@ -49,7 +49,7 @@
     <div class="rightcolumn">
         <div class="card">
             <h3>News on Twitter </h3>
-            <div ng-controller="list">
+            <div ng-controller="userInfo">
                 <ul>
                     <li ng-repeat="user in users | limitTo:5 | orderBy:'time':true">
                         <a href="#">{{user.firstname}}</a><br>
