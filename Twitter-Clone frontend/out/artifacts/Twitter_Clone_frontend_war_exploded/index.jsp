@@ -34,18 +34,10 @@
 <div class="row">
   <div class="leftcolumn">
     <div class="card">
-      <h2>TITLE HEADING</h2>
-      <h5>Title description, Dec 7, 2017</h5>
-      <div class="fakeimg" style="height:200px;">Image</div>
-      <p>Some text..</p>
-      <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
-    </div>
-    <div class="card">
-      <h2>TITLE HEADING</h2>
-      <h5>Title description, Sep 2, 2017</h5>
-      <div class="fakeimg" style="height:200px;">Image</div>
-      <p>Some text..</p>
-      <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+      <div class="fakeimg" style="height:200px;">
+        <img src=" http://www.crmreview.ro/wp-content/people-connecting.jpg" ></div>
+      <p></p>
+      <p></p>
     </div>
   </div>
   <div class="rightcolumn">
@@ -60,20 +52,14 @@
           <input ng-model="email" placeholder="Email sau numar de telefon"/>
           <input ng-model="adress" placeholder="Adresa"/>
           <input type="button" value="Register" ng-click="registerFunction(firstname, lastname, username, password, email, adress, followers, following)" />
+          <p>Apăsând pe Creează un cont, îţi exprimi acordul cu <a href="#">Condiţiile de utilizare </a> şi că ai citit <a href="#">Politica de utilizare a datelor</a>, inclusiv Utilizarea modulelor cookie. Este posibil să primeşti notificări prin SMS de la Facebook şi poţi renunţa oricând.</p>
         </div>
       </div>
     </div>
     <div class="card2">
       <div class="card">
-        <h3>Popular Post</h3>
-        <div class="fakeimg"><p>Image</p></div>
-        <div class="fakeimg"><p>Image</p></div>
-        <div class="fakeimg"><p>Image</p></div>
       </div>
-      <div class="card">
-        <h3>Follow Me</h3>
-        <p>Some text..</p>
-      </div>
+
     </div>
   </div>
 </div>

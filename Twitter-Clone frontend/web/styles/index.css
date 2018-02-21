@@ -14,7 +14,7 @@ body {
     padding: 5px;
     font-size: 20px;
     text-align: center;
-    background: deepskyblue;
+    background: #009688;
 }
 .topnav p {
     float: left;
@@ -28,7 +28,7 @@ body {
 /* Style the top navigation bar */
 .topnav {
     overflow: hidden;
-    background-color: deepskyblue;
+    background-color: #009688;
 }
 
 /* Style the topnav links */
@@ -36,7 +36,7 @@ body {
 
 /* Change color on hover */
 .topnav a:hover {
-    background-color: deepskyblue;
+    background-color: #009688;
     color: black;
 }
 
@@ -57,31 +57,33 @@ body {
 
 /* Fake image */
 .fakeimg {
-    background-color: deepskyblue;
-    width: 100%;
+    background-color: #ffffff;
     padding: 20px;
 }
-
+.fakeimg img{
+    width: 1000px;
+    height: 600px;
+}
 /* Add a card effect for articles */
 .card {
-    background-color: white;
     padding: 20px;
     margin-top: 20px;
     margin-bottom: 50px;
+    text-align: center;
 }
 .card input{
     float:left;
     height: 40px;
     width: 300px;
     border-radius: 10px;
-    background-color: lightblue;
+    background-color: #3db0a6;
     padding: 2px;
     margin-right: 150px;
     margin-bottom: 20px;
 }
 .card button{
     margin-left:20px;
-    background-color: #2ab7ec;
+    background-color: #3db0a6;
     border-radius: 10px;
     margin-bottom: 20px;
 }
@@ -99,7 +101,7 @@ body {
 .footer {
     padding: 20px;
     text-align: center;
-    background: deepskyblue;
+    background: #009688;
     margin-top: 20px;
 }
 
