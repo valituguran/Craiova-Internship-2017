@@ -37,7 +37,7 @@ app.controller('logoutController', function($scope, $window){
 })
 
 
-app.controller('userInfo',function($scope, $http){
+app.controller('userInfo',['$scope', '$http', '$window', function($scope, $http, $window){
 
     $http({ method:'GET',
         url: "http://localhost:8080/users",
@@ -52,23 +52,34 @@ app.controller('userInfo',function($scope, $http){
 
 
 
-    $scope.accountdetails = function (userID) {
+    $scope.accountdetails = function(id) {
+        var string ='http://localhost:8080/' + id;
+        console.log(string);
         $http({
             method: 'GET',
-            url: 'http://localhost:8080',
-            params: {
-                id: userID
-            }
+            url: string,
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            })
         }).then(function (response) {
             if (response.data == '') {
-                console.log("aaaaa");
+                window.alert("A aparut o problema! Reincarcati pagina! ");
             }
             else {
-                $scope.user = response.data;
+                userDetails = response.data;
+                sessionStorage.setItem("accountDetails",JSON.stringify(response.data));
+                $scope.userDetails = response.data;
+                console.log(sessionStorage.getItem("accountDetails"));
                 $window.location.assign('http://localhost:9999/userinfo.jsp');
             }
         });
     };
+
+    var init = function () {
+        var userDetails = JSON.parse(sessionStorage.getItem("accountDetails"));
+        $scope.userDetails = userDetails;
+    }
+    init();
 
 
 
@@ -95,4 +106,4 @@ app.controller('userInfo',function($scope, $http){
             }
         });
     };
-});
+}]);
