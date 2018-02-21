@@ -31,13 +31,13 @@ app.controller('logoutController', function($scope, $window){
     $scope.logout = function(){
         $scope.username = '';
         $scope.password = '';
+        sessionStorage.clear();
         $window.location.assign('http://localhost:9999/index.jsp');
     }
 })
 
 
 app.controller('userInfo',function($scope, $http){
-
 
     $http({ method:'GET',
         url: "http://localhost:8080/users",
@@ -50,7 +50,7 @@ app.controller('userInfo',function($scope, $http){
         console.log("User-ul care este logat este:" +$scope.userwhoislogin.username);
     });
 
-    $scope.userID = null;
+
 
     $scope.accountdetails = function (userID) {
         $http({
@@ -73,20 +73,26 @@ app.controller('userInfo',function($scope, $http){
 
 
 
-    $scope.followfunction = function (userID) {
+    $scope.followfunction = function (followID) {
 
+        console.log("fdsddsf" + followID);
         var userwhoislogin = JSON.parse(sessionStorage.getItem("userwhoislogin"));
         $http({
             url: 'http://localhost:8080/follow/',
             method: "GET",
             params: {
-                id_follow: userID,
+                id_follow: followID,
                 id_user: userwhoislogin.id
             }
         }).then(function (response) {
-            console.log("User-ul curent:" + userwhoislogin.username + "este conectat cu user-ul:" + response.data.username);
+            console.log(response.status);
+            if(response.status  == 200){
+                console.log("User-ul curent:" + userwhoislogin.username + "este conectat cu user-ul:" + response.data.username);
+                window.alert("You are now connected with:" + followID);
+            }
+            else{
+                window.alert("Error!");
+            }
         });
     };
-
-
 });
