@@ -24,25 +24,9 @@ app.controller('logincontroller',function($scope,$http,$window) {
             }
         });
     };
-
-    // $scope.followfunction = function () {
-    //     console.log("am intrat in functia de follow");
-    //     console.log($scope.userwhoislogin);
-    //     $http({
-    //         url: 'http://localhost:8080/follow/',
-    //         method: "GET",
-    //         params: {
-    //             id_follow: '5a7823c39b18960f18f4d408',
-    //             id_user: $scope.userwhoislogin
-    //         }
-    //     }).then(function (success) {
-    //         console.log("operatiunea s-a finalizat cu succes!");
-    //         userwhoislogin = success.data;
-    //     }, function (error) {
-    //         console.log("operatiunea s-a finalizat cu eroare!");
-    //     });
-    // }
 });
+
+
 app.controller('logoutController', function($scope, $window){
     $scope.logout = function(){
         $scope.username = '';
@@ -53,6 +37,8 @@ app.controller('logoutController', function($scope, $window){
 
 
 app.controller('userInfo',function($scope, $http){
+
+
     $http({ method:'GET',
         url: "http://localhost:8080/users",
         headers: new Headers({
@@ -63,4 +49,44 @@ app.controller('userInfo',function($scope, $http){
         $scope.userwhoislogin = JSON.parse(sessionStorage.getItem("userwhoislogin"));
         console.log("User-ul care este logat este:" +$scope.userwhoislogin.username);
     });
+
+    $scope.userID = null;
+
+    $scope.accountdetails = function (userID) {
+        $http({
+            method: 'GET',
+            url: 'http://localhost:8080',
+            params: {
+                id: userID
+            }
+        }).then(function (response) {
+            if (response.data == '') {
+                console.log("aaaaa");
+            }
+            else {
+                $scope.user = response.data;
+                $window.location.assign('http://localhost:9999/userinfo.jsp');
+            }
+        });
+    };
+
+
+
+
+    $scope.followfunction = function (userID) {
+
+        var userwhoislogin = JSON.parse(sessionStorage.getItem("userwhoislogin"));
+        $http({
+            url: 'http://localhost:8080/follow/',
+            method: "GET",
+            params: {
+                id_follow: userID,
+                id_user: userwhoislogin.id
+            }
+        }).then(function (response) {
+            console.log("User-ul curent:" + userwhoislogin.username + "este conectat cu user-ul:" + response.data.username);
+        });
+    };
+
+
 });
