@@ -18,8 +18,10 @@ public class User {
     private String adress;
     private ArrayList<String> following;//persoanele pe care le urmareste un user;
     private ArrayList<String> follower; //persoanele care il urmaresc pe user-ul respectiv
+    private byte[] image;
 
-    public User(String id, String firstname, String lastname, String username, String password, String email, String adress,ArrayList<String> following,ArrayList<String> follower) {
+    public User(String id, String firstname, String lastname, String username, String password, String email, String adress,
+                ArrayList<String> following,ArrayList<String> follower, byte[] image) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -29,6 +31,7 @@ public class User {
         this.adress = adress;
         this.follower = follower;
         this.following = following;
+        this.image = image;
     }
 
     public User() {
@@ -75,6 +78,10 @@ public class User {
 
     public String getAdress() {
         return adress;
+    }
+
+    public byte[] getImage() {
+        return image;
     }
 
     public String showDetails(){

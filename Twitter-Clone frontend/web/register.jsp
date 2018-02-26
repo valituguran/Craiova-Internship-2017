@@ -34,7 +34,9 @@
     <input type="password"  ng-model="password"  name="password" id="password" class="txt" /><br>
     <p><label for="address">Address:</label></p>
     <input type="text"  ng-model="adress"  name="adress" id="address" class="txt" /><br>
-    <input type="button"  ng-click="registerFunction(firstname, lastname, username, password, email, adress)"  name="btnSubmit" id="btnSubmit" value="Sign Up!" class="btn" />
+    <p><label for="photo">Photo:</label></p>
+    <input type="file"  ng-model="photo"  name="photo" id="photo" class="txt"  enctype="multipart/form-data" accept="image/*"/><br>
+    <input type="button"  ng-click="registerFunction(firstname, lastname, username, password, email, adress, image)"  name="btnSubmit" id="btnSubmit" value="Sign Up!" class="btn" />
 </form>
 </div>
 </body>
