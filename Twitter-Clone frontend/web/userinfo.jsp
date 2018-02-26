@@ -50,6 +50,13 @@
                     <p class="w3-opacity"><b>London Business School</b></p>
                     <p class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>2013 - 2015</p>
                     <p>Master Degree</p>
+                    <p>Find me on social media.</p>
+                    <i class="fa fa-facebook-official w3-hover-opacity"> <a href="http://www.facebook.com"></a></i>
+                    <i class="fa fa-instagram w3-hover-opacity"></i>
+                    <i class="fa fa-snapchat w3-hover-opacity"></i>
+                    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+                    <i class="fa fa-twitter w3-hover-opacity"></i>
+                    <i class="fa fa-linkedin w3-hover-opacity"></i>
                     <p>Posts</p>
                     <div class="w3-light-grey w3-round-xlarge w3-small">
                         <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:37%">518 posts</div>

@@ -7,7 +7,8 @@ app.controller('registercontroller' ,function($scope,$http) {
     $scope.email = null;
     $scope.adress = null;
     $scope.mesaj = null;
-    $scope.registerFunction = function (firstname,lastname,username,password,email,adress){
+    $scope.image = null;
+    $scope.registerFunction = function (firstname,lastname,username,password,email,adress, image){
         var obj = {
             firstname : firstname,
             lastname : lastname,
@@ -15,8 +16,9 @@ app.controller('registercontroller' ,function($scope,$http) {
             password : password,
             email : email,
             adress :adress,
+            image: image
         };
-        console.log("a intrat1");
+        console.log("image: "+image);
         console.log(JSON.stringify(obj));
         $http({ method:'POST',
                 url:'http://localhost:8080/register',
@@ -31,4 +33,41 @@ app.controller('registercontroller' ,function($scope,$http) {
         });
     };
 });
-
+(function () {
+    'use strict';
+    angular.module('ng-file-model', [])
+        .directive("ngFileModel", [function () {
+            return {
+                scope: {
+                    ngFileModel: "="
+                },
+                link: function (scope, element) {
+                    element.bind("change", function (changeEvent) {
+                        var reader = new FileReader();
+                        reader.onload = function (loadEvent) {
+                            scope.$apply(function () {
+                                scope.ngFileModel = {
+                                    lastModified: changeEvent.target.files[0].lastModified,
+                                    lastModifiedDate: changeEvent.target.files[0].lastModifiedDate,
+                                    name: changeEvent.target.files[0].name,
+                                    size: changeEvent.target.files[0].size,
+                                    type: changeEvent.target.files[0].type,
+                                    data: loadEvent.target.result
+                                };
+                                console.log($scope.ngFileModel);
+                            });
+                        };
+                        reader.readAsDataURL(changeEvent.target.files[0]);
+                    });
+                }
+            }
+        }]);
+})();
+angular.module("twitterclone", ["ng-file-model"])
+    .controller("fileCtrl",["$scope", function($scope){
+        $scope.submittedFile = {};
+        $scope.obj = {};
+        $scope.submit = function(obj){
+            console.log(JSON.stringify(obj.testFile))
+        }
+    }]);

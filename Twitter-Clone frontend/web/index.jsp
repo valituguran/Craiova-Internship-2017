@@ -52,7 +52,7 @@
           <input ng-model="email" placeholder="Email sau numar de telefon"/>
           <input ng-model="adress" placeholder="Adresa"/>
           <input type="button" value="Register" ng-click="registerFunction(firstname, lastname, username, password, email, adress, followers, following)" />
-          <p>Apăsând pe Creează un cont, îţi exprimi acordul cu <a href="#">Condiţiile de utilizare </a> şi că ai citit <a href="#">Politica de utilizare a datelor</a>, inclusiv Utilizarea modulelor cookie. Este posibil să primeşti notificări prin SMS de la Facebook şi poţi renunţa oricând.</p>
+          <p>Apăsând pe Creează un cont, îţi exprimi acordul cu <a href="#">Condiţiile de utilizare </a> şi că ai citit <a href="#">Politica de utilizare a datelor</a>, inclusiv Utilizarea modulelor cookie. Este posibil să primeşti notificări prin SMS, dar poţi renunţa oricând.</p>
         </div>
       </div>
     </div>
