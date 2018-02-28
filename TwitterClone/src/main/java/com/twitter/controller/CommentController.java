@@ -16,25 +16,25 @@ public class CommentController {
     private CommentRepository commentRepository;
 
 
-    @RequestMapping(value = "/id",method = RequestMethod.GET)
+    @RequestMapping(value = "/comment/id",method = RequestMethod.GET)
     public Post getById(@RequestParam("id") String id) {
         Post post = this.commentRepository.findById(id);
         return post;
     }
 
-    @RequestMapping(value = "/idUser",method = RequestMethod.GET)
+    @RequestMapping(value = "/comment/idUser",method = RequestMethod.GET)
     public List<Post> getByIdUser(@RequestParam("idUser") String idUser) {
         List<Post> posts = this.commentRepository.findbyIdUser(idUser);
         return posts;
     }
 
-    @RequestMapping(value = "/idPost",method = RequestMethod.GET)
+    @RequestMapping(value = "/comment/idPost",method = RequestMethod.GET)
     public List<Post> getByIdPost(@RequestParam("idPost") String idPost) {
         List<Post> posts = this.commentRepository.findByIdPost(idPost);
         return posts;
     }
 
-    @RequestMapping(value = "/date",method = RequestMethod.GET)
+    @RequestMapping(value = "/comment/date",method = RequestMethod.GET)
     public List<Post> getByDate(@RequestParam("date") Date date) {
         List<Post> posts = this.commentRepository.findbyDate(date);
         return posts;

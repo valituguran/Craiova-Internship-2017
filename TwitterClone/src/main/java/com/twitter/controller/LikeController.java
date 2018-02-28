@@ -15,19 +15,19 @@ public class LikeController {
     private LikeRepository likeRepository;
 
 
-    @RequestMapping(value = "/id",method = RequestMethod.GET)
+    @RequestMapping(value = "/like/id",method = RequestMethod.GET)
     public Post getById(@RequestParam("id") String id) {
         Post post = this.likeRepository.findById(id);
         return post;
     }
 
-    @RequestMapping(value = "/idUser",method = RequestMethod.GET)
+    @RequestMapping(value = "/like/idUser",method = RequestMethod.GET)
     public List<Post> getByIdUser(@RequestParam("idUser") String idUser) {
         List<Post> posts = this.likeRepository.findbyIdUser(idUser);
         return posts;
     }
 
-    @RequestMapping(value = "/idPost",method = RequestMethod.GET)
+    @RequestMapping(value = "/like/idPost",method = RequestMethod.GET)
     public List<Post> getByIdPost(@RequestParam("idPost") String idPost) {
         List<Post> posts = this.likeRepository.findByIdPost(idPost);
         return posts;

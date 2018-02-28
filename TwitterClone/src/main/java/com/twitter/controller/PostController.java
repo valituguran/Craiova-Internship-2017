@@ -17,19 +17,19 @@ public class PostController {
     private PostRepository postRepository;
 
 
-    @RequestMapping(value = "/id",method = RequestMethod.GET)
+    @RequestMapping(value = "/post/id",method = RequestMethod.GET)
     public Post getById(@RequestParam("id") String id) {
         Post post = this.postRepository.findById(id);
         return post;
     }
 
-    @RequestMapping(value = "/id_user",method = RequestMethod.GET)
-    public Post getByIdUser(@RequestParam("id_user") String idUser) {
-        Post post = this.postRepository.findById(idUser);
+    @RequestMapping(value = "/post/idUser",method = RequestMethod.GET)
+    public List<Post> getByIdUser(@RequestParam("id_user") String idUser) {
+        List<Post> post = this.postRepository.findByIdUser(idUser);
         return post;
     }
 
-    @RequestMapping(value = "/date",method = RequestMethod.GET)
+    @RequestMapping(value = "/post/date",method = RequestMethod.GET)
     public List<Post> getByDate(@RequestParam("date") Date date) {
         List<Post> posts = this.postRepository.findbyDate(date);
         return posts;
